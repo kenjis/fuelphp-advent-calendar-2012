@@ -50,19 +50,44 @@ class BlogArticleTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $test);
     }
 
-    public function test_replaceNonPageBreak()
+    public function test_replaceNoBreakSpace()
     {
-        $line = '    private static $exts = array(';  // C2 A0
-        $test = $this->blog->replaceNonPageBreak($line);
-        $expected = '    private static $exts = array(';
+        $line = '    private static $exts = array(); // nbsp';  // nbsp (C2 A0)
+        $test = $this->blog->replaceNoBreakSpace($line);
+        $expected = '    private static $exts = array(); // nbsp';
         $this->assertEquals($expected, $test);
     }
 
+    public function test_replaceNoBreakSpace_with_no_nbsp()
+    {
+        $line = '    private static $exts = array();';  // space
+        $test = $this->blog->replaceNoBreakSpace($line);
+        $expected = '    private static $exts = array();';
+        $this->assertEquals($expected, $test);
+    }
+    
     public function test_scrapeArticle()
     {
         $html = file_get_contents(TESTPATH . 'fixture/01.html');
         $test = $this->blog->scrapeArticle($html);
         $expected = file_get_contents(TESTPATH . 'fixture/01.html.scraped');
+        $this->assertEquals($expected, $test);
+    }
+    
+    public function test_removeBackSlash()
+    {
+        $line = '\\';
+        $test = $this->blog->removeBackSlash($line);
+        $expected = '';
+        $this->assertEquals($expected, $test);
+    }
+    
+        
+    public function test_removeDoubleWidthSpace()
+    {
+        $line = '　とはいえ';
+        $test = $this->blog->removeDoubleWidthSpace($line);
+        $expected = 'とはいえ';
         $this->assertEquals($expected, $test);
     }
 }

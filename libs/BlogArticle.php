@@ -184,7 +184,9 @@
         $contents = '';
 
         foreach ($lines as $line) {
-            $line = $this->replaceNonPageBreak($line);
+            $line = $this->replaceNoBreakSpace($line);
+            $line = $this->removeBackSlash($line);
+            $line = $this->removeDoubleWidthSpace($line);
             
             $contents .= $line . "\n";
         }
@@ -193,9 +195,33 @@
         file_put_contents($this->markdown_file, $contents);
     }
 
-    public function replaceNonPageBreak($line)
+    public function replaceNoBreakSpace($line)
     {
-        return str_replace(chr(0xC2) . chr(0xA0), ' ', $line);
+        if (preg_match('/' . chr(0xC2) . chr(0xA0) . '/u', $line, $matches)) {
+            echo 'Replace No Break Space: ', $line, PHP_EOL;
+            $line = str_replace(chr(0xC2) . chr(0xA0), ' ', $line);
+        }
+        return $line;
+    }
+    
+    public function removeBackSlash($line)
+    {
+        if ($line === '\\')
+        {
+            echo 'Remove Back Slash: ', $line, PHP_EOL;
+            $line = '';
+        }
+        return $line;
+    }
+    
+    public function removeDoubleWidthSpace($line)
+    {
+        if (mb_substr($line, 0, 1) === '　')
+        {
+            echo 'Remove Double Width Space: ', mb_substr($line, 0, 10), PHP_EOL;
+            $line = mb_substr($line, 1);
+        }
+        return $line;
     }
 }
 

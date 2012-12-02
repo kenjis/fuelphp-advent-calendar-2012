@@ -12,6 +12,8 @@
 require './libs/BlogArticle.php';
 require './vendor/autoload.php';
 
+mb_internal_encoding('UTF-8');
+
 if ( ! isset($argv[1]) || ! isset($argv[2]) || ! isset($argv[3])) {
     echo $argv[0] . ' (URL) html (chapter)' . PHP_EOL;
     echo $argv[0] . ' (URL) md (chapter)' . PHP_EOL;
@@ -23,11 +25,6 @@ if ( ! isset($argv[1]) || ! isset($argv[2]) || ! isset($argv[3])) {
 $url  = $argv[1];
 $cmd  = $argv[2];
 $chap = $argv[3];
-
-if ( ! filter_var($url, FILTER_VALIDATE_URL)) {
-    echo 'Invalid URL!' . PHP_EOL;
-    exit(1);
-}
 
 $article = new BlogArticle($url, $chap);
 
