@@ -1,5 +1,5 @@
 {
-    "hash": "0b21753453bfad0972fe6c622c0c5439",
+    "hash": "bd897f4b97a6f9b7d03999983fa54839",
     "packages": [
         {
             "name": "phpunit/php-code-coverage",
@@ -353,6 +353,49 @@
             ]
         },
         {
+            "name": "shark/simple_html_dom",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/samacs/simple_html_dom.git",
+                "reference": "a7dfed08a6e8d18dc88bc5c73d344f3a6b2316d9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/samacs/simple_html_dom/archive/a7dfed08a6e8d18dc88bc5c73d344f3a6b2316d9.zip",
+                "reference": "a7dfed08a6e8d18dc88bc5c73d344f3a6b2316d9",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.2.4"
+            },
+            "time": "2012-09-23 01:24:27",
+            "type": "library",
+            "installation-source": "source",
+            "autoload": {
+                "classmap": [
+                    "simple_html_dom.php"
+                ],
+                "files": [
+                    "simple_html_dom.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "S.C. Chen",
+                    "email": "me578022@gmail.com",
+                    "homepage": "http://simplehtmldom.sourceforge.net/"
+                }
+            ],
+            "description": "Simple HTML DOM package.",
+            "homepage": "http://simplehtmldom.sourceforge.net/",
+            "keywords": [
+                "dom",
+                "php dom"
+            ]
+        },
+        {
             "name": "symfony/yaml",
             "version": "v2.1.3",
             "target-dir": "Symfony/Component/Yaml",
@@ -405,7 +448,7 @@
 
     ],
     "minimum-stability": "stable",
-    "stability-flags": [
-
-    ]
+    "stability-flags": {
+        "shark/simple_html_dom": 20
+    }
 }

@@ -1,4 +1,4 @@
 #!/bin/sh
 
-vendor/bin/phpunit $@ 
+../vendor/bin/phpunit $@
 

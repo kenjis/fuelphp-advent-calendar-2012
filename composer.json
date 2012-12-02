@@ -1,0 +1,7 @@
+{
+    "require": {
+        "phpunit/phpunit": "3.7.*",
+        "shark/simple_html_dom": "dev-master"
+    }
+}
+
