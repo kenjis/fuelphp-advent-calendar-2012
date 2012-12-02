@@ -33,7 +33,7 @@ date: 刊行日
 # CSSファイル (yamlファイルおよびReVIEWファイルを置いたディレクトリにあること)
 stylesheet: stylesheet.css
 # LaTeX用のスタイルファイル(styディレクトリ以下に置くこと)
-# texstyle: samplemacro
+texstyle: style
 # LaTeX用のdocumentclassを指定する
 # texdocumentclass: ["jsarticle", "b5paper,oneside"]
 # 目次として抽出するレベル
