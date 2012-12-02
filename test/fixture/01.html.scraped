@@ -1,0 +1,180 @@
+<div class="section">
+			<h3 class="title"><a href="/Kenji_s/20121201/fuelphp_this_year" name="fuelphp_this_year"> FuelPHPのこの1年</a></h3>
+			<p class="sectionheader"><span class="sectioncategory"><a href="/Kenji_s/searchdiary?word=%2A%5BFuelPHP%5D" class="sectioncategory">FuelPHP</a></span></p>
+			<p>今日から25日間、<a href="http://atnd.org/events/33753" target="_blank">FuelPHP Advent Calendar 2012</a>が開催されます。参加者が毎日、FuelPHPの記事を順に公開していきます。このイベントは去年も開催されており、今年で2年目になります。</p>
+			<p>本日初日ですが、みなさんに非常に残念なことをお知らせせねばなりません。</p>
+			<p>実は、今年の<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%A2%A5%C9%A5%D9%A5%F3%A5%C8">アドベント</a>(<a class="keyword" href="http://d.hatena.ne.jp/keyword/%C2%D4%B9%DF%C0%E1">待降節</a>)は明日からです。ですので、今日はまだ本当はアドベントではありません。</p>
+			<p>とは言え、アドベントカレンダーは実際のアドベントとは無関係に12月1日から開始されるものが多いのも事実です。気を取り直して、粛々と進めたいと思います。</p>
+			<p>初日ですので、FuelPHPをあまりご存じない方にも、FuelPHPの概要や状況についてお知らせしていこうと思います。</p>
+			<br>
+
+			<h4> FuelPHPとは？</h4>
+			<p><a href="http://f.hatena.ne.jp/Kenji_s/20121129153912" class="hatena-fotolife" target="_blank"><img src="http://cdn-ak.f.st-hatena.com/images/fotolife/K/Kenji_s/20121129/20121129153912.png" alt="f:id:Kenji_s:20121129153912p:image" title="f:id:Kenji_s:20121129153912p:image" class="hatena-fotolife"></a></p>
+			<p><a href="http://fuelphp.com/" target="_blank">http://fuelphp.com/</a></p>
+			<p>FuelPHPは、今もっとも注目されている最新のPHP<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%D5%A5%EC%A1%BC%A5%E0%A5%EF%A1%BC%A5%AF">フレームワーク</a>、オープンソース(MITライセンス)のWebアプリケーションフレームワークです。シンプルでフレキシブル、コミュニティにより開発されているPHP 5.3でゼロから書かれた最先端のPHPフレームワークです。2011年7月に最初の正式版バージョン1.0がリリースされました。</p>
+			<p>名前空間などを使っているため、動作にはPHP 5.3以上が必要ですのでご注意ください。開発した後に本番環境がPHP 5.2だったりすると悲惨なことになります。</p>
+			<p>FuelPHPのコア開発者は全員がCodeIgniterに関わっており、FuelPHPはCodeIgniterとテイストが非常に似ています。CodeIgniterと同じく軽量高速で習得しやすく高い拡張性と柔軟性を持ったフレームワークになっています。また、ゼロからPHP 5.3で書き直されているためコードもクリーンです。ライセンスも扱いやすい有名なオープンソースライセンスであるMITライセンスです。</p>
+			<p>なお、PHP 5.3でゼロから書き直されているためFuelPHPはCodeIgniterのフォークではありません。念のため。</p>
+			<p>まとめると、FuelPHPは、</p>
+
+			<ul>
+				<li> もっとも注目されている</li>
+				<li> 最先端</li>
+				<li> オープンソース</li>
+				<li> 軽量高速</li>
+				<li> 習得が容易</li>
+			</ul>
+			<p>なPHPフレームワークということになります。</p>
+			<h4> FuelPHPの歴史</h4>
+			<p>リリースの歴史は次のようになっています。</p>
+
+			<table>
+				<tr><th>日付     </th><th>出来事</th></tr>
+				<tr><td>2010/10</td><td>    開発開始</td></tr>
+				<tr><td>2011/01/08</td><td> FuelPHP 1.0.0-BETA1リリース</td></tr>
+				<tr><td>2011/07/30</td><td> FuelPHP 1.0リリース</td></tr>
+				<tr><td>2011/12/13</td><td> FuelPHP 1.1リリース</td></tr>
+				<tr><td>2012/06/03</td><td> FuelPHP 1.2リリース</td></tr>
+				<tr><td>2012/09/09</td><td> FuelPHP 1.3リリース</td></tr>
+				<tr><td>2012/11/09</td><td> FuelPHP 1.4リリース</td></tr>
+
+			</table>
+			<h4> FuelPHPのこの1年</h4>
+			<p>この1年ほどの出来事をまとめると次のようになります。</p>
+
+			<table>
+				<tr><th>日付     </th><th>場所</th><th>出来事</th></tr>
+				<tr><td>2011/11/10</td><td> 日本</td><td> FuelPHPドキュメント翻訳の開始</td></tr>
+				<tr><td>2011/12/01</td><td> 日本</td><td> 「FuelPHP Advent Calendar 2011」開始</td></tr>
+				<tr><td>2011/12/13</td><td> 本家</td><td> FuelPHP 1.1リリース</td></tr>
+				<tr><td>2011/12/27</td><td> 日本</td><td> 「FuelPHPまとめWiki」開始</td></tr>
+				<tr><td>2012/01/10</td><td> 日本</td><td> 「fuelphp.jp Googleグループ」開始</td></tr>
+				<tr><td>2012/03/22</td><td> 日本</td><td> 電子書籍『FuelPHP Advent Calendar 2011』(技術評論社)出版</td></tr>
+				<tr><td>2012/06/02</td><td> 日本</td><td> 書籍『FuelPHP入門』(ソーテック社)出版</td></tr>
+				<tr><td>2012/06/03</td><td> 本家</td><td> FuelPHP 1.2リリース</td></tr>
+				<tr><td>2012/06/07</td><td> 日本</td><td> FuelPHP 勉強会 大須 vol.1</td></tr>
+				<tr><td>2012/07/02</td><td> 日本</td><td> 電子書籍『はじめてのフレームワークとしてのFuelPHP』(達人出版会)出版</td></tr>
+				<tr><td>2012/07/08</td><td> 日本</td><td> FuelPHP 勉強会 東京 vol.1</td></tr>
+				<tr><td>2012/07/22</td><td> 日本</td><td> FuelPHP 勉強会 大須 vol.2</td></tr>
+				<tr><td>2012/08/18</td><td> 日本</td><td> 「FuelPHP日本語ニュース」始動</td></tr>
+				<tr><td>2012/09/09</td><td> 本家</td><td> FuelPHP 1.3リリース</td></tr>
+				<tr><td>2012/09/15</td><td> 日本</td><td> PHPカンファレンス2012</td></tr>
+				<tr><td>2012/09/23</td><td> 日本</td><td> FuelPHP 勉強会 東京 vol.2</td></tr>
+				<tr><td>2012/10/10</td><td> 日本</td><td> FuelPHP 勉強会 大阪 vol.3</td></tr>
+				<tr><td>2012/10/12</td><td> 日本</td><td> 「fuelphp.jp Googleグループ」200人突破</td></tr>
+				<tr><td>2012/11/09</td><td> 本家</td><td> FuelPHP 1.4リリース</td></tr>
+
+			</table>
+			<p>それでは、主な出来事を振り返っていきたいと思います。</p>
+			<h4> FuelPHPドキュメント翻訳の開始</h4>
+			<p>去年の11月に<a href="http://twitter.com/NEKOGET" target="_blank">@NEKOGET</a>さんが公式ドキュメントの翻訳プロジェクトをGitHubで開始しました。これが日本でのFuelPHPに関する公の活動の始まりだったのではないかと思います。</p>
+
+			<ul>
+				<li> <a href="https://github.com/NEKOGET/FuelPHP_docs_jp/" target="_blank">https://github.com/NEKOGET/FuelPHP_docs_jp/</a></li>
+			</ul>
+			<p>翻訳プロジェクトは今も続いていますが、残念ながらあまり活発ではなく、いまだに全ドキュメントの翻訳が完了したバージョンはありません。ただし、基礎となる部分はほぼ完了しています。</p>
+			<p>「翻訳を俺が進めてやるぜ！」という方がいましたら、是非、上記のGitHubのリポジトリをご覧ください。</p>
+			<h4> FuelPHP Advent Calendar 2011</h4>
+			<p>日本でFuelPHPに関する最初のイベントは、去年のアドベントカレンダーです。ユーザ数も少なく情報もほとんどない状態で人が集まるかどうかまったくわかりませんでしたが、<a href="http://twitter.com/ounziw" target="_blank">@ounziw</a>さんにより開催されました。</p>
+
+			<ul>
+				<li> FuelPHP Advent Calendar 2011 <a href="http://atnd.org/events/22380" target="_blank">http://atnd.org/events/22380</a></li>
+			</ul>
+			<p>結果は13人しか集まらず、1人が何回か書くことになりましたが、無事終了できました。期間中にFuelPHP 1.1がリリースされました。</p>
+			<p>それに対して、今年のアドベントカレンダーは、11月中に25人の参加者がすべて埋まりました。1年で何という違いでしょう！</p>
+			<h4> fuelphp.jp Googleグループ</h4>
+			<p>年が開けて<a href="http://twitter.com/NEKOGET" target="_blank">@NEKOGET</a>さんにより日本語でFuelPHPの情報交換をするための「fuelphp.jp Googleグループ」が作成されました。</p>
+
+			<ul>
+				<li> fuelphp.jp Googleグループ <a href="https://groups.google.com/forum/?fromgroups#!forum/fuelphp_jp" target="_blank">https://groups.google.com/forum/?fromgroups#!forum/fuelphp_jp</a></li>
+			</ul>
+			<p>現在は、250名ほどが参加するまでに成長し、FuelPHPに関する日本語での最大のコミュニティになっています。FuelPHPユーザの方は、是非、ご参加下さい。</p>
+			<h4> 関連書籍</h4>
+			<p>3月には、アドベントカレンダーの記事がまとめられた電子書籍『FuelPHP Advent Calendar 2011』が技術評論社より出版されました。たぶん、FuelPHPに関する世界で初めての書籍です。</p>
+			<p>この電子書籍は、以下のサイトより、ユーザ登録するだけで無料で入手できます。</p>
+
+			<ul>
+				<li> 『FuelPHP Advent Calendar 2011』 <a href="https://gihyo.jp/dp/sp/advent2011/G11C13" target="_blank">https://gihyo.jp/dp/sp/advent2011/G11C13</a></li>
+			</ul>
+			<p>そして、6月には『FuelPHP入門』がソーテック社から出版されました。FuelPHPに関する日本で(たぶん世界でも)初めての紙の書籍です。</p>
+			<div class="hatena-asin-detail">
+  <a href="http://www.amazon.co.jp/dp/4881669419/?tag=hatena_st1-22&ascsubtag=d-43sw2"><img src="http://ecx.images-amazon.com/images/I/511wN5khDHL._SL160_.jpg" class="hatena-asin-detail-image" alt="FuelPHP入門" title="FuelPHP入門"></a>
+  <div class="hatena-asin-detail-info">
+    <p class="hatena-asin-detail-title"><a href="http://www.amazon.co.jp/dp/4881669419/?tag=hatena_st1-22&ascsubtag=d-43sw2">FuelPHP入門</a></p>
+    <ul>
+      
+      <li><span class="hatena-asin-detail-label">作者:</span> <a href="http://d.hatena.ne.jp/keyword/%C1%E1%C0%EE%C0%BB%BB%CA" class="keyword">早川聖司</a></li>
+      
+      <li><span class="hatena-asin-detail-label">出版社/メーカー:</span> <a href="http://d.hatena.ne.jp/keyword/%A5%BD%A1%BC%A5%C6%A5%C3%A5%AF%BC%D2" class="keyword">ソーテック社</a></li>
+      
+      <li><span class="hatena-asin-detail-label">発売日:</span> 2012/06/02</li>
+                                                      <li><span class="hatena-asin-detail-label">メディア:</span> 単行本</li>
+      <li><span class="hatena-asin-detail-label">購入</span>: 7人 <span class="hatena-asin-detail-label">クリック</span>: 134回</li>
+      <li><a href="http://d.hatena.ne.jp/asin/4881669419" target="_blank">この商品を含むブログ (6件) を見る</a></li>
+    </ul>
+  </div>
+  <div class="hatena-asin-detail-foot"></div>
+</div>
+
+
+			<ul>
+				<li> 『FuelPHP入門』 <a href="http://www.sotechsha.co.jp/pc/html/941.htm" target="_blank">http://www.sotechsha.co.jp/pc/html/941.htm</a></li>
+			</ul>
+			<p>7月には、私が執筆した電子書籍『はじめてのフレームワークとしてのFuelPHP』が達人出版会から出版されました。</p>
+			<p><div style="margin-bottom:0px;" class="amazlet-box"><div style="float:left;margin:0px 12px 1px 0px;" class="amazlet-image"><a target="_blank" href="http://tatsu-zine.com/books/fuelphp1st" name="amazletlink"><img alt="はじめてのフレームワークとしてのFuelPHP" src="http://tatsu-zine.com/images/books/37/cover_s.jpg" style="border: none;"></a></div><div style="line-height:120%;margin-bottom:10px" class="amazlet-info"><div style="margin-bottom:10px;line-height:120%" class="amazlet-name"><a target="_blank" href="http://tatsu-zine.com/books/fuelphp1st" name="amazletlink">はじめてのフレームワークとしてのFuelPHP【電子書籍】</a></div><div class="amazlet-detail">鈴木憲治<br>達人出版会<br>発行日: 2012-07-02<br>対応フォーマット: EPUB, PDF<br></div><div style="float:left;" class="amazlet-sub-info"><div style="margin-top:5px" class="amazlet-link"><a target="_blank" href="http://tatsu-zine.com/books/fuelphp1st" name="amazletlink">詳細を見る</a></div></div></div><div style="clear:left" class="amazlet-footer"></div></div></p>
+
+			<ul>
+				<li> 『はじめてのフレームワークとしてのFuelPHP』 <a href="http://tatsu-zine.com/books/fuelphp1st" target="_blank">http://tatsu-zine.com/books/fuelphp1st</a></li>
+			</ul>
+			<p>この電子書籍はFuelPHP 1.2に完全に対応してリリースしました。</p>
+			<h4> FuelPHP勉強会</h4>
+			<p>6月、7月に相次いでFuelPHP勉強会がスタートしています。<a href="http://twitter.com/ounziw" target="_blank">@ounziw</a>さんにより名古屋大須での勉強会が、<a href="http://twitter.com/mukaken" target="_blank">@mukaken</a>さんにより東京での勉強会がスタートしました。</p>
+
+			<ul>
+				<li> FuelPHP 勉強会 大須 vol.1 <a href="http://atnd.org/events/29536" target="_blank">http://atnd.org/events/29536</a></li>
+				<li> FuelPHP 勉強会 東京 vol.1 <a href="http://atnd.org/event/fuelphp" target="_blank">http://atnd.org/event/fuelphp</a></li>
+			</ul>
+			<p>10月には今まで地下に潜っていた<a href="http://twitter.com/omoon" target="_blank">@omoon</a>さんによる「FuelPHP 勉強会 大阪」も公になりました。</p>
+
+			<ul>
+				<li> FuelPHP 勉強会 大阪 vol.3 <a href="http://atnd.org/events/32493" target="_blank">http://atnd.org/events/32493</a></li>
+			</ul>
+			<p>これらは、継続的なFuelPHPの勉強会です。東京はもともと人口が多いこともありますが、初回勉強会から50人規模で行われており、いきなり大きな規模の勉強会になっています。</p>
+			<p>今後も勉強会は開催されますので、興味のある方は参加したり、スタッフをしたり主催してみてください。勉強会の情報は、fuelphp.jp Googleグループに流れるでしょうし、FuelPHPまとめWikiにも記載されるでしょう。</p>
+
+			<ul>
+				<li> <a href="http://wiki.fuelphp1st.com/wiki/index/FuelPHP%20%E3%81%AE%E5%8B%89%E5%BC%B7%E4%BC%9A%E3%83%BB%E3%82%A4%E3%83%99%E3%83%B3%E3%83%88" target="_blank">FuelPHP の勉強会・イベント : FuelPHP まとめ Wiki</a></li>
+			</ul>
+			<h4> PHPカンファレンス2012</h4>
+			<p>9月には毎年、東京でPHPカンファレンスが行われますが、今年、もっとも存在感のあったフレームワークがFuelPHPでした。去年は全く名前を目にすることがありませんでしたが、今年は多くのセッションでその名前を耳にしました。</p>
+			<p>各フレームワークの最新情報を届けるセッションである「フレームワークアップデート」にも初めて登場しました。その他、興味のある方は、次の記事をご覧ください。</p>
+
+			<ul>
+				<li> <a href="http://d.hatena.ne.jp/Kenji_s/20120917/fuelphp_at_php_con_2012" target="_blank">PHPカンファレンス2012でのFuelPHP</a></li>
+			</ul>
+			<h4> 日本語情報の爆発的な増加</h4>
+			<p>1年前と比べると、書籍なども出ていますが、Web上の日本語情報も比較にならないほど増えました。「FuelPHP日本語ニュース」を見てもらえばわかりますが、今はほぼ毎日のように数本のブログ記事が書かれています。</p>
+
+			<ul>
+				<li> FuelPHP日本語ニュース <a href="https://www.facebook.com/jp.fuel" target="_blank">https://www.facebook.com/jp.fuel</a></li>
+			</ul>
+			<p>あまりに日本語情報が多いので、FuelPHPが日本製だと勘違いする人まで出てきたほどです。とはいえ、CakePHPなどの歴史のあるフレームワークと比べるとまだまだ情報は少ないですが。</p>
+			<h4> Web検索の人気度</h4>
+			<p>Googleトレンドのによるここ1年の日本での検索ボリュームの推移です。</p>
+			<p><a href="http://f.hatena.ne.jp/Kenji_s/20121201063941" class="hatena-fotolife" target="_blank"><img src="http://cdn-ak.f.st-hatena.com/images/fotolife/K/Kenji_s/20121201/20121201063941.png" alt="f:id:Kenji_s:20121201063941p:image" title="f:id:Kenji_s:20121201063941p:image" class="hatena-fotolife"></a></p>
+			<p><a href="http://www.google.com/trends/explore?hl=ja#q=symfony%2C%20codeigniter%2C%20yii%2C%20zend%20framework%2C%20fuelphp&geo=JP&date=12%2F2011%2012m&cmpt=q" target="_blank">Google トレンド</a></p>
+			<p>ここ1年で、Symfony、CodeIgniterと肩を並べるレベルまで上昇していることがわかります。</p>
+			<p>なお、CakePHPははるか上に位置しており、含めるとグラフが見づらくなるため除外しています。決して、CakePHPをわざと無視しているわけではありません。</p>
+			<h4> FuelPHPをさらに知るには？</h4>
+			<p>ほとんど全く技術的なことは書いていませんが、もし、FuelPHPに興味を持っていただけましたら、「FuelPHPまとめWiki」にFuelPHPの情報をまとめていますので、ここをスターティングポイントにすることでFuelPHPの様々な情報を得ることができると思います。</p>
+
+			<ul>
+				<li> FuelPHPまとめWiki <a href="http://wiki.fuelphp1st.com/wiki/" target="_blank">http://wiki.fuelphp1st.com/wiki/</a></li>
+			</ul>
+			<p>また、明日からはもっと、FuelPHPの技術的な話が続くと思いますのでご期待ください。</p>
+			<p>明日は、<a href="http://twitter.com/madmamor" target="_blank">@madmamor</a>さんの「FuelPHPで画像をプログラムから出力する方法。切り取る方法。応用する方法。」です。お楽しみに！</p>
+			<p class="share-button sectionfooter"><a href="http://twitter.com/share" class="twitter-share-button" data-lang="ja" data-count="none" data-url="http://d.hatena.ne.jp/Kenji_s/20121201/fuelphp_this_year" data-text=" FuelPHPのこの1年 - A Day in Serenity @ kenjis (id:Kenji_s)">ツイートする</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js" charset="utf-8"></script><iframe src="http://www.facebook.com/plugins/like.php?href=http%3A%2F%2Fd.hatena.ne.jp%2FKenji_s%2F20121201%2Ffuelphp_this_year&amp;layout=button_count&amp;show_faces=false&amp;width=100&amp;action=like&amp;colorscheme=light&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:100px; height:21px;" allowtransparency="true"></iframe></p>
+
+			<p class="sectionfooter"><a href="/Kenji_s/20121201/fuelphp_this_year">Permalink</a> | <a href="/Kenji_s/20121201/fuelphp_this_year#c">コメント(0)</a> | <a href="/Kenji_s/20121201/fuelphp_this_year#tb">トラックバック(0)</a> <a href="http://b.hatena.ne.jp/entry/http://d.hatena.ne.jp/Kenji_s/20121201/fuelphp_this_year" class="bookmark-icon"><img src="http://d.hatena.ne.jp/images/b_entry_de.gif" border="0" title=" FuelPHPのこの1年を含むブックマーク" alt=" FuelPHPのこの1年を含むブックマーク" width="16" height="12" class="icon"></a> <a href="http://b.hatena.ne.jp/entry/http://d.hatena.ne.jp/Kenji_s/20121201/fuelphp_this_year" class="bookmark-count"><img src="http://b.hatena.ne.jp/entry/image/http://d.hatena.ne.jp/Kenji_s/20121201/fuelphp_this_year" title="はてなブックマーク -  FuelPHPのこの1年" alt=""></a></p>
+
+		</div>
