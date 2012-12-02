@@ -12,8 +12,8 @@
 require './libs/BlogArticle.php';
 
 if ( ! isset($argv[1]) || ! isset($argv[2]) || ! isset($argv[3])) {
-    echo $argv[0] . ' URL page chapter' . PHP_EOL;
-    echo $argv[0] . ' URL image chapter' . PHP_EOL;
+    echo $argv[0] . ' (URL) page (chapter)' . PHP_EOL;
+    echo $argv[0] . ' (URL) image (chapter)' . PHP_EOL;
     exit(1);
 }
 

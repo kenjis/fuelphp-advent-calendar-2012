@@ -71,6 +71,7 @@
                 $img = $this->processImageLine($line);
                 
                 // get image file
+                echo 'Getting: ', $img['path'], PHP_EOL;
                 $img_data = file_get_contents($img['path']);
                 
                 // save image file
