@@ -1,0 +1,744 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html xmlns:og="http://ogp.me/ns#">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=euc-jp">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<title> FuelPHPのこの1年 - A Day in Serenity @ kenjis</title>
+<link rel="start" href="/" title="A Day in Serenity @ kenjis">
+<link rel="help" href="/help" title="ヘルプ">
+<link rel="prev" href="/Kenji_s/20121130/install_pandoc" title="[Ubuntu] Pandoc のインストール">
+
+<link rel="stylesheet" href="http://d.st-hatena.com/statics/css/base.css?5d7f38e4a6d82f044c81959ae4de5445d7f238cd" type="text/css" media="all">
+<link rel="stylesheet" href="http://d.st-hatena.com/statics/css/headerstyle_de.css?1e7f1ae8a305b254105e3093bcf711b2af81c2a0" type="text/css" media="all">
+<link rel="stylesheet" href="http://d.st-hatena.com/statics/theme/hatena2/hatena2.css?1e7f1ae8a305b254105e3093bcf711b2af81c2a0" type="text/css" media="all">
+
+
+<link rel="alternate" type="application/rss+xml" title="RSS" href="http://d.hatena.ne.jp/Kenji_s/rss">
+<link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="http://d.hatena.ne.jp/Kenji_s/rss2">
+
+<link rel="meta" type="application/rdf+xml" title="FOAF" href="http://d.hatena.ne.jp/Kenji_s/foaf" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://d.hatena.ne.jp/Kenji_s/opensearch/diary.xml" title="A Day in Serenity @ kenjis内日記検索" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://d.hatena.ne.jp/Kenji_s/opensearch/archive.xml" title="A Day in Serenity @ kenjis内一覧検索" />
+
+
+
+<link rel="shortcut icon" href="http://d.hatena.ne.jp/images/de_favicon.ico">
+
+
+
+
+<style type="text/css">
+<!-- 
+
+-->
+</style>
+
+
+<script type="text/javascript">if(/[\x3c\x3e\x22]/.test(location.hash))location.hash=location.hash.replace(/[\x3c\x3e\x22]/g,'');if(/[\x3c\x3e]/.test(document.referrer))location.href=location.href;</script>
+
+
+
+
+<meta property="og:type" content="article">
+<meta property="og:title" content=" FuelPHPのこの1年 - A Day in Serenity @ kenjis">
+<meta property="og:image" content="http://cdn-ak.f.st-hatena.com/images/fotolife/K/Kenji_s/20121129/20121129153912.png">
+<meta property="og:url" content="http://d.hatena.ne.jp/Kenji_s/20121201/fuelphp_this_year">
+<meta property="og:description" content=" 今日から25日間、FuelPHP Advent Calendar 2012が開催されます。参加者が毎日、FuelPHPの記事を順に公開し..">
+<meta property="og:site_name" content="はてなダイアリー">
+
+
+<!--
+<rdf:RDF
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:foaf="http://xmlns.com/foaf/0.1/">
+<rdf:Description rdf:about="http://d.hatena.ne.jp/Kenji_s/20121201/fuelphp_this_year">
+   <foaf:maker rdf:parseType="Resource">
+     <foaf:holdsAccount>
+       <foaf:OnlineAccount foaf:accountName="Kenji_s">
+         <foaf:accountServiceHomepage rdf:resource="http://www.hatena.ne.jp/" />
+       </foaf:OnlineAccount>
+     </foaf:holdsAccount>
+   </foaf:maker>
+</rdf:Description>
+</rdf:RDF>
+-->
+
+<link rel="alternate" media="handheld" type="text/html" href="http://d.hatena.ne.jp/Kenji_s/mobile?date=20121201&section=fuelphp_this_year" />
+<!--
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:dc="http://purl.org/dc/elements/1.1/"
+         xmlns:trackback="http://madskills.com/public/xml/rss/module/trackback/">
+<rdf:Description
+  rdf:about="http://d.hatena.ne.jp/Kenji_s/20121201/fuelphp_this_year"
+  trackback:ping="http://d.hatena.ne.jp/Kenji_s/20121201/fuelphp_this_year"
+  dc:title="[FuelPHP] FuelPHPのこの1年"
+  dc:identifier="http://d.hatena.ne.jp/Kenji_s/20121201/fuelphp_this_year" />
+</rdf:RDF>
+-->
+
+
+
+<link rel="canonical" href="http://d.hatena.ne.jp/Kenji_s/20121201/fuelphp_this_year">
+
+
+
+
+<script type="text/javascript" src="http://s.hatena.ne.jp/js/HatenaStar.js"></script>
+<script type="text/javascript">
+Hatena.Star.SiteConfig = {
+  entryNodes: {
+    'div.section': {
+      uri: 'h3 a',
+      title: 'h3',
+      container: 'h3'
+    }
+  }
+};
+Hatena.Author  = new Hatena.User('Kenji_s');
+Hatena.DiaryName  = new Hatena.User('Kenji_s');
+
+</script>
+
+
+
+
+
+
+<script type="text/javascript" src="http://d.st-hatena.com/statics/js/quick_pager.js?1e7f1ae8a305b254105e3093bcf711b2af81c2a0"></script>
+<script type="text/javascript" src="http://d.st-hatena.com/statics/js/diary_utils.js?1e7f1ae8a305b254105e3093bcf711b2af81c2a0"></script>
+<script type="text/javascript" src="http://d.st-hatena.com/statics/js/max_width_fotolife.js?1e7f1ae8a305b254105e3093bcf711b2af81c2a0"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="http://d.st-hatena.com/statics/js/jquery-1.4.2.min.js?1e7f1ae8a305b254105e3093bcf711b2af81c2a0"></script>
+<script type="text/javascript">
+  jQuery.noConflict()(function($){
+    var j$ = jQuery;
+  });
+</script>
+
+
+
+
+</head>
+<body>
+
+<div id="simple-header">
+
+  <a href="http://www.hatena.ne.jp/"><img src="/images/hatena-simple_de.gif" alt="Hatena::" title="Hatena::" id="logo-hatena" width="65" height="17"></a><a href="/"><img src="/images/diary-simple_de.gif" alt="ブログ(Diary)" title="Diary" id="logo-diary" width="43" height="17"></a>
+  <form method="get" action="/search" class="search-form">
+    <input type="text" class="search-word" name="word" value=""><input name="name" value="Kenji_s" type="hidden"><input type="submit" name="diary" value="日記" class="search-button"><input type="submit" name="submit" value="検索" class="search-button">
+  </form>
+  <ul class="menu">
+    <li><a href="/Kenji_s/">ブログトップ</a></li>
+    <li><a href="/Kenji_s/archive">記事一覧</a></li>
+
+
+
+    <li><a href="https://www.hatena.ne.jp/login?backurl=http%3A%2F%2Fd.hatena.ne.jp%2FKenji_s%2F20121201%2Ffuelphp_this_year&add_timestamp=1">ログイン</a></li>
+    <li><a href="https://www.hatena.ne.jp/register?location=http://d.hatena.ne.jp/">無料ブログ開設</a></li>
+
+  </ul>
+</div>
+
+
+
+<h1><a href="http://d.hatena.ne.jp/Kenji_s/">A Day in Serenity @ kenjis</a></h1>
+<div class="hatena-body">
+<div class="main">
+
+
+
+
+
+
+
+
+
+<div class="calendar" id="pager-top">
+  <a rel="prev" href="/Kenji_s/20121130/install_pandoc" class="prev">&lt;[Ubuntu] Pandoc のインストール</a><span id="edit-in-place-add"></span>
+</div>
+<div id="days">
+
+<div class="day">
+<h2><a href="http://d.hatena.ne.jp/Kenji_s/20121201" rel="nofollow"><span class="date">2012-12-01</span></a></h2>
+
+<div class="body">
+
+<!-- google_ad_section_start -->
+
+		<div class="section">
+			<h3 class="title"><a href="/Kenji_s/20121201/fuelphp_this_year" name="fuelphp_this_year"> FuelPHPのこの1年</a></h3>
+			<p class="sectionheader"><span class="sectioncategory"><a href="/Kenji_s/searchdiary?word=%2A%5BFuelPHP%5D" class="sectioncategory">FuelPHP</a></span></p>
+			<p>今日から25日間、<a href="http://atnd.org/events/33753" target="_blank">FuelPHP Advent Calendar 2012</a>が開催されます。参加者が毎日、FuelPHPの記事を順に公開していきます。このイベントは去年も開催されており、今年で2年目になります。</p>
+			<p>本日初日ですが、みなさんに非常に残念なことをお知らせせねばなりません。</p>
+			<p>実は、今年の<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%A2%A5%C9%A5%D9%A5%F3%A5%C8">アドベント</a>(<a class="keyword" href="http://d.hatena.ne.jp/keyword/%C2%D4%B9%DF%C0%E1">待降節</a>)は明日からです。ですので、今日はまだ本当はアドベントではありません。</p>
+			<p>とは言え、アドベントカレンダーは実際のアドベントとは無関係に12月1日から開始されるものが多いのも事実です。気を取り直して、粛々と進めたいと思います。</p>
+			<p>初日ですので、FuelPHPをあまりご存じない方にも、FuelPHPの概要や状況についてお知らせしていこうと思います。</p>
+			<br>
+
+			<h4> FuelPHPとは？</h4>
+			<p><a href="http://f.hatena.ne.jp/Kenji_s/20121129153912" class="hatena-fotolife" target="_blank"><img src="http://cdn-ak.f.st-hatena.com/images/fotolife/K/Kenji_s/20121129/20121129153912.png" alt="f:id:Kenji_s:20121129153912p:image" title="f:id:Kenji_s:20121129153912p:image" class="hatena-fotolife"></a></p>
+			<p><a href="http://fuelphp.com/" target="_blank">http://fuelphp.com/</a></p>
+			<p>FuelPHPは、今もっとも注目されている最新のPHP<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%D5%A5%EC%A1%BC%A5%E0%A5%EF%A1%BC%A5%AF">フレームワーク</a>、オープンソース(MITライセンス)のWebアプリケーションフレームワークです。シンプルでフレキシブル、コミュニティにより開発されているPHP 5.3でゼロから書かれた最先端のPHPフレームワークです。2011年7月に最初の正式版バージョン1.0がリリースされました。</p>
+			<p>名前空間などを使っているため、動作にはPHP 5.3以上が必要ですのでご注意ください。開発した後に本番環境がPHP 5.2だったりすると悲惨なことになります。</p>
+			<p>FuelPHPのコア開発者は全員がCodeIgniterに関わっており、FuelPHPはCodeIgniterとテイストが非常に似ています。CodeIgniterと同じく軽量高速で習得しやすく高い拡張性と柔軟性を持ったフレームワークになっています。また、ゼロからPHP 5.3で書き直されているためコードもクリーンです。ライセンスも扱いやすい有名なオープンソースライセンスであるMITライセンスです。</p>
+			<p>なお、PHP 5.3でゼロから書き直されているためFuelPHPはCodeIgniterのフォークではありません。念のため。</p>
+			<p>まとめると、FuelPHPは、</p>
+
+			<ul>
+				<li> もっとも注目されている</li>
+				<li> 最先端</li>
+				<li> オープンソース</li>
+				<li> 軽量高速</li>
+				<li> 習得が容易</li>
+			</ul>
+			<p>なPHPフレームワークということになります。</p>
+			<h4> FuelPHPの歴史</h4>
+			<p>リリースの歴史は次のようになっています。</p>
+
+			<table>
+				<tr><th>日付     </th><th>出来事</th></tr>
+				<tr><td>2010/10</td><td>    開発開始</td></tr>
+				<tr><td>2011/01/08</td><td> FuelPHP 1.0.0-BETA1リリース</td></tr>
+				<tr><td>2011/07/30</td><td> FuelPHP 1.0リリース</td></tr>
+				<tr><td>2011/12/13</td><td> FuelPHP 1.1リリース</td></tr>
+				<tr><td>2012/06/03</td><td> FuelPHP 1.2リリース</td></tr>
+				<tr><td>2012/09/09</td><td> FuelPHP 1.3リリース</td></tr>
+				<tr><td>2012/11/09</td><td> FuelPHP 1.4リリース</td></tr>
+
+			</table>
+			<h4> FuelPHPのこの1年</h4>
+			<p>この1年ほどの出来事をまとめると次のようになります。</p>
+
+			<table>
+				<tr><th>日付     </th><th>場所</th><th>出来事</th></tr>
+				<tr><td>2011/11/10</td><td> 日本</td><td> FuelPHPドキュメント翻訳の開始</td></tr>
+				<tr><td>2011/12/01</td><td> 日本</td><td> 「FuelPHP Advent Calendar 2011」開始</td></tr>
+				<tr><td>2011/12/13</td><td> 本家</td><td> FuelPHP 1.1リリース</td></tr>
+				<tr><td>2011/12/27</td><td> 日本</td><td> 「FuelPHPまとめWiki」開始</td></tr>
+				<tr><td>2012/01/10</td><td> 日本</td><td> 「fuelphp.jp Googleグループ」開始</td></tr>
+				<tr><td>2012/03/22</td><td> 日本</td><td> 電子書籍『FuelPHP Advent Calendar 2011』(技術評論社)出版</td></tr>
+				<tr><td>2012/06/02</td><td> 日本</td><td> 書籍『FuelPHP入門』(ソーテック社)出版</td></tr>
+				<tr><td>2012/06/03</td><td> 本家</td><td> FuelPHP 1.2リリース</td></tr>
+				<tr><td>2012/06/07</td><td> 日本</td><td> FuelPHP 勉強会 大須 vol.1</td></tr>
+				<tr><td>2012/07/02</td><td> 日本</td><td> 電子書籍『はじめてのフレームワークとしてのFuelPHP』(達人出版会)出版</td></tr>
+				<tr><td>2012/07/08</td><td> 日本</td><td> FuelPHP 勉強会 東京 vol.1</td></tr>
+				<tr><td>2012/07/22</td><td> 日本</td><td> FuelPHP 勉強会 大須 vol.2</td></tr>
+				<tr><td>2012/08/18</td><td> 日本</td><td> 「FuelPHP日本語ニュース」始動</td></tr>
+				<tr><td>2012/09/09</td><td> 本家</td><td> FuelPHP 1.3リリース</td></tr>
+				<tr><td>2012/09/15</td><td> 日本</td><td> PHPカンファレンス2012</td></tr>
+				<tr><td>2012/09/23</td><td> 日本</td><td> FuelPHP 勉強会 東京 vol.2</td></tr>
+				<tr><td>2012/10/10</td><td> 日本</td><td> FuelPHP 勉強会 大阪 vol.3</td></tr>
+				<tr><td>2012/10/12</td><td> 日本</td><td> 「fuelphp.jp Googleグループ」200人突破</td></tr>
+				<tr><td>2012/11/09</td><td> 本家</td><td> FuelPHP 1.4リリース</td></tr>
+
+			</table>
+			<p>それでは、主な出来事を振り返っていきたいと思います。</p>
+			<h4> FuelPHPドキュメント翻訳の開始</h4>
+			<p>去年の11月に<a href="http://twitter.com/NEKOGET" target="_blank">@NEKOGET</a>さんが公式ドキュメントの翻訳プロジェクトをGitHubで開始しました。これが日本でのFuelPHPに関する公の活動の始まりだったのではないかと思います。</p>
+
+			<ul>
+				<li> <a href="https://github.com/NEKOGET/FuelPHP_docs_jp/" target="_blank">https://github.com/NEKOGET/FuelPHP_docs_jp/</a></li>
+			</ul>
+			<p>翻訳プロジェクトは今も続いていますが、残念ながらあまり活発ではなく、いまだに全ドキュメントの翻訳が完了したバージョンはありません。ただし、基礎となる部分はほぼ完了しています。</p>
+			<p>「翻訳を俺が進めてやるぜ！」という方がいましたら、是非、上記のGitHubのリポジトリをご覧ください。</p>
+			<h4> FuelPHP Advent Calendar 2011</h4>
+			<p>日本でFuelPHPに関する最初のイベントは、去年のアドベントカレンダーです。ユーザ数も少なく情報もほとんどない状態で人が集まるかどうかまったくわかりませんでしたが、<a href="http://twitter.com/ounziw" target="_blank">@ounziw</a>さんにより開催されました。</p>
+
+			<ul>
+				<li> FuelPHP Advent Calendar 2011 <a href="http://atnd.org/events/22380" target="_blank">http://atnd.org/events/22380</a></li>
+			</ul>
+			<p>結果は13人しか集まらず、1人が何回か書くことになりましたが、無事終了できました。期間中にFuelPHP 1.1がリリースされました。</p>
+			<p>それに対して、今年のアドベントカレンダーは、11月中に25人の参加者がすべて埋まりました。1年で何という違いでしょう！</p>
+			<h4> fuelphp.jp Googleグループ</h4>
+			<p>年が開けて<a href="http://twitter.com/NEKOGET" target="_blank">@NEKOGET</a>さんにより日本語でFuelPHPの情報交換をするための「fuelphp.jp Googleグループ」が作成されました。</p>
+
+			<ul>
+				<li> fuelphp.jp Googleグループ <a href="https://groups.google.com/forum/?fromgroups#!forum/fuelphp_jp" target="_blank">https://groups.google.com/forum/?fromgroups#!forum/fuelphp_jp</a></li>
+			</ul>
+			<p>現在は、250名ほどが参加するまでに成長し、FuelPHPに関する日本語での最大のコミュニティになっています。FuelPHPユーザの方は、是非、ご参加下さい。</p>
+			<h4> 関連書籍</h4>
+			<p>3月には、アドベントカレンダーの記事がまとめられた電子書籍『FuelPHP Advent Calendar 2011』が技術評論社より出版されました。たぶん、FuelPHPに関する世界で初めての書籍です。</p>
+			<p>この電子書籍は、以下のサイトより、ユーザ登録するだけで無料で入手できます。</p>
+
+			<ul>
+				<li> 『FuelPHP Advent Calendar 2011』 <a href="https://gihyo.jp/dp/sp/advent2011/G11C13" target="_blank">https://gihyo.jp/dp/sp/advent2011/G11C13</a></li>
+			</ul>
+			<p>そして、6月には『FuelPHP入門』がソーテック社から出版されました。FuelPHPに関する日本で(たぶん世界でも)初めての紙の書籍です。</p>
+			<div class="hatena-asin-detail">
+  <a href="http://www.amazon.co.jp/dp/4881669419/?tag=hatena_st1-22&ascsubtag=d-43sw2"><img src="http://ecx.images-amazon.com/images/I/511wN5khDHL._SL160_.jpg" class="hatena-asin-detail-image" alt="FuelPHP入門" title="FuelPHP入門"></a>
+  <div class="hatena-asin-detail-info">
+    <p class="hatena-asin-detail-title"><a href="http://www.amazon.co.jp/dp/4881669419/?tag=hatena_st1-22&ascsubtag=d-43sw2">FuelPHP入門</a></p>
+    <ul>
+      
+      <li><span class="hatena-asin-detail-label">作者:</span> <a href="http://d.hatena.ne.jp/keyword/%C1%E1%C0%EE%C0%BB%BB%CA" class="keyword">早川聖司</a></li>
+      
+      <li><span class="hatena-asin-detail-label">出版社/メーカー:</span> <a href="http://d.hatena.ne.jp/keyword/%A5%BD%A1%BC%A5%C6%A5%C3%A5%AF%BC%D2" class="keyword">ソーテック社</a></li>
+      
+      <li><span class="hatena-asin-detail-label">発売日:</span> 2012/06/02</li>
+                                                      <li><span class="hatena-asin-detail-label">メディア:</span> 単行本</li>
+      <li><span class="hatena-asin-detail-label">購入</span>: 7人 <span class="hatena-asin-detail-label">クリック</span>: 134回</li>
+      <li><a href="http://d.hatena.ne.jp/asin/4881669419" target="_blank">この商品を含むブログ (6件) を見る</a></li>
+    </ul>
+  </div>
+  <div class="hatena-asin-detail-foot"></div>
+</div>
+
+
+			<ul>
+				<li> 『FuelPHP入門』 <a href="http://www.sotechsha.co.jp/pc/html/941.htm" target="_blank">http://www.sotechsha.co.jp/pc/html/941.htm</a></li>
+			</ul>
+			<p>7月には、私が執筆した電子書籍『はじめてのフレームワークとしてのFuelPHP』が達人出版会から出版されました。</p>
+			<p><div style="margin-bottom:0px;" class="amazlet-box"><div style="float:left;margin:0px 12px 1px 0px;" class="amazlet-image"><a target="_blank" href="http://tatsu-zine.com/books/fuelphp1st" name="amazletlink"><img alt="はじめてのフレームワークとしてのFuelPHP" src="http://tatsu-zine.com/images/books/37/cover_s.jpg" style="border: none;"></a></div><div style="line-height:120%;margin-bottom:10px" class="amazlet-info"><div style="margin-bottom:10px;line-height:120%" class="amazlet-name"><a target="_blank" href="http://tatsu-zine.com/books/fuelphp1st" name="amazletlink">はじめてのフレームワークとしてのFuelPHP【電子書籍】</a></div><div class="amazlet-detail">鈴木憲治<br>達人出版会<br>発行日: 2012-07-02<br>対応フォーマット: EPUB, PDF<br></div><div style="float:left;" class="amazlet-sub-info"><div style="margin-top:5px" class="amazlet-link"><a target="_blank" href="http://tatsu-zine.com/books/fuelphp1st" name="amazletlink">詳細を見る</a></div></div></div><div style="clear:left" class="amazlet-footer"></div></div></p>
+
+			<ul>
+				<li> 『はじめてのフレームワークとしてのFuelPHP』 <a href="http://tatsu-zine.com/books/fuelphp1st" target="_blank">http://tatsu-zine.com/books/fuelphp1st</a></li>
+			</ul>
+			<p>この電子書籍はFuelPHP 1.2に完全に対応してリリースしました。</p>
+			<h4> FuelPHP勉強会</h4>
+			<p>6月、7月に相次いでFuelPHP勉強会がスタートしています。<a href="http://twitter.com/ounziw" target="_blank">@ounziw</a>さんにより名古屋大須での勉強会が、<a href="http://twitter.com/mukaken" target="_blank">@mukaken</a>さんにより東京での勉強会がスタートしました。</p>
+
+			<ul>
+				<li> FuelPHP 勉強会 大須 vol.1 <a href="http://atnd.org/events/29536" target="_blank">http://atnd.org/events/29536</a></li>
+				<li> FuelPHP 勉強会 東京 vol.1 <a href="http://atnd.org/event/fuelphp" target="_blank">http://atnd.org/event/fuelphp</a></li>
+			</ul>
+			<p>10月には今まで地下に潜っていた<a href="http://twitter.com/omoon" target="_blank">@omoon</a>さんによる「FuelPHP 勉強会 大阪」も公になりました。</p>
+
+			<ul>
+				<li> FuelPHP 勉強会 大阪 vol.3 <a href="http://atnd.org/events/32493" target="_blank">http://atnd.org/events/32493</a></li>
+			</ul>
+			<p>これらは、継続的なFuelPHPの勉強会です。東京はもともと人口が多いこともありますが、初回勉強会から50人規模で行われており、いきなり大きな規模の勉強会になっています。</p>
+			<p>今後も勉強会は開催されますので、興味のある方は参加したり、スタッフをしたり主催してみてください。勉強会の情報は、fuelphp.jp Googleグループに流れるでしょうし、FuelPHPまとめWikiにも記載されるでしょう。</p>
+
+			<ul>
+				<li> <a href="http://wiki.fuelphp1st.com/wiki/index/FuelPHP%20%E3%81%AE%E5%8B%89%E5%BC%B7%E4%BC%9A%E3%83%BB%E3%82%A4%E3%83%99%E3%83%B3%E3%83%88" target="_blank">FuelPHP の勉強会・イベント : FuelPHP まとめ Wiki</a></li>
+			</ul>
+			<h4> PHPカンファレンス2012</h4>
+			<p>9月には毎年、東京でPHPカンファレンスが行われますが、今年、もっとも存在感のあったフレームワークがFuelPHPでした。去年は全く名前を目にすることがありませんでしたが、今年は多くのセッションでその名前を耳にしました。</p>
+			<p>各フレームワークの最新情報を届けるセッションである「フレームワークアップデート」にも初めて登場しました。その他、興味のある方は、次の記事をご覧ください。</p>
+
+			<ul>
+				<li> <a href="http://d.hatena.ne.jp/Kenji_s/20120917/fuelphp_at_php_con_2012" target="_blank">PHPカンファレンス2012でのFuelPHP</a></li>
+			</ul>
+			<h4> 日本語情報の爆発的な増加</h4>
+			<p>1年前と比べると、書籍なども出ていますが、Web上の日本語情報も比較にならないほど増えました。「FuelPHP日本語ニュース」を見てもらえばわかりますが、今はほぼ毎日のように数本のブログ記事が書かれています。</p>
+
+			<ul>
+				<li> FuelPHP日本語ニュース <a href="https://www.facebook.com/jp.fuel" target="_blank">https://www.facebook.com/jp.fuel</a></li>
+			</ul>
+			<p>あまりに日本語情報が多いので、FuelPHPが日本製だと勘違いする人まで出てきたほどです。とはいえ、CakePHPなどの歴史のあるフレームワークと比べるとまだまだ情報は少ないですが。</p>
+			<h4> Web検索の人気度</h4>
+			<p>Googleトレンドのによるここ1年の日本での検索ボリュームの推移です。</p>
+			<p><a href="http://f.hatena.ne.jp/Kenji_s/20121201063941" class="hatena-fotolife" target="_blank"><img src="http://cdn-ak.f.st-hatena.com/images/fotolife/K/Kenji_s/20121201/20121201063941.png" alt="f:id:Kenji_s:20121201063941p:image" title="f:id:Kenji_s:20121201063941p:image" class="hatena-fotolife"></a></p>
+			<p><a href="http://www.google.com/trends/explore?hl=ja#q=symfony%2C%20codeigniter%2C%20yii%2C%20zend%20framework%2C%20fuelphp&geo=JP&date=12%2F2011%2012m&cmpt=q" target="_blank">Google トレンド</a></p>
+			<p>ここ1年で、Symfony、CodeIgniterと肩を並べるレベルまで上昇していることがわかります。</p>
+			<p>なお、CakePHPははるか上に位置しており、含めるとグラフが見づらくなるため除外しています。決して、CakePHPをわざと無視しているわけではありません。</p>
+			<h4> FuelPHPをさらに知るには？</h4>
+			<p>ほとんど全く技術的なことは書いていませんが、もし、FuelPHPに興味を持っていただけましたら、「FuelPHPまとめWiki」にFuelPHPの情報をまとめていますので、ここをスターティングポイントにすることでFuelPHPの様々な情報を得ることができると思います。</p>
+
+			<ul>
+				<li> FuelPHPまとめWiki <a href="http://wiki.fuelphp1st.com/wiki/" target="_blank">http://wiki.fuelphp1st.com/wiki/</a></li>
+			</ul>
+			<p>また、明日からはもっと、FuelPHPの技術的な話が続くと思いますのでご期待ください。</p>
+			<p>明日は、<a href="http://twitter.com/madmamor" target="_blank">@madmamor</a>さんの「FuelPHPで画像をプログラムから出力する方法。切り取る方法。応用する方法。」です。お楽しみに！</p>
+			<p class="share-button sectionfooter"><a href="http://twitter.com/share" class="twitter-share-button" data-lang="ja" data-count="none" data-url="http://d.hatena.ne.jp/Kenji_s/20121201/fuelphp_this_year" data-text=" FuelPHPのこの1年 - A Day in Serenity @ kenjis (id:Kenji_s)">ツイートする</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js" charset="utf-8"></script><iframe src="http://www.facebook.com/plugins/like.php?href=http%3A%2F%2Fd.hatena.ne.jp%2FKenji_s%2F20121201%2Ffuelphp_this_year&amp;layout=button_count&amp;show_faces=false&amp;width=100&amp;action=like&amp;colorscheme=light&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:100px; height:21px;" allowTransparency="true"></iframe></p>
+
+			<p class="sectionfooter"><a href="/Kenji_s/20121201/fuelphp_this_year">Permalink</a> | <a href="/Kenji_s/20121201/fuelphp_this_year#c">コメント(0)</a> | <a href="/Kenji_s/20121201/fuelphp_this_year#tb">トラックバック(0)</a> <a href="http://b.hatena.ne.jp/entry/http://d.hatena.ne.jp/Kenji_s/20121201/fuelphp_this_year" class="bookmark-icon"><img src="http://d.hatena.ne.jp/images/b_entry_de.gif" border="0" title=" FuelPHPのこの1年を含むブックマーク" alt=" FuelPHPのこの1年を含むブックマーク" width="16" height="12" class="icon"></a> <a href="http://b.hatena.ne.jp/entry/http://d.hatena.ne.jp/Kenji_s/20121201/fuelphp_this_year" class="bookmark-count"><img src="http://b.hatena.ne.jp/entry/image/http://d.hatena.ne.jp/Kenji_s/20121201/fuelphp_this_year" title="はてなブックマーク -  FuelPHPのこの1年" alt=""></a></p>
+
+		</div>
+
+<div id="google_afc_user" class="section">
+<div id="google_afc_user_container" class="google_afc_blocklink2_5 google_afc_boder">
+<script type="text/javascript">
+<!--
+    google_ad_client = 'ca-hatena_html';
+    google_ad_channel = 'd_user';
+    google_ad_type     = 'image';
+    google_ad_width = '300';
+    google_ad_height = '250';
+    google_image_size = '300x250';
+    google_ad_format = '300x250_pas_abgc';
+    document.write('<scri' + 'pt charset="utf-8" type="text/javascript" src="http://ad.hatena.ne.jp/js/hatena_afc-compiled.js"></scri' + 'pt>');
+// -->
+</script>
+</div>
+</div>
+
+
+<!-- google_ad_section_end -->
+<div class="ad">
+
+<script type="text/javascript"><!--
+google_ad_client = "pub-4438296558807254";
+google_ad_channel ="5901068518";
+google_ad_height = '60';
+google_ad_width = '468';
+google_ad_slot = '4202729120';
+//--></script>
+<script type="text/javascript"
+  src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+
+</div>
+
+<div class="ad">
+<div class="hatena-asin-recommend">
+<div class="hatena-asin-recommend-item-1">
+<div class="hatena-asin-recommend-image"><a href="http://d.hatena.ne.jp/asin/4774153249"><img src="http://ecx.images-amazon.com/images/I/51HDvWexiXL._SL60_.jpg" ALT="4774153249"></a></div>
+<div class="hatena-asin-recommend-info">
+<div class="hatena-asin-recommend-title"><a href="http://d.hatena.ne.jp/asin/4774153249"><img src="/images/hamazou_icons/icon-book.gif" border="0" align="left" alt="Book"> CakePHP2 実践入門 (WEB+DB PRESS plus)</a></div>
+<div class="hatena-asin-recommend-description">
+  <a href="http://d.hatena.ne.jp/keyword/%B5%BB%BD%D1%C9%BE%CF%C0%BC%D2">技術評論社</a> <a href="http://d.hatena.ne.jp/keyword/%B0%C2%C6%A3%CD%B4%B2%F0">安藤祐介</a> <a href="http://d.hatena.ne.jp/keyword/%B4%DF%C5%C4%B7%F2%B0%EC%CF%BA">岸田健一郎</a> <a href="http://d.hatena.ne.jp/keyword/%BF%B7%B8%B6%B2%ED%BB%CA">新原雅司</a> <a href="http://d.hatena.ne.jp/keyword/%BB%D4%C0%EE%B2%F7">市川快</a> <a href="http://d.hatena.ne.jp/keyword/%C5%CF%CA%D5%B0%EC%B9%A8">渡辺一宏</a> <a href="http://d.hatena.ne.jp/keyword/%CE%EB%CC%DA%C2%A7%C9%D7">鈴木則夫</a> <br />
+  購入: 2人 クリック: 114回
+</div>
+</div></div>
+<div class="hatena-asin-recommend-item-2">
+<div class="hatena-asin-recommend-image"><a href="http://d.hatena.ne.jp/asin/4774154075"><img src="http://ecx.images-amazon.com/images/I/51GNcgWsHPL._SL60_.jpg" ALT="4774154075"></a></div>
+<div class="hatena-asin-recommend-info">
+<div class="hatena-asin-recommend-title"><a href="http://d.hatena.ne.jp/asin/4774154075"><img src="/images/hamazou_icons/icon-book.gif" border="0" align="left" alt="Book"> Webサービスのつくり方 ~「新しい」を生み出すた...</a></div>
+<div class="hatena-asin-recommend-description">
+  <a href="http://d.hatena.ne.jp/keyword/%B5%BB%BD%D1%C9%BE%CF%C0%BC%D2">技術評論社</a> <a href="http://d.hatena.ne.jp/keyword/%CF%C2%C5%C4%CD%B5%B2%F0">和田裕介</a> <br />
+  購入: 7人 クリック: 187回
+</div>
+</div></div>
+<div class="hatena-asin-recommend-foot"></div></div></div>
+
+
+</div>
+
+<form id="comment-form" method="post" action="/Kenji_s/comment#c" class="comment">
+<input type="hidden" name="mode" value="enter">
+<input type="hidden" name="rkm" value="">
+<input type="hidden" name="date" value="2012-12-01">
+<div class="comment">
+  <div class="caption"><a name="c">コメントを書く</a></div>
+  <div class="commentshort">
+    
+    
+
+    <a name="error-message"></a>
+    <p class="message" style="display:none"></p>
+
+    
+
+    
+            
+        
+          <p class="commentmessage">投稿したコメントは管理者が承認するまで公開されません。</p>
+        
+      
+    <p class="commentform">
+      <span class="commentator">
+        <span class="usermailconfirm"><input name="usermail" size="1" value=""><input name="userurl" size="1" value="">スパム対策のためのダミーです。もし見えても何も入力しないでください<br></span>
+        <span class="username">
+        <img src="http://www.hatena.ne.jp/images/guest_icon.gif" class="hatena-id-icon" alt="ゲスト" title="ゲスト" height="16" width="16">
+        <input type="hidden" name="section" value="fuelphp_this_year">
+        
+          <input id="comment-username" name="username" size="15">
+        
+        </span>
+        
+          <span class="usermail"><img src="/images/icon-usermail.gif" style="vertical-align:middle;margin-right:3px;"><input id="comment-usermail" name="useremail" size="15" value=""></span>
+          <span class="userurl"><img src="/images/icon-userurl.gif" style="vertical-align:middle;margin-right:3px;"><input id="comment-userurl" name="useruri" size="15" value=""></span>
+        
+      </span>
+<br>
+      <!-- NOT_VERIFIED_COMMENT_AUTH -->
+      <textarea id="comment-textarea" name="body" value="" cols="60" rows="3"></textarea><br>
+      
+          <div class="captcha">
+            <img src="/Kenji_s/captcha?1354407422" class="captcha-image">
+            <span class="captcha-message">画像認証</span><br />
+            <input type="text" name="captcha_code" size="10" class="captcha-string" id="comment-captcha">
+          </div>
+      
+      <span class="comment-submit"><input type="submit" id="comment-form-button" value="投稿"></span>
+    </p>
+
+      <script type="text/javascript" src="/js/diary_comment_edit_form.js"></script>
+    
+
+  </div>
+</div>
+
+</form>
+
+
+
+
+
+  
+  <div class="refererlist">
+    <div class="caption">
+      <a name="tb">トラックバック</a> - http://d.hatena.ne.jp/Kenji_s/20121201/fuelphp_this_year
+    </div>
+    
+  </div>
+  
+    <div class="refererlist">
+      <div class="caption"><a name="idtb">idトラックバック</a></div>
+      
+      <ul>
+        
+            <li><a href="http://twitter.com/php_hatena_bot/status/274636920481529857" title="FuelPHPのこの1年 - A Day in Serenity @ kenjis (id:Kenji_s) http://t.co/4DMwTInC" rel="nofollow">Twitter / @php_hatena_bot</a></li>
+          
+        </ul>
+      </div>
+    
+  
+
+
+
+
+
+    <div class="refererlist">
+      <div class="caption">リンク元</div>
+      <ul>
+          <li>8 <a href="http://t.co/uQNPxQyD" rel="nofollow">http://t.co/uQNPxQyD</a></li>
+          <li>7 <a href="http://pipes.yahoo.com/pipes/pipe.info?_id=f8e50936209277c7946c9bc16b988bf7" rel="nofollow">http://pipes.yahoo.com/pipes/pipe.info?_id=f8e50936209277c7946c9bc16b988bf7</a></li>
+          <li>6 <a href="http://ow.ly/fJ5Pn" rel="nofollow">http://ow.ly/fJ5Pn</a></li>
+          <li>4 <a href="http://hootsuite.com/dashboard" rel="nofollow">http://hootsuite.com/dashboard</a></li>
+          <li>2 <a href="http://t.co/FR358BOR" rel="nofollow">http://t.co/FR358BOR</a></li>
+          <li>2 <a href="http://t.co/Op22sXWi" rel="nofollow">http://t.co/Op22sXWi</a></li>
+          <li>2 <a href="http://www.google.com/" rel="nofollow">http://www.google.com/</a></li>
+          <li>2 <a href="http://www.google.com/url?source=web&amp;url=http%3A%2F%2Fd.hatena.ne.jp%2FKenji_s%2F20121201%2Ffuelphp_this_year" rel="nofollow">http://www.google.com/url?source=web&amp;url=http://d.hatena.ne.jp/Kenji_s/20121201/fuelphp_this_year</a></li>
+          <li>2 <a href="https://www.facebook.com/" rel="nofollow">https://www.facebook.com/</a></li>
+          <li>1 <a href="http://b.hatena.ne.jp/mukaken/bookmark" rel="nofollow">http://b.hatena.ne.jp/mukaken/bookmark</a></li>
+      </ul>
+      
+    </div>
+
+
+
+
+</div>
+
+
+
+</div>
+<div class="calendar" id="pager-bottom">
+  <a rel="prev" href="/Kenji_s/20121130/install_pandoc" class="prev">&lt;[Ubuntu] Pandoc のインストール</a>
+</div>
+</div>
+<div class="sidebar">
+
+<div class="hatena-module">
+<div class="hatena-moduletitle">宣伝</div>
+<div class="hatena-modulebody">
+<div style="text-align:center;">PHPフレームワーク入門書の決定版!<br>
+<a href="http://tatsu-zine.com/books/fuelphp1st"><img alt="はじめてのフレームワークとしてのFuelPHP" src="http://tatsu-zine.com/images/books/37/cover_s.jpg"></a></div>
+</div>
+</div>
+
+<div class="hatena-module">
+<div class="hatena-moduletitle">広告</div>
+<div class="hatena-modulebody">
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4642178115527167";
+/* Serenity: サイドバートップ 200x200 */
+google_ad_slot = "5042521414";
+google_ad_width = 200;
+google_ad_height = 200;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
+</div>
+</div>
+
+	<div class="hatena-module">
+	<div class="hatena-moduletitle">リンク集</div>
+	<div class="hatena-modulebody">
+	<ul class="hatena-urllist">
+	<li><a href="http://wiki.fuelphp1st.com/wiki/">FuelPHP まとめ Wiki</a></li>
+	<li><a href="http://club.h14m.org/kenji/CodeIgniter/">CodeIgniter まとめ Wiki</a></li>
+	<li><a href="http://d.hatena.ne.jp/Kenji_s/20110909/1315572290">CodeIgniter 2.0.3 に対するノート(脆弱性とバグ)</a></li>
+	<li><a href="http://d.hatena.ne.jp/Kenji_s/20110203/1296696735">Mercurial(hg) のコマンド一覧</a></li>
+	<li><a href="http://d.hatena.ne.jp/Kenji_s/20110823/1314111985">Mercurial ユーザのための git メモ</a></li>
+	<li><a href="http://d.hatena.ne.jp/Kenji_s/20110927/1317105278">ReVIEW の使い方</a></li>
+	</ul>
+	</div>
+	</div>
+
+	<div class="hatena-module hatena-module-calendar2">
+<div class="hatena-moduletitle">カレンダー</div>
+<div class="hatena-modulebody">
+<table class="calendar" summary="calendar">
+<tr>
+<td class="calendar-prev-month" colspan="2"><a href="/Kenji_s/201211" title="201211" rel="nofollow">&lt;&lt;</a></td>
+<td class="calendar-current-month" colspan="3"><a href="/Kenji_s/archive/201212" rel="nofollow">2012/12</a></td>
+<td class="calendar-next-month" colspan="2"><a href="/Kenji_s/201301" title="201301" rel="nofollow">&gt;&gt;</a></td>
+</tr>
+<tr>
+<td class="calendar-sunday">日</td>
+<td class="calendar-weekday">月</td>
+<td class="calendar-weekday">火</td>
+<td class="calendar-weekday">水</td>
+<td class="calendar-weekday">木</td>
+<td class="calendar-weekday">金</td>
+<td class="calendar-saturday">土</td>
+</tr>
+	<tr>
+		<td class="calendar-day"></td>
+		<td class="calendar-day"></td>
+		<td class="calendar-day"></td>
+		<td class="calendar-day"></td>
+		<td class="calendar-day"></td>
+		<td class="calendar-day"></td>
+		<td class="calendar-day day-selected"><a href="/Kenji_s/20121201" title="1">1</a></td>
+	</tr>
+	<tr>
+		<td class="calendar-day day-today">2</td>
+		<td class="calendar-day">3</td>
+		<td class="calendar-day">4</td>
+		<td class="calendar-day">5</td>
+		<td class="calendar-day">6</td>
+		<td class="calendar-day">7</td>
+		<td class="calendar-day">8</td>
+	</tr>
+	<tr>
+		<td class="calendar-day">9</td>
+		<td class="calendar-day">10</td>
+		<td class="calendar-day">11</td>
+		<td class="calendar-day">12</td>
+		<td class="calendar-day">13</td>
+		<td class="calendar-day">14</td>
+		<td class="calendar-day">15</td>
+	</tr>
+	<tr>
+		<td class="calendar-day">16</td>
+		<td class="calendar-day">17</td>
+		<td class="calendar-day">18</td>
+		<td class="calendar-day">19</td>
+		<td class="calendar-day">20</td>
+		<td class="calendar-day">21</td>
+		<td class="calendar-day">22</td>
+	</tr>
+	<tr>
+		<td class="calendar-day">23</td>
+		<td class="calendar-day">24</td>
+		<td class="calendar-day">25</td>
+		<td class="calendar-day">26</td>
+		<td class="calendar-day">27</td>
+		<td class="calendar-day">28</td>
+		<td class="calendar-day">29</td>
+	</tr>
+	<tr>
+		<td class="calendar-day">30</td>
+		<td class="calendar-day">31</td>
+		<td class="calendar-day"></td>
+		<td class="calendar-day"></td>
+		<td class="calendar-day"></td>
+		<td class="calendar-day"></td>
+		<td class="calendar-day"></td>
+	</tr>
+</table>
+	</div>
+</div>
+
+	<div class="hatena-module hatena-module-section">
+<div class="hatena-moduletitle"><a href="/Kenji_s/archive">最新タイトル</a></div>
+<div class="hatena-modulebody">
+<ul class="hatena-section">
+<li><a href="http://d.hatena.ne.jp/Kenji_s/20121201/fuelphp_this_year">[FuelPHP] FuelPHPのこの1年</a></li>
+<li><a href="http://d.hatena.ne.jp/Kenji_s/20121130/install_pandoc">[Ubuntu] Pandoc のインストール</a></li>
+<li><a href="http://d.hatena.ne.jp/Kenji_s/20121129/xampp_1_7_7_php_5_3_19">[Ubuntu] XAMPP 1.7.7 for Linux の PHP を 5.3.19 にバージョンアップする</a></li>
+<li><a href="http://d.hatena.ne.jp/Kenji_s/20121126/php_template_interim_report">[PHP] PHP ユーザは実際はどんなテンプレートエンジンを使っているのか? (途中経過)</a></li>
+<li><a href="http://d.hatena.ne.jp/Kenji_s/20121122/fuelphp_wiki_moved">[FuelPHP] FuelPHP まとめ Wiki の URL が変りました</a></li>
+<li><a href="http://d.hatena.ne.jp/Kenji_s/20121116/migration_appfog_2">[FuelPHP][PHP][Cloud] PHPFog の FuelPHP アプリを AppFog に移行してみる (2)</a></li>
+<li><a href="http://d.hatena.ne.jp/Kenji_s/20121115/migration_appfog">[FuelPHP][PHP][Cloud] PHPFog の FuelPHP アプリを AppFog に移行してみる</a></li>
+<li><a href="http://d.hatena.ne.jp/Kenji_s/20121114/php_template_survey">[PHP] PHP ユーザは実際はどんなテンプレートエンジンを使っているのか？アンケート調査実施中です</a></li>
+<li><a href="http://d.hatena.ne.jp/Kenji_s/20121111/fuelphp_1_4">[FuelPHP] FuelPHP 1.4 がリリースされました</a></li>
+<li><a href="http://d.hatena.ne.jp/Kenji_s/20121109/fuelphp_advent_2012">[FuelPHP] FuelPHP Advent Calendar 2012 が開催されます</a></li>
+</ul>
+</div>
+</div>
+
+	<div class="hatena-module hatena-module-comment">
+<div class="hatena-moduletitle">最近のコメント</div>
+<div class="hatena-modulebody">
+<ul class="hatena-recentcomment">
+<li><a href="/Kenji_s/20120117/1326763908#c">2012-01-17</a>&nbsp;Andy</li>
+<li><a href="/Kenji_s/20121109/fuelphp_advent_2012#c">2012-11-09</a>&nbsp;Kenji_s</li>
+<li><a href="/Kenji_s/20120118/1326848578#c">2012-01-18</a>&nbsp;Kenji_s</li>
+<li><a href="/Kenji_s/20120118/1326848578#c">2012-01-18</a>&nbsp;James</li>
+<li><a href="/Kenji_s/20121109/fuelphp_advent_2012#c">2012-11-09</a>&nbsp;ぼぶちん</li>
+</ul>
+</div>
+</div>
+
+	<div class="hatena-module hatena-module-trackback">
+<div class="hatena-moduletitle">最近のトラックバック</div>
+<div class="hatena-modulebody">
+<ul class="hatena-recentcomment">
+<li><a href="/Kenji_s/20121201#tb">2012-12-01</a>&nbsp;<a href="http://twitter.com/php_hatena_bot/status/274636920481529857">Twitter / @php_hatena_bot</a></li>
+<li><a href="/Kenji_s/20121129#tb">2012-11-29</a>&nbsp;<a href="http://twitter.com/php_hatena_bot/status/274017108986302465">Twitter / @php_hatena_bot</a></li>
+<li><a href="/Kenji_s/20121126#tb">2012-11-26</a>&nbsp;<a href="http://twitter.com/aWebprogrammer/status/272996164612259840">Twitter / @aWebprogrammer</a></li>
+<li><a href="/Kenji_s/20121126#tb">2012-11-26</a>&nbsp;<a href="http://twitter.com/php_hatena_bot/status/272966983677521921">Twitter / @php_hatena_bot</a></li>
+<li><a href="/Kenji_s/20121122#tb">2012-11-22</a>&nbsp;<a href="http://twitter.com/php_hatena_bot/status/271630696567697408">Twitter / @php_hatena_bot</a></li>
+</ul>
+</div>
+</div>
+
+</div>
+</div>
+
+
+
+
+
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  var days = document.getElementById('days');
+  if (days && days.innerHTML.indexOf("今週のお題") != -1) {
+    _gaq.push(['_setCustomVar', 2, 'campaign', 'odai', 3]);
+  }
+
+  if (days && /\u6d77\u5916\u30c9\u30e9\u30de\u300e\u30e9\u30a4\u30fb\u30c8\u30a5\u30fb\u30df\u30fc \u5618\u306e\u77ac\u9593\u300f\u89b3\u305f\u3044\uff01|\u300e\u30e9\u30a4\u30fb\u30c8\u30a5\u30fb\u30df\u30fc \u5618\u306e\u77ac\u9593\u300f\u7b2c1\u8a71\u306e\u611f\u60f3\u3092\u6559\u3048\u3066\u304f\u3060\u3055\u3044|\u4eca\u3060\u304b\u3089\u8a00\u3048\u308b\u300c\u5618\u3092\u3064\u3044\u3066\u3057\u307e\u3063\u305f\u30a8\u30d4\u30bd\u30fc\u30c9\u300d\u3092\u6559\u3048\u3066\u304f\u3060\u3055\u3044|\u3060\u307e\u3055\u308c\u305f\u3051\u3069\u3001\u8a31\u305b\u3066\u3057\u307e\u3063\u305f\u5618\u3092\u6559\u3048\u3066\u304f\u3060\u3055\u3044/.test(days.innerHTML)) {
+    _gaq.push(['_setCustomVar', 2, 'campaign', 'lietome', 3]);
+  }
+
+  if (days && /Visa\u30d7\u30ea\u30da\u30a4\u30c9\u300cV\u30d7\u30ea\u30ab\u300d\u8a66\u3057\u305f\u3044\uff01|Visa\u30d7\u30ea\u30da\u30a4\u30c9\u300cV\u30d7\u30ea\u30ab\u300d\u3001\u81ea\u5206\u306a\u3089\u3053\u3046\u4f7f\u3046\uff01|V\u30d7\u30ea\u30ab\u304c1\u4e07\u5186\u5206\u3042\u3063\u305f\u3089\u3001\u30cd\u30c3\u30c8\u3067\u4f55\u3092\u8cb7\u3044\u307e\u3059\u304b\uff1f/.test(days.innerHTML)) {
+    _gaq.push(['_setCustomVar', 2, 'campaign', 'vpreca', 3]);
+  }
+
+  if (days && /\u30a2\u30a4\u30c7\u30e0 \u30a8\u30f3\u30b8\u30cb\u30a2\u30ad\u30e3\u30ea\u30a2Hacks\u5171\u6709\u30d7\u30ed\u30b8\u30a7\u30af\u30c8|\u30a8\u30f3\u30b8\u30cb\u30a2\u3068\u3057\u3066\u306e\u3001\u3068\u3063\u3066\u304a\u304d\u306e\u30ad\u30e3\u30ea\u30a2Hacks\u3092\u6559\u3048\u3066\u304f\u3060\u3055\u3044|\u3042\u306a\u305f\u304c\u30a8\u30f3\u30b8\u30cb\u30a2\u8ee2\u8077\u30b5\u30a4\u30c8\u3092\u4f5c\u308b\u306a\u3089\u3001\u3069\u3093\u306a\u30b5\u30a4\u30c8\u306b\u3057\u307e\u3059\u304b\uff1f|5\u5e74\u5f8c\u306e\u300c\u30a8\u30f3\u30b8\u30cb\u30a2\u306e\u50cd\u304d\u65b9\u300d\u306f\u3001\u3069\u3046\u5909\u308f\u3063\u3066\u3044\u3066\u307b\u3057\u3044\u3067\u3059\u304b\uff1f/.test(days.innerHTML)) {
+    _gaq.push(['_setCustomVar', 2, 'campaign', 'aidemcareer', 3]);
+  }
+
+  _gaq.push(
+  ['_setAccount', 'UA-441387-31'],
+  ['_setCustomVar', 1, 'afc_type', 'point', 3],
+  ['_setCustomVar', 3, 'theme', 'hatena2', 3],
+  ['_setCustomVar', 4, 'usertype', 'guest', 1],
+  ['_trackPageview'],
+  ['b._setAccount', 'UA-7855606-1'],
+  ['b._setDomainName', '.hatena.ne.jp'],
+  ['b._trackPageview']
+  ,['c._setAccount', 'UA-29583346-1'],
+  ['c._trackPageview']
+  );
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+<!-- CG:1,CH:1,ICG:10,ICH:1,T: -->
+</body>
+</html>
