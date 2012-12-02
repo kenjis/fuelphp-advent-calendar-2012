@@ -61,6 +61,10 @@
         elseif ( ! is_null($dom->find('.section', 0))) {
             $html = $dom->find('.section', 0)->outertext;;
         }
+        // WordPress
+        elseif ( ! is_null($dom->find('article', 0))) {
+            $html = $dom->find('article', 0)->outertext;;
+        }
 
         //var_dump($html); exit;
         return $html;
