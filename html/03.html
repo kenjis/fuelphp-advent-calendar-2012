@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<!--[if IE 6]>
+<html id="ie6" dir="ltr" lang="en-US">
+<![endif]-->
+<!--[if IE 7]>
+<html id="ie7" dir="ltr" lang="en-US">
+<![endif]-->
+<!--[if IE 8]>
+<html id="ie8" dir="ltr" lang="en-US">
+<![endif]-->
+<!--[if !(IE 6) | !(IE 7) | !(IE 8)  ]><!-->
+<html dir="ltr" lang="en-US">
+<!--<![endif]-->
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fuel PHP を使ったモジュール開発入門 | mkkn.info</title>
+<link rel="profile" href="http://gmpg.org/xfn/11" />
+<link rel="stylesheet" type="text/css" media="all" href="http://mkkn.info/blog/wp-content/themes/twentyeleven/style.css" />
+<link rel="pingback" href="http://mkkn.info/blog/xmlrpc.php" />
+<!--[if lt IE 9]>
+<script src="http://mkkn.info/blog/wp-content/themes/twentyeleven/js/html5.js" type="text/javascript"></script>
+<![endif]-->
+<link rel="alternate" type="application/rss+xml" title="mkkn.info &raquo; Feed" href="http://mkkn.info/blog/feed" />
+<link rel="alternate" type="application/rss+xml" title="mkkn.info &raquo; Comments Feed" href="http://mkkn.info/blog/comments/feed" />
+<link rel="alternate" type="application/rss+xml" title="mkkn.info &raquo; Fuel PHP を使ったモジュール開発入門 Comments Feed" href="http://mkkn.info/blog/blog/archives/1617.html/feed" />
+<script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js?ver=3.3.2'></script>
+<script type='text/javascript' src='http://mkkn.info/blog/wp-includes/js/comment-reply.js?ver=20090102'></script>
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://mkkn.info/blog/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://mkkn.info/blog/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='PHP Tips PHPと相対ディレクトリ' href='http://mkkn.info/blog/blog/archives/1613.html' />
+<meta name="generator" content="WordPress 3.3.2" />
+<link rel='canonical' href='http://mkkn.info/blog/blog/archives/1617.html' />
+<link rel='shortlink' href='http://mkkn.info/blog/?p=1617' />
+<script type="text/javascript">
+	swfobject.registerObject("wpFollowmeFlash", "9.0.0");
+</script>
+<style type="text/css">
+	.getflash { font-size:8px; }
+	.wp_followme_c2 {
+		position:fixed;
+		background:#59B7FF;
+		top:130px;
+		right:0px;
+		width:32px;
+		height:160px;
+		border:1px solid #FFFFFF;
+		color:#FFFFFF;
+	}
+</style>
+
+
+<link rel="stylesheet" href="http://mkkn.info/assets/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="http://mkkn.info/assets/bootstrap/css/bootstrap-responsive.min.css">
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+
+<!--google anal-->
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-34734895-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+<!--google anal-->
+
+
+</head>
+
+<body class="single single-post postid-1617 single-format-standard single-author singular two-column right-sidebar">
+<div id="page" class="hfeed">
+	<header id="branding" role="banner">
+			<hgroup>
+				<h1 id="site-title"><span><a href="http://mkkn.info/blog/" title="mkkn.info" rel="home">mkkn.info</a></span></h1>
+				<h2 id="site-description">諸々の事情で,中の人が変わります。wpのブログは縮小の方向で…</h2>
+			</hgroup>
+
+						<a href="http://mkkn.info/blog/">
+									<img src="http://mkkn.info/blog/wp-content/themes/twentyeleven/images/headers/lanterns.jpg" width="1000" height="288" alt="" />
+							</a>
+			
+								<form method="get" id="searchform" action="http://mkkn.info/blog/">
+		<label for="s" class="assistive-text">Search</label>
+		<input type="text" class="field" name="s" id="s" placeholder="Search" />
+		<input type="submit" class="submit" name="submit" id="searchsubmit" value="Search" />
+	</form>
+			
+			<nav id="access" role="navigation">
+				<h3 class="assistive-text">Main menu</h3>
+								<div class="skip-link"><a class="assistive-text" href="#content" title="Skip to primary content">Skip to primary content</a></div>
+				<div class="skip-link"><a class="assistive-text" href="#secondary" title="Skip to secondary content">Skip to secondary content</a></div>
+								<div class="menu"><ul><li ><a href="http://mkkn.info/blog/" title="Home">Home</a></li><li class="page_item page-item-1041"><a href="http://mkkn.info/blog/fuelphp">fuel php</a></li><li class="page_item page-item-1536"><a href="http://mkkn.info/blog/php-tips">PHP Tips</a></li><li class="page_item page-item-1253"><a href="http://mkkn.info/blog/iphone">iphone</a></li><li class="page_item page-item-650"><a href="http://mkkn.info/blog/jquery">JQuery</a></li><li class="page_item page-item-206"><a href="http://mkkn.info/blog/twitterbootstrap">TwitterBootstrap</a></li><li class="page_item page-item-48"><a href="http://mkkn.info/blog/about-me">about me</a></li></ul></div>
+			</nav><!-- #access -->
+	</header><!-- #branding -->
+
+
+	<div id="main">
+		<div id="primary">
+			<div id="content" role="main">
+
+				
+					<nav id="nav-single">
+						<h3 class="assistive-text">Post navigation</h3>
+						<span class="nav-previous"><a href="http://mkkn.info/blog/blog/archives/1613.html" rel="prev"><span class="meta-nav">&larr;</span> Previous</a></span>
+						<span class="nav-next"></span>
+					</nav><!-- #nav-single -->
+					
+					
+<article id="post-1617" class="post-1617 post type-post status-publish format-standard hentry category-others">
+	<header class="entry-header">
+
+<div class="hidden-phone">
+<!-- admax -->
+<script type="text/javascript" src="http://adm.shinobi.jp/s/e2d0dae4796279b7dd6b0b7e2c4eb25c"></script>
+<!-- admax -->
+</div>
+
+
+
+<div class="pan">
+<a href="http://mkkn.info/blog">HOME</a> &gt;<a href="http://mkkn.info/blog/blog/archives/category/others" title="View all posts in 雑記">雑記</a> &gt; Fuel PHP を使ったモジュール開発入門<br />
+</div>
+
+
+
+
+
+		<h1 class="entry-title">Fuel PHP を使ったモジュール開発入門</h1>
+
+				<div class="entry-meta">
+			<span class="sep">Posted on </span><a href="http://mkkn.info/blog/blog/archives/1617.html" title="12:00 AM" rel="bookmark"><time class="entry-date" datetime="2012-12-03T00:00:51+00:00" pubdate>2012年12月3日</time></a><span class="by-author"> <span class="sep"> by </span> <span class="author vcard"><a class="url fn n" href="http://mkkn.info/blog/blog/archives/author/admin" title="View all posts by mikakane" rel="author">mikakane</a></span></span>		</div><!-- .entry-meta -->
+		
+<div class="ninja_onebutton">
+<script type="text/javascript">
+//<![CDATA[
+(function(d){
+if(typeof(window.NINJA_CO_JP_ONETAG_BUTTON_ada97b79622b7757897e1a53f1eb4a47)=='undefined'){
+    document.write("<sc"+"ript type='text\/javascript' src='http:\/\/omt.shinobi.jp\/b\/ada97b79622b7757897e1a53f1eb4a47'><\/sc"+"ript>");
+}else{
+    window.NINJA_CO_JP_ONETAG_BUTTON_ada97b79622b7757897e1a53f1eb4a47.ONETAGButton_Load();}
+})(document);
+//]]>
+</script><span class="ninja_onebutton_hidden" style="display:none;">http://mkkn.info/blog/blog/archives/1617.html</span><span style="display:none;" class="ninja_onebutton_hidden">Fuel PHP を使ったモジュール開発入門</span>
+</div>
+
+
+
+<div class="hidde-phone">
+<!-- adhere -->
+</div>
+
+
+	</header><!-- .entry-header -->
+	<div class="entry-content">
+
+
+		<p><a href="http://atnd.org/events/33753">FuelPHPアドベントカレンダー企画</a>です。<br />
+昨日は<a href="http://madroom-project.blogspot.jp/2012/12/fac20121202.html">＠madmamor</a>さんの「FuelPHPで画像をプログラムから出力する方法。切り取る方法。応用する方法。」でした。<br />
+3回めの私の方では、Fuel PHPのモジュール開発機能について少々。</p>
+
+<p><span id="more-1617"></span></p>
+
+<h2>fuel phpのmodule機能について</h2>
+
+<p>　fuel phpにはモジュールと言う機能がありまして,これが中々優秀なやつです。ざっくり簡単に説明するとMVCの塊をドンっと一つのディレクトリ以下にまとめて配置できるって機能です。アプリケーションを開発する上で,「あーこの機能別のアプリでも使えそうだなぁ」みたいな部分はモジュールとして分離して管理すると,別のアプリでもその部分流用するのが簡単って感じですね。1ディレクトリにまとめる事ができるので配布も楽ちんです。</p>
+
+<h2>moduleのtasks対応</h2>
+
+<p>　なんで今回,moduleを紹介しようかと思ったかというと,v1.3にてmoduleにtask対応が追加されたからです。</p>
+
+<p><a href="http://mkkn.info/blog/wp-content/uploads/2012/12/Modules-General-FuelPHP-Documentation.png"><img src="http://mkkn.info/blog/wp-content/uploads/2012/12/Modules-General-FuelPHP-Documentation-300x158.png" alt="" title="Modules - General - FuelPHP Documentation" width="300" height="158" class="alignnone size-medium wp-image-1621" /></a></p>
+
+<p>fuelの公式ドキュメントにも堂々と「tasks」の文字が追加されています。まぁmoduelの基本的な使い方は<a href="http://fuelphp.com/docs/general/modules.html">公式ドキュメント</a>,や<a href="http://mkkn.info/blog/blog/archives/1451.html">私が以前書いたもの</a>がありますのでそちらを見ていただけるといいと思います。</p>
+
+<p>　今回v1.3でのtasks対応で,単純なMVCとしてだけでなく,module管理ツールとしてのoilコマンドまで用意できるようになりmoduleの有用性が更に上がったように思います(というかもうpackageいらないんじゃない?)</p>
+
+<h2>module内でのtaskの使い方</h2>
+
+<p>　とはいえ,module内でtaskを使うのは微妙にややこしい所があるので少々解説を。基本的には公式ドキュメントの翻訳の域を出ませんが…。</p>
+
+<p>　まずtasksは他のクラス類と違って,<code>namespace Fuel\Tasks;</code>を使わなければなりません。他のクラス類が「モジュール名」の名前空間を強制されるのと比べて,大きく違う部分です(自分はまずここでつまりました…)。</p>
+
+<p>　moduleのtasksディレクトリ以下に<code>namespace Fuel\Tasks;</code>でtaskファイルを用意すれば,後は、</p>
+
+<pre><code>php oil refine modulename::classname
+</code></pre>
+
+<p>みたいな感じでoilコマンド投げれば実行できます。接頭辞<code>modulename::</code>でモジュール内のファイルを探しに行くあたりはviewsファイルとかと同じ感じですね。</p>
+
+<h2>まとめ?</h2>
+
+<p>　個人的にphpでシェルスクリプトっていうのは,rubyでやれよ感がして凄く好きなので今回のtasks対応は非常に嬉しいところです。コンソール上でfuel的なオートロードを実現するために1ファイル構成のcli-php用フレームワークファイル用意してたりしたんですが,公開する前にfuel1.3のお陰でお蔵入りとなってしまいました…。</p>
+
+<p>　WPでのブログ管理が面倒になってきてjekyllに手を出しだして,これPHPで出来ないかなぁとか思って色々策を練ってたんですが,こういうのが出てくるとphpでも静的コンテンツジェネレータとか上手いこと行きそうですね。</p>
+
+<p>　まぁ本来なら今回のアドベントカレンダーでjekyllっぽいfuelモジュール公開して…みたいな予定を考えてたんですが,fuel1.4が予想以上のハイペースでリリースされたり,本業で精神状態やられたり,その他もろもろ大人の事情で公開できなかったりして,今は眠らせてる感じです。多分来年頭くらいに「誰か別の人」が公開してくれるはずなんで興味のある人は気にしといて貰えると嬉しいです。</p>
+
+<h2>余談</h2>
+
+<p>　似たような機能としてpackageってやつもあるんですが,こいつはpackage内のviewファイル参照できなかったり,Controllerルーティングするのが面倒だったり,task使えなかったり(ですよね?)なんで,個人的にはあんまり好きじゃない感じ。oilでインストールできるって話もgitでよくね?みたいに感じたりとか…packageの意味ってなんですかね?そのへん誰か教えて下さい。</p>
+
+<p>四回目は@sa2yasuさんの「モジュール分割の利点とスケルトンのリファクタリング」です。お楽しみに。</p>
+			</div><!-- .entry-content -->
+
+	<footer class="entry-meta">
+		This entry was posted in <a href="http://mkkn.info/blog/blog/archives/category/others" title="View all posts in 雑記" rel="category tag">雑記</a> by <a href="http://mkkn.info/blog/blog/archives/author/admin">mikakane</a>. Bookmark the <a href="http://mkkn.info/blog/blog/archives/1617.html" title="Permalink to Fuel PHP を使ったモジュール開発入門" rel="bookmark">permalink</a>.<br/>
+<br/>
+
+
+
+
+<br/>
+
+
+		
+		
+<div class="hidden-phone">
+<!-- admax -->
+<script type="text/javascript" src="http://adm.shinobi.jp/s/c593612825a344e8a60f0d62db9b9a9f"></script>
+<!-- admax -->
+</div>
+
+<div class="visible-phone">
+<!-- admax -->
+<script type="text/javascript" src="http://adm.shinobi.jp/s/5f62f4b9b4704f2e49edf8dd76536e9a"></script>
+<!-- admax -->
+</div>
+
+	</footer><!-- .entry-meta -->
+</article><!-- #post-1617 -->
+					
+<div id="disqus_thread">
+    </div>
+
+<script type="text/javascript">
+/* <![CDATA[ */
+    var disqus_url = 'http://mkkn.info/blog/blog/archives/1617.html';
+    var disqus_identifier = '1617 http://mkkn.info/blog/?p=1617';
+    var disqus_container_id = 'disqus_thread';
+    var disqus_domain = 'disqus.com';
+    var disqus_shortname = 'mkkn';
+    var disqus_title = "Fuel PHP を使ったモジュール開発入門";
+        var disqus_config = function () {
+        var config = this; // Access to the config object
+
+        /*
+           All currently supported events:
+            * preData — fires just before we request for initial data
+            * preInit - fires after we get initial data but before we load any dependencies
+            * onInit  - fires when all dependencies are resolved but before dtpl template is rendered
+            * afterRender - fires when template is rendered but before we show it
+            * onReady - everything is done
+         */
+
+        config.callbacks.preData.push(function() {
+            // clear out the container (its filled for SEO/legacy purposes)
+            document.getElementById(disqus_container_id).innerHTML = '';
+        });
+                config.callbacks.onReady.push(function() {
+            // sync comments in the background so we don't block the page
+            DISQUS.request.get('?cf_action=sync_comments&post_id=1617');
+        });
+                    };
+    var facebookXdReceiverPath = 'http://mkkn.info/blog/wp-content/plugins/disqus-comment-system/xd_receiver.htm';
+/* ]]> */
+</script>
+
+<script type="text/javascript">
+/* <![CDATA[ */
+    var DsqLocal = {
+        'trackbacks': [
+        ],
+        'trackback_url': "http:\/\/mkkn.info\/blog\/blog\/archives\/1617.html\/trackback"    };
+/* ]]> */
+</script>
+
+<script type="text/javascript">
+/* <![CDATA[ */
+(function() {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript';
+    dsq.async = true;
+        dsq.src = 'http' + '://' + disqus_shortname + '.' + disqus_domain + '/embed.js?pname=wordpress&pver=2.72';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+/* ]]> */
+</script>
+
+				
+			</div><!-- #content -->
+		</div><!-- #primary -->
+
+
+<div style="position:relative;">
+	<div class="wp_followme_c2">
+		<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="32" height="160" id="wpFollowmeFlash">
+			<param name="movie" value="http://mkkn.info/blog/wp-content/plugins/wp-followme/flash/wp_followme.swf" />
+			<param name="allowfullscreen" value="false" />
+			<param name="allowscriptaccess" value="always" />
+			<param name="flashvars" value="twit_icon=http://mkkn.info/blog/wp-content/plugins/wp-followme/icons/5.png&amp;turl=https://twitter.com/mikakane_info&amp;twitmsg=Follow Me&amp;twitmsgcolor=FFFFFF&amp;iconbgcolor=FFFFFF" />
+			<param name="bgcolor" value="#59B7FF" />
+			<!--[if !IE]>-->
+			<object type="application/x-shockwave-flash" data="http://mkkn.info/blog/wp-content/plugins/wp-followme/flash/wp_followme.swf" width="32" height="160">
+				<param name="allowfullscreen" value="false" />
+				<param name="allowscriptaccess" value="always" />
+				<param name="flashvars" value="twit_icon=http://mkkn.info/blog/wp-content/plugins/wp-followme/icons/5.png&amp;turl=https://twitter.com/mikakane_info&amp;twitmsg=Follow Me&amp;twitmsgcolor=FFFFFF&amp;iconbgcolor=FFFFFF" />
+				<param name="bgcolor" value="#59B7FF" />
+				<!--<![endif]-->
+				<div class="getflash">
+					<a rel="nofollow" href="http://www.adobe.com/go/getflashplayer"><img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="Get Adobe Flash player" /></a>
+									</div><!--[if !IE]>-->
+			</object> <!--<![endif]-->
+		</object>
+	</div>
+</div>
+
+
+	</div><!-- #main -->
+
+	<footer id="colophon" role="contentinfo">
+
+			
+
+			<div id="site-generator">
+								<a href="http://wordpress.org/" title="Semantic Personal Publishing Platform" rel="generator">Unwillingly powered by WordPress</a>
+			</div>
+	</footer><!-- #colophon -->
+</div><!-- #page -->
+
+<script type='text/javascript'>slimstat_tid='22b40';slimstat_path='http://mkkn.info/blog/wp-content/plugins/wp-slimstat';slimstat_blog_id='1';slimstat_session_id='b0a842895dfe900973b0a72a83a65e22';</script><script type='text/javascript' src='http://mkkn.info/blog/wp-content/plugins/wp-slimstat/wp-slimstat.js?ver=3.3.2'></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script src="http://mkkn.info/assets/bootstrap/js/bootstrap.min.js"></script>
+<script>
+$(function(){
+	$("a").tooltip();
+});
+</script>
+</body>
+</html>
