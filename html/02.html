@@ -1,0 +1,1758 @@
+<!DOCTYPE html>
+<html b:version='2' class='v2' dir='ltr' xmlns='http://www.w3.org/1999/xhtml' xmlns:b='http://www.google.com/2005/gml/b' xmlns:data='http://www.google.com/2005/gml/data' xmlns:expr='http://www.google.com/2005/gml/expr'>
+<head>
+<meta content='IE=EmulateIE7' http-equiv='X-UA-Compatible'/>
+<meta content='width=1100' name='viewport'/>
+<meta content='text/html; charset=UTF-8' http-equiv='Content-Type'/>
+<script type="text/javascript">(function() { var a=window,b="jstiming",d="tick";var e=function(c){this.t={};this.tick=function(c,p,h){h=void 0!=h?h:(new Date).getTime();this.t[c]=[h,p]};this[d]("start",null,c)},f=new e;a.jstiming={Timer:e,load:f};if(a.performance&&a.performance.timing){var g=a.performance.timing,j=a[b].load,k=g.navigationStart,l=g.responseStart;0<k&&l>=k&&(j[d]("_wtsrt",void 0,k),j[d]("wtsrt_","_wtsrt",l),j[d]("tbsd_","wtsrt_"))}
+try{var m=null;a.chrome&&a.chrome.csi&&(m=Math.floor(a.chrome.csi().pageT),j&&0<k&&(j[d]("_tbnd",void 0,a.chrome.csi().startE),j[d]("tbnd_","_tbnd",k)));null==m&&a.gtbExternal&&(m=a.gtbExternal.pageT());null==m&&a.external&&(m=a.external.pageT,j&&0<k&&(j[d]("_tbnd",void 0,a.external.startE),j[d]("tbnd_","_tbnd",k)));m&&(a[b].pt=m)}catch(n){};a.tickAboveFold=function(c){var i=0;if(c.offsetParent){do i+=c.offsetTop;while(c=c.offsetParent)}c=i;750>=c&&a[b].load[d]("aft")};var q=!1;function r(){q||(q=!0,a[b].load[d]("firstScrollTime"))}a.addEventListener?a.addEventListener("scroll",r,!1):a.attachEvent("onscroll",r);
+ })();</script>
+<meta content='true' name='MSSmartTagsPreventParsing'/>
+<meta content='blogger' name='generator'/>
+<link href='http://madroom-project.blogspot.jp/favicon.ico' rel='icon' type='image/x-icon'/>
+<link href='http://madroom-project.blogspot.com/2012/12/fac20121202.html' rel='canonical'/>
+<link rel="alternate" type="application/atom+xml" title="madroom project - Atom" href="http://madroom-project.blogspot.com/feeds/posts/default" />
+<link rel="alternate" type="application/rss+xml" title="madroom project - RSS" href="http://madroom-project.blogspot.com/feeds/posts/default?alt=rss" />
+<link rel="service.post" type="application/atom+xml" title="madroom project - Atom" href="http://www.blogger.com/feeds/6895271190558144932/posts/default" />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://www.blogger.com/rsd.g?blogID=6895271190558144932" />
+<link rel="alternate" type="application/atom+xml" title="madroom project - Atom" href="http://madroom-project.blogspot.com/feeds/4205220202408328971/comments/default" />
+<!--[if IE]><script type="text/javascript" src="//www.blogger.com/static/v1/jsbin/2627287098-ieretrofit.js"></script>
+<![endif]-->
+<link href='https://plus.google.com/104213825825883199069' rel='publisher'/>
+<!--[if IE]> <script> (function() { var html5 = ("abbr,article,aside,audio,canvas,datalist,details," + "figure,footer,header,hgroup,mark,menu,meter,nav,output," + "progress,section,time,video").split(','); for (var i = 0; i < html5.length; i++) { document.createElement(html5[i]); } try { document.execCommand('BackgroundImageCache', false, true); } catch(e) {} })(); </script> <![endif]-->
+<title>madroom project: FuelPHPで画像をプログラムから出力する方法&#12290;切り取る方法&#12290;応用する方法&#12290;</title>
+<!-- SyntaxHighlighter -->
+<script src='http://agorbatchev.typepad.com/pub/sh/3_0_83/scripts/shCore.js' type='text/javascript'></script>
+<script src='http://agorbatchev.typepad.com/pub/sh/3_0_83/scripts/shAutoloader.js' type='text/javascript'></script>
+<script src='http://agorbatchev.typepad.com/pub/sh/3_0_83/scripts/shBrushBash.js' type='text/javascript'></script>
+<script src='http://agorbatchev.typepad.com/pub/sh/3_0_83/scripts/shBrushCss.js' type='text/javascript'></script>
+<script src='http://agorbatchev.typepad.com/pub/sh/3_0_83/scripts/shBrushDiff.js' type='text/javascript'></script>
+<script src='http://agorbatchev.typepad.com/pub/sh/3_0_83/scripts/shBrushJava.js' type='text/javascript'></script>
+<script src='http://agorbatchev.typepad.com/pub/sh/3_0_83/scripts/shBrushJavaFx.js' type='text/javascript'></script>
+<script src='http://agorbatchev.typepad.com/pub/sh/3_0_83/scripts/shBrushJScript.js' type='text/javascript'></script>
+<script src='http://agorbatchev.typepad.com/pub/sh/3_0_83/scripts/shBrushPhp.js' type='text/javascript'></script>
+<script src='http://agorbatchev.typepad.com/pub/sh/3_0_83/scripts/shBrushPlain.js' type='text/javascript'></script>
+<script src='http://agorbatchev.typepad.com/pub/sh/3_0_83/scripts/shBrushSql.js' type='text/javascript'></script>
+<script src='http://agorbatchev.typepad.com/pub/sh/3_0_83/scripts/shBrushXml.js' type='text/javascript'></script>
+<!-- <script src='http://agorbatchev.typepad.com/pub/sh/3_0_83/scripts/shBrushAppleScript.js' type='text/javascript'/> <script src='http://agorbatchev.typepad.com/pub/sh/3_0_83/scripts/shBrushAS3.js' type='text/javascript'/> <script src='http://agorbatchev.typepad.com/pub/sh/3_0_83/scripts/shBrushColdFusion.js' type='text/javascript'/> <script src='http://agorbatchev.typepad.com/pub/sh/3_0_83/scripts/shBrushCpp.js' type='text/javascript'/> <script src='http://agorbatchev.typepad.com/pub/sh/3_0_83/scripts/shBrushCSharp.js' type='text/javascript'/> <script src='http://agorbatchev.typepad.com/pub/sh/3_0_83/scripts/shBrushDelphi.js' type='text/javascript'/> <script src='http://agorbatchev.typepad.com/pub/sh/3_0_83/scripts/shBrushErlang.js' type='text/javascript'/> <script src='http://agorbatchev.typepad.com/pub/sh/3_0_83/scripts/shBrushGroovy.js' type='text/javascript'/> <script src='http://agorbatchev.typepad.com/pub/sh/3_0_83/scripts/shBrushPerl.js' type='text/javascript'/> <script src='http://agorbatchev.typepad.com/pub/sh/3_0_83/scripts/shBrushPowerShell.js' type='text/javascript'/> <script src='http://agorbatchev.typepad.com/pub/sh/3_0_83/scripts/shBrushPython.js' type='text/javascript'/> <script src='http://agorbatchev.typepad.com/pub/sh/3_0_83/scripts/shBrushRuby.js' type='text/javascript'/> <script src='http://agorbatchev.typepad.com/pub/sh/3_0_83/scripts/shBrushSass.js' type='text/javascript'/> <script src='http://agorbatchev.typepad.com/pub/sh/3_0_83/scripts/shBrushScala.js' type='text/javascript'/> <script src='http://agorbatchev.typepad.com/pub/sh/3_0_83/scripts/shBrushVb.js' type='text/javascript'/> -->
+<link href='http://agorbatchev.typepad.com/pub/sh/3_0_83/styles/shCoreMidnight.css' rel='stylesheet' type='text/css'/>
+<link href='http://agorbatchev.typepad.com/pub/sh/3_0_83/styles/shThemeMidnight.css' rel='stylesheet' type='text/css'/>
+<link type='text/css' rel='stylesheet' href='//www.blogger.com/static/v1/widgets/4219271310-widget_css_2_bundle.css' />
+<link type='text/css' rel='stylesheet' href='//www.google.com/uds/css/gsearch.css' />
+<link type="text/css" rel="stylesheet" href="//www.blogger.com/dyn-css/authorization.css?targetBlogID=6895271190558144932&zx=b205a579-6521-41cf-a6a5-d967382a8837"/>
+<style type='text/css'>
+.syntaxhighlighter { overflow-y: hidden !important; border: 1px solid #ccc !important; }
+.syntaxhighlighter .toolbar { display:none; }
+.syntaxhighlighter table td.gutter .line { padding: 0 5px !important; }
+</style>
+<script language='javascript'> 
+SyntaxHighlighter.config.bloggerMode = true;
+SyntaxHighlighter.all();
+</script>
+<!-- SyntaxHighlighter -->
+<style id='page-skin-1' type='text/css'><!--
+/*
+-----------------------------------------------
+Blogger Template Style
+Name:     Watermark
+Designer: Josh Peterson
+URL:      www.noaesthetic.com
+----------------------------------------------- */
+/* Variable definitions
+====================
+<Variable name="keycolor" description="Main Color" type="color" default="#c0a154"/>
+<Group description="Page Text" selector="body">
+<Variable name="body.font" description="Font" type="font"
+default="normal normal 14px Arial, Tahoma, Helvetica, FreeSans, sans-serif"/>
+<Variable name="body.text.color" description="Text Color" type="color" default="#333333"/>
+</Group>
+<Group description="Backgrounds" selector=".main-inner">
+<Variable name="body.background.color" description="Outer Background" type="color" default="#c0a154"/>
+<Variable name="footer.background.color" description="Footer Background" type="color" default="transparent"/>
+</Group>
+<Group description="Links" selector=".main-inner">
+<Variable name="link.color" description="Link Color" type="color" default="#cc3300"/>
+<Variable name="link.visited.color" description="Visited Color" type="color" default="#993322"/>
+<Variable name="link.hover.color" description="Hover Color" type="color" default="#ff3300"/>
+</Group>
+<Group description="Blog Title" selector=".header h1">
+<Variable name="header.font" description="Title Font" type="font"
+default="normal normal 60px Georgia, Utopia, 'Palatino Linotype', Palatino, serif"/>
+<Variable name="header.text.color" description="Title Color" type="color" default="#ffffff" />
+</Group>
+<Group description="Blog Description" selector=".header .description">
+<Variable name="description.text.color" description="Description Color" type="color"
+default="#997755" />
+</Group>
+<Group description="Tabs Text" selector=".tabs-inner .widget li a">
+<Variable name="tabs.font" description="Font" type="font"
+default="normal normal 20px Georgia, Utopia, 'Palatino Linotype', Palatino, serif"/>
+<Variable name="tabs.text.color" description="Text Color" type="color" default="#ffcc77"/>
+<Variable name="tabs.selected.text.color" description="Selected Color" type="color" default="#000000"/>
+</Group>
+<Group description="Tabs Background" selector=".tabs-outer .PageList">
+<Variable name="tabs.background.color" description="Background Color" type="color" default="transparent"/>
+<Variable name="tabs.separator.color" description="Separator Color" type="color" default="#441500"/>
+</Group>
+<Group description="Date Header" selector="h2.date-header">
+<Variable name="date.font" description="Font" type="font"
+default="normal normal 16px Arial, Tahoma, Helvetica, FreeSans, sans-serif"/>
+<Variable name="date.text.color" description="Text Color" type="color" default="#997755"/>
+</Group>
+<Group description="Post" selector="h3.post-title, .comments h4">
+<Variable name="post.title.font" description="Title Font" type="font"
+default="normal normal 30px Georgia, Utopia, 'Palatino Linotype', Palatino, serif"/>
+<Variable name="post.background.color" description="Background Color" type="color" default="transparent"/>
+<Variable name="post.border.color" description="Border Color" type="color" default="#ccbb99" />
+</Group>
+<Group description="Post Footer" selector=".post-footer">
+<Variable name="post.footer.text.color" description="Text Color" type="color" default="#997755"/>
+</Group>
+<Group description="Gadgets" selector="h2">
+<Variable name="widget.title.font" description="Title Font" type="font"
+default="normal normal 20px Georgia, Utopia, 'Palatino Linotype', Palatino, serif"/>
+<Variable name="widget.title.text.color" description="Title Color" type="color" default="#000000"/>
+<Variable name="widget.alternate.text.color" description="Alternate Color" type="color" default="#777777"/>
+</Group>
+<Group description="Footer" selector=".footer-inner">
+<Variable name="footer.text.color" description="Text Color" type="color" default="#ffeedd"/>
+<Variable name="footer.widget.title.text.color" description="Gadget Title Color" type="color" default="#ffffff"/>
+</Group>
+<Group description="Footer Links" selector=".footer-inner">
+<Variable name="footer.link.color" description="Link Color" type="color" default="#ffcc77"/>
+<Variable name="footer.link.visited.color" description="Visited Color" type="color" default="#ff8866"/>
+<Variable name="footer.link.hover.color" description="Hover Color" type="color" default="#ffeecc"/>
+</Group>
+<Variable name="body.background" description="Body Background" type="background"
+color="#441500" default="$(color) url(//www.blogblog.com/1kt/watermark/body_background_birds.png) repeat scroll top left"/>
+<Variable name="body.background.overlay" description="Overlay Background" type="background" color="#441500"
+default="transparent url(//www.blogblog.com/1kt/watermark/body_overlay_birds.png) no-repeat scroll top right"/>
+<Variable name="body.background.overlay.height" description="Overlay Background Height" type="length" default="121px"/>
+<Variable name="tabs.background.inner" description="Tabs Background Inner" type="url" default="none"/>
+<Variable name="tabs.background.outer" description="Tabs Background Outer" type="url" default="none"/>
+<Variable name="tabs.border.size" description="Tabs Border Size" type="length" default="0"/>
+<Variable name="tabs.shadow.spread" description="Tabs Shadow Spread" type="length" default="0"/>
+<Variable name="main.padding.top" description="Main Padding Top" type="length" default="30px"/>
+<Variable name="main.cap.height" description="Main Cap Height" type="length" default="0"/>
+<Variable name="main.cap.image" description="Main Cap Image" type="url" default="none"/>
+<Variable name="main.cap.overlay" description="Main Cap Overlay" type="url" default="none"/>
+<Variable name="main.background" description="Main Background" type="background"
+default="transparent none no-repeat scroll top left"/>
+<Variable name="post.background.url" description="Post Background URL" type="url"
+default="url(//www.blogblog.com/1kt/watermark/post_background_birds.png)"/>
+<Variable name="post.border.size" description="Post Border Size" type="length" default="1px"/>
+<Variable name="post.border.style" description="Post Border Style" type="string" default="dotted"/>
+<Variable name="post.shadow.spread" description="Post Shadow Spread" type="length" default="0"/>
+<Variable name="footer.background" description="Footer Background" type="background"
+color="#110000" default="$(color) url(//www.blogblog.com/1kt/watermark/body_background_navigator.png) repeat scroll top left"/>
+<Variable name="mobile.background.overlay" description="Mobile Background Overlay" type="string"
+default="transparent none repeat scroll top left"/>
+<Variable name="startSide" description="Side where text starts in blog language" type="automatic" default="left"/>
+<Variable name="endSide" description="Side where text ends in blog language" type="automatic" default="right"/>
+*/
+/* Use this with templates/1ktemplate-*.html */
+/* Content
+----------------------------------------------- */
+body {
+font: normal normal 14px Arial, Tahoma, Helvetica, FreeSans, sans-serif;
+color: #ffeedd;
+background: #441500 url(//www.blogblog.com/1kt/watermark/body_background_navigator.png) repeat scroll top left;
+}
+html body .content-outer {
+min-width: 0;
+max-width: 100%;
+width: 100%;
+}
+.content-outer {
+font-size: 92%;
+}
+a:link {
+text-decoration:none;
+color: #ffcc77;
+}
+a:visited {
+text-decoration:none;
+color: #ff8866;
+}
+a:hover {
+text-decoration:underline;
+color: #ffeecc;
+}
+.body-fauxcolumns .cap-top {
+margin-top: 30px;
+background: transparent url(//www.blogblog.com/1kt/watermark/body_overlay_navigator.png) no-repeat scroll top center;
+height: 256px;
+}
+.content-inner {
+padding: 0;
+}
+/* Header
+----------------------------------------------- */
+.header-inner .Header .titlewrapper,
+.header-inner .Header .descriptionwrapper {
+padding-left: 20px;
+padding-right: 20px;
+}
+.Header h1 {
+font: normal normal 60px Georgia, Utopia, 'Palatino Linotype', Palatino, serif;
+color: #ffffff;
+text-shadow: 2px 2px rgba(0, 0, 0, .1);
+}
+.Header h1 a {
+color: #ffffff;
+}
+.Header .description {
+font-size: 140%;
+color: #aa9988;
+}
+/* Tabs
+----------------------------------------------- */
+.tabs-inner .section {
+margin: 0 20px;
+}
+.tabs-inner .PageList, .tabs-inner .LinkList, .tabs-inner .Labels {
+margin-left: -11px;
+margin-right: -11px;
+background-color: transparent;
+border-top: 0 solid #ffffff;
+border-bottom: 0 solid #ffffff;
+-moz-box-shadow: 0 0 0 rgba(0, 0, 0, .3);
+-webkit-box-shadow: 0 0 0 rgba(0, 0, 0, .3);
+-goog-ms-box-shadow: 0 0 0 rgba(0, 0, 0, .3);
+box-shadow: 0 0 0 rgba(0, 0, 0, .3);
+}
+.tabs-inner .PageList .widget-content,
+.tabs-inner .LinkList .widget-content,
+.tabs-inner .Labels .widget-content {
+margin: -3px -11px;
+background: transparent none  no-repeat scroll right;
+}
+.tabs-inner .widget ul {
+padding: 2px 25px;
+max-height: 34px;
+background: transparent none no-repeat scroll left;
+}
+.tabs-inner .widget li {
+border: none;
+}
+.tabs-inner .widget li a {
+display: inline-block;
+padding: .25em 1em;
+font: normal normal 20px Georgia, Utopia, 'Palatino Linotype', Palatino, serif;
+color: #ffcc77;
+border-right: 1px solid #776655;
+}
+.tabs-inner .widget li:first-child a {
+border-left: 1px solid #776655;
+}
+.tabs-inner .widget li.selected a, .tabs-inner .widget li a:hover {
+color: #ffffff;
+}
+/* Headings
+----------------------------------------------- */
+h2 {
+font: normal normal 20px Georgia, Utopia, 'Palatino Linotype', Palatino, serif;
+color: #ffffff;
+margin: 0 0 .5em;
+}
+h2.date-header {
+font: normal normal 16px Arial, Tahoma, Helvetica, FreeSans, sans-serif;
+color: #aa9988;
+}
+/* Main
+----------------------------------------------- */
+.main-inner .column-center-inner,
+.main-inner .column-left-inner,
+.main-inner .column-right-inner {
+padding: 0 5px;
+}
+.main-outer {
+margin-top: 0;
+background: transparent none no-repeat scroll top left;
+}
+.main-inner {
+padding-top: 30px;
+}
+.main-cap-top {
+position: relative;
+}
+.main-cap-top .cap-right {
+position: absolute;
+height: 0;
+width: 100%;
+bottom: 0;
+background: transparent none repeat-x scroll bottom center;
+}
+.main-cap-top .cap-left {
+position: absolute;
+height: 245px;
+width: 280px;
+right: 0;
+bottom: 0;
+background: transparent none no-repeat scroll bottom left;
+}
+/* Posts
+----------------------------------------------- */
+.post-outer {
+padding: 15px 20px;
+margin: 0 0 25px;
+background: transparent url(//www.blogblog.com/1kt/watermark/post_background_navigator.png) repeat scroll top left;
+_background-image: none;
+border: dotted 1px #332211;
+-moz-box-shadow: 0 0 0 rgba(0, 0, 0, .1);
+-webkit-box-shadow: 0 0 0 rgba(0, 0, 0, .1);
+-goog-ms-box-shadow: 0 0 0 rgba(0, 0, 0, .1);
+box-shadow: 0 0 0 rgba(0, 0, 0, .1);
+}
+h3.post-title {
+font: normal normal 30px Georgia, Utopia, 'Palatino Linotype', Palatino, serif;
+margin: 0;
+}
+.comments h4 {
+font: normal normal 30px Georgia, Utopia, 'Palatino Linotype', Palatino, serif;
+margin: 1em 0 0;
+}
+.post-body {
+font-size: 105%;
+line-height: 1.5;
+position: relative;
+}
+.post-header {
+margin: 0 0 1em;
+color: #aa9988;
+}
+.post-footer {
+margin: 10px 0 0;
+padding: 10px 0 0;
+color: #aa9988;
+border-top: dashed 1px #998877;
+}
+#blog-pager {
+font-size: 140%
+}
+#comments .comment-author {
+padding-top: 1.5em;
+border-top: dashed 1px #998877;
+background-position: 0 1.5em;
+}
+#comments .comment-author:first-child {
+padding-top: 0;
+border-top: none;
+}
+.avatar-image-container {
+margin: .2em 0 0;
+}
+/* Comments
+----------------------------------------------- */
+.comments .comments-content .icon.blog-author {
+background-repeat: no-repeat;
+background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEgAACxIB0t1+/AAAAAd0SU1FB9sLFwMeCjjhcOMAAAD+SURBVDjLtZSvTgNBEIe/WRRnm3U8RC1neQdsm1zSBIU9VVF1FkUguQQsD9ITmD7ECZIJSE4OZo9stoVjC/zc7ky+zH9hXwVwDpTAWWLrgS3QAe8AZgaAJI5zYAmc8r0G4AHYHQKVwII8PZrZFsBFkeRCABYiMh9BRUhnSkPTNCtVXYXURi1FpBDgArj8QU1eVXUzfnjv7yP7kwu1mYrkWlU33vs1QNu2qU8pwN0UpKoqokjWwCztrMuBhEhmh8bD5UDqur75asbcX0BGUB9/HAMB+r32hznJgXy2v0sGLBcyAJ1EK3LFcbo1s91JeLwAbwGYu7TP/3ZGfnXYPgAVNngtqatUNgAAAABJRU5ErkJggg==);
+}
+.comments .comments-content .loadmore a {
+border-top: 1px solid #998877;
+border-bottom: 1px solid #998877;
+}
+.comments .continue {
+border-top: 2px solid #998877;
+}
+/* Widgets
+----------------------------------------------- */
+.widget ul, .widget #ArchiveList ul.flat {
+padding: 0;
+list-style: none;
+}
+.widget ul li, .widget #ArchiveList ul.flat li {
+padding: .35em 0;
+text-indent: 0;
+border-top: dashed 1px #998877;
+}
+.widget ul li:first-child, .widget #ArchiveList ul.flat li:first-child {
+border-top: none;
+}
+.widget .post-body ul {
+list-style: disc;
+}
+.widget .post-body ul li {
+border: none;
+}
+.widget .zippy {
+color: #998877;
+}
+.post-body img, .post-body .tr-caption-container, .Profile img, .Image img,
+.BlogList .item-thumbnail img {
+padding: 5px;
+background: #fff;
+-moz-box-shadow: 1px 1px 5px rgba(0, 0, 0, .5);
+-webkit-box-shadow: 1px 1px 5px rgba(0, 0, 0, .5);
+-goog-ms-box-shadow: 1px 1px 5px rgba(0, 0, 0, .5);
+box-shadow: 1px 1px 5px rgba(0, 0, 0, .5);
+}
+.post-body img, .post-body .tr-caption-container {
+padding: 8px;
+}
+.post-body .tr-caption-container {
+color: #333333;
+}
+.post-body .tr-caption-container img {
+padding: 0;
+background: transparent;
+border: none;
+-moz-box-shadow: 0 0 0 rgba(0, 0, 0, .1);
+-webkit-box-shadow: 0 0 0 rgba(0, 0, 0, .1);
+-goog-ms-box-shadow: 0 0 0 rgba(0, 0, 0, .1);
+box-shadow: 0 0 0 rgba(0, 0, 0, .1);
+}
+/* Footer
+----------------------------------------------- */
+.footer-outer {
+color:#ffeedd;
+background: #110000 url(//www.blogblog.com/1kt/watermark/body_background_navigator.png) repeat scroll top left;
+}
+.footer-outer a {
+color: #ffcc77;
+}
+.footer-outer a:visited {
+color: #ff8866;
+}
+.footer-outer a:hover {
+color: #ffeecc;
+}
+.footer-outer .widget h2 {
+color: #ffffff;
+}
+/* Mobile
+----------------------------------------------- */
+body.mobile  {
+background-size: 100% auto;
+}
+.mobile .body-fauxcolumn-outer {
+background: transparent none repeat scroll top left;
+}
+html .mobile .mobile-date-outer {
+border-bottom: none;
+background: transparent url(//www.blogblog.com/1kt/watermark/post_background_navigator.png) repeat scroll top left;
+_background-image: none;
+margin-bottom: 10px;
+}
+.mobile .main-cap-top {
+z-index: -1;
+}
+.mobile .content-outer {
+font-size: 100%;
+}
+.mobile .post-outer {
+padding: 10px;
+}
+.mobile .main-cap-top .cap-left {
+background: transparent none no-repeat scroll bottom left;
+}
+.mobile .body-fauxcolumns .cap-top {
+margin: 0;
+}
+.mobile-link-button {
+background: transparent url(//www.blogblog.com/1kt/watermark/post_background_navigator.png) repeat scroll top left;
+}
+.mobile-link-button a:link, .mobile-link-button a:visited {
+color: #ffcc77;
+}
+.mobile-index-date .date-header {
+color: #aa9988;
+}
+.mobile-index-contents {
+color: #ffeedd;
+}
+.mobile .tabs-inner .section {
+margin: 0;
+}
+.mobile .tabs-inner .PageList {
+margin-left: 0;
+margin-right: 0;
+}
+.mobile .tabs-inner .PageList .widget-content {
+margin: 0;
+color: #ffffff;
+background: transparent url(//www.blogblog.com/1kt/watermark/post_background_navigator.png) repeat scroll top left;
+}
+.mobile .tabs-inner .PageList .widget-content .pagelist-arrow {
+border-left: 1px solid #776655;
+}
+
+--></style>
+<style id='template-skin-1' type='text/css'><!--
+body {
+min-width: 960px;
+}
+.content-outer, .content-fauxcolumn-outer, .region-inner {
+min-width: 960px;
+max-width: 960px;
+_width: 960px;
+}
+.main-inner .columns {
+padding-left: 0;
+padding-right: 310px;
+}
+.main-inner .fauxcolumn-center-outer {
+left: 0;
+right: 310px;
+/* IE6 does not respect left and right together */
+_width: expression(this.parentNode.offsetWidth -
+parseInt("0") -
+parseInt("310px") + 'px');
+}
+.main-inner .fauxcolumn-left-outer {
+width: 0;
+}
+.main-inner .fauxcolumn-right-outer {
+width: 310px;
+}
+.main-inner .column-left-outer {
+width: 0;
+right: 100%;
+margin-left: -0;
+}
+.main-inner .column-right-outer {
+width: 310px;
+margin-right: -310px;
+}
+#layout {
+min-width: 0;
+}
+#layout .content-outer {
+min-width: 0;
+width: 800px;
+}
+#layout .region-inner {
+min-width: 0;
+width: auto;
+}
+--></style>
+<!-- SyntaxHighlighter -->
+<script src='http://agorbatchev.typepad.com/pub/sh/3_0_83/sh/scripts/XRegExp.js' type='text/javascript'></script>
+<!-- XRegExp is bundled with the final shCore.js during build -->
+<script src='http://agorbatchev.typepad.com/pub/sh/3_0_83/sh/scripts/shCore.js' type='text/javascript'></script>
+<script src='http://agorbatchev.typepad.com/pub/sh/3_0_83/sh/scripts/shAutoloader.js' type='text/javascript'></script>
+<script src='http://agorbatchev.typepad.com/pub/sh/3_0_83/sh/scripts/shBrushAppleScript.js' type='text/javascript'></script>
+<script src='http://agorbatchev.typepad.com/pub/sh/3_0_83/sh/scripts/shBrushAS3.js' type='text/javascript'></script>
+<script src='http://agorbatchev.typepad.com/pub/sh/3_0_83/sh/scripts/shBrushBash.js' type='text/javascript'></script>
+<script src='http://agorbatchev.typepad.com/pub/sh/3_0_83/sh/scripts/shBrushColdFusion.js' type='text/javascript'></script>
+<script src='http://agorbatchev.typepad.com/pub/sh/3_0_83/sh/scripts/shBrushCpp.js' type='text/javascript'></script>
+<script src='http://agorbatchev.typepad.com/pub/sh/3_0_83/sh/scripts/shBrushCSharp.js' type='text/javascript'></script>
+<script src='http://agorbatchev.typepad.com/pub/sh/3_0_83/sh/scripts/shBrushCss.js' type='text/javascript'></script>
+<script src='http://agorbatchev.typepad.com/pub/sh/3_0_83/sh/scripts/shBrushDelphi.js' type='text/javascript'></script>
+<script src='http://agorbatchev.typepad.com/pub/sh/3_0_83/sh/scripts/shBrushDiff.js' type='text/javascript'></script>
+<script src='http://agorbatchev.typepad.com/pub/sh/3_0_83/sh/scripts/shBrushErlang.js' type='text/javascript'></script>
+<script src='http://agorbatchev.typepad.com/pub/sh/3_0_83/sh/scripts/shBrushGroovy.js' type='text/javascript'></script>
+<script src='http://agorbatchev.typepad.com/pub/sh/3_0_83/sh/scripts/shBrushJava.js' type='text/javascript'></script>
+<script src='http://agorbatchev.typepad.com/pub/sh/3_0_83/sh/scripts/shBrushJavaFx.js' type='text/javascript'></script>
+<script src='http://agorbatchev.typepad.com/pub/sh/3_0_83/sh/scripts/shBrushJScript.js' type='text/javascript'></script>
+<script src='http://agorbatchev.typepad.com/pub/sh/3_0_83/sh/scripts/shBrushPerl.js' type='text/javascript'></script>
+<script src='http://agorbatchev.typepad.com/pub/sh/3_0_83/sh/scripts/shBrushPhp.js' type='text/javascript'></script>
+<script src='http://agorbatchev.typepad.com/pub/sh/3_0_83/sh/scripts/shBrushPlain.js' type='text/javascript'></script>
+<script src='http://agorbatchev.typepad.com/pub/sh/3_0_83/sh/scripts/shBrushPowerShell.js' type='text/javascript'></script>
+<script src='http://agorbatchev.typepad.com/pub/sh/3_0_83/sh/scripts/shBrushPython.js' type='text/javascript'></script>
+<script src='http://agorbatchev.typepad.com/pub/sh/3_0_83/sh/scripts/shBrushRuby.js' type='text/javascript'></script>
+<script src='http://agorbatchev.typepad.com/pub/sh/3_0_83/sh/scripts/shBrushSass.js' type='text/javascript'></script>
+<script src='http://agorbatchev.typepad.com/pub/sh/3_0_83/sh/scripts/shBrushScala.js' type='text/javascript'></script>
+<script src='http://agorbatchev.typepad.com/pub/sh/3_0_83/sh/scripts/shBrushSql.js' type='text/javascript'></script>
+<script src='http://agorbatchev.typepad.com/pub/sh/3_0_83/sh/scripts/shBrushVb.js' type='text/javascript'></script>
+<script src='http://agorbatchev.typepad.com/pub/sh/3_0_83/sh/scripts/shBrushXml.js' type='text/javascript'></script>
+<link href='http://agorbatchev.typepad.com/pub/sh/3_0_83/sh/styles/shCoreDefault.css' rel='stylesheet' type='text/css'/>
+<script language='javascript'> 
+        SyntaxHighlighter.config.bloggerMode = true;
+        SyntaxHighlighter.all();
+    </script>
+<!-- SyntaxHighlighter -->
+<script type="text/javascript">var a=navigator,b="userAgent",c="indexOf",f="&m=1",g="(^|&)m=",h="?",i="?m=1";function j(){var d=window.location.href,e=d.split(h);switch(e.length){case 1:return d+i;case 2:return 0<=e[1].search(g)?null:d+f;default:return null}}if(-1!=a[b][c]("Mobile")&&-1!=a[b][c]("WebKit")&&-1==a[b][c]("iPad")||-1!=a[b][c]("Opera Mini")||-1!=a[b][c]("IEMobile")){var k=j();k&&window.location.replace(k)};
+</script><script type="text/javascript">
+if (window.jstiming) window.jstiming.load.tick('headEnd');
+</script></head>
+<body class='loading'>
+<div class='navbar section' id='navbar'><div class='widget Navbar' id='Navbar1'><script type="text/javascript">
+    function setAttributeOnload(object, attribute, val) {
+      if(window.addEventListener) {
+        window.addEventListener('load',
+          function(){ object[attribute] = val; }, false);
+      } else {
+        window.attachEvent('onload', function(){ object[attribute] = val; });
+      }
+    }
+  </script>
+<div id="navbar-iframe-container"></div>
+<script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
+<script type="text/javascript">
+        gapi.load("iframes-styles-bubble", function() {
+          if (window.iframes && iframes.open) {
+            iframes.open(
+                '//www.blogger.com/navbar.g?targetBlogID\0756895271190558144932\46blogName\75madroom+project\46publishMode\75PUBLISH_MODE_BLOGSPOT\46navbarType\75LIGHT\46layoutType\75LAYOUTS\46searchRoot\75http://madroom-project.blogspot.com/search\46blogLocale\75en\46v\0752\46homepageUrl\75http://madroom-project.blogspot.com/\46targetPostID\0754205220202408328971\46blogPostOrPageUrl\75http://madroom-project.blogspot.com/2012/12/fac20121202.html\46vt\75-3695511570223448932',
+                {
+                  container: "navbar-iframe-container",
+                  id: "navbar-iframe"
+                },
+                {
+                });
+          }
+        });
+      </script><script type="text/javascript">
+(function() {
+var script = document.createElement('script');
+script.type = 'text/javascript';
+script.src = '//pagead2.googlesyndication.com/pagead/js/google_top_exp.js';
+var head = document.getElementsByTagName('head')[0];
+if (head) {
+head.appendChild(script);
+}})();
+</script>
+</div></div>
+<div class='body-fauxcolumns'>
+<div class='fauxcolumn-outer body-fauxcolumn-outer'>
+<div class='cap-top'>
+<div class='cap-left'></div>
+<div class='cap-right'></div>
+</div>
+<div class='fauxborder-left'>
+<div class='fauxborder-right'></div>
+<div class='fauxcolumn-inner'>
+</div>
+</div>
+<div class='cap-bottom'>
+<div class='cap-left'></div>
+<div class='cap-right'></div>
+</div>
+</div>
+</div>
+<div class='content'>
+<div class='content-fauxcolumns'>
+<div class='fauxcolumn-outer content-fauxcolumn-outer'>
+<div class='cap-top'>
+<div class='cap-left'></div>
+<div class='cap-right'></div>
+</div>
+<div class='fauxborder-left'>
+<div class='fauxborder-right'></div>
+<div class='fauxcolumn-inner'>
+</div>
+</div>
+<div class='cap-bottom'>
+<div class='cap-left'></div>
+<div class='cap-right'></div>
+</div>
+</div>
+</div>
+<div class='content-outer'>
+<div class='content-cap-top cap-top'>
+<div class='cap-left'></div>
+<div class='cap-right'></div>
+</div>
+<div class='fauxborder-left content-fauxborder-left'>
+<div class='fauxborder-right content-fauxborder-right'></div>
+<div class='content-inner'>
+<header>
+<div class='header-outer'>
+<div class='header-cap-top cap-top'>
+<div class='cap-left'></div>
+<div class='cap-right'></div>
+</div>
+<div class='fauxborder-left header-fauxborder-left'>
+<div class='fauxborder-right header-fauxborder-right'></div>
+<div class='region-inner header-inner'>
+<div class='header section' id='header'><div class='widget Header' id='Header1'>
+<div id='header-inner'>
+<div class='titlewrapper'>
+<h1 class='title'>
+<a href='http://madroom-project.blogspot.jp/'>madroom project</a>
+</h1>
+</div>
+<div class='descriptionwrapper'>
+<p class='description'><span>The infinite loop of development.</span></p>
+</div>
+</div>
+</div></div>
+</div>
+</div>
+<div class='header-cap-bottom cap-bottom'>
+<div class='cap-left'></div>
+<div class='cap-right'></div>
+</div>
+</div>
+</header>
+<div class='tabs-outer'>
+<div class='tabs-cap-top cap-top'>
+<div class='cap-left'></div>
+<div class='cap-right'></div>
+</div>
+<div class='fauxborder-left tabs-fauxborder-left'>
+<div class='fauxborder-right tabs-fauxborder-right'></div>
+<div class='region-inner tabs-inner'>
+<div class='tabs section' id='crosscol'></div>
+<div class='tabs section' id='crosscol-overflow'></div>
+</div>
+</div>
+<div class='tabs-cap-bottom cap-bottom'>
+<div class='cap-left'></div>
+<div class='cap-right'></div>
+</div>
+</div>
+<div class='main-outer'>
+<div class='main-cap-top cap-top'>
+<div class='cap-left'></div>
+<div class='cap-right'></div>
+</div>
+<div class='fauxborder-left main-fauxborder-left'>
+<div class='fauxborder-right main-fauxborder-right'></div>
+<div class='region-inner main-inner'>
+<div class='columns fauxcolumns'>
+<div class='fauxcolumn-outer fauxcolumn-center-outer'>
+<div class='cap-top'>
+<div class='cap-left'></div>
+<div class='cap-right'></div>
+</div>
+<div class='fauxborder-left'>
+<div class='fauxborder-right'></div>
+<div class='fauxcolumn-inner'>
+</div>
+</div>
+<div class='cap-bottom'>
+<div class='cap-left'></div>
+<div class='cap-right'></div>
+</div>
+</div>
+<div class='fauxcolumn-outer fauxcolumn-left-outer'>
+<div class='cap-top'>
+<div class='cap-left'></div>
+<div class='cap-right'></div>
+</div>
+<div class='fauxborder-left'>
+<div class='fauxborder-right'></div>
+<div class='fauxcolumn-inner'>
+</div>
+</div>
+<div class='cap-bottom'>
+<div class='cap-left'></div>
+<div class='cap-right'></div>
+</div>
+</div>
+<div class='fauxcolumn-outer fauxcolumn-right-outer'>
+<div class='cap-top'>
+<div class='cap-left'></div>
+<div class='cap-right'></div>
+</div>
+<div class='fauxborder-left'>
+<div class='fauxborder-right'></div>
+<div class='fauxcolumn-inner'>
+</div>
+</div>
+<div class='cap-bottom'>
+<div class='cap-left'></div>
+<div class='cap-right'></div>
+</div>
+</div>
+<!-- corrects IE6 width calculation -->
+<div class='columns-inner'>
+<div class='column-center-outer'>
+<div class='column-center-inner'>
+<div class='main section' id='main'><div class='widget Blog' id='Blog1'>
+<div class='blog-posts hfeed'>
+<!-- google_ad_section_start(name=default) -->
+
+          <div class="date-outer">
+        
+<h2 class='date-header'><span>December 2, 2012</span></h2>
+
+          <div class="date-posts">
+        
+<div class='post-outer'>
+<div class='post hentry' itemprop='blogPost' itemscope='itemscope' itemtype='http://schema.org/BlogPosting'>
+<meta content='6895271190558144932' itemprop='blogId'/>
+<meta content='4205220202408328971' itemprop='postId'/>
+<a name='4205220202408328971'></a>
+<h3 class='post-title entry-title' itemprop='name'>
+FuelPHPで画像をプログラムから出力する方法&#12290;切り取る方法&#12290;応用する方法&#12290;
+</h3>
+<div class='post-header'>
+<div class='post-header-line-1'></div>
+</div>
+<div class='post-body entry-content' id='post-body-4205220202408328971' itemprop='description articleBody'>
+<div>
+<a href="http://atnd.org/events/33753">FuelPHP Advent Calendar 2012</a> 2日目です&#12290;<a href="https://twitter.com/madmamor">@madmamor</a> です&#12290;
+</div>
+<div>
+昨日は <a href="https://twitter.com/kenji_s">@kenji_s</a> さんの&#12300;<a href="http://d.hatena.ne.jp/Kenji_s/20121201/fuelphp_this_year">FuelPHPのこの1年</a>&#12301;でした&#12290;
+</div>
+
+<div><br /></div>
+
+<div>
+本日は&#12300;FuelPHPで画像をプログラムから出力する方法&#12290;切り取る方法&#12290;応用する方法&#12290;&#12301;を紹介します&#12290;WEB開発でよくある&#12289;ユーザによる画像アップロード機能の実装に際して&#12289;参考になれば幸いです&#12290;尚&#12289;当記事の内容はFuelPHP 1.4で確認しています&#12290;
+</div>
+
+<div><br /></div>
+
+<h2 style="border-bottom: 1px dotted;">1. 画像をプログラムから出力する方法</h2>
+<div>
+以下のようなコントローラを用意します&#12290;
+</div>
+
+<pre class="brush:php">
+&lt;?php
+
+class Controller_Image extends Controller
+{
+
+&nbsp;&nbsp;&nbsp;&nbsp;private static $exts = array(
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'gif' => 'image/gif',
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'jpg' => 'image/jpeg',
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'jpeg'=> 'image/jpeg',
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'png' => 'image/png',
+&nbsp;&nbsp;&nbsp;&nbsp;);
+
+&nbsp;&nbsp;&nbsp;&nbsp;public function get_image($encoded_file_name = null)
+&nbsp;&nbsp;&nbsp;&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$file_name = Crypt::decode($encoded_file_name);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$file_path = APPPATH.'tmp'.DS.$file_name;
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if ( ! is_file($file_path))
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;throw new Exception('Invalid file name.');
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;list($tmp, $ext) = explode('.', $file_name);
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return Response::forge(
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;file_get_contents($file_path),
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;200,
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;array('Content-Type' => static::$exts[$ext])
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;);
+&nbsp;&nbsp;&nbsp;&nbsp;}
+
+}
+</pre>
+
+<div>
+get_image()は&#12289;URLのセグメントから&#12289;Cryptクラスで暗号化された画像ファイル名を受け取り&#12289;その画像を出力します&#12290;Controllerクラスはセグメントにドットを含ませることが出来ないようで&#12289;この形を取っています&#12290;尚&#12289;セグメントにドットを含ませると&#12289;ドット以降は無視されました&#12290;
+</div>
+
+<div><br /></div>
+
+<h3>Cryptクラス:</h3>
+<div>
+<a href="http://press.nekoget.com/fuelphp_doc/classes/crypt.html">http://press.nekoget.com/fuelphp_doc/classes/crypt.html</a>
+<a href="http://fuelphp.com/docs/classes/crypt.html">http://fuelphp.com/docs/classes/crypt.html</a>
+</div>
+
+<div><br /></div>
+
+<div>
+使い方は簡単で&#12289;Viewファイルに&#12289;以下のようなimgタグを書くだけです&#12290;
+</div>
+
+<pre class="brush:html">
+&lt;img src="&lt;?php echo Uri::create('image/image/'.Crypt::encode('xxx.png')); ?&gt;" alt="xxx" /&gt;
+</pre>
+
+<div><br /></div>
+
+<h2 style="border-bottom: 1px dotted;">2. 画像を切り取る方法</h2>
+<div>
+以下の方法で&#12289;切り取りつつ保存出来ます&#12290;
+</div>
+<pre class="brush:php">
+Image::load($path1)-&gt;crop($x1, $y1, $x2, $y2)-&gt;save($path2);
+</pre>
+<div>
+$x1 と $y1 が始点座標&#12289;$x2 と $y2 が終点座標です&#12290;$path1 が元のファイル名で&#12289;$path2 が保存するファイル名です&#12290;
+</div>
+
+<div><br /></div>
+
+<h3>Imageクラス:</h3>
+<div>
+<a href="http://press.nekoget.com/fuelphp_doc/classes/image.html">http://press.nekoget.com/fuelphp_doc/classes/image.html</a>
+<a href="http://docs.fuelphp.com/classes/image.html">http://docs.fuelphp.com/classes/image.html</a>
+</div>
+
+<div><br /></div>
+
+<h2 style="border-bottom: 1px dotted;">3. 応用する方法</h2>
+
+<div>
+以上の2つの機能を組み合わせて&#12289;最近よく見かける方式の画像アップロード機能が実装できます&#12290;
+</div>
+
+<div><br /></div>
+
+<div>
+例えばSNSで&#12289;ユーザがプロフィール画像をアップロードする際&#12289;画像の 縦幅 / 横幅 / 比率 はバラバラなので&#12289;それらをサーバサイドで一定の基準に基づき処理する必要があります&#12290;また&#12289;プロフィール画像はデザインとの関係も強く&#12289;切り取りやリサイズ処理が入るケースも多いと思われます&#12290;
+</div>
+
+<div><br /></div>
+
+<div>
+その際&#12289;その基準(比率を維持する??横幅がNピクセル以上ならリサイズする?? etc&#8230;)の決定が煩わしいのであれば&#12289;ユーザに任せてしまうのも&#12289;一つの方法です&#12290;
+</div>
+
+<div><br /></div>
+
+<div>
+例えばJcropのようなjQueryライブラリと組み合わせることで&#12289;ユーザによる切り取り機能を実装できます&#12290;
+</div>
+
+<div><br /></div>
+
+<h3>Jcrop:</h3>
+<div>
+<a href="http://deepliquid.com/content/Jcrop.html">http://deepliquid.com/content/Jcrop.html</a><br />
+<a href="https://github.com/tapmodo/Jcrop">https://github.com/tapmodo/Jcrop</a>
+</div>
+
+<div><br /></div>
+
+<div>
+Jcropは&#12289;比率固定の切り取りや&#12289;サイズ固定の切り取りが可能です&#12290;切り取りのchangeイベントも&#12289;随時キャッチできます&#12290;Jcrop側で&#12289;比率と&#12289;ミニマムな幅を制御すれば&#12289;サーバサイドの処理も楽になりますね&#12290;
+</div>
+
+<div><br /></div>
+
+<div>
+実装の基本的なステップは&#12289;以下の流れになります&#12290;
+</div>
+
+<div><br /></div>
+
+<h2>画面1(ファイルアップロード画面)</h2>
+
+<ul>
+<li>通常の画像アップロード画面を用意&#12289;ユーザに画像をアップロードさせる&#12290;</li>
+</ul>
+
+<div><br /></div>
+
+<h2>画面2(リサイズ画面)</h2>
+
+<ul>
+<li>画面1から送信された画像を非公開ディレクトリにテンポラリとして保存&#12290;</li>
+<li>&#12300;1. 画像をプログラムから出力する方法&#12301;でHTMLに出力&#12290;</li>
+<li>Jcropで切り取り&#12289;始点座標と終点座標をhiddenで送信&#12290;</li>
+</ul>
+
+<div>
+セッションを用いない場合は&#12289;併せて&#12289;テンポラリとして保存されているファイル名もhiddenで送信する必要があります&#12290;
+</div>
+
+<div><br /></div>
+
+<h2>画面3(完了画面)</h2>
+
+<ul>
+<li>画面2から送信されたhidden値を使い&#12289;&#12300;2. 画像を切り取る方法&#12301;で切り取って&#12289;正式に保存&#12290;</li>
+<li>切り取った画像を表示&#12290;等&#12290;</li>
+</ul>
+
+<div><br /></div>
+
+<div>
+絵的にも面白い(カッコいい)機能と思いますので&#12289;機会があれば是非&#12289;取り入れてみて下さい&#12290;
+</div>
+
+<div><br /></div>
+
+<div>
+また&#12289;更なる応用で&#12289;ドラッグドロップに対応したシームレスなアップロードを目指す場合&#12289;以下が参考になりそうです&#12290;
+</div>
+
+<div><br /></div>
+
+<h3>jQuery File Upload Plugin:</h3>
+
+<div>
+<a href="http://blueimp.github.com/jQuery-File-Upload/">http://blueimp.github.com/jQuery-File-Upload/</a><br />
+<a href="https://github.com/blueimp/jQuery-File-Upload">https://github.com/blueimp/jQuery-File-Upload</a>
+</div>
+
+<div><br /></div>
+
+<div>
+明日は <a href="https://twitter.com/mkkn_info">@mkkn_info</a> さんの&#12300;FuelPHPのモジュール開発&#12301;です&#12290;お楽しみに&#65281;
+</div>
+<div style='clear: both;'></div>
+</div>
+<div class='post-footer'>
+<div class='post-footer-line post-footer-line-1'><span class='post-author vcard'>
+Posted by
+<span class='fn' itemprop='author' itemscope='itemscope' itemtype='http://schema.org/Person'>
+<meta content='https://plus.google.com/104213825825883199069' itemprop='url'/>
+<a href='https://plus.google.com/104213825825883199069' rel='author' title='author profile'>
+<span itemprop='name'>mamoru otsuka</span>
+</a>
+</span>
+</span>
+<span class='post-timestamp'>
+at
+<meta content='http://madroom-project.blogspot.jp/2012/12/fac20121202.html' itemprop='url'/>
+<a class='timestamp-link' href='http://madroom-project.blogspot.jp/2012/12/fac20121202.html' rel='bookmark' title='permanent link'><abbr class='published' itemprop='datePublished' title='2012-12-02T00:58:00+09:00'>00:58</abbr></a>
+</span>
+<span class='post-comment-link'>
+</span>
+<span class='post-icons'>
+<span class='item-control blog-admin pid-1971979209'>
+<a href='http://www.blogger.com/post-edit.g?blogID=6895271190558144932&postID=4205220202408328971&from=pencil' title='Edit Post'>
+<img alt='' class='icon-action' height='18' src='http://img2.blogblog.com/img/icon18_edit_allbkg.gif' width='18'/>
+</a>
+</span>
+</span>
+<div class='post-share-buttons goog-inline-block'>
+<a class='goog-inline-block share-button sb-email' href='http://www.blogger.com/share-post.g?blogID=6895271190558144932&postID=4205220202408328971&target=email' target='_blank' title='Email This'><span class='share-button-link-text'>Email This</span></a><a class='goog-inline-block share-button sb-blog' href='http://www.blogger.com/share-post.g?blogID=6895271190558144932&postID=4205220202408328971&target=blog' onclick='window.open(this.href, "_blank", "height=270,width=475"); return false;' target='_blank' title='BlogThis!'><span class='share-button-link-text'>BlogThis!</span></a><a class='goog-inline-block share-button sb-twitter' href='http://www.blogger.com/share-post.g?blogID=6895271190558144932&postID=4205220202408328971&target=twitter' target='_blank' title='Share to Twitter'><span class='share-button-link-text'>Share to Twitter</span></a><a class='goog-inline-block share-button sb-facebook' href='http://www.blogger.com/share-post.g?blogID=6895271190558144932&postID=4205220202408328971&target=facebook' onclick='window.open(this.href, "_blank", "height=430,width=640"); return false;' target='_blank' title='Share to Facebook'><span class='share-button-link-text'>Share to Facebook</span></a><div class='goog-inline-block dummy-container'><g:plusone source='blogger:blog:plusone' href='http://madroom-project.blogspot.com/2012/12/fac20121202.html' size='medium' width='300' annotation='inline'/></div>
+</div>
+</div>
+<div class='post-footer-line post-footer-line-2'><span class='post-labels'>
+Labels:
+<a href='http://madroom-project.blogspot.jp/search/label/fuelphp' rel='tag'>fuelphp</a>
+</span>
+</div>
+<div class='post-footer-line post-footer-line-3'><span class='post-location'>
+</span>
+</div>
+</div>
+</div>
+<div class='comments' id='comments'>
+<a name='comments'></a>
+<h4>No comments:</h4>
+<div id='Blog1_comments-block-wrapper'>
+<dl class='avatar-comment-indent' id='comments-block'>
+</dl>
+</div>
+<p class='comment-footer'>
+<div class='comment-form'>
+<a name='comment-form'></a>
+<h4 id='comment-post-message'>Post a Comment</h4>
+<p>
+</p>
+<a href='http://www.blogger.com/comment-iframe.g?blogID=6895271190558144932&postID=4205220202408328971' id='comment-editor-src'></a>
+<iframe allowtransparency='true' class='blogger-iframe-colorize blogger-comment-from-post' frameborder='0' height='410' id='comment-editor' name='comment-editor' src='' width='100%'></iframe>
+<script type="text/javascript" src="//www.blogger.com/static/v1/jsbin/124404617-comment_from_post_iframe.js"></script>
+<script type='text/javascript'>
+      BLOG_CMT_createIframe('http://www.blogger.com/rpc_relay.html', '05686422468475365126');
+    </script>
+</div>
+</p>
+<div id='backlinks-container'>
+<div id='Blog1_backlinks-container'>
+</div>
+</div>
+</div>
+</div>
+
+        </div></div>
+      
+<!-- google_ad_section_end -->
+</div>
+<div class='blog-pager' id='blog-pager'>
+<span id='blog-pager-older-link'>
+<a class='blog-pager-older-link' href='http://madroom-project.blogspot.jp/2012/12/phpdocumentor-2macwin.html' id='Blog1_blog-pager-older-link' title='Older Post'>Older Post</a>
+</span>
+<a class='home-link' href='http://madroom-project.blogspot.jp/'>Home</a>
+</div>
+<div class='clear'></div>
+<div class='post-feeds'>
+<div class='feed-links'>
+Subscribe to:
+<a class='feed-link' href='http://madroom-project.blogspot.com/feeds/4205220202408328971/comments/default' target='_blank' type='application/atom+xml'>Post Comments (Atom)</a>
+</div>
+</div>
+<script type="text/javascript">window.___gcfg = {'lang': 'en'};window.___gapisync = false;(function() {var po = document.createElement('script');po.type = 'text/javascript';po.async = true;po.src = 'https://apis.google.com/js/plusone.js';var s = document.body.getElementsByTagName('script')[0];s.parentNode.insertBefore(po, s);})();</script>
+</div></div>
+</div>
+</div>
+<div class='column-left-outer'>
+<div class='column-left-inner'>
+<aside>
+</aside>
+</div>
+</div>
+<div class='column-right-outer'>
+<div class='column-right-inner'>
+<aside>
+<div class='sidebar section' id='sidebar-right-1'><div class='widget CustomSearch' id='CustomSearch1'>
+<h2 class='title'>Search archive</h2>
+<div class='widget-content'>
+<div id='CustomSearch1_form'>
+<span class='cse-status'>Loading...</span>
+</div>
+</div>
+<style type='text/css'>
+      #uds-searchControl .gs-result .gs-title,
+      #uds-searchControl .gs-result .gs-title *,
+      #uds-searchControl .gsc-results .gsc-trailing-more-results,
+      #uds-searchControl .gsc-results .gsc-trailing-more-results * {
+        color:#ffcc77;
+      }
+
+      #uds-searchControl .gs-result .gs-title a:visited,
+      #uds-searchControl .gs-result .gs-title a:visited * {
+        color:#ff8866;
+      }
+
+      #uds-searchControl .gs-relativePublishedDate,
+      #uds-searchControl .gs-publishedDate {
+        color: #aa9988;
+      }
+
+      #uds-searchControl .gs-result a.gs-visibleUrl,
+      #uds-searchControl .gs-result .gs-visibleUrl {
+        color: #ffcc77;
+      }
+
+      #uds-searchControl .gsc-results {
+        border-color: #332211;
+        background-color: transparent;
+      }
+
+      #uds-searchControl .gsc-tabhActive {
+        border-color: #332211;
+        border-top-color: #332211;
+        background-color: transparent;
+        color: #ffeedd;
+      }
+
+      #uds-searchControl .gsc-tabhInactive {
+        border-color: #332211;
+        background-color: transparent;
+        color: #ffcc77;
+      }
+
+      #uds-searchClearResults {
+        border-color: #332211;
+      }
+
+      #uds-searchClearResults:hover {
+        border-color: #332211;
+      }
+
+      #uds-searchControl .gsc-cursor-page {
+        color: #ffcc77;
+      }
+
+      #uds-searchControl .gsc-cursor-current-page {
+        color: #ffeedd;
+      }
+    </style>
+<div class='clear'></div>
+<span class='widget-item-control'>
+<span class='item-control blog-admin'>
+<a class='quickedit' href='//www.blogger.com/rearrange?blogID=6895271190558144932&widgetType=CustomSearch&widgetId=CustomSearch1&action=editWidget&sectionId=sidebar-right-1' onclick='return _WidgetManager._PopupConfig(document.getElementById("CustomSearch1"));' target='configCustomSearch1' title='Edit'>
+<img alt='' height='18' src='http://img1.blogblog.com/img/icon18_wrench_allbkg.png' width='18'/>
+</a>
+</span>
+</span>
+<div class='clear'></div>
+</div><div class='widget LinkList' id='LinkList1'>
+<h2>Link</h2>
+<div class='widget-content'>
+<ul>
+<li><a href='https://www.facebook.com/mamoru.otsuka'>Facebook</a></li>
+<li><a href='https://market.android.com/developer?pub=madroom+project'>Android Apps</a></li>
+<li><a href='https://github.com/mp-php'>GitHub (PHP)</a></li>
+<li><a href='https://github.com/mp-android'>GitHub (Android)</a></li>
+</ul>
+<div class='clear'></div>
+<span class='widget-item-control'>
+<span class='item-control blog-admin'>
+<a class='quickedit' href='//www.blogger.com/rearrange?blogID=6895271190558144932&widgetType=LinkList&widgetId=LinkList1&action=editWidget&sectionId=sidebar-right-1' onclick='return _WidgetManager._PopupConfig(document.getElementById("LinkList1"));' target='configLinkList1' title='Edit'>
+<img alt='' height='18' src='http://img1.blogblog.com/img/icon18_wrench_allbkg.png' width='18'/>
+</a>
+</span>
+</span>
+<div class='clear'></div>
+</div>
+</div><div class='widget HTML' id='HTML2'>
+<h2 class='title'>Twitter</h2>
+<div class='widget-content'>
+<a class="twitter-timeline" href="https://twitter.com/madmamor" data-widget-id="266008178020450304">Tweets by @madmamor</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+</div>
+<div class='clear'></div>
+<span class='widget-item-control'>
+<span class='item-control blog-admin'>
+<a class='quickedit' href='//www.blogger.com/rearrange?blogID=6895271190558144932&widgetType=HTML&widgetId=HTML2&action=editWidget&sectionId=sidebar-right-1' onclick='return _WidgetManager._PopupConfig(document.getElementById("HTML2"));' target='configHTML2' title='Edit'>
+<img alt='' height='18' src='http://img1.blogblog.com/img/icon18_wrench_allbkg.png' width='18'/>
+</a>
+</span>
+</span>
+<div class='clear'></div>
+</div><div class='widget HTML' id='HTML1'>
+<h2 class='title'>Hatena Bookmark</h2>
+<div class='widget-content'>
+<div style="margin-bottom:10px;">
+<script language="javascript" type="text/javascript" src="http://b.hatena.ne.jp/js/widget.js" charset="utf-8"></script>
+<script language="javascript" type="text/javascript">
+Hatena.BookmarkWidget.url   = "http://madroom-project.blogspot.";
+Hatena.BookmarkWidget.title = "Recent Entries";
+Hatena.BookmarkWidget.sort  = "hot";
+Hatena.BookmarkWidget.width = 250;
+Hatena.BookmarkWidget.num   = 5;
+Hatena.BookmarkWidget.theme = "default";
+Hatena.BookmarkWidget.load();
+</script>
+</div>
+<div>
+<script language="javascript" type="text/javascript" src="http://b.hatena.ne.jp/js/widget.js" charset="utf-8"></script>
+<script language="javascript" type="text/javascript">
+Hatena.BookmarkWidget.url   = "http://madroom-project.blogspot.";
+Hatena.BookmarkWidget.title = "Popular Entries";
+Hatena.BookmarkWidget.sort  = "count";
+Hatena.BookmarkWidget.width = 250;
+Hatena.BookmarkWidget.num   = 5;
+Hatena.BookmarkWidget.theme = "default";
+Hatena.BookmarkWidget.load();
+</script>
+</div>
+</div>
+<div class='clear'></div>
+<span class='widget-item-control'>
+<span class='item-control blog-admin'>
+<a class='quickedit' href='//www.blogger.com/rearrange?blogID=6895271190558144932&widgetType=HTML&widgetId=HTML1&action=editWidget&sectionId=sidebar-right-1' onclick='return _WidgetManager._PopupConfig(document.getElementById("HTML1"));' target='configHTML1' title='Edit'>
+<img alt='' height='18' src='http://img1.blogblog.com/img/icon18_wrench_allbkg.png' width='18'/>
+</a>
+</span>
+</span>
+<div class='clear'></div>
+</div><div class='widget Label' id='Label2'>
+<h2>Label</h2>
+<div class='widget-content list-label-widget-content'>
+<ul>
+<li>
+<a dir='ltr' href='http://madroom-project.blogspot.jp/search/label/anddev'>anddev</a>
+<span dir='ltr'>(11)</span>
+</li>
+<li>
+<a dir='ltr' href='http://madroom-project.blogspot.jp/search/label/android'>android</a>
+<span dir='ltr'>(4)</span>
+</li>
+<li>
+<a dir='ltr' href='http://madroom-project.blogspot.jp/search/label/aptana'>aptana</a>
+<span dir='ltr'>(1)</span>
+</li>
+<li>
+<a dir='ltr' href='http://madroom-project.blogspot.jp/search/label/backbone.js'>backbone.js</a>
+<span dir='ltr'>(6)</span>
+</li>
+<li>
+<a dir='ltr' href='http://madroom-project.blogspot.jp/search/label/bazaar'>bazaar</a>
+<span dir='ltr'>(1)</span>
+</li>
+<li>
+<a dir='ltr' href='http://madroom-project.blogspot.jp/search/label/cakephp'>cakephp</a>
+<span dir='ltr'>(2)</span>
+</li>
+<li>
+<a dir='ltr' href='http://madroom-project.blogspot.jp/search/label/chrome'>chrome</a>
+<span dir='ltr'>(1)</span>
+</li>
+<li>
+<a dir='ltr' href='http://madroom-project.blogspot.jp/search/label/eclipse'>eclipse</a>
+<span dir='ltr'>(6)</span>
+</li>
+<li>
+<a dir='ltr' href='http://madroom-project.blogspot.jp/search/label/facebook'>facebook</a>
+<span dir='ltr'>(5)</span>
+</li>
+<li>
+<a dir='ltr' href='http://madroom-project.blogspot.jp/search/label/fpac2011'>fpac2011</a>
+<span dir='ltr'>(6)</span>
+</li>
+<li>
+<a dir='ltr' href='http://madroom-project.blogspot.jp/search/label/fuelphp'>fuelphp</a>
+<span dir='ltr'>(58)</span>
+</li>
+<li>
+<a dir='ltr' href='http://madroom-project.blogspot.jp/search/label/fuelphp2'>fuelphp2</a>
+<span dir='ltr'>(1)</span>
+</li>
+<li>
+<a dir='ltr' href='http://madroom-project.blogspot.jp/search/label/gae'>gae</a>
+<span dir='ltr'>(2)</span>
+</li>
+<li>
+<a dir='ltr' href='http://madroom-project.blogspot.jp/search/label/gdata'>gdata</a>
+<span dir='ltr'>(2)</span>
+</li>
+<li>
+<a dir='ltr' href='http://madroom-project.blogspot.jp/search/label/git'>git</a>
+<span dir='ltr'>(8)</span>
+</li>
+<li>
+<a dir='ltr' href='http://madroom-project.blogspot.jp/search/label/jquery'>jquery</a>
+<span dir='ltr'>(1)</span>
+</li>
+<li>
+<a dir='ltr' href='http://madroom-project.blogspot.jp/search/label/mac'>mac</a>
+<span dir='ltr'>(4)</span>
+</li>
+<li>
+<a dir='ltr' href='http://madroom-project.blogspot.jp/search/label/mamp'>mamp</a>
+<span dir='ltr'>(1)</span>
+</li>
+<li>
+<a dir='ltr' href='http://madroom-project.blogspot.jp/search/label/muzik'>muzik</a>
+<span dir='ltr'>(2)</span>
+</li>
+<li>
+<a dir='ltr' href='http://madroom-project.blogspot.jp/search/label/node.js'>node.js</a>
+<span dir='ltr'>(1)</span>
+</li>
+<li>
+<a dir='ltr' href='http://madroom-project.blogspot.jp/search/label/none'>none</a>
+<span dir='ltr'>(2)</span>
+</li>
+<li>
+<a dir='ltr' href='http://madroom-project.blogspot.jp/search/label/php'>php</a>
+<span dir='ltr'>(4)</span>
+</li>
+<li>
+<a dir='ltr' href='http://madroom-project.blogspot.jp/search/label/phpfog'>phpfog</a>
+<span dir='ltr'>(2)</span>
+</li>
+<li>
+<a dir='ltr' href='http://madroom-project.blogspot.jp/search/label/twitter'>twitter</a>
+<span dir='ltr'>(1)</span>
+</li>
+<li>
+<a dir='ltr' href='http://madroom-project.blogspot.jp/search/label/twitterbootstrap'>twitterbootstrap</a>
+<span dir='ltr'>(1)</span>
+</li>
+<li>
+<a dir='ltr' href='http://madroom-project.blogspot.jp/search/label/web'>web</a>
+<span dir='ltr'>(2)</span>
+</li>
+<li>
+<a dir='ltr' href='http://madroom-project.blogspot.jp/search/label/windows'>windows</a>
+<span dir='ltr'>(4)</span>
+</li>
+<li>
+<a dir='ltr' href='http://madroom-project.blogspot.jp/search/label/xampp'>xampp</a>
+<span dir='ltr'>(1)</span>
+</li>
+<li>
+<a dir='ltr' href='http://madroom-project.blogspot.jp/search/label/zendframework'>zendframework</a>
+<span dir='ltr'>(1)</span>
+</li>
+<li>
+<a dir='ltr' href='http://madroom-project.blogspot.jp/search/label/zendframework2'>zendframework2</a>
+<span dir='ltr'>(1)</span>
+</li>
+</ul>
+<div class='clear'></div>
+<span class='widget-item-control'>
+<span class='item-control blog-admin'>
+<a class='quickedit' href='//www.blogger.com/rearrange?blogID=6895271190558144932&widgetType=Label&widgetId=Label2&action=editWidget&sectionId=sidebar-right-1' onclick='return _WidgetManager._PopupConfig(document.getElementById("Label2"));' target='configLabel2' title='Edit'>
+<img alt='' height='18' src='http://img1.blogblog.com/img/icon18_wrench_allbkg.png' width='18'/>
+</a>
+</span>
+</span>
+<div class='clear'></div>
+</div>
+</div><div class='widget BlogArchive' id='BlogArchive1'>
+<h2>Archive</h2>
+<div class='widget-content'>
+<div id='ArchiveList'>
+<div id='BlogArchive1_ArchiveList'>
+<ul class='hierarchy'>
+<li class='archivedate expanded'>
+<a class='toggle' href='javascript:void(0)'>
+<span class='zippy toggle-open'>&#9660;&#160;</span>
+</a>
+<a class='post-count-link' href='http://madroom-project.blogspot.jp/search?updated-min=2012-01-01T00:00:00%2B09:00&amp;updated-max=2013-01-01T00:00:00%2B09:00&amp;max-results=50'>2012</a>
+<span class='post-count' dir='ltr'>(74)</span>
+<ul class='hierarchy'>
+<li class='archivedate expanded'>
+<a class='toggle' href='javascript:void(0)'>
+<span class='zippy toggle-open'>&#9660;&#160;</span>
+</a>
+<a class='post-count-link' href='http://madroom-project.blogspot.jp/2012_12_01_archive.html'>December</a>
+<span class='post-count' dir='ltr'>(4)</span>
+<ul class='posts'>
+<li><a href='http://madroom-project.blogspot.jp/2012/12/fac20121202.html'>FuelPHPで画像をプログラムから出力する方法&#12290;切り取る方法&#12290;応用する方法&#12290;</a></li>
+<li><a href='http://madroom-project.blogspot.jp/2012/12/phpdocumentor-2macwin.html'>phpDocumentor 2のインストール手順(Mac/Win)</a></li>
+<li><a href='http://madroom-project.blogspot.jp/2012/12/mampnodejs.html'>MAMPにnode.jsをインストール</a></li>
+<li><a href='http://madroom-project.blogspot.jp/2012/12/gdata-apigoogle-analyticsapi.html'>Gdata APIでGoogle Analytics情報を取得する際に&#12289;APIコール数を減らすポイン...</a></li>
+</ul>
+</li>
+</ul>
+<ul class='hierarchy'>
+<li class='archivedate collapsed'>
+<a class='toggle' href='javascript:void(0)'>
+<span class='zippy'>
+
+          &#9658;&#160;
+        
+</span>
+</a>
+<a class='post-count-link' href='http://madroom-project.blogspot.jp/2012_11_01_archive.html'>November</a>
+<span class='post-count' dir='ltr'>(11)</span>
+</li>
+</ul>
+<ul class='hierarchy'>
+<li class='archivedate collapsed'>
+<a class='toggle' href='javascript:void(0)'>
+<span class='zippy'>
+
+          &#9658;&#160;
+        
+</span>
+</a>
+<a class='post-count-link' href='http://madroom-project.blogspot.jp/2012_10_01_archive.html'>October</a>
+<span class='post-count' dir='ltr'>(11)</span>
+</li>
+</ul>
+<ul class='hierarchy'>
+<li class='archivedate collapsed'>
+<a class='toggle' href='javascript:void(0)'>
+<span class='zippy'>
+
+          &#9658;&#160;
+        
+</span>
+</a>
+<a class='post-count-link' href='http://madroom-project.blogspot.jp/2012_09_01_archive.html'>September</a>
+<span class='post-count' dir='ltr'>(3)</span>
+</li>
+</ul>
+<ul class='hierarchy'>
+<li class='archivedate collapsed'>
+<a class='toggle' href='javascript:void(0)'>
+<span class='zippy'>
+
+          &#9658;&#160;
+        
+</span>
+</a>
+<a class='post-count-link' href='http://madroom-project.blogspot.jp/2012_08_01_archive.html'>August</a>
+<span class='post-count' dir='ltr'>(4)</span>
+</li>
+</ul>
+<ul class='hierarchy'>
+<li class='archivedate collapsed'>
+<a class='toggle' href='javascript:void(0)'>
+<span class='zippy'>
+
+          &#9658;&#160;
+        
+</span>
+</a>
+<a class='post-count-link' href='http://madroom-project.blogspot.jp/2012_07_01_archive.html'>July</a>
+<span class='post-count' dir='ltr'>(8)</span>
+</li>
+</ul>
+<ul class='hierarchy'>
+<li class='archivedate collapsed'>
+<a class='toggle' href='javascript:void(0)'>
+<span class='zippy'>
+
+          &#9658;&#160;
+        
+</span>
+</a>
+<a class='post-count-link' href='http://madroom-project.blogspot.jp/2012_06_01_archive.html'>June</a>
+<span class='post-count' dir='ltr'>(12)</span>
+</li>
+</ul>
+<ul class='hierarchy'>
+<li class='archivedate collapsed'>
+<a class='toggle' href='javascript:void(0)'>
+<span class='zippy'>
+
+          &#9658;&#160;
+        
+</span>
+</a>
+<a class='post-count-link' href='http://madroom-project.blogspot.jp/2012_05_01_archive.html'>May</a>
+<span class='post-count' dir='ltr'>(2)</span>
+</li>
+</ul>
+<ul class='hierarchy'>
+<li class='archivedate collapsed'>
+<a class='toggle' href='javascript:void(0)'>
+<span class='zippy'>
+
+          &#9658;&#160;
+        
+</span>
+</a>
+<a class='post-count-link' href='http://madroom-project.blogspot.jp/2012_04_01_archive.html'>April</a>
+<span class='post-count' dir='ltr'>(4)</span>
+</li>
+</ul>
+<ul class='hierarchy'>
+<li class='archivedate collapsed'>
+<a class='toggle' href='javascript:void(0)'>
+<span class='zippy'>
+
+          &#9658;&#160;
+        
+</span>
+</a>
+<a class='post-count-link' href='http://madroom-project.blogspot.jp/2012_03_01_archive.html'>March</a>
+<span class='post-count' dir='ltr'>(3)</span>
+</li>
+</ul>
+<ul class='hierarchy'>
+<li class='archivedate collapsed'>
+<a class='toggle' href='javascript:void(0)'>
+<span class='zippy'>
+
+          &#9658;&#160;
+        
+</span>
+</a>
+<a class='post-count-link' href='http://madroom-project.blogspot.jp/2012_02_01_archive.html'>February</a>
+<span class='post-count' dir='ltr'>(5)</span>
+</li>
+</ul>
+<ul class='hierarchy'>
+<li class='archivedate collapsed'>
+<a class='toggle' href='javascript:void(0)'>
+<span class='zippy'>
+
+          &#9658;&#160;
+        
+</span>
+</a>
+<a class='post-count-link' href='http://madroom-project.blogspot.jp/2012_01_01_archive.html'>January</a>
+<span class='post-count' dir='ltr'>(7)</span>
+</li>
+</ul>
+</li>
+</ul>
+<ul class='hierarchy'>
+<li class='archivedate collapsed'>
+<a class='toggle' href='javascript:void(0)'>
+<span class='zippy'>
+
+          &#9658;&#160;
+        
+</span>
+</a>
+<a class='post-count-link' href='http://madroom-project.blogspot.jp/search?updated-min=2011-01-01T00:00:00%2B09:00&amp;updated-max=2012-01-01T00:00:00%2B09:00&amp;max-results=46'>2011</a>
+<span class='post-count' dir='ltr'>(46)</span>
+<ul class='hierarchy'>
+<li class='archivedate collapsed'>
+<a class='toggle' href='javascript:void(0)'>
+<span class='zippy'>
+
+          &#9658;&#160;
+        
+</span>
+</a>
+<a class='post-count-link' href='http://madroom-project.blogspot.jp/2011_12_01_archive.html'>December</a>
+<span class='post-count' dir='ltr'>(14)</span>
+</li>
+</ul>
+<ul class='hierarchy'>
+<li class='archivedate collapsed'>
+<a class='toggle' href='javascript:void(0)'>
+<span class='zippy'>
+
+          &#9658;&#160;
+        
+</span>
+</a>
+<a class='post-count-link' href='http://madroom-project.blogspot.jp/2011_11_01_archive.html'>November</a>
+<span class='post-count' dir='ltr'>(23)</span>
+</li>
+</ul>
+<ul class='hierarchy'>
+<li class='archivedate collapsed'>
+<a class='toggle' href='javascript:void(0)'>
+<span class='zippy'>
+
+          &#9658;&#160;
+        
+</span>
+</a>
+<a class='post-count-link' href='http://madroom-project.blogspot.jp/2011_10_01_archive.html'>October</a>
+<span class='post-count' dir='ltr'>(8)</span>
+</li>
+</ul>
+<ul class='hierarchy'>
+<li class='archivedate collapsed'>
+<a class='toggle' href='javascript:void(0)'>
+<span class='zippy'>
+
+          &#9658;&#160;
+        
+</span>
+</a>
+<a class='post-count-link' href='http://madroom-project.blogspot.jp/2011_09_01_archive.html'>September</a>
+<span class='post-count' dir='ltr'>(1)</span>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class='clear'></div>
+<span class='widget-item-control'>
+<span class='item-control blog-admin'>
+<a class='quickedit' href='//www.blogger.com/rearrange?blogID=6895271190558144932&widgetType=BlogArchive&widgetId=BlogArchive1&action=editWidget&sectionId=sidebar-right-1' onclick='return _WidgetManager._PopupConfig(document.getElementById("BlogArchive1"));' target='configBlogArchive1' title='Edit'>
+<img alt='' height='18' src='http://img1.blogblog.com/img/icon18_wrench_allbkg.png' width='18'/>
+</a>
+</span>
+</span>
+<div class='clear'></div>
+</div>
+</div></div>
+<table border='0' cellpadding='0' cellspacing='0' class='section-columns columns-2'>
+<tbody>
+<tr>
+<td class='first columns-cell'>
+<div class='sidebar section' id='sidebar-right-2-1'><div class='widget Feed' id='Feed1'>
+<h2>GitHub feed (PHP)</h2>
+<div class='widget-content' id='Feed1_feedItemListDisplay'>
+<span style='filter: alpha(25); opacity: 0.25;'>
+<a href='http://github.com/mp-php.atom'>Loading...</a>
+</span>
+</div>
+<div class='clear'></div>
+<span class='widget-item-control'>
+<span class='item-control blog-admin'>
+<a class='quickedit' href='//www.blogger.com/rearrange?blogID=6895271190558144932&widgetType=Feed&widgetId=Feed1&action=editWidget&sectionId=sidebar-right-2-1' onclick='return _WidgetManager._PopupConfig(document.getElementById("Feed1"));' target='configFeed1' title='Edit'>
+<img alt='' height='18' src='http://img1.blogblog.com/img/icon18_wrench_allbkg.png' width='18'/>
+</a>
+</span>
+</span>
+<div class='clear'></div>
+</div></div>
+</td>
+<td class='columns-cell'>
+<div class='sidebar section' id='sidebar-right-2-2'><div class='widget Feed' id='Feed2'>
+<h2>GitHub feed (Android)</h2>
+<div class='widget-content' id='Feed2_feedItemListDisplay'>
+<span style='filter: alpha(25); opacity: 0.25;'>
+<a href='http://github.com/mp-android.atom'>Loading...</a>
+</span>
+</div>
+<div class='clear'></div>
+<span class='widget-item-control'>
+<span class='item-control blog-admin'>
+<a class='quickedit' href='//www.blogger.com/rearrange?blogID=6895271190558144932&widgetType=Feed&widgetId=Feed2&action=editWidget&sectionId=sidebar-right-2-2' onclick='return _WidgetManager._PopupConfig(document.getElementById("Feed2"));' target='configFeed2' title='Edit'>
+<img alt='' height='18' src='http://img1.blogblog.com/img/icon18_wrench_allbkg.png' width='18'/>
+</a>
+</span>
+</span>
+<div class='clear'></div>
+</div></div>
+</td>
+</tr>
+</tbody>
+</table>
+<div class='sidebar section' id='sidebar-right-3'></div>
+</aside>
+</div>
+</div>
+</div>
+<div style='clear: both'></div>
+<!-- columns -->
+</div>
+<!-- main -->
+</div>
+</div>
+<div class='main-cap-bottom cap-bottom'>
+<div class='cap-left'></div>
+<div class='cap-right'></div>
+</div>
+</div>
+<footer>
+<div class='footer-outer'>
+<div class='footer-cap-top cap-top'>
+<div class='cap-left'></div>
+<div class='cap-right'></div>
+</div>
+<div class='fauxborder-left footer-fauxborder-left'>
+<div class='fauxborder-right footer-fauxborder-right'></div>
+<div class='region-inner footer-inner'>
+<div class='foot section' id='footer-1'></div>
+<table border='0' cellpadding='0' cellspacing='0' class='section-columns columns-2'>
+<tbody>
+<tr>
+<td class='first columns-cell'>
+<div class='foot section' id='footer-2-1'></div>
+</td>
+<td class='columns-cell'>
+<div class='foot section' id='footer-2-2'></div>
+</td>
+</tr>
+</tbody>
+</table>
+<!-- outside of the include in order to lock Attribution widget -->
+<div class='foot section' id='footer-3'><div class='widget Attribution' id='Attribution1'>
+<div class='widget-content' style='text-align: center;'>
+Watermark template. Powered by <a href='http://www.blogger.com' target='_blank'>Blogger</a>.
+</div>
+<div class='clear'></div>
+<span class='widget-item-control'>
+<span class='item-control blog-admin'>
+<a class='quickedit' href='//www.blogger.com/rearrange?blogID=6895271190558144932&widgetType=Attribution&widgetId=Attribution1&action=editWidget&sectionId=footer-3' onclick='return _WidgetManager._PopupConfig(document.getElementById("Attribution1"));' target='configAttribution1' title='Edit'>
+<img alt='' height='18' src='http://img1.blogblog.com/img/icon18_wrench_allbkg.png' width='18'/>
+</a>
+</span>
+</span>
+<div class='clear'></div>
+</div></div>
+</div>
+</div>
+<div class='footer-cap-bottom cap-bottom'>
+<div class='cap-left'></div>
+<div class='cap-right'></div>
+</div>
+</div>
+</footer>
+<!-- content -->
+</div>
+</div>
+<div class='content-cap-bottom cap-bottom'>
+<div class='cap-left'></div>
+<div class='cap-right'></div>
+</div>
+</div>
+</div>
+<script type='text/javascript'>
+    window.setTimeout(function() {
+        document.body.className = document.body.className.replace('loading', '');
+      }, 10);
+  </script>
+<script type='text/javascript'>
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-36383132-1']);
+      _gaq.push(['_trackPageview']);
+      (function() {
+        var ga = document.createElement('script');
+        ga.type = 'text/javascript';
+        ga.async = true;
+        ga.src = (document.location.protocol == 'https:' ?
+                  'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+<script type="text/javascript">
+if (window.jstiming) window.jstiming.load.tick('widgetJsBefore');
+</script><script type="text/javascript" src="//www.blogger.com/static/v1/widgets/2167839501-widgets.js"></script>
+<script type="text/javascript" src="//www.google.com/jsapi"></script>
+<script type='text/javascript'>
+if (typeof(BLOG_attachCsiOnload) != 'undefined' && BLOG_attachCsiOnload != null) { window['blogger_templates_experiment_id'] = "templatesV2";window['blogger_blog_id'] = '6895271190558144932';BLOG_attachCsiOnload('item_'); }_WidgetManager._Init('//www.blogger.com/rearrange?blogID\x3d6895271190558144932','//madroom-project.blogspot.jp/2012/12/fac20121202.html','6895271190558144932');
+_WidgetManager._SetDataContext([{'name': 'blog', 'data': {'blogId': '6895271190558144932', 'bloggerUrl': 'http://www.blogger.com', 'title': 'madroom project', 'pageType': 'item', 'url': 'http://madroom-project.blogspot.jp/2012/12/fac20121202.html', 'canonicalUrl': 'http://madroom-project.blogspot.com/2012/12/fac20121202.html', 'canonicalHomepageUrl': 'http://madroom-project.blogspot.com/', 'homepageUrl': 'http://madroom-project.blogspot.jp/', 'blogspotFaviconUrl': 'http://madroom-project.blogspot.jp/favicon.ico', 'enabledCommentProfileImages': true, 'adultContent': false, 'disableAdSenseWidget': false, 'analyticsAccountNumber': 'UA-36383132-1', 'searchLabel': '', 'searchQuery': '', 'pageName': 'FuelPHPで画像をプログラムから出力する方法&#12290;切り取る方法&#12290;応用する方法&#12290;', 'pageTitle': 'madroom project: FuelPHPで画像をプログラムから出力する方法&#12290;切り取る方法&#12290;応用する方法&#12290;', 'encoding': 'UTF-8', 'locale': 'en', 'isPrivate': false, 'isMobile': false, 'isMobileRequest': false, 'mobileClass': '', 'isPrivateBlog': false, 'languageDirection': 'ltr', 'feedLinks': '\74link rel\75\42alternate\42 type\75\42application/atom+xml\42 title\75\42madroom project - Atom\42 href\75\42http://madroom-project.blogspot.com/feeds/posts/default\42 /\76\n\74link rel\75\42alternate\42 type\75\42application/rss+xml\42 title\75\42madroom project - RSS\42 href\75\42http://madroom-project.blogspot.com/feeds/posts/default?alt\75rss\42 /\76\n\74link rel\75\42service.post\42 type\75\42application/atom+xml\42 title\75\42madroom project - Atom\42 href\75\42http://www.blogger.com/feeds/6895271190558144932/posts/default\42 /\76\n\74link rel\75\42EditURI\42 type\75\42application/rsd+xml\42 title\75\42RSD\42 href\75\42http://www.blogger.com/rsd.g?blogID\0756895271190558144932\42 /\76\n\74link rel\75\42alternate\42 type\75\42application/atom+xml\42 title\75\42madroom project - Atom\42 href\75\42http://madroom-project.blogspot.com/feeds/4205220202408328971/comments/default\42 /\76\n', 'meTag': '', 'openIdOpTag': '', 'googleProfileUrl': 'https://plus.google.com/104213825825883199069', 'imageSrcTag': '', 'latencyHeadScript': '\74script type\75\42text/javascript\42\76(function() { var a\75window,b\75\42jstiming\42,d\75\42tick\42;var e\75function(c){this.t\75{};this.tick\75function(c,p,h){h\75void 0!\75h?h:(new Date).getTime();this.t[c]\75[h,p]};this[d](\42start\42,null,c)},f\75new e;a.jstiming\75{Timer:e,load:f};if(a.performance\46\46a.performance.timing){var g\75a.performance.timing,j\75a[b].load,k\75g.navigationStart,l\75g.responseStart;0\74k\46\46l\76\75k\46\46(j[d](\42_wtsrt\42,void 0,k),j[d](\42wtsrt_\42,\42_wtsrt\42,l),j[d](\42tbsd_\42,\42wtsrt_\42))}\ntry{var m\75null;a.chrome\46\46a.chrome.csi\46\46(m\75Math.floor(a.chrome.csi().pageT),j\46\0460\74k\46\46(j[d](\42_tbnd\42,void 0,a.chrome.csi().startE),j[d](\42tbnd_\42,\42_tbnd\42,k)));null\75\75m\46\46a.gtbExternal\46\46(m\75a.gtbExternal.pageT());null\75\75m\46\46a.external\46\46(m\75a.external.pageT,j\46\0460\74k\46\46(j[d](\42_tbnd\42,void 0,a.external.startE),j[d](\42tbnd_\42,\42_tbnd\42,k)));m\46\46(a[b].pt\75m)}catch(n){};a.tickAboveFold\75function(c){var i\0750;if(c.offsetParent){do i+\75c.offsetTop;while(c\75c.offsetParent)}c\75i;750\76\75c\46\46a[b].load[d](\42aft\42)};var q\75!1;function r(){q||(q\75!0,a[b].load[d](\42firstScrollTime\42))}a.addEventListener?a.addEventListener(\42scroll\42,r,!1):a.attachEvent(\42onscroll\42,r);\n })();\74/script\076', 'mobileHeadScript': '', 'ieCssRetrofitLinks': '\74!--[if IE]\76\74script type\75\42text/javascript\42 src\75\42//www.blogger.com/static/v1/jsbin/2627287098-ieretrofit.js\42\76\74/script\76\n\74![endif]--\076', 'view': '', 'dynamicViewsCommentsSrc': '//www.blogblog.com/dynamicviews/4224c15c4e7c9321/js/comments.js', 'dynamicViewsScriptSrc': '//www.blogblog.com/dynamicviews/20497177ec370ede'}}, {'name': 'skin', 'data': {'vars': {'tabs_border_size': '0', 'tabs_shadow_spread': '0', 'link_visited_color': '#ff8866', 'post_title_font': 'normal normal 30px Georgia, Utopia, \47Palatino Linotype\47, Palatino, serif', 'tabs_separator_color': '#776655', 'tabs_text_color': '#ffcc77', 'post_shadow_spread': '0', 'body_background_overlay_height': '256px', 'main_cap_height': '0', 'widget_title_font': 'normal normal 20px Georgia, Utopia, \47Palatino Linotype\47, Palatino, serif', 'body_background_overlay': 'transparent url(//www.blogblog.com/1kt/watermark/body_overlay_navigator.png) no-repeat scroll top center', 'tabs_background_outer': 'none', 'keycolor': '#441500', 'main_background': 'transparent none no-repeat scroll top left', 'header_font': 'normal normal 60px Georgia, Utopia, \47Palatino Linotype\47, Palatino, serif', 'post_border_style': 'dotted', 'footer_link_visited_color': '#ff8866', 'post_background_url': 'url(//www.blogblog.com/1kt/watermark/post_background_navigator.png)', 'footer_link_hover_color': '#ffeecc', 'mobile_background_overlay': 'transparent none repeat scroll top left', 'tabs_background_color': 'transparent', 'link_hover_color': '#ffeecc', 'footer_link_color': '#ffcc77', 'description_text_color': '#aa9988', 'body_text_color': '#ffeedd', 'post_border_color': '#332211', 'footer_text_color': '#ffeedd', 'post_background_color': 'transparent', 'endSide': 'right', 'post_footer_text_color': '#aa9988', 'tabs_background_inner': 'none', 'tabs_font': 'normal normal 20px Georgia, Utopia, \47Palatino Linotype\47, Palatino, serif', 'startSide': 'left', 'body_font': 'normal normal 14px Arial, Tahoma, Helvetica, FreeSans, sans-serif', 'main_cap_overlay': 'none', 'date_text_color': '#aa9988', 'widget_title_text_color': '#ffffff', 'link_color': '#ffcc77', 'footer_widget_title_text_color': '#ffffff', 'post_border_size': '1px', 'main_cap_image': 'none', 'footer_background_color': '#110000', 'header_text_color': '#ffffff', 'date_font': 'normal normal 16px Arial, Tahoma, Helvetica, FreeSans, sans-serif', 'main_padding_top': '30px', 'tabs_selected_text_color': '#ffffff', 'body_background_color': '#441500', 'widget_alternate_text_color': '#998877'}, 'override': ''}}, {'name': 'view', 'data': {'classic': {'name': 'classic', 'url': '/?view\75classic'}, 'flipcard': {'name': 'flipcard', 'url': '/?view\75flipcard'}, 'magazine': {'name': 'magazine', 'url': '/?view\75magazine'}, 'mosaic': {'name': 'mosaic', 'url': '/?view\75mosaic'}, 'sidebar': {'name': 'sidebar', 'url': '/?view\75sidebar'}, 'snapshot': {'name': 'snapshot', 'url': '/?view\75snapshot'}, 'timeslide': {'name': 'timeslide', 'url': '/?view\75timeslide'}}}]);
+_WidgetManager._RegisterWidget('_HeaderView', new _WidgetInfo('Header1', 'header', null, document.getElementById('Header1'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_AttributionView', new _WidgetInfo('Attribution1', 'footer-3', null, document.getElementById('Attribution1'), {'attribution': 'Watermark template. Powered by \74a href\75\47http://www.blogger.com\47 target\75\47_blank\47\76Blogger\74/a\76.'}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_BlogView', new _WidgetInfo('Blog1', 'main', null, document.getElementById('Blog1'), {'cmtInteractionsEnabled': false, 'lightboxEnabled': true, 'lightboxModuleUrl': '//www.blogger.com/static/v1/jsbin/151820343-lbx.js', 'lightboxCssUrl': '//www.blogger.com/static/v1/v-css/228702327-lightbox_bundle.css'}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_CustomSearchView', new _WidgetInfo('CustomSearch1', 'sidebar-right-1', null, document.getElementById('CustomSearch1'), {'title': 'Search archive', 'includeBlog': true, 'includePostLinks': true, 'includeWeb': true, 'linkLists': [], 'blogUrl': 'http://madroom-project.blogspot.com/', 'loadingMsg': 'Loading...', 'thisBlogMsg': 'This Blog', 'linkedFromHereMsg': 'Linked From Here', 'theWebMsg': 'The Web', 'backgroundColor': 'transparent', 'textColor': '#ffeedd', 'dateColor': '#aa9988', 'linkColor': '#ffcc77', 'urlColor': '#ffcc77', 'visitedLinkColor': '#ff8866', 'borderColor': '#332211', 'activeBorderColor': '#332211'}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_LinkListView', new _WidgetInfo('LinkList1', 'sidebar-right-1', null, document.getElementById('LinkList1'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_HTMLView', new _WidgetInfo('HTML2', 'sidebar-right-1', null, document.getElementById('HTML2'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_HTMLView', new _WidgetInfo('HTML1', 'sidebar-right-1', null, document.getElementById('HTML1'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_LabelView', new _WidgetInfo('Label2', 'sidebar-right-1', null, document.getElementById('Label2'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_BlogArchiveView', new _WidgetInfo('BlogArchive1', 'sidebar-right-1', null, document.getElementById('BlogArchive1'), {'languageDirection': 'ltr'}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_FeedView', new _WidgetInfo('Feed2', 'sidebar-right-2-2', null, document.getElementById('Feed2'), {'title': 'GitHub feed (Android)', 'showItemDate': true, 'showItemAuthor': false, 'feedUrl': 'http://github.com/mp-android.atom', 'numItemsShow': 5, 'loadingMsg': 'Loading...', 'openLinksInNewWindow': true}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_FeedView', new _WidgetInfo('Feed1', 'sidebar-right-2-1', null, document.getElementById('Feed1'), {'title': 'GitHub feed (PHP)', 'showItemDate': true, 'showItemAuthor': false, 'feedUrl': 'http://github.com/mp-php.atom', 'numItemsShow': 5, 'loadingMsg': 'Loading...', 'openLinksInNewWindow': true}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_NavbarView', new _WidgetInfo('Navbar1', 'navbar', null, document.getElementById('Navbar1'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_PageListView', new _WidgetInfo('PageList1', 'null', null, document.getElementById('PageList1'), {'title': 'Pages', 'links': [{'href': 'http://madroom-project.blogspot.jp/', 'title': 'ホーム', 'isCurrentPage': false}], 'mobile': false}, 'displayModeFull'));
+</script>
+</body>
+</html>
