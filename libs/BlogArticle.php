@@ -83,7 +83,7 @@
                 }
                 
                 // change image path
-                $img['path'] = 'images/' . $img_file;
+                $img['path'] = 'images/' . $this->chap . '/' . $img_file;
                 if ($img['title'] !== '') {
                     $img['path'] .= ' "' . $img['title'] . '"';
                 }
