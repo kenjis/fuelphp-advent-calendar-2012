@@ -9,12 +9,19 @@
 
 ## ブログ記事のMarkdown化
 
-### ブログページの取得とMarkdown化
+### ブログページの取得
 
-	$ php get-blog.php (URL) page (章)
+	$ php get-blog.php (URL) html (章)
 
 	例:
-	$ php get-blog.php http://d.hatena.ne.jp/Kenji_s/20121201/fuelphp_this_year page 01
+	$ php get-blog.php http://d.hatena.ne.jp/Kenji_s/20121201/fuelphp_this_year html 01
+
+### Markdown化
+
+	$ php get-blog.php (URL) md (章)
+
+	例:
+	$ php get-blog.php http://d.hatena.ne.jp/Kenji_s/20121201/fuelphp_this_year md 01
 
 ### 画像ファイルの取得
 
@@ -22,6 +29,13 @@
 
 	例:
 	$ php get-blog.php http://d.hatena.ne.jp/Kenji_s/20121201/fuelphp_this_year image 01
+
+### Markdownファイルの調整
+
+	$ php get-blog.php (URL) adjust (章)
+
+	例:
+	$ php get-blog.php http://d.hatena.ne.jp/Kenji_s/20121201/fuelphp_this_year adjust 01
 
 ## MarkdownファイルのReVIEW化
 

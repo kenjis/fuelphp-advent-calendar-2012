@@ -10,10 +10,13 @@
  */
 
 require './libs/BlogArticle.php';
+require './vendor/autoload.php';
 
 if ( ! isset($argv[1]) || ! isset($argv[2]) || ! isset($argv[3])) {
-    echo $argv[0] . ' (URL) page (chapter)' . PHP_EOL;
+    echo $argv[0] . ' (URL) html (chapter)' . PHP_EOL;
+    echo $argv[0] . ' (URL) md (chapter)' . PHP_EOL;
     echo $argv[0] . ' (URL) image (chapter)' . PHP_EOL;
+    echo $argv[0] . ' (URL) adjust (chapter)' . PHP_EOL;
     exit(1);
 }
 
@@ -28,10 +31,15 @@ if ( ! filter_var($url, FILTER_VALIDATE_URL)) {
 
 $article = new BlogArticle($url, $chap);
 
-if ($cmd === 'page') {
+if ($cmd === 'html') {
+    $article->checkUrl();
     $article->getContents();
+} elseif ($cmd === 'md') {
     $article->convertToMarkdown();
 } elseif ($cmd === 'image') {
+    $article->checkUrl();
     $article->getImageFiles();
+} elseif ($cmd === 'adjust') {
+    $article->adjustMarkdown();
 }
 

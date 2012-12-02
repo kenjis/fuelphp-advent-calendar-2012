@@ -49,5 +49,21 @@ class BlogArticleTest extends PHPUnit_Framework_TestCase
         );
         $this->assertEquals($expected, $test);
     }
+
+    public function test_replaceNonPageBreak()
+    {
+        $line = '    private static $exts = array(';  // C2 A0
+        $test = $this->blog->replaceNonPageBreak($line);
+        $expected = '    private static $exts = array(';
+        $this->assertEquals($expected, $test);
+    }
+
+    public function test_scrapeArticle()
+    {
+        $html = file_get_contents(TESTPATH . 'fixture/01.html');
+        $test = $this->blog->scrapeArticle($html);
+        $expected = file_get_contents(TESTPATH . 'fixture/01.html.scraped');
+        $this->assertEquals($expected, $test);
+    }
 }
 

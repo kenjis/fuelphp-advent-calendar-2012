@@ -27,11 +27,14 @@
         $this->markdown_file = static::MARKDOWN_DIR . '/' . $chap . '.md';
     }
     
-    public function getMarkdown()
+    public function checkUrl()
     {
-        return $this->markdown_file;
+        if ( ! filter_var($this->url, FILTER_VALIDATE_URL)) {
+            echo 'Invalid URL!' . PHP_EOL;
+            exit(1);
+        }
     }
-    
+
     public function getContents()
     {
         $html = file_get_contents($this->url);
@@ -42,12 +45,33 @@
         if ($encoding !== 'UTF-8') {
             $html = mb_convert_encoding($html, 'UTF-8', $encoding);
         }
-        
+
         file_put_contents($this->html_file, $html);
     }
     
+    public function scrapeArticle($html)
+    {
+        $dom = str_get_html($html, true, true, DEFAULT_TARGET_CHARSET, false);
+
+        // blogspot
+        if ( ! is_null($dom->find('.post-outer', 0))) {
+            $html = $dom->find('.post-outer', 0)->outertext;
+        }
+        // hatena diary
+        elseif ( ! is_null($dom->find('.section', 0))) {
+            $html = $dom->find('.section', 0)->outertext;;
+        }
+
+        //var_dump($html); exit;
+        return $html;
+    }
+
     public function convertToMarkdown()
     {
+        $html = file_get_contents($this->html_file);
+        $html = $this->scrapeArticle($html);
+        file_put_contents($this->html_file, $html);
+
         system('pandoc --no-wrap -f html -t markdown ' . $this->html_file . ' > ' . $this->markdown_file);
     }
     
@@ -146,6 +170,28 @@
         );
         
         return $img;
+    }
+
+
+    public function adjustMarkdown()
+    {
+        $markdown = file_get_contents($this->markdown_file);
+        $lines = explode("\n", $markdown);
+        $contents = '';
+
+        foreach ($lines as $line) {
+            $line = $this->replaceNonPageBreak($line);
+            
+            $contents .= $line . "\n";
+        }
+        
+        //var_dump($contents);
+        file_put_contents($this->markdown_file, $contents);
+    }
+
+    public function replaceNonPageBreak($line)
+    {
+        return str_replace(chr(0xC2) . chr(0xA0), ' ', $line);
     }
 }
 
