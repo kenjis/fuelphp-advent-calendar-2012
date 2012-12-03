@@ -206,10 +206,10 @@
     
     public function removeBackSlash($line)
     {
-        if ($line === '\\')
+        if (mb_substr($line, -1) === '\\')
         {
             echo 'Remove Back Slash: ', $line, PHP_EOL;
-            $line = '';
+            $line = mb_substr($line, 0, -1);
         }
         return $line;
     }
