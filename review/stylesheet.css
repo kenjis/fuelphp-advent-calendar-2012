@@ -106,3 +106,8 @@ p.noindent {
 p.flushright {
     text-align: right;
 }
+
+blockquote {
+    border: 1px #aaa solid;
+}
+

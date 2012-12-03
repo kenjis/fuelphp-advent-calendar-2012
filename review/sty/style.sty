@@ -1,2 +1,9 @@
+%% 章見出しの変更
 \renewcommand{\prechaptername}{Day~}
 \renewcommand{\postchaptername}{ }
+
+%% quoteに枠線
+\renewenvironment{quote}{%
+  \begin{framed}}{%
+  \end{framed}\vspace{2zw}}
+
