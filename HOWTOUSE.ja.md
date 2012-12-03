@@ -2,7 +2,7 @@
 
 ## 必要なソフトウェア
 
-- PHP 5.x (PHP 5.3でのみテストされています)
+- PHP 5.3
 - Pandoc https://github.com/jgm/pandoc
 - md2review https://github.com/takahashim/md2review
 - ReVIEW https://github.com/kmuto/review
@@ -38,6 +38,8 @@
 	$ php get-blog.php http://d.hatena.ne.jp/Kenji_s/20121201/fuelphp_this_year adjust 01
 
 ## MarkdownファイルのReVIEW化
+
+ReVIEWの設定ファイルはあらかじめ用意してください。
 
 	$ cd review
 	$ ./make-pdf.sh  ... mdをreに変換しPDFを作成します
