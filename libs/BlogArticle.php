@@ -17,7 +17,8 @@
     protected $chap;
     protected $html;
     protected $markdown;
-    
+    protected $blogType;
+
     public function __construct($url, $chap)
     {
         $this->url  = $url;
@@ -49,21 +50,46 @@
         file_put_contents($this->html_file, $html);
     }
     
+    public function detectBlogType()
+    {
+        if ($this->blogType !== null) {
+            return $this->blogType;
+        }
+        
+        $url = parse_url($this->url);
+        $host = $url['host'];
+
+        if (preg_match('/\Ad\.hatena\.ne\.jp\z/', $host)) {
+            $this->blogType = 'hatena diary';
+        } elseif (preg_match('/\.blogspot\.jp\z/', $host)) {
+            $this->blogType = 'blogspot';
+        }
+
+        return $this->blogType;
+    }
+
     public function scrapeArticle($html)
     {
         $dom = str_get_html($html, true, true, DEFAULT_TARGET_CHARSET, false);
 
-        // blogspot
-        if ( ! is_null($dom->find('.post-outer', 0))) {
-            $html = $dom->find('.post-outer', 0)->outertext;
-        }
-        // hatena diary
-        elseif ( ! is_null($dom->find('.section', 0))) {
-            $html = $dom->find('.section', 0)->outertext;;
+        $this->detectBlogType();
+        
+        if ($this->blogType === 'blogspot') {
+            if ( ! is_null($dom->find('.post-outer', 0))) {
+                $html = $dom->find('.post-outer', 0)->outertext;
+            } else {
+                exit('Error: can\'t scrape blogspot article');
+            }
+        } elseif ($this->blogType === 'hatena diary') {
+            if ( ! is_null($dom->find('.section', 0))) {
+                $html = $dom->find('.section', 0)->outertext;
+            } else {
+                exit('Error: can\'t scrape hatena diary article');
+            }
         }
         // WordPress
         elseif ( ! is_null($dom->find('article', 0))) {
-            $html = $dom->find('article', 0)->outertext;;
+            $html = $dom->find('article', 0)->outertext;
         }
 
         //var_dump($html); exit;
@@ -183,10 +209,16 @@
         $lines = explode("\n", $markdown);
         $contents = '';
 
+        $this->detectBlogType();
+        
         foreach ($lines as $line) {
             $line = $this->replaceNoBreakSpace($line);
             $line = $this->removeBackSlash($line);
             $line = $this->removeDoubleWidthSpace($line);
+            
+            if ($this->blogType === 'hatena diary') {
+                $line = $this->removeHatenaKeywordLink($line);
+            }
             
             $contents .= $line . "\n";
         }
@@ -222,6 +254,32 @@
             $line = mb_substr($line, 1);
         }
         return $line;
+    }
+    
+    public function removeHatenaKeywordLink($line)
+    {
+        $newline = '';
+        
+        while (preg_match('/(.*?)\[(.+?)\]\((.+?)\)(.*)/u', $line, $matches))
+        {
+            //var_dump($matches);
+            $before  = $matches[1];
+            $keyword = $matches[2];
+            $url     = $matches[3];
+            $after   = $matches[4];
+            
+            if (substr($url, 0, 30) === 'http://d.hatena.ne.jp/keyword/') {
+                echo 'Remove Hatena Keyword Link: ', $keyword, ' ', $url, PHP_EOL;
+                $newline .= $before . $keyword;
+                $line = $after;
+            } else {
+                $newline .= $before . '[' . $keyword . '](' . $url . ')';
+                $line = $after;
+            }
+        }
+        $newline .= $line;
+        
+        return $newline;
     }
 }
 

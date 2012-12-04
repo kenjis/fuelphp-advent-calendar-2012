@@ -4,7 +4,7 @@ class BlogArticleTest extends PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
-        $this->blog = new BlogArticle('dummy', '01');
+        $this->blog = new BlogArticle('http://d.hatena.ne.jp/Kenji_s/20121201/fuelphp_this_year', '01');
     }
     
     public function test_processImageLine()
@@ -82,12 +82,51 @@ class BlogArticleTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $test);
     }
     
-        
     public function test_removeDoubleWidthSpace()
     {
         $line = '　とはいえ';
         $test = $this->blog->removeDoubleWidthSpace($line);
         $expected = 'とはいえ';
+        $this->assertEquals($expected, $test);
+    }
+    
+    public function test_detectBlogType_hatena_diary()
+    {
+        $blog = new BlogArticle('http://d.hatena.ne.jp/Kenji_s/20121201/fuelphp_this_year', '01');
+        $test = $blog->detectBlogType();
+        $expected = 'hatena diary';
+        $this->assertEquals($expected, $test);
+    }
+
+    public function test_detectBlogType_blogspot()
+    {
+        $blog = new BlogArticle('http://madroom-project.blogspot.jp/2012/12/fac20121202.html', '01');
+        $test = $blog->detectBlogType();
+        $expected = 'blogspot';
+        $this->assertEquals($expected, $test);
+    }
+
+    public function test_removeHatenaKeywordLink()
+    {
+        $line = 'FuelPHPを用いて実[案件](http://d.hatena.ne.jp/keyword/%B0%C6%B7%EF)で[CMS](http://d.hatena.ne.jp/keyword/CMS)構築をしていた';
+        $test = $this->blog->removeHatenaKeywordLink($line);
+        $expected = 'FuelPHPを用いて実案件でCMS構築をしていた';
+        $this->assertEquals($expected, $test);
+    }
+    
+    public function test_removeHatenaKeywordLink_no_link()
+    {
+        $line = 'FuelPHPを用いて実案件でCMS構築をしていた';
+        $test = $this->blog->removeHatenaKeywordLink($line);
+        $expected = 'FuelPHPを用いて実案件でCMS構築をしていた';
+        $this->assertEquals($expected, $test);
+    }
+    
+    public function test_removeHatenaKeywordLink_not_hatena_keyword_link()
+    {
+        $line = '昨日は [@kenji_s](https://twitter.com/kenji_s) さんの「[FuelPHPのこの1年](http://d.hatena.ne.jp/Kenji_s/20121201/fuelphp_this_year)」でした。';
+        $test = $this->blog->removeHatenaKeywordLink($line);
+        $expected = '昨日は [@kenji_s](https://twitter.com/kenji_s) さんの「[FuelPHPのこの1年](http://d.hatena.ne.jp/Kenji_s/20121201/fuelphp_this_year)」でした。';
         $this->assertEquals($expected, $test);
     }
 }
