@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja" xmlns:og="http://ogp.me/ns#" xmlns:fb="http://www.facebook.com/2008/fbml">
+
+<head profile="http://gmpg.org/xfn/11">
+	
+	<meta charset="UTF-8" />
+
+	<title>FuelPHPで日本人にやさしいフォームを作る</title>
+	
+		<link rel="shortcut icon" href="http://nob-log.info/favicon.ico" type="image/x-icon" />
+		<link rel="pingback" href="http://nob-log.info/xmlrpc.php" />
+	
+	<link rel="alternate" type="application/rss+xml" title="のぶろぐ &raquo; フィード" href="http://nob-log.info/feed/" />
+<link rel="alternate" type="application/rss+xml" title="のぶろぐ &raquo; コメントフィード" href="http://nob-log.info/comments/feed/" />
+<link rel="alternate" type="application/rss+xml" title="のぶろぐ &raquo; FuelPHPで日本人にやさしいフォームを作る のコメントのフィード" href="http://nob-log.info/2012/12/05/fuelphp-advent-calendar-2012/feed/" />
+<link rel='stylesheet' id='cudazi-scroll-to-top-style-css'  href='http://nob-log.info/wp-content/plugins/cudazi-scroll-to-top/css/widget.css?ver=3.4.2' type='text/css' media='all' />
+<link rel='stylesheet' id='jetpack-widgets-css'  href='http://nob-log.info/wp-content/plugins/jetpack/modules/widgets/widgets.css?ver=20121003' type='text/css' media='all' />
+<link rel='stylesheet' id='wp-syntax-css-css'  href='http://nob-log.info/wp-content/plugins/wp-syntax/wp-syntax.css?ver=3.4.2' type='text/css' media='all' />
+<link rel='stylesheet' id='jquery.lightbox.min.css-css'  href='http://nob-log.info/wp-content/plugins/wp-jquery-lightbox/styles/lightbox.min.css?ver=1.3.4' type='text/css' media='all' />
+<link rel='stylesheet' id='style-css'  href='http://nob-log.info/wp-content/themes/delicacy/style.css?ver=3.4.2' type='text/css' media='all' />
+<link rel='stylesheet' id='color_scheme-css'  href='http://nob-log.info/wp-content/themes/delicacy/images/blue/style.css?ver=3.4.2' type='text/css' media='all' />
+<link rel='stylesheet' id='sfcss-css'  href='http://nob-log.info/wp-content/themes/delicacy/js/superfish.css?ver=3.4.2' type='text/css' media='all' />
+<link rel='stylesheet' id='widget-grid-and-list-css'  href='http://nob-log.info/wp-content/plugins/jetpack/modules/widgets/widget-grid-and-list.css?ver=3.4.2' type='text/css' media='all' />
+<script type='text/javascript' src='http://nob-log.info/wp-includes/js/jquery/jquery.js?ver=1.7.2'></script>
+<script type='text/javascript' src='http://nob-log.info/wp-content/plugins/cudazi-scroll-to-top/js/widget.js?ver=3.4.2'></script>
+<script type='text/javascript' src='http://nob-log.info/wp-content/themes/delicacy/js/delicacy.js?ver=3.4.2'></script>
+<script type='text/javascript' src='http://nob-log.info/wp-content/themes/delicacy/js/superfish.js?ver=3.4.2'></script>
+<script type='text/javascript' src='http://nob-log.info/wp-includes/js/comment-reply.js?ver=3.4.2'></script>
+<script type='text/javascript' src='http://nob-log.info/wp-content/plugins/google-analyticator/external-tracking.min.js?ver=6.4'></script>
+<link rel='prev' title='FuelPHPのfindの困った挙動' href='http://nob-log.info/2012/12/04/fuelphp-orm-find/' />
+<link rel='shortlink' href='http://wp.me/p2jTj1-25a' />
+
+<!-- All in One SEO Pack 1.6.15.2 by Michael Torbert of Semper Fi Web Design[195,274] -->
+<meta name="description" content="FuelPHP Advent Calendar 2012 5日目の@redsnow_です 昨日は@sa2yasuさんの「モジュール分割の利点とスケルトンのリファクタリング」でした 自分はValidationの小ネタについて書こうと思います" />
+<meta name="keywords" content="fuelphp,advent calendar 2012,validation,works" />
+<link rel="canonical" href="http://nob-log.info/2012/12/05/fuelphp-advent-calendar-2012/" />
+<!-- /all in one seo pack -->
+<link rel="alternate" media="handheld" type="text/html" href="http://nob-log.info/2012/12/05/fuelphp-advent-calendar-2012/" />
+<!-- This site is powered by Tweet, Like, Plusone and Share Plugin - http://letusbuzz.com/tweet-share-like-plusone/ -->
+<style type="text/css">div.socialicons{float:left;display:block;margin-right: 10px;}div.socialicons p{margin-bottom: 0px !important;margin-top: 0px !important;padding-bottom: 0px !important;padding-top: 0px !important;}</style>
+<script type="text/javascript">
+(function (w, d) {
+    w.___gcfg = {lang: "ja"};
+    var s, e = d.getElementsByTagName("script")[0],
+        a = function (u, i) {
+            if (!d.getElementById(i)) {
+                s = d.createElement("script");
+                s.src = u;
+                if (i) {s.id = i;}
+                e.parentNode.insertBefore(s, e);
+            }
+        };
+    a("https://apis.google.com/js/plusone.js");
+    a("//b.st-hatena.com/js/bookmark_button_wo_al.js");
+    a("//platform.twitter.com/widgets.js", "twitter-wjs");
+    a("//connect.facebook.net/ja_JP/all.js#xfbml=1", "facebook-jssdk");
+})(this, document);
+</script>	<style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>
+<meta property="og:title" content="FuelPHPで日本人にやさしいフォームを作る" />
+<meta property="og:site_name" content="のぶろぐ" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://nob-log.info/2012/12/05/fuelphp-advent-calendar-2012/" />
+<meta property="og:image" content="http://nob-log.info/wp-content/uploads/2012/12/51C1-g-SP8L._SX500_CR175499200_-150x150.jpg" />
+<meta property="fb:admins" content="100001611672102" />
+<meta property="fb:app_id" content="209355525823502" />
+<style type="text/css">.broken_link, a.broken_link {
+	text-decoration: line-through;
+}</style><style type="text/css" id="custom-background-css">
+body.custom-background { background-image: url('/wp-content/themes/delicacy/images/bg/bg01.png'); background-repeat: repeat; background-position: top left; background-attachment: scroll; }
+</style>
+
+<!--
+<rdf:RDF
+  xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+  xmlns:dc="http://purl.org/dc/elements/1.1/"
+  xmlns:foaf="http://xmlns.com/foaf/0.1/">
+<rdf:Description rdf:about="http://nob-log.info/2012/12/05/fuelphp-advent-calendar-2012/">
+   <foaf:maker rdf:parseType="Resource">
+     <foaf:holdsAccount>
+       <foaf:OnlineAccount foaf:accountName="red_snow">
+         <foaf:accountServiceHomepage rdf:resource="http://www.hatena.ne.jp/" />
+       </foaf:OnlineAccount>
+     </foaf:holdsAccount>
+   </foaf:maker>
+</rdf:Description>
+</rdf:RDF>
+-->
+<!-- Google Analytics Tracking by Google Analyticator 6.4: http://www.videousermanuals.com/google-analyticator/ -->
+<script type="text/javascript">
+	var analyticsFileTypes = [''];
+	var analyticsEventTracking = 'enabled';
+</script>
+<script type="text/javascript">
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-11221610-10']);
+        _gaq.push(['_addDevId', 'i9k95']); // Google Analyticator App ID with Google 
+        
+	_gaq.push(['_trackPageview']);
+
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
+</script>
+</head>
+<body class="single single-post postid-8008 single-format-standard custom-background">
+	<div id="wrapper">
+	    <div id="inner-wrapper">
+			<div id="header">
+			    <div id="header-top">
+					<div id="logo">
+					    						<a href="http://nob-log.info"><img src="http://nob-log.info/wp-content/uploads/2012/06/freefont_logo_cinecaption227.png" alt="のぶろぐ" /></a>
+											</div>
+					<div id="search-form">
+					    <form action="http://nob-log.info/" id="searchform" method="get">
+    <div>
+        <input type="text" id="s" name="s" value="" />
+        <input type="submit" value="Search" id="searchsubmit" />
+    </div>
+</form>					</div>
+				</div>
+			<div id="navigation">
+					<div class="main-menu"><ul id="menu-%e3%83%a1%e3%83%8b%e3%83%a5%e3%83%bc" class="sf-menu"><li id="menu-item-1614" class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-1614"><a href="http://nob-log.info/category/works/">works</a></li>
+<li id="menu-item-1615" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1615"><a href="http://nob-log.info/category/photos/">photos</a></li>
+<li id="menu-item-1616" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1616"><a href="http://nob-log.info/category/diving/">scuba diving</a></li>
+<li id="menu-item-4555" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-4555"><a href="http://nob-log.info/category/release/">release</a></li>
+<li id="menu-item-1617" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1617"><a href="http://nob-log.info/about/">about</a></li>
+<li id="menu-item-7493" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-7493"><a href="http://nob-log.info/contact/">contact</a></li>
+</ul></div>				<div class="ribbon-left ribbon"></div>
+				<div class="ribbon-right ribbon"></div>
+			</div><!-- end #navigation -->
+			<div id="intro">
+				<div class="menu-shadow"></div>
+				<div class="headline">
+	    							</div>
+			</div><!-- end #intro -->
+			</div><!-- end #header -->
+        	<div id="content-wrapper">
+			<div id="content">
+
+
+		
+    <div id="post-8008" class="post-8008 post type-post status-publish format-standard hentry category-works tag-fuelphp one-post">
+	<h1 class="post-title">FuelPHPで日本人にやさしいフォームを作る</h1>
+	<div class="entry-meta">
+		<span class="cat"><a href="http://nob-log.info/category/works/" title="works の投稿をすべて表示" rel="category tag">works</a></span><span class="date">2012年12月5日</span><span class="comments"><a href="http://nob-log.info/2012/12/05/fuelphp-advent-calendar-2012/#respond" title="FuelPHPで日本人にやさしいフォームを作る へのコメント"><span class="dsq-postid" rel="8008 http://nob-log.info/?p=8008">No comments</span></a></span>
+	</div>
+	<div class="entry-content">
+    	<!-- google_ad_section_start --><div class="social4i" style="height:69px;">
+<div class="social4in" style="height:69px;float: left;">
+<div class="socialicons s4twitter" style="float:left;margin-right: 10px;"><a href="https://twitter.com/share" data-url="http://nob-log.info/2012/12/05/fuelphp-advent-calendar-2012/" data-counturl="http://nob-log.info/2012/12/05/fuelphp-advent-calendar-2012/" data-text="FuelPHPで日本人にやさしいフォームを作る" class="twitter-share-button" data-count="vertical" data-via="redsnow_"></a></div>
+<div class="socialicons s4fblike" style="float:left;margin-right: 10px;">
+<div id="fb-root"></div>
+<p><fb:like href="http%3A%2F%2Fnob-log.info%2F2012%2F12%2F05%2Ffuelphp-advent-calendar-2012%2F" send="false" layout="box_count" width="55" height="62" show_faces="false" font=""></fb:like></div>
+<div class="socialicons s4plusone" style="float:left;margin-right: 10px;"><g:plusone size="tall" href="http://nob-log.info/2012/12/05/fuelphp-advent-calendar-2012/" count="true"></g:plusone></div>
+<div class="socialicons s4custombtn-1" style="float:left;margin-right: 10px;"><a href="http://b.hatena.ne.jp/entry/http%3A%2F%2Fnob-log.info%2F2012%2F12%2F05%2Ffuelphp-advent-calendar-2012%2F" class="hatena-bookmark-button" data-hatena-bookmark-title="FuelPHPで日本人にやさしいフォームを作る" data-hatena-bookmark-layout="vertical-balloon" title="このエントリーをはてなブックマークに追加"><img src="http://b.st-hatena.com/images/entry-button/button-only.gif" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a></div>
+</div>
+<div style="clear:both"></div>
+</div>
+<p><span style="display:none;"><!-- zenback_title_begin -->FuelPHPで日本人にやさしいフォームを作る | のぶろぐ<!-- zenback_title_end --></span><!-- zenback_body_begin -->
+<div class="amzimg"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/0735811628/redsnow0a-22/" rel="nofollow" target="_blank"><img src="http://ecx.images-amazon.com/images/I/51C1-g-SP8L._SX500_CR1,75,499,200_.jpg" alt="Holy Night Advent Calendar" /></a></div>
+<p><a href="http://atnd.org/events/33753" target="_blank">FuelPHP Advent Calendar 2012</a> 5日目の@redsnow_です<br />
+昨日は@sa2yasuさんの「<a href="http://d.hatena.ne.jp/ya_sasak__ja/20121203/1354547064" target="_blank">モジュール分割の利点とスケルトンのリファクタリング</a>」でした</p>
+<p>自分はValidationの小ネタについて書こうと思います<br />
+<span id="more-8008"></span></p>
+<div class="master_post_advert" style="margin:10px auto; width:500px;">
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-2613386057502929";
+/* バナー */
+google_ad_slot = "1839482077";
+google_ad_width = 468;
+google_ad_height = 60;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+<h3>結論から</h3>
+
+<div class="wp_syntax"><table><tr><td class="code"><pre class="php" style="font-family:monospace;"><span style="color: #000088;">$form</span> <span style="color: #339933;">=</span> Fieldset<span style="color: #339933;">::</span><span style="color: #004000;">forge</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span>
+&nbsp;
+<span style="color: #000088;">$form</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">add</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'hoge'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'フィールド名'</span><span style="color: #009900;">&#41;</span>
+    <span style="color: #339933;">-&gt;</span><span style="color: #004000;">add_rule</span><span style="color: #009900;">&#40;</span><span style="color: #000000; font-weight: bold;">function</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$form</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span> <span style="color: #b1b100;">return</span> <span style="color: #990000;">mb_convert_kana</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$form</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'n'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><span style="color: #009900;">&#125;</span><span style="color: #009900;">&#41;</span>
+    <span style="color: #339933;">-&gt;</span><span style="color: #004000;">add_rule</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'valid_string'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'numeric'</span><span style="color: #009900;">&#41;</span>
+    <span style="color: #339933;">-&gt;</span><span style="color: #004000;">add_rule</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'max_length'</span><span style="color: #339933;">,</span> <span style="color: #cc66cc;">8</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span></pre></td></tr></table></div>
+
+<p>FuelPHPのValidationに使えるvalid_string numericは<strong>半角数字のみ</strong>許可するバリデーションです<br />
+でも全角数字を入力された人に、「有効な文字列ではありません。半角数字 で入力して下さい。」というエラーメッセージを出したくない。。。</p>
+<p>そんな時にadd_ruleにPHPのネイティブの関数か無名関数を突っ込むと解決できます</p>
+<p><a href="http://fuelphp.com/docs/classes/validation/validation.html" target="_blank">マニュアル</a>でもさらっと触れられています</p>
+<blockquote><p>
+The first parameter of the add_rule() method can contain PHP native function names, any valid PHP callback and Closures in addition to the provided validation methods. The method will get the value to be validated as its first argument and any further arguments can be given to the add_rule() method.<br />
+We also provide a shorter syntax which is very limited in comparison. It will not accept array-callbacks, closures or parameters other than strings.
+</p></blockquote>
+<h4>注意点 1</h4>
+<p>add_ruleは上から順番に処理されるので書く順番に気をつけないといけない</p>
+
+<div class="wp_syntax"><table><tr><td class="code"><pre class="php" style="font-family:monospace;"><span style="color: #000088;">$form</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">add</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'hoge'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'フィールド名'</span><span style="color: #009900;">&#41;</span>
+    <span style="color: #339933;">-&gt;</span><span style="color: #004000;">add_rule</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'valid_string'</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'numeric'</span><span style="color: #009900;">&#41;</span>
+    <span style="color: #339933;">-&gt;</span><span style="color: #004000;">add_rule</span><span style="color: #009900;">&#40;</span><span style="color: #000000; font-weight: bold;">function</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$form</span><span style="color: #009900;">&#41;</span> <span style="color: #009900;">&#123;</span> <span style="color: #b1b100;">return</span> <span style="color: #990000;">mb_convert_kana</span><span style="color: #009900;">&#40;</span><span style="color: #000088;">$form</span><span style="color: #339933;">,</span> <span style="color: #0000ff;">'n'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span><span style="color: #009900;">&#125;</span><span style="color: #009900;">&#41;</span>
+    <span style="color: #339933;">-&gt;</span><span style="color: #004000;">add_rule</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'max_length'</span><span style="color: #339933;">,</span> <span style="color: #cc66cc;">8</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span></pre></td></tr></table></div>
+
+<p>これだと数字で入力して下さいエラーが出ちゃいます</p>
+<h4>注意点 2</h4>
+<p>処理結果を取得するにはvalidated()を使う</p>
+
+<div class="wp_syntax"><table><tr><td class="code"><pre class="php" style="font-family:monospace;"><span style="color: #000088;">$hoge</span> <span style="color: #339933;">=</span> <span style="color: #000088;">$form</span><span style="color: #339933;">-&gt;</span><span style="color: #004000;">validated</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'hoge'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span></pre></td></tr></table></div>
+
+<p>こちらだと全角の数字が取れちゃうのでご注意を</p>
+
+<div class="wp_syntax"><table><tr><td class="code"><pre class="php" style="font-family:monospace;"><span style="color: #000088;">$hoge</span> <span style="color: #339933;">=</span> Input<span style="color: #339933;">::</span><span style="color: #004000;">post</span><span style="color: #009900;">&#40;</span><span style="color: #0000ff;">'hoge'</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span></pre></td></tr></table></div>
+
+<h4>明日は、</h4>
+<p><a href="https://twitter.com/ounziw" target="_blank">@ounziw</a>さんの「ユニットテストのすすめ」です。お楽しみに〜<!-- zenback_body_end --><!-- zenback_date 2012-12-05 -->
+<div class="social4i" style="height:69px;">
+<div class="social4in" style="height:69px;float: left;">
+<div class="socialicons s4twitter" style="float:left;margin-right: 10px;"><a href="https://twitter.com/share" data-url="http://nob-log.info/2012/12/05/fuelphp-advent-calendar-2012/" data-counturl="http://nob-log.info/2012/12/05/fuelphp-advent-calendar-2012/" data-text="FuelPHPで日本人にやさしいフォームを作る" class="twitter-share-button" data-count="vertical" data-via="redsnow_"></a></div>
+<div class="socialicons s4fblike" style="float:left;margin-right: 10px;">
+<div id="fb-root"></div>
+<p><fb:like href="http%3A%2F%2Fnob-log.info%2F2012%2F12%2F05%2Ffuelphp-advent-calendar-2012%2F" send="false" layout="box_count" width="55" height="62" show_faces="false" font=""></fb:like></div>
+<div class="socialicons s4plusone" style="float:left;margin-right: 10px;"><g:plusone size="tall" href="http://nob-log.info/2012/12/05/fuelphp-advent-calendar-2012/" count="true"></g:plusone></div>
+<div class="socialicons s4custombtn-1" style="float:left;margin-right: 10px;"><a href="http://b.hatena.ne.jp/entry/http%3A%2F%2Fnob-log.info%2F2012%2F12%2F05%2Ffuelphp-advent-calendar-2012%2F" class="hatena-bookmark-button" data-hatena-bookmark-title="FuelPHPで日本人にやさしいフォームを作る" data-hatena-bookmark-layout="vertical-balloon" title="このエントリーをはてなブックマークに追加"><img src="http://b.st-hatena.com/images/entry-button/button-only.gif" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a></div>
+</div>
+<div style="clear:both"></div>
+</div>
+<!-- google_ad_section_end --><div class='yarpp-related'>
+<style type="text/css">
+.related-post{
+height:100%;
+}
+.related-post{
+width:700px;
+overflow:hidden;
+         margin-top:5px;
+}
+.related-entry {
+    vertical-align: top;
+float: left;
+width:104px;
+      font-size: 13px;
+      min-height: 215px;
+margin: 0;
+        padding-right: 15px;
+        line-height:1.5em;
+}
+
+.related-entry img{
+padding:2px;
+border: #ccc 1px solid;
+width:100px;
+height:100px;
+}
+
+.related-entry .hBookmark-widget-counter img {
+width:41px;
+height:19px;
+
+}
+.related{
+    margin-top:20px;
+}
+</style>
+<h3>関連記事してそうな記事</h3>
+<div class="related-post">
+<div class="related-entry">
+<a href="http://nob-log.info/2011/03/08/php-%e3%81%a7%e5%87%84%e3%81%8f%e7%b0%a1%e5%8d%98%e3%81%ab-getpost-%e9%80%81%e4%bf%a1%e3%81%8c%e3%81%a7%e3%81%8d%e3%82%8b%e9%96%a2%e6%95%b0%e3%82%92%e4%bd%9c%e3%82%8a%e3%81%be%e3%81%97%e3%81%9f/"rel="bookmark"title="[PHP で凄く簡単に GET/POST 送信ができる関数を作りました]という記事を修正してみる">
+<img src="http://nob-log.info/wp-content/themes/delicacy/images/no-image.gif" />[PHP で凄く簡単に GET/POST 送信ができる関数を作りました]という記事を修正してみる</a></div>
+<div class="related-entry">
+<a href="http://nob-log.info/2010/09/08/php53-late-static-bindings/"rel="bookmark"title="PHP5.3の新機能『遅延静的束縛』について勉強してみる">
+<img src="http://nob-log.info/wp-content/themes/delicacy/images/no-image.gif" />PHP5.3の新機能『遅延静的束縛』について勉強してみる</a></div>
+<div class="related-entry">
+<a href="http://nob-log.info/2010/08/25/php53-namespace/"rel="bookmark"title="PHP5.3の新機能『名前空間』について勉強してみる">
+<img src="http://nob-log.info/wp-content/themes/delicacy/images/no-image.gif" />PHP5.3の新機能『名前空間』について勉強してみる</a></div>
+<div class="related-entry">
+<a href="http://nob-log.info/2010/04/08/eccube-get-mobile-id/"rel="bookmark"title="EC-CUBEで各端末の識別IDを取得する方法">
+<img src="http://nob-log.info/wp-content/themes/delicacy/images/no-image.gif" />EC-CUBEで各端末の識別IDを取得する方法</a></div>
+<div class="related-entry">
+<a href="http://nob-log.info/2009/07/21/php-url-exists/"rel="bookmark"title="PHPでURLが存在するか確認する方法">
+<img width="95" height="51" src="http://nob-log.info/wp-content/uploads/2011/11/php-med-trans1.png" class="attachment-thumbnail wp-post-image" alt="php" title="php-med-trans" />PHPでURLが存在するか確認する方法</a></div>
+    <script type="text/javascript">
+    // <![CDATA[
+        var disqus_shortname = 'nob-log';
+        (function () {
+            var nodes = document.getElementsByTagName('span');
+            for (var i = 0, url; i < nodes.length; i++) {
+                if (nodes[i].className.indexOf('dsq-postid') != -1) {
+                    nodes[i].parentNode.setAttribute('data-disqus-identifier', nodes[i].getAttribute('rel'));
+                    url = nodes[i].parentNode.href.split('#', 1);
+                    if (url.length == 1) { url = url[0]; }
+                    else { url = url[1]; }
+                    nodes[i].parentNode.href = url + '#disqus_thread';
+                }
+            }
+            var s = document.createElement('script'); s.async = true;
+            s.type = 'text/javascript';
+                        s.src = 'http' + '://' + 'disqus.com/forums/' + disqus_shortname + '/count.js';
+            (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+        }());
+    //]]&gt;
+    </script>
+</div>
+</div>
+
+<h3>同じカテゴリーの最新記事</h3>
+<div class="related-post">
+<div class="related-entry">
+<a href="http://nob-log.info/2012/12/04/fuelphp-orm-find/">
+<img src="http://nob-log.info/wp-content/themes/delicacy/images/no-image.gif" />FuelPHPのfindの困った挙動</a></div>
+<div class="related-entry">
+<a href="http://nob-log.info/2012/11/22/invalid-rule-passed-validation/">
+<img src="http://nob-log.info/wp-content/themes/delicacy/images/no-image.gif" />Invalid rule "" passed to Validation, not used. in COREPATH/classes/validation.php</a></div>
+<div class="related-entry">
+<a href="http://nob-log.info/2012/11/21/wordpress-contact-form/">
+<img width="150" height="141" src="http://nob-log.info/wp-content/uploads/2012/11/c90e940924ec834f4adb4b36cb2bf8df-500x1411-150x141.png" class="attachment-thumbnail wp-post-image" alt="Jetpack" title="Jetpack" />WordPress史上最も使いやすいContactFormプラグイン</a></div>
+<div class="related-entry">
+<a href="http://nob-log.info/2012/11/19/twitter-bootstrap-social-button/">
+<img width="150" height="27" src="http://nob-log.info/wp-content/uploads/2012/11/IROSTAGRAM-Let_s-enjoy-a-colorful-photograph-150x27.png" class="attachment-thumbnail wp-post-image" alt="flat-button" title="flat-button" />Twitter Bootstrapでソーシャルボタンを簡単にまっすぐ並べる方法</a></div>
+<div class="related-entry">
+<a href="http://nob-log.info/2012/11/18/php-converting-minutes-to-hours/">
+<img src="http://nob-log.info/wp-content/themes/delicacy/images/no-image.gif" />PHPで分を時間表記に変更する</a></div>
+</div>
+
+<!-- Rakuten Widget FROM HERE --><script type="text/javascript">rakuten_design="slide";rakuten_affiliateId="0d5e1d21.a8a33609.0d5e1d22.d8e0f006";rakuten_items="ctsmatch";rakuten_genreId=0;rakuten_size="600x200";rakuten_target="_blank";rakuten_theme="gray";rakuten_border="off";rakuten_auto_mode="off";rakuten_genre_title="off";rakuten_recommend="on";</script><script type="text/javascript" src="http://xml.affiliate.rakuten.co.jp/widget/js/rakuten_widget.js"></script><!-- Rakuten Widget TO HERE -->
+
+		<div class="recipe">
+		    					</div>
+		<div class="clear"></div>
+				<p>Tagged: <a href="http://nob-log.info/tag/fuelphp/" rel="tag">FuelPHP</a></p>
+    		</div>
+
+
+	<div class="deco-line"></div>
+			
+	
+<div id="disqus_thread">
+    </div>
+
+<script type="text/javascript">
+/* <![CDATA[ */
+    var disqus_url = 'http://nob-log.info/2012/12/05/fuelphp-advent-calendar-2012/';
+    var disqus_identifier = '8008 http://nob-log.info/?p=8008';
+    var disqus_container_id = 'disqus_thread';
+    var disqus_domain = 'disqus.com';
+    var disqus_shortname = 'nob-log';
+    var disqus_title = "FuelPHPで日本人にやさしいフォームを作る";
+        var disqus_config = function () {
+        var config = this; // Access to the config object
+
+        /*
+           All currently supported events:
+            * preData — fires just before we request for initial data
+            * preInit - fires after we get initial data but before we load any dependencies
+            * onInit  - fires when all dependencies are resolved but before dtpl template is rendered
+            * afterRender - fires when template is rendered but before we show it
+            * onReady - everything is done
+         */
+
+        config.callbacks.preData.push(function() {
+            // clear out the container (its filled for SEO/legacy purposes)
+            document.getElementById(disqus_container_id).innerHTML = '';
+        });
+                config.callbacks.onReady.push(function() {
+            // sync comments in the background so we don't block the page
+            var script = document.createElement('script');
+            script.async = true;
+            script.src = '?cf_action=sync_comments&post_id=8008';
+
+            var firstScript = document.getElementsByTagName( "script" )[0];
+            firstScript.parentNode.insertBefore(script, firstScript);
+        });
+                    };
+    var facebookXdReceiverPath = 'http://nob-log.info/wp-content/plugins/disqus-comment-system/xd_receiver.htm';
+/* ]]> */
+</script>
+
+<script type="text/javascript">
+/* <![CDATA[ */
+    var DsqLocal = {
+        'trackbacks': [
+        ],
+        'trackback_url': "http:\/\/nob-log.info\/2012\/12\/05\/fuelphp-advent-calendar-2012\/trackback\/"    };
+/* ]]> */
+</script>
+
+<script type="text/javascript">
+/* <![CDATA[ */
+(function() {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript';
+    dsq.async = true;
+        dsq.src = 'http' + '://' + disqus_shortname + '.' + 'disqus.com' + '/embed.js?pname=wordpress&pver=2.73';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+/* ]]> */
+</script>
+    
+    <!-- X:S ZenBackWidget --><script type="text/javascript">document.write(unescape("%3Cscript")+" src='http://widget.zenback.jp/?base_uri=http%3A//nob-log.info&nsid=95904120317169066%3A%3A95904125685864799&rand="+Math.ceil((new Date()*1)*Math.random())+"' type='text/javascript'"+unescape("%3E%3C/script%3E"));</script><!-- X:E ZenBackWidget -->
+	</div>
+
+		
+	</div><!-- end #content -->
+		<div id="sidebar">
+			
+    <div class="widget">			<div class="textwidget"><script type="text/javascript"><!--
+google_ad_client = "ca-pub-2613386057502929";
+/* 250x250, 作成済み 11/04/30 */
+google_ad_slot = "9564972481";
+google_ad_width = 250;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script></div>
+		</div><div class="widget"><h3>About</h3>			    <div class="sidebar-about">
+				    				    フリーランスのWEB系プログラマー<br>
+PHP(CakePHP,FuelPHP)を使った開発<br>
+EC-CUBEのカスタマイズ承ります、お気軽にお問い合わせ下さい			    </div>
+		</div><div class="widget"><h3>Follow me</h3>			<div class="sidebar-social">
+				<a href="http://www.flickr.com/photos/redsnow_/" title="Follow me on Flickr"><img src="http://nob-log.info/wp-content/themes/delicacy/images/flickr.png" alt="Flickr" /></a>				<a href="https://twitter.com/#!/redsnow_" title="Follow me on Twitter"><img src="http://nob-log.info/wp-content/themes/delicacy/images/twitter.png" alt="Twitter" /></a>				<a href="https://www.facebook.com/noblog" title="Follow me on Facebook"><img src="http://nob-log.info/wp-content/themes/delicacy/images/facebook.png" alt="Facebook" /></a>				<a href="http://nob-log.info/feed/" title="Subscribe to RSS feed"><img src="http://nob-log.info/wp-content/themes/delicacy/images/rss.png" alt="Subskrybuj RSS" /></a>		    </div>
+		</div><div class="widget"><iframe src="http://www.facebook.com/plugins/likebox.php?href=https%3A%2F%2Fwww.facebook.com%2Fnoblog&#038;width=230&#038;height=110&#038;colorscheme=light&#038;show_faces=false&#038;stream=false&#038;header=false&#038;force_wall=false&#038;locale=ja_JP" scrolling="no" frameborder="0" style="border: none; overflow: hidden; width: 230px;  height: 110px; background: #fff"></iframe></div><div class="widget"><h3>Recent posts</h3>		
+						
+			<div class="post-block">
+			
+							<div class="sidebar-post-item">
+
+										<img width="80" height="70" src="http://nob-log.info/wp-content/uploads/2012/12/51C1-g-SP8L._SX500_CR175499200_-80x70.jpg" class="attachment-side-thumb wp-post-image" alt="" title="" />					
+					<h4><a href="http://nob-log.info/2012/12/05/fuelphp-advent-calendar-2012/" rel="bookmark" title="FuelPHPで日本人にやさしいフォームを作る">FuelPHPで日本人にやさしいフォームを作る</a></h4>
+					<div class="sidebar-post-meta"><span class="date">2012年12月5日</span><span class="comments"><a href="http://nob-log.info/2012/12/05/fuelphp-advent-calendar-2012/#respond" title="FuelPHPで日本人にやさしいフォームを作る へのコメント"><span class="dsq-postid" rel="8008 http://nob-log.info/?p=8008">No comments</span></a></span></div>
+				</div>
+				
+							<div class="sidebar-post-item">
+
+					
+					<h4><a href="http://nob-log.info/2012/12/04/fuelphp-orm-find/" rel="bookmark" title="FuelPHPのfindの困った挙動">FuelPHPのfindの困った挙動</a></h4>
+					<div class="sidebar-post-meta"><span class="date">2012年12月4日</span><span class="comments"><a href="http://nob-log.info/2012/12/04/fuelphp-orm-find/#respond" title="FuelPHPのfindの困った挙動 へのコメント"><span class="dsq-postid" rel="8108 http://nob-log.info/?p=8108">No comments</span></a></span></div>
+				</div>
+				
+							<div class="sidebar-post-item">
+
+										<img width="80" height="70" src="http://nob-log.info/wp-content/uploads/2012/12/8240104371_a86dde3726-80x70.jpg" class="attachment-side-thumb wp-post-image" alt="" title="" />					
+					<h4><a href="http://nob-log.info/2012/12/04/okinawa-5/" rel="bookmark" title="潜り納めは沖縄で？ 5本目 石切">潜り納めは沖縄で？ 5本目 石切</a></h4>
+					<div class="sidebar-post-meta"><span class="date">2012年12月4日</span><span class="comments"><a href="http://nob-log.info/2012/12/04/okinawa-5/#respond" title="潜り納めは沖縄で？ 5本目 石切 へのコメント"><span class="dsq-postid" rel="8100 http://nob-log.info/?p=8100">No comments</span></a></span></div>
+				</div>
+				
+							<div class="sidebar-post-item">
+
+										<img width="80" height="70" src="http://nob-log.info/wp-content/uploads/2012/12/8236418247_486fbb3801-80x70.jpg" class="attachment-side-thumb wp-post-image" alt="" title="" />					
+					<h4><a href="http://nob-log.info/2012/12/03/okinawa-4/" rel="bookmark" title="潜り納めは沖縄で？ 4本目 レッドビーチ">潜り納めは沖縄で？ 4本目 レッドビーチ</a></h4>
+					<div class="sidebar-post-meta"><span class="date">2012年12月3日</span><span class="comments"><a href="http://nob-log.info/2012/12/03/okinawa-4/#respond" title="潜り納めは沖縄で？ 4本目 レッドビーチ へのコメント"><span class="dsq-postid" rel="8081 http://nob-log.info/?p=8081">No comments</span></a></span></div>
+				</div>
+				
+							<div class="sidebar-post-item">
+
+										<img width="80" height="70" src="http://nob-log.info/wp-content/uploads/2012/12/36e88881197d6c8ee21e5f5b9076a481-500x2101-80x70.png" class="attachment-side-thumb wp-post-image" alt="僕のログブック | redsnow_" title="僕のログブック | redsnow_" />					
+					<h4><a href="http://nob-log.info/2012/12/03/release-mylogbook/" rel="bookmark" title="僕のログブックをリリースしました">僕のログブックをリリースしました</a></h4>
+					<div class="sidebar-post-meta"><span class="date">2012年12月3日</span><span class="comments"><a href="http://nob-log.info/2012/12/03/release-mylogbook/#respond" title="僕のログブックをリリースしました へのコメント"><span class="dsq-postid" rel="8063 http://nob-log.info/?p=8063">No comments</span></a></span></div>
+				</div>
+				
+						
+			</div>
+			
+		</div><div class="widget"><h3>Categories</h3>
+        	<div class="archive-list">
+
+								<ul class="left">
+						<li class="cat-item cat-item-4"><a href="http://nob-log.info/category/photos/" title="photos に含まれる投稿をすべて表示">photos</a>
+</li>
+	<li class="cat-item cat-item-133"><a href="http://nob-log.info/category/release/" title="release に含まれる投稿をすべて表示">release</a>
+</li>
+	<li class="cat-item cat-item-5"><a href="http://nob-log.info/category/diving/" title="scuba diving に含まれる投稿をすべて表示">scuba diving</a>
+</li>
+	<li class="cat-item cat-item-1"><a href="http://nob-log.info/category/works/" title="works に含まれる投稿をすべて表示">works</a>
+</li>
+	<li class="cat-item cat-item-106"><a href="http://nob-log.info/category/diving/overseas/sipadan/" title="シパダン に含まれる投稿をすべて表示">シパダン</a>
+</li>
+	<li class="cat-item cat-item-88"><a href="http://nob-log.info/category/diving/overseas/%e3%82%bb%e3%83%96%e5%b3%b6/" title="セブ島 に含まれる投稿をすべて表示">セブ島</a>
+</li>
+	<li class="cat-item cat-item-151"><a href="http://nob-log.info/category/diving/overseas/%e3%83%91%e3%83%a9%e3%82%aa/" title="パラオ に含まれる投稿をすべて表示">パラオ</a>
+</li>
+	<li class="cat-item cat-item-67"><a href="http://nob-log.info/category/diving/overseas/maldives/" title="モルディブ に含まれる投稿をすべて表示">モルディブ</a>
+</li>
+	<li class="cat-item cat-item-163"><a href="http://nob-log.info/category/diving/%e4%ba%95%e7%94%b0/" title="井田 に含まれる投稿をすべて表示">井田</a>
+</li>
+	<li class="cat-item cat-item-68"><a href="http://nob-log.info/category/diving/ito/" title="伊東 に含まれる投稿をすべて表示">伊東</a>
+</li>
+	<li class="cat-item cat-item-69"><a href="http://nob-log.info/category/diving/oshima/" title="伊豆大島 に含まれる投稿をすべて表示">伊豆大島</a>
+</li>					</ul>
+					<ul class="right">
+					
+	<li class="cat-item cat-item-168"><a href="http://nob-log.info/category/diving/%e4%bc%8a%e8%b1%86%e6%b5%b7%e6%b4%8b%e5%85%ac%e5%9c%92/" title="伊豆海洋公園 に含まれる投稿をすべて表示">伊豆海洋公園</a>
+</li>
+	<li class="cat-item cat-item-131"><a href="http://nob-log.info/category/diving/%e5%88%9d%e5%b3%b6/" title="初島 に含まれる投稿をすべて表示">初島</a>
+</li>
+	<li class="cat-item cat-item-66"><a href="http://nob-log.info/category/diving/osezaki/" title="大瀬崎 に含まれる投稿をすべて表示">大瀬崎</a>
+</li>
+	<li class="cat-item cat-item-172"><a href="http://nob-log.info/category/diving/%e5%b7%9d%e5%a5%88/" title="川奈 に含まれる投稿をすべて表示">川奈</a>
+</li>
+	<li class="cat-item cat-item-132"><a href="http://nob-log.info/category/diving/%e6%b2%96%e7%b8%84/" title="沖縄 に含まれる投稿をすべて表示">沖縄</a>
+</li>
+	<li class="cat-item cat-item-161"><a href="http://nob-log.info/category/diving/%e6%b5%ae%e5%b3%b6/" title="浮島 に含まれる投稿をすべて表示">浮島</a>
+</li>
+	<li class="cat-item cat-item-99"><a href="http://nob-log.info/category/diving/overseas/" title="海外 に含まれる投稿をすべて表示">海外</a>
+</li>
+	<li class="cat-item cat-item-175"><a href="http://nob-log.info/category/diving/%e7%a5%9e%e5%ad%90%e5%85%83/" title="神子元 に含まれる投稿をすべて表示">神子元</a>
+</li>
+	<li class="cat-item cat-item-148"><a href="http://nob-log.info/category/diving/%e8%91%89%e5%b1%b1/" title="葉山 に含まれる投稿をすべて表示">葉山</a>
+</li>
+	<li class="cat-item cat-item-95"><a href="http://nob-log.info/category/diving/%e9%80%97%e5%ad%90/" title="逗子 に含まれる投稿をすべて表示">逗子</a>
+</li>
+	<li class="cat-item cat-item-70"><a href="http://nob-log.info/category/diving/kumomi/" title="雲見 に含まれる投稿をすべて表示">雲見</a>
+</li>					</ul>
+				</div>
+
+		</div><div class="widget"><h3>Archives</h3>
+        	<div class="archive-list">
+
+								<ul class="left">
+						<li><a href='http://nob-log.info/2012/12/' title='2012年12月'>2012年12月</a></li>
+	<li><a href='http://nob-log.info/2012/11/' title='2012年11月'>2012年11月</a></li>
+	<li><a href='http://nob-log.info/2012/10/' title='2012年10月'>2012年10月</a></li>
+	<li><a href='http://nob-log.info/2012/09/' title='2012年9月'>2012年9月</a></li>
+	<li><a href='http://nob-log.info/2012/08/' title='2012年8月'>2012年8月</a></li>
+	<li><a href='http://nob-log.info/2012/07/' title='2012年7月'>2012年7月</a></li>
+	<li><a href='http://nob-log.info/2012/06/' title='2012年6月'>2012年6月</a></li>
+	<li><a href='http://nob-log.info/2012/05/' title='2012年5月'>2012年5月</a></li>
+	<li><a href='http://nob-log.info/2012/04/' title='2012年4月'>2012年4月</a></li>
+	<li><a href='http://nob-log.info/2012/03/' title='2012年3月'>2012年3月</a></li>
+	<li><a href='http://nob-log.info/2012/02/' title='2012年2月'>2012年2月</a></li>
+	<li><a href='http://nob-log.info/2012/01/' title='2012年1月'>2012年1月</a></li>
+	<li><a href='http://nob-log.info/2011/12/' title='2011年12月'>2011年12月</a></li>
+	<li><a href='http://nob-log.info/2011/11/' title='2011年11月'>2011年11月</a></li>
+	<li><a href='http://nob-log.info/2011/10/' title='2011年10月'>2011年10月</a></li>
+	<li><a href='http://nob-log.info/2011/09/' title='2011年9月'>2011年9月</a></li>
+	<li><a href='http://nob-log.info/2011/08/' title='2011年8月'>2011年8月</a></li>
+	<li><a href='http://nob-log.info/2011/07/' title='2011年7月'>2011年7月</a></li>
+	<li><a href='http://nob-log.info/2011/06/' title='2011年6月'>2011年6月</a></li>					</ul>
+					<ul class="right">
+					
+	<li><a href='http://nob-log.info/2011/05/' title='2011年5月'>2011年5月</a></li>
+	<li><a href='http://nob-log.info/2011/04/' title='2011年4月'>2011年4月</a></li>
+	<li><a href='http://nob-log.info/2011/03/' title='2011年3月'>2011年3月</a></li>
+	<li><a href='http://nob-log.info/2011/02/' title='2011年2月'>2011年2月</a></li>
+	<li><a href='http://nob-log.info/2011/01/' title='2011年1月'>2011年1月</a></li>
+	<li><a href='http://nob-log.info/2010/12/' title='2010年12月'>2010年12月</a></li>
+	<li><a href='http://nob-log.info/2010/11/' title='2010年11月'>2010年11月</a></li>
+	<li><a href='http://nob-log.info/2010/10/' title='2010年10月'>2010年10月</a></li>
+	<li><a href='http://nob-log.info/2010/09/' title='2010年9月'>2010年9月</a></li>
+	<li><a href='http://nob-log.info/2010/08/' title='2010年8月'>2010年8月</a></li>
+	<li><a href='http://nob-log.info/2010/07/' title='2010年7月'>2010年7月</a></li>
+	<li><a href='http://nob-log.info/2010/06/' title='2010年6月'>2010年6月</a></li>
+	<li><a href='http://nob-log.info/2010/05/' title='2010年5月'>2010年5月</a></li>
+	<li><a href='http://nob-log.info/2010/04/' title='2010年4月'>2010年4月</a></li>
+	<li><a href='http://nob-log.info/2010/03/' title='2010年3月'>2010年3月</a></li>
+	<li><a href='http://nob-log.info/2010/01/' title='2010年1月'>2010年1月</a></li>
+	<li><a href='http://nob-log.info/2009/10/' title='2009年10月'>2009年10月</a></li>
+	<li><a href='http://nob-log.info/2009/08/' title='2009年8月'>2009年8月</a></li>
+	<li><a href='http://nob-log.info/2009/07/' title='2009年7月'>2009年7月</a></li>					</ul>
+				</div>
+
+		</div><div class="widget"><h3>Popular Posts</h3><ul class='widgets-list-layout no-grav'>
+					<li>
+						<img src="http://i0.wp.com/nob-log.info/wp-content/uploads/2012/12/36e88881197d6c8ee21e5f5b9076a481-500x2101.png?resize=40%2C40" class='widgets-list-layout-blavatar' />
+						<div class="widgets-list-layout-links"><a href="http://nob-log.info/2012/12/03/release-mylogbook/" class="bump-view" data-bump-view="tp">僕のログブックをリリースしました</a></div>
+					</li>
+									<li>
+						<img src="http://i0.wp.com/nob-log.info/wp-content/uploads/2012/06/51mk9jWHzSL._SX405_CR0168400200_.jpg?resize=40%2C40" class='widgets-list-layout-blavatar' />
+						<div class="widgets-list-layout-links"><a href="http://nob-log.info/2011/11/02/php%e3%81%ab%e3%82%88%e3%82%8b%e6%97%a5%e4%bb%98%e3%83%bb%e6%99%82%e5%88%bb%e3%83%bb%e6%99%82%e9%96%93%e3%81%ae%e8%a8%88%e7%ae%97%e3%83%bb%e6%bc%94%e7%ae%97/" class="bump-view" data-bump-view="tp">PHPによる日付・時刻・時間の計算・演算</a></div>
+					</li>
+									<li>
+						<img src="http://1.gravatar.com/avatar/9a1ebbaec04f5dedf81c3fa24138c0f8?s=40&#038;d=http%3A%2F%2Fs1.wp.com%2Fi%2Flogo%2Fwhite-gray-80.png%3Fs%3D40&#038;r=G" class='widgets-list-layout-blavatar' />
+						<div class="widgets-list-layout-links"><a href="http://nob-log.info/2012/12/04/fuelphp-orm-find/" class="bump-view" data-bump-view="tp">FuelPHPのfindの困った挙動</a></div>
+					</li>
+									<li>
+						<img src="http://i0.wp.com/nob-log.info/wp-content/uploads/2011/12/subversion_logo_hor-468x64.png?resize=40%2C40" class='widgets-list-layout-blavatar' />
+						<div class="widgets-list-layout-links"><a href="http://nob-log.info/2011/12/05/subversioncleanup/" class="bump-view" data-bump-view="tp">subversionでCleanUpが出来なくなった際の対処</a></div>
+					</li>
+									<li>
+						<img src="http://i0.wp.com/nob-log.info/wp-content/uploads/2012/06/86ddd9c98116535f129d6117fcf010c8-300x209.png?resize=40%2C40" class='widgets-list-layout-blavatar' />
+						<div class="widgets-list-layout-links"><a href="http://nob-log.info/2011/01/19/redmine%e3%81%a7%e3%83%a1%e3%83%bc%e3%83%ab%e9%80%9a%e7%9f%a5%e3%81%8c%e9%a3%9b%e3%81%b0%e3%81%aa%e3%81%84%e6%99%82%e3%81%ab%e3%82%84%e3%82%8b%e3%81%93%e3%81%a8/" class="bump-view" data-bump-view="tp">Redmineでメール通知が飛ばない時にやること</a></div>
+					</li>
+									<li>
+						<img src="http://i0.wp.com/nob-log.info/wp-content/uploads/2011/11/php-med-trans1.png?resize=40%2C40" class='widgets-list-layout-blavatar' />
+						<div class="widgets-list-layout-links"><a href="http://nob-log.info/2009/07/21/php-url-exists/" class="bump-view" data-bump-view="tp">PHPでURLが存在するか確認する方法</a></div>
+					</li>
+									<li>
+						<img src="http://i1.wp.com/nob-log.info/wp-content/uploads/2012/06/FuelPHP-Framework-20120205-300x210.png?resize=40%2C40" class='widgets-list-layout-blavatar' />
+						<div class="widgets-list-layout-links"><a href="http://nob-log.info/2012/02/05/fuelphp/" class="bump-view" data-bump-view="tp">FuelPHPをはじめてみたら思った以上につまりました</a></div>
+					</li>
+									<li>
+						<img src="http://i0.wp.com/nob-log.info/wp-content/uploads/2012/03/88470359854606ef7e47a49b5e39a660-300x57.jpg?resize=40%2C40" class='widgets-list-layout-blavatar' />
+						<div class="widgets-list-layout-links"><a href="http://nob-log.info/2012/03/22/install-mroonga/" class="bump-view" data-bump-view="tp">全文検索エンジンmroonga導入の試行錯誤</a></div>
+					</li>
+									<li>
+						<img src="http://1.gravatar.com/avatar/9a1ebbaec04f5dedf81c3fa24138c0f8?s=40&#038;d=http%3A%2F%2Fs1.wp.com%2Fi%2Flogo%2Fwhite-gray-80.png%3Fs%3D40&#038;r=G" class='widgets-list-layout-blavatar' />
+						<div class="widgets-list-layout-links"><a href="http://nob-log.info/2011/05/11/php%e3%81%a7oracle%e3%82%92%e4%bd%bf%e3%81%86%e7%82%ba%e3%81%ab%e5%bf%85%e8%a6%81%e3%81%aa5%e3%81%a4%e3%81%ae%e3%81%93%e3%81%a8/" class="bump-view" data-bump-view="tp">PHPでOracleを使う為に必要な5つのこと</a></div>
+					</li>
+				</ul>
+</div><div class="widget"><h3>タグ</h3><div class="tagcloud"><a href='http://nob-log.info/tag/centos/' class='tag-link-14' title='33件のトピック' style='font-size: 16.563106796117pt;'>CentOS</a>
+<a href='http://nob-log.info/tag/ec-cube/' class='tag-link-29' title='36件のトピック' style='font-size: 17.106796116505pt;'>EC-CUBE</a>
+<a href='http://nob-log.info/tag/facebook/' class='tag-link-38' title='9件のトピック' style='font-size: 9.3592233009709pt;'>Facebook</a>
+<a href='http://nob-log.info/tag/fuelphp/' class='tag-link-143' title='8件のトピック' style='font-size: 8.6796116504854pt;'>FuelPHP</a>
+<a href='http://nob-log.info/tag/git/' class='tag-link-43' title='16件のトピック' style='font-size: 12.485436893204pt;'>git</a>
+<a href='http://nob-log.info/tag/github/' class='tag-link-97' title='15件のトピック' style='font-size: 12.077669902913pt;'>github</a>
+<a href='http://nob-log.info/tag/google/' class='tag-link-44' title='12件のトピック' style='font-size: 10.854368932039pt;'>google</a>
+<a href='http://nob-log.info/tag/mac/' class='tag-link-141' title='9件のトピック' style='font-size: 9.3592233009709pt;'>Mac</a>
+<a href='http://nob-log.info/tag/mamp/' class='tag-link-144' title='9件のトピック' style='font-size: 9.3592233009709pt;'>MAMP</a>
+<a href='http://nob-log.info/tag/mysql/' class='tag-link-24' title='24件のトピック' style='font-size: 14.796116504854pt;'>MySQL</a>
+<a href='http://nob-log.info/tag/pear/' class='tag-link-49' title='10件のトピック' style='font-size: 9.9029126213592pt;'>pear</a>
+<a href='http://nob-log.info/tag/php/' class='tag-link-3' title='84件のトピック' style='font-size: 22pt;'>PHP</a>
+<a href='http://nob-log.info/tag/plugin/' class='tag-link-19' title='15件のトピック' style='font-size: 12.077669902913pt;'>plugin</a>
+<a href='http://nob-log.info/tag/subversion/' class='tag-link-104' title='7件のトピック' style='font-size: 8pt;'>subversion</a>
+<a href='http://nob-log.info/tag/twitter/' class='tag-link-37' title='7件のトピック' style='font-size: 8pt;'>Twitter</a>
+<a href='http://nob-log.info/tag/vim/' class='tag-link-128' title='12件のトピック' style='font-size: 10.854368932039pt;'>vim</a>
+<a href='http://nob-log.info/tag/wordpress/' class='tag-link-18' title='13件のトピック' style='font-size: 11.398058252427pt;'>Wordpress</a>
+<a href='http://nob-log.info/tag/yum/' class='tag-link-31' title='21件のトピック' style='font-size: 13.980582524272pt;'>yum</a>
+<a href='http://nob-log.info/tag/%e3%81%a1%e3%81%b3%e3%81%99%e3%81%91/' class='tag-link-164' title='17件のトピック' style='font-size: 12.893203883495pt;'>ちびすけ</a>
+<a href='http://nob-log.info/tag/%e3%81%af%e3%81%a6%e3%83%80%e3%81%8b%e3%82%89%e3%81%ae%e7%a7%bb%e8%a1%8c/' class='tag-link-158' title='15件のトピック' style='font-size: 12.077669902913pt;'>はてダからの移行</a>
+<a href='http://nob-log.info/tag/%e3%81%be%e3%81%a8%e3%82%81/' class='tag-link-112' title='16件のトピック' style='font-size: 12.485436893204pt;'>まとめ</a>
+<a href='http://nob-log.info/tag/%e3%82%a6%e3%83%9f%e3%82%a6%e3%82%b7/' class='tag-link-90' title='85件のトピック' style='font-size: 22pt;'>ウミウシ</a>
+<a href='http://nob-log.info/tag/%e3%82%a6%e3%83%9f%e3%82%ac%e3%83%a1/' class='tag-link-79' title='10件のトピック' style='font-size: 9.9029126213592pt;'>ウミガメ</a>
+<a href='http://nob-log.info/tag/%e3%82%ab%e3%82%a8%e3%83%ab%e3%82%a2%e3%83%b3%e3%82%b3%e3%82%a6/' class='tag-link-71' title='16件のトピック' style='font-size: 12.485436893204pt;'>カエルアンコウ</a>
+<a href='http://nob-log.info/tag/%e3%82%b3%e3%82%b1%e3%82%ae%e3%83%b3%e3%83%9d/' class='tag-link-78' title='24件のトピック' style='font-size: 14.796116504854pt;'>コケギンポ</a>
+<a href='http://nob-log.info/tag/%e3%82%b5%e3%83%bc%e3%83%90%e3%83%bc/' class='tag-link-136' title='8件のトピック' style='font-size: 8.6796116504854pt;'>サーバー</a>
+<a href='http://nob-log.info/tag/%e3%82%b7%e3%83%91%e3%83%80%e3%83%b3/' class='tag-link-107' title='10件のトピック' style='font-size: 9.9029126213592pt;'>シパダン</a>
+<a href='http://nob-log.info/tag/%e3%82%b8%e3%83%b3%e3%83%99%e3%82%a4%e3%82%b6%e3%83%a1/' class='tag-link-41' title='7件のトピック' style='font-size: 8pt;'>ジンベイザメ</a>
+<a href='http://nob-log.info/tag/%e3%82%bb%e3%83%96/' class='tag-link-85' title='9件のトピック' style='font-size: 9.3592233009709pt;'>セブ</a>
+<a href='http://nob-log.info/tag/%e3%83%8f%e3%82%bc/' class='tag-link-155' title='24件のトピック' style='font-size: 14.796116504854pt;'>ハゼ</a>
+<a href='http://nob-log.info/tag/%e3%83%91%e3%83%a9%e3%82%aa/' class='tag-link-151' title='28件のトピック' style='font-size: 15.611650485437pt;'>パラオ</a>
+<a href='http://nob-log.info/tag/%e3%83%93%e3%83%bc%e3%83%81%e3%83%80%e3%82%a4%e3%83%93%e3%83%b3%e3%82%b0/' class='tag-link-12' title='38件のトピック' style='font-size: 17.378640776699pt;'>ビーチダイビング</a>
+<a href='http://nob-log.info/tag/%e3%83%9c%e3%83%bc%e3%83%88%e3%83%80%e3%82%a4%e3%83%93%e3%83%b3%e3%82%b0/' class='tag-link-11' title='42件のトピック' style='font-size: 17.922330097087pt;'>ボートダイビング</a>
+<a href='http://nob-log.info/tag/%e3%83%9e%e3%83%96%e3%83%bc%e3%83%ab/' class='tag-link-109' title='7件のトピック' style='font-size: 8pt;'>マブール</a>
+<a href='http://nob-log.info/tag/%e3%83%a1%e3%83%a2/' class='tag-link-35' title='22件のトピック' style='font-size: 14.252427184466pt;'>メモ</a>
+<a href='http://nob-log.info/tag/%e3%83%a2%e3%83%ab%e3%83%87%e3%82%a3%e3%83%96/' class='tag-link-28' title='16件のトピック' style='font-size: 12.485436893204pt;'>モルディブ</a>
+<a href='http://nob-log.info/tag/%e4%bc%8a%e6%9d%b1/' class='tag-link-10' title='7件のトピック' style='font-size: 8pt;'>伊東</a>
+<a href='http://nob-log.info/tag/%e4%bc%8a%e8%b1%86%e5%a4%a7%e5%b3%b6/' class='tag-link-63' title='17件のトピック' style='font-size: 12.893203883495pt;'>伊豆大島</a>
+<a href='http://nob-log.info/tag/%e5%8b%95%e7%94%bb/' class='tag-link-123' title='9件のトピック' style='font-size: 9.3592233009709pt;'>動画</a>
+<a href='http://nob-log.info/tag/%e5%8f%b0%e9%a2%a8/' class='tag-link-96' title='23件のトピック' style='font-size: 14.52427184466pt;'>台風</a>
+<a href='http://nob-log.info/tag/%e5%a4%a7%e7%80%ac%e5%b4%8e/' class='tag-link-60' title='24件のトピック' style='font-size: 14.796116504854pt;'>大瀬崎</a>
+<a href='http://nob-log.info/tag/%e6%b2%96%e7%b8%84/' class='tag-link-132' title='18件のトピック' style='font-size: 13.165048543689pt;'>沖縄</a>
+<a href='http://nob-log.info/tag/%e6%b5%ae%e5%b3%b6/' class='tag-link-161' title='12件のトピック' style='font-size: 10.854368932039pt;'>浮島</a>
+<a href='http://nob-log.info/tag/%e9%98%bf%e4%bd%90%e3%83%b6%e8%b0%b7/' class='tag-link-33' title='8件のトピック' style='font-size: 8.6796116504854pt;'>阿佐ヶ谷</a>
+<a href='http://nob-log.info/tag/%e9%a3%9f%e3%81%b9%e7%89%a9/' class='tag-link-13' title='10件のトピック' style='font-size: 9.9029126213592pt;'>食べ物</a></div>
+</div><div class="widget"><h3>最近のコメント</h3><ul id="recentcomments"><li class="recentcomments"><a href="http://nob-log.info/contact/#comment-690">contact</a> に <a href='http://www.facebook.com/sydshelton' rel='external nofollow' class='url'>Sydnee Shelton</a> より</li><li class="recentcomments"><a href="http://nob-log.info/contact/#comment-689">contact</a> に <a href='https://www.facebook.com/menogaia.mg' rel='external nofollow' class='url'>株式会社　メノガイア　広報担当　酒井</a> より</li><li class="recentcomments"><a href="http://nob-log.info/contact/#comment-688">contact</a> に <a href='http://nob-log.info/' rel='external nofollow' class='url'>のぶ</a> より</li><li class="recentcomments"><a href="http://nob-log.info/contact/#comment-687">contact</a> に <a href='https://www.facebook.com/menogaia.mg' rel='external nofollow' class='url'>株式会社　メノガイア　広報担当　酒井</a> より</li><li class="recentcomments"><a href="http://nob-log.info/2012/03/22/install-mroonga/#comment-685">全文検索エンジンmroonga導入の試行錯誤</a> に <a href='http://blog.yasuoza.com/2012/10/12/bench_for_mroonga_wrapper_mode/' rel='external nofollow' class='url'>mroongaラッパーモードのベンチマーク &laquo; YasuOza&#039;s Diary</a> より</li></ul></div><div class="widget"><h3>ブログパーツ</h3>			<div class="textwidget"><a href="http://tophatenar.com/view/http://nob-log.info/" title="TopHatenar"><img src="http://tophatenar.com/chart/bookmark_small/http://nob-log.info/" width="160" height="120" border="0"></a>
+<br>
+<a href="http://blog.with2.net/link.php?1350192" target="_blank" title="人気ブログランキングへ"><img src="http://image.with2.net/img/banner/banner_21.gif" width="88" height="31" border="0" /></a></div>
+		</div>
+</div></div><!-- end #content-wrapper -->
+
+			</div><!-- end #inner-wrapper -->
+</div><!-- end #wrapper -->
+
+		<div id="footer">
+			<p>Copyright &copy; 2009 - 2012 <strong><a href="http://nob-log.info/">のぶろぐ</a></strong></p>
+			
+			<div id="site-generator">
+			
+				<small>Proudly powered by <a href="http://wordpress.org" target="_blank">WordPress</a>. Design by  <a href="http://webtuts.pl/" title="WebTuts.pl" target="_blank">WebTuts.pl</a></small>
+
+			</div><!-- #site-generator -->
+		</div>
+
+			<a id="scroll-to-top" href="#" title="Scroll to Top">Top</a>
+			<div style="display:none">
+	<div class="grofile-hash-map-9a1ebbaec04f5dedf81c3fa24138c0f8">
+	</div>
+	</div>
+<script type='text/javascript' src='http://s0.wp.com/wp-content/js/devicepx-jetpack.js?ver=201249'></script>
+<script type='text/javascript' src='http://s.gravatar.com/js/gprofiles.js?ver=2012Decaa'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var WPGroHo = {"my_hash":""};
+/* ]]> */
+</script>
+<script type='text/javascript' src='http://nob-log.info/wp-content/plugins/jetpack/modules/wpgroho.js?ver=3.4.2'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var JQLBSettings = {"fitToScreen":"1","resizeSpeed":"250","displayDownloadLink":"0","navbarOnTop":"0","loopImages":"","resizeCenter":"","marginSize":"0","linkTarget":"_self","help":"","prevLinkTitle":"\u524d\u306e\u753b\u50cf","nextLinkTitle":"\u6b21\u306e\u753b\u50cf","prevLinkText":"\u00ab \u524d\u3078","nextLinkText":"\u6b21\u3078 \u00bb","closeTitle":"\u30ae\u30e3\u30e9\u30ea\u30fc\u3092\u9589\u3058\u308b","image":"\u753b\u50cf ","of":"\u306e","download":"\u30c0\u30a6\u30f3\u30ed\u30fc\u30c9"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='http://nob-log.info/wp-content/plugins/wp-jquery-lightbox/jquery.lightbox.min.js?ver=1.3.4.1'></script>
+
+	<script src="http://stats.wordpress.com/e-201249.js" type="text/javascript"></script>
+	<script type="text/javascript">
+	st_go({v:'ext',j:'1:2.0.2',blog:'34293503',post:'8008'});
+	var load_cmc = function(){linktracker_init(34293503,8008,2);};
+	if ( typeof addLoadEvent != 'undefined' ) addLoadEvent(load_cmc);
+	else load_cmc();
+	</script>	
+	<!-- Don't forget analytics -->
+	
+</body>
+
+</html>
+
+<!-- Performance optimized by W3 Total Cache. Learn more: http://www.w3-edge.com/wordpress-plugins/
+
+Minified using disk: basic
+Page Caching using disk: enhanced
+Database Caching 18/22 queries in 0.013 seconds using apc
+Object Caching 2442/2462 objects using apc
+
+Served from: nob-log.info @ 2012-12-05 09:03:35 -->
