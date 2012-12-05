@@ -11,7 +11,7 @@ booktitle: FuelPHP Advent Calendar 2012
 # 著者
 aut: FuelPHP Advent Calendar 2012 参加有志
 # 以下はオプション
-# prt: 出版社
+prt: 出版社
 # asn: Associated name
 # ant: Bibliographic antecedent
 # clb: 貢献者
@@ -20,13 +20,15 @@ aut: FuelPHP Advent Calendar 2012 参加有志
 # ill: イラストレータ
 # pht: 撮影者
 # trl: 翻訳者
-date: 刊行日
+# date: 刊行日
+date: 2012/12/XX
 # rights: 権利表記
 # description: ブックの説明
 #
 # coverfile: カバーページのbody要素内に挿入する内容を記述したファイル名
-#
+#coverfile: cover.html
 # coverimage: カバー用画像。画像ディレクトリ内に置いてもディレクトリ名は不要(例: cover.jpg)
+#coverimage: cover.jpg
 #
 # 固有IDに使用するドメイン。指定しない場合には、時刻に基づくランダムUUIDが入る
 # urnid: urn:uid:http://example.com/some-book-title/1.0.2/
