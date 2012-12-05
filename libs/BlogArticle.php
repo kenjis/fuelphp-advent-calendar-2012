@@ -90,6 +90,8 @@
         // WordPress
         elseif ( ! is_null($dom->find('article', 0))) {
             $html = $dom->find('article', 0)->outertext;
+        } elseif ( ! is_null($dom->find('.post', 0))) {
+            $html = $dom->find('.post', 0)->outertext;
         }
 
         //var_dump($html); exit;
@@ -213,7 +215,7 @@
         
         foreach ($lines as $line) {
             $line = $this->replaceNoBreakSpace($line);
-            $line = $this->removeBackSlash($line);
+            $line = $this->convertBackslash($line);
             $line = $this->removeDoubleWidthSpace($line);
             
             if ($this->blogType === 'hatena diary') {
@@ -236,12 +238,12 @@
         return $line;
     }
     
-    public function removeBackSlash($line)
+    public function convertBackslash($line)
     {
         if (mb_substr($line, -1) === '\\')
         {
-            echo 'Remove Back Slash: ', $line, PHP_EOL;
-            $line = mb_substr($line, 0, -1);
+            echo 'Convert Backslash to <br>: ', $line, PHP_EOL;
+            $line = mb_substr($line, 0, -1) . '  ';
         }
         return $line;
     }

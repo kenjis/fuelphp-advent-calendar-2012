@@ -74,11 +74,11 @@ class BlogArticleTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $test);
     }
     
-    public function test_removeBackSlash()
+    public function test_convertBackslash()
     {
         $line = '\\';
-        $test = $this->blog->removeBackSlash($line);
-        $expected = '';
+        $test = $this->blog->convertBackslash($line);
+        $expected = '  ';
         $this->assertEquals($expected, $test);
     }
     
