@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="ja" xmlns:og="http://ogp.me/ns#" xmlns:fb="http://www.facebook.com/2008/fbml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>ユニットテストのすすめ</title>
+
+<link rel="stylesheet" href="http://ounziw.com/wp-content/themes/mynews/style.css" type="text/css" media="all" />
+<link rel="profile" href="http://gmpg.org/xfn/11" />
+<link rel="pingback" href="http://ounziw.com/xmlrpc.php" />
+
+<meta name="generator" content="WordPress 3.4.2" />
+<meta name="template" content="News 0.3" />
+<meta name="robots" content="index,follow" />
+<meta name="author" content="mizuno" />
+<meta name="copyright" content="Copyright (c) 12月 2012" />
+<meta name="revised" content="木曜日, 12月 6th, 2012, 8:44 am" />
+<meta name="description" content="ユニットテストのすすめ。FuelPHPでは、PHPUnitというテスティングフレームワークを利用。" />
+<meta name="keywords" content="php" />
+<link rel="alternate" type="application/rss+xml" title="Standing on the Shoulder of Linus &raquo; フィード" href="http://ounziw.com/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Standing on the Shoulder of Linus &raquo; コメントフィード" href="http://ounziw.com/comments/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Standing on the Shoulder of Linus &raquo; ユニットテストのすすめ のコメントのフィード" href="http://ounziw.com/2012/12/06/phpunit/feed/" />
+<link rel='stylesheet' id='jetpack-widgets-css'  href='http://ounziw.com/wp-content/plugins/jetpack/modules/widgets/widgets.css?ver=20121003' type='text/css' media='all' />
+<link rel='stylesheet' id='widget-grid-and-list-css'  href='http://ounziw.com/wp-content/plugins/jetpack/modules/widgets/widget-grid-and-list.css?ver=3.4.2' type='text/css' media='all' />
+<script type='text/javascript' src='http://ounziw.com/wp-includes/js/jquery/jquery.js?ver=1.7.2'></script>
+<script type='text/javascript' src='http://ounziw.com/wp-includes/js/comment-reply.js?ver=3.4.2'></script>
+<link rel='prev' title='WordPress プラグインと GPL #wacja2012' href='http://ounziw.com/2012/12/04/plugin-gpl/' />
+<link rel='canonical' href='http://ounziw.com/2012/12/06/phpunit/' />
+<link rel='shortlink' href='http://wp.me/sZEIy-phpunit' />
+<meta property="og:title" content="ユニットテストのすすめ" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://ounziw.com/2012/12/06/phpunit/" />
+<meta property="og:site_name" content="Standing on the Shoulder of Linus" />
+<meta property="og:image" content="http://ounziw.com/wp-content/themes/mynews/images/mizuno.jpg" />
+<meta property="fb:app_id" content="213736395316924" />
+<meta property="og:description" content="ユニットテストのすすめ。FuelPHPでは、PHPUnitというテスティングフレームワークを利用。" />
+	<style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>
+<meta id="syntaxhighlighteranchor" name="syntaxhighlighter-version" content="3.1.3" />
+
+</head>
+
+<body class="wordpress ltr ja child-theme y2012 m12 d06 h09 thursday logged-out singular singular-post singular-post-2380">
+
+	
+	<div id="body-container">
+
+		
+		
+		<div id="header">
+
+			
+			<div class="wrap">
+
+				<div id="site-title"><a href="http://ounziw.com" title="Standing on the Shoulder of Linus" rel="home"><span>Standing on the Shoulder of Linus</span></a></div>
+				
+				
+			</div><!-- .wrap -->
+
+			
+		</div><!-- #header -->
+
+		
+		
+		
+		<div id="container">
+
+			<div class="wrap">
+
+			
+			<div class="breadcrumb-trail breadcrumbs" itemprop="breadcrumb"><span class="trail-before">現在地: <span class="sep">/</span></span> <span class="trail-begin"><a href="http://ounziw.com" title="Standing on the Shoulder of Linus" rel="home" class="trail-begin">Home</a></span> <span class="sep">/</span> <a href="http://ounziw.com/2012/" title="2012">2012</a> <span class="sep">/</span> <a href="http://ounziw.com/2012/12/" title="12月 2012">12月</a> <span class="sep">/</span> <a href="http://ounziw.com/2012/12/06/" title="12月 6, 2012">06</a> <span class="sep">/</span> <span class="trail-end">ユニットテストのすすめ</span></div>
+	
+	<div id="content">
+
+		
+		<div class="hfeed">
+
+			
+				
+					
+					<div id="post-2380" class="hentry post publish post-1 odd author-mizuno has-excerpt category-php-2">
+
+						
+						<div class="entry-utility"><a class="print-link hide-if-no-js" href="#">印刷</a> <a class="email-link" href="mailto:?subject=%5BStanding+on+the+Shoulder+of+Linus%5D%E3%83%A6%E3%83%8B%E3%83%83%E3%83%88%E3%83%86%E3%82%B9%E3%83%88%E3%81%AE%E3%81%99%E3%81%99%E3%82%81&amp;body=%E3%81%93%E3%81%AE%E8%A8%98%E4%BA%8B%E3%82%92%E3%83%81%E3%82%A7%E3%83%83%E3%82%AF%3A+http%3A%2F%2Founziw.com%2F2012%2F12%2F06%2Fphpunit%2F">メール</a> <a class="tips shortlink hide-if-no-js" rel="#shortlink-2380" title="&#039;ユニットテストのすすめ&#039;のショートリンク">ショートリンク</a> <div id="shortlink-2380" class="tip hide"><input type="text" value="http://wp.me/sZEIy-phpunit" onclick="this.focus(); this.select();" /></div></div>
+						<h1 class="entry-title"><a href="http://ounziw.com/2012/12/06/phpunit/" title="ユニットテストのすすめ" rel="bookmark">ユニットテストのすすめ</a></h1>
+						<div class="byline">By <span class="author vcard"><a class="url fn n" href="https://plus.google.com/112701319643571447221?rel=author" title="mizuno">mizuno</a></span> on <abbr class="published" title="木曜日, 12月 6th, 2012, 8:44 am">2012年12月6日</abbr> <span class="category"><span class="before"> in </span><a href="http://ounziw.com/category/php-2/" rel="tag">php</a></span> </div>
+						<div class="entry-content">
+							<p><a href="http://atnd.org/events/33753">FuelPHP Advent Calendar 2012</a> 6日目です。昨日は<a href="http://nob-log.info/2012/12/05/fuelphp-advent-calendar-2012/">FuelPHPで日本人にやさしいフォームを作る</a>(<a href="https://twitter.com/redsnow_">@redsnow_</a>さん)でした。今日はユニットテストのすすめです。公式マニュアル<a href="http://fuelphp.com/docs/general/unit_testing.html">http://fuelphp.com/docs/general/unit_testing.html</a>を参考にしています。<span id="more-2380"></span></p>
+<h3>PHPUnitのインストール</h3>
+<p>FuelPHPでは、PHPUnitというテスティングフレームワークを利用しています。まずPHPUnitをインストールしましょう。</p>
+<p>PHPUnitは、PEARインストーラを使用してインストールします。まず、pear.phpunit.deからインストールできるようにします。</p>
+<p><code>pear channel-discover pear.phpunit.de</code></p>
+<p>続いてインストールします。</p>
+<p><code>pear install phpunit/PHPUnit</code></p>
+<p>詳しくは<a href="http://www.phpunit.de/manual/3.0/ja/installation.html">第3章 PHPUnit のインストール</a>をごらんください。なお、Ubuntuでは、<code>sudo apt-get install phpunit</code>でインストールできます。</p>
+<h3>簡単なユニットテストの例</h3>
+<p>FuelPHPのコアコード<a href="https://github.com/fuel/core/blob/1.4/master/tests/num.php">https://github.com/fuel/core/blob/1.4/master/tests/num.php</a>から引用です。</p>
+<pre class="brush: php; title: ; notranslate" title="">namespace Fuel\Core;
+
+/**
+ * Numeric helper tests
+ *
+ * @package		Fuel
+ * @category	Core
+ * @author      Chase &quot;Syntaqx&quot; Hutchins
+ *
+ * @group Core
+ * @group Num
+ */
+class Test_Num extends TestCase
+{
+
+	/**
+	 * @see     Num::bytes
+	 */
+	public function test_bytes()
+	{
+		$output = Num::bytes('200K');
+		$expected = '204800';
+
+		$this-&gt;assertEquals($expected, $output);
+	}
+...
+</pre>
+<p>ユニットテストするには、TestCaseクラスを継承したクラスを作ります。(元々のPHPUnitではPHPUnit_Framework_TestCaseクラスを継承しますが、FuelPHPではTestCaseを継承します。)</p>
+<p>テストのクラス名は、<code>Test_テストするクラス名</code>とする規約になっています。上の例ではTest_Numです。テストするクラスがModel_Loginなら、Test_Model_Loginと命名します。</p>
+<p>このクラスで、test_で始まるメソッドを定義してください。上の例ではtest_bytesメソッドが定義されており、このメソッドは<code>Num::bytes('200K');</code>の実行結果が&#8217;204800&#8242;に等しいことを確かめています。assertEqualsは、PHPUnitのメソッドで、1つ目の引数と2つ目の引数が等しいかどうかを確かめます。</p>
+<h3>ユニットテストを書くメリット</h3>
+<p>ユニットテストを書くメリットは、テストを実行するコストが下がるので頻繁にテストを実行しやすくなること、クラス毎にテストを書くのでバグの箇所を見つけ易いこと、等があげられます。</p>
+<p>プログラムを実行した結果をブラウザで目視して動作確認する、という方式だと、頻繁にテストするのは大変ですし、バグの箇所を見つけて修正するのも大変です。</p>
+<p>ユニットテストを書いておけば、FuelPHPをインストールしたルートディレクトリで</p>
+<p><code>oil test</code></p>
+<p>コマンドでテストを実行することができます。またテストに失敗した場合、どのテストが失敗したかが分かります。バグがあった場合に早期発見／修正しやすくなります。</p>
+<h3>まずはテストしやすいところから</h3>
+<p>いきなり全部のコードのテストを完璧に書く、というのは難しいでしょう。まずはテストしやすいところから始めれば良いと思います。PHPUnitには様々なテストメソッドが用意されていますが、まずはassertEquals、assertTrue、assertFalseぐらいで良いと思います。FuelPHPのコアコードのテストコードも、大半はassertEquals、assertTrue、assertFalseです。</p>
+<ul>
+<li>assertEquals($expected, $actual)  : $actual が $expected に等しい</li>
+<li>assertTrue($actual)  : $actual が TRUE</li>
+<li>assertFalse($actual)  : $actual が FALSE</li>
+</ul>
+<h3>テストのグループ化</h3>
+<p><code>oil test</code>を実行すると、コアを含む全てのテストを実行します。自分のアプリケーションをテストしたい場合には、アプリケーション部分のみのテストができると嬉しいですね。</p>
+<ul>
+<li>自分で書いたテストのクラスに、@group App アノテーションを書く</li>
+<li>テストを書いたファイルをapp/testsフォルダに置く</li>
+<li><code>oil test --group=App</code>を実行する</li>
+</ul>
+<p>で、グループ化してテスト実行できます。</p>
+<p>アノテーションは、上の例のTest_numでは、@group Core となっています。自分のアプリケーションには、@group App を付けると、自分のアプリケーションのテストだけを実行することができます。App の部分は好きな名前を付けることができます。</p>
+<p>明日は「(仮)FuelPHPのFieldsetクラス利用時のオレオレTips集」(<a href="https://twitter.com/omoon">@omoon</a>さん)です。お楽しみに。</p>
+													</div><!-- .entry-content -->
+
+						<div class="entry-meta"><span class="share">Share this on:</span> <a href="http://b.hatena.ne.jp/add" onclick="window.open('http://b.hatena.ne.jp/add?mode=confirm&amp;url='+encodeURIComponent('http://ounziw.com/2012/12/06/phpunit/')+'&amp;title='+encodeURIComponent('ユニットテストのすすめ'),'hatena', 'toolbar=no,width=550,height=550'); return false;">Hatena</a> <a href="http://delicious.com/save" onclick="window.open('http://delicious.com/save?v=5&amp;noui&amp;jump=close&amp;url='+encodeURIComponent('http://ounziw.com/2012/12/06/phpunit/')+'&amp;title='+encodeURIComponent('ユニットテストのすすめ'),'delicious', 'toolbar=no,width=550,height=550'); return false;">Delicious</a> <a href="http://digg.com/submit?phase=2&#038;url=http%3A%2F%2Founziw.com%2F2012%2F12%2F06%2Fphpunit%2F&#038;title=%E3%83%A6%E3%83%8B%E3%83%83%E3%83%88%E3%83%86%E3%82%B9%E3%83%88%E3%81%AE%E3%81%99%E3%81%99%E3%82%81" title="Digg で共有">Digg</a> <a href="http://facebook.com/sharer.php?u=http%3A%2F%2Founziw.com%2F2012%2F12%2F06%2Fphpunit%2F&#038;t=%E3%83%A6%E3%83%8B%E3%83%83%E3%83%88%E3%83%86%E3%82%B9%E3%83%88%E3%81%AE%E3%81%99%E3%81%99%E3%82%81" title="Facebook で共有">Facebook</a> <a href="http://twitter.com/home?status=%E4%BB%8A%E8%A6%8B%E3%81%A6%E3%82%8B+http%3A%2F%2Fwp.me%2FsZEIy-phpunit" title="Twitter で共有">Twitter</a></div>
+						
+					</div><!-- .hentry -->
+
+					
+					
+	<div id="sidebar-after-singular" class="sidebar utility">
+
+		<div id="text-13" class="widget widget_text widget-widget_text"><div class="widget-wrap widget-inside">			<div class="textwidget"><!-- X:S ZenBackWidget --><script type="text/javascript">document.write(unescape("%3Cscript")+" src='http://widget.zenback.jp/?base_uri=http%3A//ounziw.com/&nsid=107111292820581592%3A%3A107111300873617199&rand="+Math.ceil((new Date()*1)*Math.random())+"' type='text/javascript'"+unescape("%3E%3C/script%3E"));</script><!-- X:E ZenBackWidget --></div>
+		</div></div>
+	</div><!-- #sidebar-after-singular .utility -->
+
+
+					
+					
+<div id="comments-template">
+
+	<div class="comments-wrap">
+
+		<div id="comments">
+
+			
+			
+		
+		</div><!-- #comments -->
+
+							
+		<div id="respond">
+			<div id="cancel-comment-reply-link" style="display:none; float:right;"><a href="#">返信をキャンセル</a></div>
+			<iframe src="http://jetpack.wordpress.com/jetpack-comment/?blogid=14694530&#038;postid=2380&#038;comment_registration=0&#038;require_name_email=1&#038;stc_enabled=1&#038;stb_enabled=1&#038;show_avatars=1&#038;avatar_default=mystery&#038;greeting=%E3%82%B3%E3%83%A1%E3%83%B3%E3%83%88%E3%82%92%E3%81%A9%E3%81%86%E3%81%9E&#038;color_scheme=light&#038;lang=ja&#038;jetpack_version=1.8.2&#038;sig=bbea993bf9f2cd07775e87c4c1eb7652bc0af273#parent=http%3A%2F%2Founziw.com%2F2012%2F12%2F06%2Fphpunit%2F" allowtransparency="false" style="width:100%; height: 430px;border:0px;" frameBorder="0" scrolling="no" name="jetpack_remote_comment" id="jetpack_remote_comment"></iframe>
+		</div>
+
+		
+		<input type="hidden" name="comment_parent" id="comment_parent" value="" />
+
+					
+	</div><!-- .comments-wrap -->
+
+</div><!-- #comments-template -->
+				
+			
+		</div><!-- .hfeed -->
+
+		
+		
+	
+		<div class="loop-nav navigation-links">
+			<a href="http://ounziw.com/2012/12/04/plugin-gpl/" rel="prev"><span class="previous">&larr; 前へ</span></a>					</div><!-- .navigation-links -->
+
+	
+	</div><!-- #content -->
+
+	
+			
+	<div id="sidebar-primary" class="sidebar aside">
+
+		
+		<div id="top-posts-2" class="widget widget_top-posts widget-widget_top-posts"><div class="widget-wrap widget-inside"><h3 class="widget-title">良く見られている記事</h3><ul><li><a href="http://ounziw.com/2012/12/04/plugin-gpl/" class="bump-view" data-bump-view="tp">WordPress プラグインと GPL #wacja2012</a></li>
+<li><a href="http://ounziw.com/2012/05/30/advanced-custom-field/" class="bump-view" data-bump-view="tp">advanced custom fields プラグインの日本語化</a></li>
+<li><a href="http://ounziw.com/2011/12/01/github-localize/" class="bump-view" data-bump-view="tp">github でドキュメント日本語化</a></li>
+<li><a href="http://ounziw.com/2010/04/08/featured-image/" class="bump-view" data-bump-view="tp">featured image アイキャッチ画像</a></li>
+<li><a href="http://ounziw.com/2011/12/13/namespace/" class="bump-view" data-bump-view="tp">PHP5.3 の名前空間入門</a></li>
+</ul></div></div><div id="recent-comments-2" class="widget widget_recent_comments widget-widget_recent_comments"><div class="widget-wrap widget-inside"><h3 class="widget-title">最近のコメント</h3><ul id="recentcomments"><li class="recentcomments"><a href="http://ounziw.com/2012/10/15/coderdojo-osscafe/comment-page-1/#comment-6096">CoderDojo at 下北沢オープンソースカフェ</a> に mizuno より</li><li class="recentcomments"><a href="http://ounziw.com/2012/10/15/coderdojo-osscafe/comment-page-1/#comment-6095">CoderDojo at 下北沢オープンソースカフェ</a> に 亜蘭忠 より</li><li class="recentcomments"><a href="http://ounziw.com/2012/11/06/fuelphp-wordpress/comment-page-1/#comment-6091">FuelPHP で WordPress のログイン機能を使う</a> に <a href='http://ounziw.com/2012/11/07/wordpress-login-failure/' rel='external nofollow' class='url'>WordPress ログイン失敗時の処理を変更する</a> より</li><li class="recentcomments"><a href="http://ounziw.com/2011/07/25/twentyeleven-functions-php/comment-page-1/#comment-6088">twentyeleven の functions.php</a> に <a href='http://ounziw.com/2012/10/01/twentytwelve-functions/' rel='external nofollow' class='url'>twentytwelve の functions.php の日本語化</a> より</li><li class="recentcomments"><a href="http://ounziw.com/2011/06/28/english-japanese/comment-page-1/#comment-6078">メッセージを英日併記にするプラグインdebugging translation</a> に <a href='http://best-plugins.net/wordpress/debugging-translation/' rel='external nofollow' class='url'>Debugging Translation | Best Plugins - wordpress &#8211; widgets &#8211; plugin 2012</a> より</li><li class="recentcomments"><a href="http://ounziw.com/opensource/comment-page-1/#comment-6074">オープンソースのメリットデメリット</a> に <a href='http://ounziw.com/2012/08/01/wordpress-demerit/' rel='external nofollow' class='url'>WordPressのデメリット</a> より</li><li class="recentcomments"><a href="http://ounziw.com/2012/07/12/wordpress-html5-slider/comment-page-1/#comment-6069">WordPress カスタムフィールドでHTML5スライダー</a> に <a href='http://ounziw.com/2012/07/25/acfaddon/' rel='external nofollow' class='url'>advanced custom fields のアドオンリスト</a> より</li></ul></div></div><div id="hybrid-archives-5" class="widget archives widget-archives"><div class="widget-wrap widget-inside"><h3 class="widget-title">アーカイブ</h3><p><select name="archive-dropdown" onchange='document.location.href=this.options[this.selectedIndex].value;'><option value="">Select Month</option><option value='http://ounziw.com/2012/12/'> 2012年12月 &nbsp;(2)</option><option value='http://ounziw.com/2012/11/'> 2012年11月 &nbsp;(14)</option><option value='http://ounziw.com/2012/10/'> 2012年10月 &nbsp;(14)</option><option value='http://ounziw.com/2012/09/'> 2012年9月 &nbsp;(19)</option><option value='http://ounziw.com/2012/08/'> 2012年8月 &nbsp;(8)</option><option value='http://ounziw.com/2012/07/'> 2012年7月 &nbsp;(13)</option><option value='http://ounziw.com/2012/06/'> 2012年6月 &nbsp;(12)</option><option value='http://ounziw.com/2012/05/'> 2012年5月 &nbsp;(12)</option><option value='http://ounziw.com/2012/04/'> 2012年4月 &nbsp;(10)</option><option value='http://ounziw.com/2012/03/'> 2012年3月 &nbsp;(12)</option><option value='http://ounziw.com/2012/02/'> 2012年2月 &nbsp;(4)</option><option value='http://ounziw.com/2012/01/'> 2012年1月 &nbsp;(7)</option><option value='http://ounziw.com/2011/12/'> 2011年12月 &nbsp;(8)</option><option value='http://ounziw.com/2011/11/'> 2011年11月 &nbsp;(12)</option><option value='http://ounziw.com/2011/10/'> 2011年10月 &nbsp;(10)</option><option value='http://ounziw.com/2011/09/'> 2011年9月 &nbsp;(7)</option><option value='http://ounziw.com/2011/08/'> 2011年8月 &nbsp;(9)</option><option value='http://ounziw.com/2011/07/'> 2011年7月 &nbsp;(13)</option><option value='http://ounziw.com/2011/06/'> 2011年6月 &nbsp;(6)</option><option value='http://ounziw.com/2011/05/'> 2011年5月 &nbsp;(6)</option><option value='http://ounziw.com/2011/04/'> 2011年4月 &nbsp;(8)</option><option value='http://ounziw.com/2011/03/'> 2011年3月 &nbsp;(8)</option><option value='http://ounziw.com/2011/02/'> 2011年2月 &nbsp;(4)</option><option value='http://ounziw.com/2011/01/'> 2011年1月 &nbsp;(8)</option><option value='http://ounziw.com/2010/12/'> 2010年12月 &nbsp;(7)</option><option value='http://ounziw.com/2010/11/'> 2010年11月 &nbsp;(11)</option><option value='http://ounziw.com/2010/10/'> 2010年10月 &nbsp;(3)</option><option value='http://ounziw.com/2010/09/'> 2010年9月 &nbsp;(7)</option><option value='http://ounziw.com/2010/08/'> 2010年8月 &nbsp;(8)</option><option value='http://ounziw.com/2010/07/'> 2010年7月 &nbsp;(8)</option><option value='http://ounziw.com/2010/06/'> 2010年6月 &nbsp;(5)</option><option value='http://ounziw.com/2010/05/'> 2010年5月 &nbsp;(5)</option><option value='http://ounziw.com/2010/04/'> 2010年4月 &nbsp;(7)</option><option value='http://ounziw.com/2010/03/'> 2010年3月 &nbsp;(9)</option><option value='http://ounziw.com/2010/02/'> 2010年2月 &nbsp;(11)</option><option value='http://ounziw.com/2010/01/'> 2010年1月 &nbsp;(7)</option><option value='http://ounziw.com/2009/12/'> 2009年12月 &nbsp;(11)</option><option value='http://ounziw.com/2009/11/'> 2009年11月 &nbsp;(14)</option><option value='http://ounziw.com/2009/10/'> 2009年10月 &nbsp;(19)</option><option value='http://ounziw.com/2009/09/'> 2009年9月 &nbsp;(3)</option><option value='http://ounziw.com/2009/08/'> 2009年8月 &nbsp;(3)</option><option value='http://ounziw.com/2009/07/'> 2009年7月 &nbsp;(1)</option><option value='http://ounziw.com/2009/06/'> 2009年6月 &nbsp;(1)</option><option value='http://ounziw.com/2009/05/'> 2009年5月 &nbsp;(1)</option><option value='http://ounziw.com/2009/04/'> 2009年4月 &nbsp;(3)</option><option value='http://ounziw.com/2009/03/'> 2009年3月 &nbsp;(2)</option><option value='http://ounziw.com/2009/02/'> 2009年2月 &nbsp;(4)</option><option value='http://ounziw.com/2009/01/'> 2009年1月 &nbsp;(9)</option><option value='http://ounziw.com/2008/12/'> 2008年12月 &nbsp;(9)</option></select></p></div></div><div id="hybrid-archives-4" class="widget archives widget-archives"><div class="widget-wrap widget-inside"><h3 class="widget-title">最近の投稿</h3><ul class="xoxo archives"><li><a href='http://ounziw.com/2012/12/06/phpunit/' title='ユニットテストのすすめ'>ユニットテストのすすめ</a></li><li><a href='http://ounziw.com/2012/12/04/plugin-gpl/' title='WordPress プラグインと GPL #wacja2012'>WordPress プラグインと GPL #wacja2012</a></li><li><a href='http://ounziw.com/2012/11/24/customfieldsnippet-myself/' title='WordPress カスタムフィールドスニペット、自分で追加可能に'>WordPress カスタムフィールドスニペット、自分で追加可能に</a></li><li><a href='http://ounziw.com/2012/11/21/fuelphp-jquery-cdn/' title='FuelPHP で JQuery 配信に CDN 利用するパッケージ'>FuelPHP で JQuery 配信に CDN 利用するパッケージ</a></li><li><a href='http://ounziw.com/2012/11/20/html5-introduction/' title='アプリを作ろう！HTML5入門'>アプリを作ろう！HTML5入門</a></li><li><a href='http://ounziw.com/2012/11/19/wordpress-plugin-i18n/' title='WordPress プラグインを国際化対応にする方法'>WordPress プラグインを国際化対応にする方法</a></li><li><a href='http://ounziw.com/2012/11/19/php5-novice/' title='PHP5技術者認定初級試験問題集'>PHP5技術者認定初級試験問題集</a></li><li><a href='http://ounziw.com/2012/11/16/wordpress-plugin-pay/' title='WordPress プラグイン公式登録と課金モデル'>WordPress プラグイン公式登録と課金モデル</a></li><li><a href='http://ounziw.com/2012/11/15/customfieldsnippet/' title='WordPress カスタムフィールドスニペット'>WordPress カスタムフィールドスニペット</a></li><li><a href='http://ounziw.com/2012/11/14/custom-field-snippet/' title='Custom Field Snippet Plugin'>Custom Field Snippet Plugin</a></li></ul><!-- .xoxo .archives --></div></div>
+		
+	</div><!-- #sidebar-primary .aside -->
+
+
+			
+			
+			</div><!-- .wrap -->
+
+		</div><!-- #container -->
+
+		
+		
+		<div id="footer">
+
+			
+			
+	<div id="menu-footer" class="menu-container">
+
+		<div class="wrap">
+
+			
+			<div class="menu"><ul id="menu-footer-items" class=""><li id="menu-item-1179" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1179"><a href="http://ounziw.com/about/">管理者紹介</a></li>
+<li id="menu-item-1178" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1178"><a href="http://ounziw.com/opensource/">オープンソースのメリットデメリット</a></li>
+<li id="menu-item-1776" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1776"><a href="http://ounziw.com/category/wordbench/">wordbench</a></li>
+<li id="menu-item-1180" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1180"><a href="http://ounziw.com/category/myplugin/">myplugin</a></li>
+<li id="menu-item-1177" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1177"><a href="http://ounziw.com/contact/">Contact</a></li>
+</ul></div>
+			
+		</div>
+
+	</div><!-- #menu-footer .menu-container -->
+
+
+			<div class="wrap">
+
+				<div class="footer-content">
+					<p class="copyright">Copyright &#169; 2008-2012 <a class="site-link" href="http://ounziw.com" title="Standing on the Shoulder of Linus" rel="home"><span>Standing on the Shoulder of Linus</span></a>. Powered by <a class="wp-link" href="http://wordpress.org" title="State-of-the-art semantic personal publishing platform"><span>WordPress</span></a></p>
+
+<p class="credit">ブログ、CMS構築は<a href="http://php-web.net/">PHPでWEB作成</a></p>				</div><!-- .footer-content -->
+
+				
+			</div><!-- .wrap -->
+
+			
+		</div><!-- #footer -->
+
+		
+	</div><!-- #body-container -->
+
+		<script type='text/javascript' src='http://s.gravatar.com/js/gprofiles.js?ver=2012Decaa'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var WPGroHo = {"my_hash":""};
+/* ]]> */
+</script>
+<script type='text/javascript' src='http://ounziw.com/wp-content/plugins/jetpack/modules/wpgroho.js?ver=3.4.2'></script>
+	<div style="display:none">
+	</div>
+<script type="text/javascript">/* <![CDATA[ */ jQuery(document).ready( function() { jQuery.post( "http://ounziw.com/wp-admin/admin-ajax.php", { action : "entry_views", _ajax_nonce : "9fa411c7c6", post_id : 2380 } ); } ); /* ]]> */</script>
+<script type='text/javascript' src='http://ounziw.com/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shCore.js?ver=3.0.83c'></script>
+<script type='text/javascript' src='http://ounziw.com/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushPhp.js?ver=3.0.83c'></script>
+<script type='text/javascript'>
+	(function(){
+		var corecss = document.createElement('link');
+		var themecss = document.createElement('link');
+		var corecssurl = "http://ounziw.com/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shCore.css?ver=3.0.83c";
+		if ( corecss.setAttribute ) {
+				corecss.setAttribute( "rel", "stylesheet" );
+				corecss.setAttribute( "type", "text/css" );
+				corecss.setAttribute( "href", corecssurl );
+		} else {
+				corecss.rel = "stylesheet";
+				corecss.href = corecssurl;
+		}
+		document.getElementsByTagName("head")[0].insertBefore( corecss, document.getElementById("syntaxhighlighteranchor") );
+		var themecssurl = "http://ounziw.com/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shThemeDefault.css?ver=3.0.83c";
+		if ( themecss.setAttribute ) {
+				themecss.setAttribute( "rel", "stylesheet" );
+				themecss.setAttribute( "type", "text/css" );
+				themecss.setAttribute( "href", themecssurl );
+		} else {
+				themecss.rel = "stylesheet";
+				themecss.href = themecssurl;
+		}
+		//document.getElementById("syntaxhighlighteranchor").appendChild(themecss);
+		document.getElementsByTagName("head")[0].insertBefore( themecss, document.getElementById("syntaxhighlighteranchor") );
+	})();
+	SyntaxHighlighter.config.strings.expandSource = 'ソースを表示';
+	SyntaxHighlighter.config.strings.help = 'SyntaxHighlighterについて';
+	SyntaxHighlighter.config.strings.alert = 'SyntaxHighlighter\n\n';
+	SyntaxHighlighter.config.strings.noBrush = '指定のブラシが見つかりませんでした: ';
+	SyntaxHighlighter.config.strings.brushNotHtmlScript = 'HTMLスクリプトのオプションのためにブラシが構成されませんでした: ';
+	SyntaxHighlighter.defaults['pad-line-numbers'] = false;
+	SyntaxHighlighter.defaults['toolbar'] = false;
+	SyntaxHighlighter.all();
+</script>
+<script type='text/javascript' src='http://s0.wp.com/wp-content/js/devicepx-jetpack.js?ver=201249'></script>
+<script type='text/javascript' src='http://ounziw.com/wp-includes/js/jquery/ui/jquery.ui.core.min.js?ver=1.8.20'></script>
+<script type='text/javascript' src='http://ounziw.com/wp-includes/js/jquery/ui/jquery.ui.widget.min.js?ver=1.8.20'></script>
+<script type='text/javascript' src='http://ounziw.com/wp-includes/js/jquery/ui/jquery.ui.tabs.min.js?ver=1.8.20'></script>
+<script type='text/javascript' src='http://ounziw.com/wp-content/themes/news/js/news-theme.js?ver=20120825'></script>
+<script type='text/javascript' src='http://ounziw.com/wp-content/themes/news/library/js/drop-downs.js?ver=20110920'></script>
+
+		<!--[if IE]>
+		<script type="text/javascript">
+		if ( 0 === window.location.hash.indexOf( '#comment-' ) ) {
+			// window.location.reload() doesn't respect the Hash in IE
+			window.location.hash = window.location.hash;
+		}
+		</script>
+		<![endif]-->
+		<script type="text/javascript">
+			var comm_par_el = document.getElementById( 'comment_parent' ),
+			    comm_par = (comm_par_el && comm_par_el.value) ? comm_par_el.value : '',
+			    frame = document.getElementById( 'jetpack_remote_comment' ),
+			    tellFrameNewParent;
+
+			tellFrameNewParent = function() {
+				if ( comm_par ) {
+					frame.src = "http:\/\/jetpack.wordpress.com\/jetpack-comment\/?blogid=14694530&postid=2380&comment_registration=0&require_name_email=1&stc_enabled=1&stb_enabled=1&show_avatars=1&avatar_default=mystery&greeting=%E3%82%B3%E3%83%A1%E3%83%B3%E3%83%88%E3%82%92%E3%81%A9%E3%81%86%E3%81%9E&color_scheme=light&lang=ja&jetpack_version=1.8.2&sig=bbea993bf9f2cd07775e87c4c1eb7652bc0af273#parent=http%3A%2F%2Founziw.com%2F2012%2F12%2F06%2Fphpunit%2F" + '&replytocom=' + parseInt( comm_par, 10 ).toString();
+				} else {
+					frame.src = "http:\/\/jetpack.wordpress.com\/jetpack-comment\/?blogid=14694530&postid=2380&comment_registration=0&require_name_email=1&stc_enabled=1&stb_enabled=1&show_avatars=1&avatar_default=mystery&greeting=%E3%82%B3%E3%83%A1%E3%83%B3%E3%83%88%E3%82%92%E3%81%A9%E3%81%86%E3%81%9E&color_scheme=light&lang=ja&jetpack_version=1.8.2&sig=bbea993bf9f2cd07775e87c4c1eb7652bc0af273#parent=http%3A%2F%2Founziw.com%2F2012%2F12%2F06%2Fphpunit%2F";
+				}
+			};
+
+	
+			if ( 'undefined' !== typeof addComment ) {
+				addComment._Jetpack_moveForm = addComment.moveForm;
+
+				addComment.moveForm = function( commId, parentId, respondId, postId ) {
+					var returnValue = addComment._Jetpack_moveForm( commId, parentId, respondId, postId ), cancelClick, cancel;
+
+					if ( false === returnValue ) {
+						cancel = document.getElementById( 'cancel-comment-reply-link' );
+						cancelClick = cancel.onclick;
+						cancel.onclick = function() {
+							var cancelReturn = cancelClick.call( this );
+							if ( false !== cancelReturn ) {
+								return cancelReturn;
+							}
+
+							if ( !comm_par ) {
+								return cancelReturn;
+							}
+
+							comm_par = 0;
+
+							tellFrameNewParent();
+
+							return cancelReturn;
+						};
+					}
+
+					if ( comm_par == parentId ) {
+						return returnValue;
+					}
+
+					comm_par = parentId;
+
+					tellFrameNewParent();
+
+					return returnValue;
+				};
+			}
+
+	
+			if ( window.postMessage ) {
+				if ( document.addEventListener ) {
+					window.addEventListener( 'message', function( event ) {
+						if ( "http:\/\/jetpack.wordpress.com" !== event.origin ) {
+							return;
+						}
+
+						jQuery( frame ).height( event.data );
+					} );
+				} else if ( document.attachEvent ) {
+					window.attachEvent( 'message', function( event ) {
+						if ( "http:\/\/jetpack.wordpress.com" !== event.origin ) {
+							return;
+						}
+
+						jQuery( frame ).height( event.data );
+					} );
+				}
+			}
+		</script>
+
+	
+	<script src="http://stats.wordpress.com/e-201249.js" type="text/javascript"></script>
+	<script type="text/javascript">
+	st_go({v:'ext',j:'1:1.8.2',blog:'14694530',post:'2380'});
+	var load_cmc = function(){linktracker_init(14694530,2380,2);};
+	if ( typeof addLoadEvent != 'undefined' ) addLoadEvent(load_cmc);
+	else load_cmc();
+	</script>
+<style type='text/css'>img#wpstats{display:none}</style>
+</body>
+</html>
