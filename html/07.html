@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="utf-8">
+        <title>FuelPHP の Fieldset クラスをこんな風に拡張してまーす、という話 | A Small, Good Thing - blog</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        	<link type="text/css" rel="stylesheet" href="http://blog.omoon.org/assets/css/bootstrap.css?1354880766" />
+
+        	<link type="text/css" rel="stylesheet" href="http://blog.omoon.org/assets/css/responsive.css?1354880766" />
+
+        <script type="text/javascript" src="http://fast.fonts.com/jsapi/904a6cb2-55ea-4eae-85a8-b27af8b5a0ed.js"></script>
+        <style type="text/css">
+        </style>
+        	<script type="text/javascript" src="http://blog.omoon.org/assets/js/jquery.min.js?1354880766"></script>
+
+        	<script type="text/javascript" src="http://blog.omoon.org/assets/js/bootstrap.min.js?1354880766"></script>
+
+
+        <link rel="alternate" type="application/rss+xml" title="A Small, Good Thing - blog &raquo; Feed" href="http://blog.omoon.org/feed/" />
+<script type="text/javascript" src="http://s.hatena.ne.jp/js/HatenaStar.js"></script>
+<script type="text/javascript">
+Hatena.Star.SiteConfig = {
+    entryNodes: {
+        'div.blog_post': {
+            uri: 'h2 a',
+            title: 'h2',
+            container: 'h2'
+        }
+    }
+};
+</script>
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-32198411-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+    </head>
+
+<body>
+
+
+<div class="container">
+
+<div class="row">
+
+<h1 class="visible-phone pull-right"><a href="http://omoon.org/"><img src="http://blog.omoon.org/assets/img/logo.gif?1354880766" alt="" /></a></h1>
+
+<div class="visible-phone clearfix"></div>
+<div class="hidden-phone" style="height:100px"></div>
+
+<div class="span7 offset1">
+
+
+<div class="blog_post">
+    <h2 style="margin-top:0"><a href="http://blog.omoon.org/20121207/523">FuelPHP の Fieldset クラスをこんな風に拡張してまーす、という話</a></h2>
+
+    <p style="height:50px;">
+    December 7th, 2012
+    </p>
+
+    <p>
+    <p><a href="http://atnd.org/events/33753">FuelPHP Advent Calendar 2012</a> の 7 日目の記事です。昨日は <a href="https://twitter.com/ounziw">@ounziw</a> さんの『<a href="http://ounziw.com/2012/12/06/phpunit/">ユニットテストのすすめ</a>』でした。</p>
+
+<p><a href="http://www.flickr.com/photos/omoon/8248798195/" title=""><img src="http://farm9.staticflickr.com/8482/8248798195_f8d3a3143f_z.jpg" alt=""></a></p>
+
+<p>↑関係ないけど、昨日<a href="http://www.uobaka.com/store_info/store_ika.html">イカセンター新宿総本店</a>で食べた紋甲イカ。美しい。</p>
+
+<p>みなさんこんにちは。7 日目担当の <a href="http://twitter.com/omoon">omoon</a> です。</p>
+
+<p>2012 年は、5 月の PHP カンファレンス関西で、</p>
+
+<iframe src="http://www.slideshare.net/slideshow/embed_code/12909243?startSlide=76" width="597" height="486" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC;border-width:1px 1px 0;margin-bottom:5px" allowfullscreen webkitallowfullscreen mozallowfullscreen> </iframe>
+
+<div style="margin-bottom:5px"> <strong> <a href="http://www.slideshare.net/sotaroomura/fuelphp" title="FuelPHPをさわってみて" target="_blank">FuelPHPをさわってみて</a> </strong> from <strong><a href="http://www.slideshare.net/sotaroomura" target="_blank">Sotaro Omura</a></strong> </div>
+
+<p>この話をしたのをきっかけに、まさに、FuelPHP とともに forge し続けた 1 年でした。2012 年も残り少ないですが、悔いの残らないように forge しまくって、2013 年も引き続き forge しまくりたいと思います。</p>
+
+<p>さて、FuelPHP では、フォームを扱う場合、<a href="http://fuelphp.com/docs/classes/form.html">Form クラス</a>と、<a href="http://fuelphp.com/docs/classes/validation/validation.html">Validation クラス</a>という 2 つのクラスを使います。</p>
+
+<p>また、それらをまとめてオブジェクト指向風に扱うための <a href="http://fuelphp.com/docs/classes/fieldset.html">Fieldset クラス</a>というクラスも用意されています。</p>
+
+<p>僕の場合は、基本的に Fieldset クラスを使ってフォームを扱うのですが、使っているうちに、ここがこうなってたら便利なのになー、とか、こういうメソッドあればいいのに、っていうのがいくつか出てきたので、自分用に Fieldset クラスを拡張しています。</p>
+
+<p>今日はその一部を晒します。</p>
+
+<h3>この拡張でなにがやりたいか</h3>
+
+<p>この拡張でやりたいことを簡単にまとめると、</p>
+
+<ol>
+<li>view でのレイアウトの自由度を高めたい</li>
+<li>自動的に CSRF トークンを含めたい</li>
+<li>フォーム要素の生成でよくあるパターンをサッと呼び出したい</li>
+</ol>
+
+<p>の 3 つになります。</p>
+
+<p>下で詳しく説明しますが、やりたいことをざっくりコードで説明すると、</p>
+
+<script src="https://gist.github.com/4230585.js?file=gistfile1.php"></script>
+
+<p>コントローラで↑このように、<code>Myfieldset::forge()</code>して、</p>
+
+<script src="https://gist.github.com/4230597.js?file=sample.php"></script>
+
+<p>ビューファイルで↑このように書いて、</p>
+
+<script src="https://gist.github.com/4231682.js?file=gistfile1.html"></script>
+
+<p>結果として、↑このような出力を得たい、ということです。</p>
+
+<p>表示はこうなります。</p>
+
+<p><a href="http://www.flickr.com/photos/omoon/8251048283/" title="ad00a380ef1b41bf2191d934ffce8a62 by omoon, on Flickr"><img src="http://farm9.staticflickr.com/8490/8251048283_04725f61ef_z.jpg" alt="ad00a380ef1b41bf2191d934ffce8a62"></a></p>
+
+<p>Myfieldset クラスはこんな感じです。</p>
+
+<script src="https://gist.github.com/4230226.js?file=gistfile1.php"></script>
+
+<p>わかりにくいですね。以下、説明します。</p>
+
+<h3>ポイント</h3>
+
+<h4>各要素のラベルと html が別々に呼び出せるので、view ファイル上でのレイアウトの自由度が上がる</h4>
+
+<p>各要素のラベルと html が、それぞれ</p>
+
+<pre><code>$form['age']['label']
+$form['age']['html']
+</code></pre>
+
+<p>として別々に呼び出すことができるようになります。</p>
+
+<p>Form クラスの<code>build()</code>メソッドは、ラベルと html 要素を、決まったレイアウトを一気に出したい場合には便利なんですが、ちょっとレイアウトを触りたい時にうまくいきません。</p>
+
+<p>なので、こうやって別々に呼び出せるようにしておくと、view ファイル側で色々といじれて嬉しいです。</p>
+
+<h4>CSRF トークンが自動的に含まれるので、めんどくさくないし、出し忘れたりしない</h4>
+
+<p>基本的に、フォームには、セキュリティ対策としての CSRF トークンを含めることになるので、何も考えなくても勝手に追加されるようにしました。</p>
+
+<p>これで、view ファイルから</p>
+
+<pre><code>$form['open']
+</code></pre>
+
+<p>と呼べば、明示的に追加しなくても、</p>
+
+<pre><code>&lt;form action="http://localhost:8080/post_url" method="post" id="form_sample" accept-charset="utf-8"&gt;
+&lt;input name="fuel_csrf_token" value="c9313a400c254e58c0d23f7fd599c297" type="hidden" id="form_fuel_csrf_token" /&gt;
+</code></pre>
+
+<p>みたいに、出力されるようになって嬉しいです。</p>
+
+<h4>フォーム要素の生成でよくあるパターンをサッと呼び出せるので、何回も同じこと書かなくて良い</h4>
+
+<p>例えば、数値型の入力を受け付ける場合は、値が数値かどうか必ずチェックします。また、ime-mode なんかも適切に設定してあげると親切です。</p>
+
+<p>なので、</p>
+
+<pre><code>return $this-&gt;add(
+    $name,
+    $label,
+    array(
+        'class' =&gt; 'input-medium',
+        'style' =&gt; 'ime-mode:disabled'
+    )
+)-&gt;add_rule('valid_string', 'numeric')-&gt;set_template('{field}');
+</code></pre>
+
+<p>という感じにして、入力値が数値かどうかの判定を<code>add_rule</code>したり、<code>ime-mode:disabled</code>をスタイル指定したりしています。</p>
+
+<p>これで、コントローラ側では、</p>
+
+<pre><code>$fieldset-&gt;addTextForNumeric('age', '年齢');
+</code></pre>
+
+<p>と書くだけです。スッキリ！スッキリ！</p>
+
+<p>このように、自分がよく使う要素を生成するメソッドを、スタイルやバリデーション込みで用意しておけば、コントローラからさっと呼び出せて便利です。</p>
+
+<p>ちなみに、ぼくのかんがえたさいきょうの拡張は、こんなやつが色々と溜まってきて良い感じになっているのですが、今回は、ラジオボタンで、選択肢を改行するパターンと改行しないパターンを例に上げてみました。</p>
+
+<pre><code>public function addRadioInline($name, $label, $options)
+{
+    return $this-&gt;add(
+        $name,
+        $label,
+        array(
+            'type'    =&gt; 'radio',
+            'options' =&gt; $options,
+        )
+    )-&gt;set_template('{fields}&lt;label class="radio inline"&gt;{field}{label}&lt;/label&gt;{fields}');
+}
+
+public function addRadioWithBr($name, $label, $options)
+{
+    return $this-&gt;add(
+        $name,
+        $label,
+        array(
+            'type'    =&gt; 'radio',
+            'options' =&gt; $options,
+        )
+    )-&gt;set_template('{fields}&lt;label class="radio"&gt;{field}{label}&lt;/label&gt;{fields}');
+}
+</code></pre>
+
+<p>こんな感じで、<code>set_template</code>メソッドを使って、要素生成時のタグの出し分けをするようにしています。</p>
+
+<p>えーっと、結構長くなってきたので、そろそろ、このあたりで。。</p>
+
+<p>フォームの作りこみは、システムのユーザビリティに大きく影響しますので、これからもどんどん拡張していって良い感じに育てていきたいと思っています。</p>
+
+<p>明日は、<a href="https://twitter.com/web2citizen">@web2citizen</a> さんの、『FuelPHPのスパムフィルタパッケージ』です。楽しみですね！</p>
+
+<p>では、みなさん、良いクリスマスを！そして、来年もガンガン forge しましょう！</p>
+
+    </p>
+
+</div>
+
+<div class="blog_navi">
+    <ul class="unstyled">
+                <li class=""><a href="http://blog.omoon.org/20121116/522">←ホーチミン、フォー屋さんの店先</a></li>
+                    </ul>
+</div>
+
+<!-- X:S ZenBackWidget --><script type="text/javascript">document.write(unescape("%3Cscript")+" src='http://widget.zenback.jp/?base_uri=http%3A//blog.omoon.org/&nsid=109079484937831824%3A%3A109079498091177673&rand="+Math.ceil((new Date()*1)*Math.random())+"' type='text/javascript'"+unescape("%3E%3C/script%3E"));</script><!-- X:E ZenBackWidget -->
+
+
+
+</div>
+
+<div class="span3">
+
+<h1><a class="hidden-phone" href="http://omoon.org/"><img src="http://blog.omoon.org/assets/img/logo.gif?1354880766" alt="" /></a></h1>
+
+<ul class="unstyled" style="margin-top:3em">
+<li><a href="http://blog.omoon.org/">Blog</a></li>
+<li><a href="http://twitter.com/omoon">Twitter</a></li>
+<li><a href="http://facebook.com/sotaro.omura">Facebook</a></li>
+<li><a href="http://d.hatena.ne.jp/omoon">はてなダイアリー</a></li>
+<li><a href="http://omoon.jugem.jp/">こざるたちの記録</a></li>
+</ul>
+
+</div>
+
+</div>
+
+</div>
+
+<footer class="footer span10 offset1" style="padding:50px 0">
+<p class="pull-right">
+&copy; <a href="http://www.flickr.com/search/?q=%E4%BB%8A%E6%97%A5%E3%81%AE%E9%BA%BA&w=94387617%40N00&s=rec&z=e" target="_blank">omoon</a>
+</p>
+</footer>
+
+</body>
+</html>
