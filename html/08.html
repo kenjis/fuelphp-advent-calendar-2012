@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<!--[if IE 6]>
+<html id="ie6" dir="ltr" lang="ja">
+<![endif]-->
+<!--[if IE 7]>
+<html id="ie7" dir="ltr" lang="ja">
+<![endif]-->
+<!--[if IE 8]>
+<html id="ie8" dir="ltr" lang="ja">
+<![endif]-->
+<!--[if !(IE 6) | !(IE 7) | !(IE 8)  ]><!-->
+<html dir="ltr" lang="ja">
+<!--<![endif]-->
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width" />
+<title>FuelPHPのスパムフィルタパッケージ | うぇぶに</title>
+<link rel="profile" href="http://gmpg.org/xfn/11" />
+<link rel="stylesheet" type="text/css" media="all" href="http://www.web2citizen.info/blog/wp-content/themes/twentyeleven/style.css" />
+<link rel="pingback" href="http://www.web2citizen.info/blog/xmlrpc.php" />
+<!--[if lt IE 9]>
+<script src="http://www.web2citizen.info/blog/wp-content/themes/twentyeleven/js/html5.js" type="text/javascript"></script>
+<![endif]-->
+<link rel="alternate" type="application/rss+xml" title="うぇぶに &raquo; フィード" href="http://www.web2citizen.info/blog/feed/" />
+<link rel="alternate" type="application/rss+xml" title="うぇぶに &raquo; コメントフィード" href="http://www.web2citizen.info/blog/comments/feed/" />
+<link rel="alternate" type="application/rss+xml" title="うぇぶに &raquo; FuelPHPのスパムフィルタパッケージ のコメントのフィード" href="http://www.web2citizen.info/blog/2012/12/fuelphp%e3%81%ae%e3%82%b9%e3%83%91%e3%83%a0%e3%83%95%e3%82%a3%e3%83%ab%e3%82%bf%e3%83%91%e3%83%83%e3%82%b1%e3%83%bc%e3%82%b8/feed/" />
+<link rel='stylesheet' id='moztheme2011-css'  href='http://www.web2citizen.info/blog/wp-content/plugins/twenty-eleven-theme-extensions/moztheme2011.css?ver=3.4.2' type='text/css' media='all' />
+<link rel='stylesheet' id='twttrStylesheet-css'  href='http://www.web2citizen.info/blog/wp-content/plugins/twitter-plugin/css/style.css?ver=3.4.2' type='text/css' media='all' />
+<link rel='stylesheet' id='wp-syntax-css-css'  href='http://www.web2citizen.info/blog/wp-content/plugins/wp-syntax/wp-syntax.css?ver=3.4.2' type='text/css' media='all' />
+<script type='text/javascript' src='http://www.web2citizen.info/blog/wp-includes/js/comment-reply.js?ver=3.4.2'></script>
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://www.web2citizen.info/blog/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://www.web2citizen.info/blog/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='FuelPHPの自作認証クラスを公開しました' href='http://www.web2citizen.info/blog/2012/10/fuelphp%e3%81%ae%e8%87%aa%e4%bd%9c%e8%aa%8d%e8%a8%bc%e3%82%af%e3%83%a9%e3%82%b9%e3%82%92%e5%85%ac%e9%96%8b%e3%81%97%e3%81%be%e3%81%97%e3%81%9f/' />
+<meta name="generator" content="WordPress 3.4.2" />
+<link rel='canonical' href='http://www.web2citizen.info/blog/2012/12/fuelphp%e3%81%ae%e3%82%b9%e3%83%91%e3%83%a0%e3%83%95%e3%82%a3%e3%83%ab%e3%82%bf%e3%83%91%e3%83%83%e3%82%b1%e3%83%bc%e3%82%b8/' />
+<link rel='shortlink' href='http://www.web2citizen.info/blog/?p=409' />
+	<style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>
+<style type="text/css" id="custom-background-css">
+body.custom-background { background-color: #f1f1f1; background-image: url('http://www.web2citizen.info/blog/wp-content/uploads/2011/10/back.png'); background-repeat: repeat; background-position: top left; background-attachment: fixed; }
+</style>
+</head>
+
+<body class="single single-post postid-409 single-format-standard custom-background two-column right-sidebar moz-sidebar-adjust moz-nav-adjust">
+<div id="page" class="hfeed">
+	<header id="branding" role="banner">
+			<hgroup>
+				<h1 id="site-title"><span><a href="http://www.web2citizen.info/blog/" title="うぇぶに" rel="home">うぇぶに</a></span></h1>
+				<h2 id="site-description">ウェブの2級市民から、1級市民を目指して</h2>
+			</hgroup>
+
+						<a href="http://www.web2citizen.info/blog/">
+									<img src="http://www.web2citizen.info/blog/wp-content/themes/twentyeleven/images/headers/wheel.jpg" width="1000" height="288" alt="" />
+							</a>
+			
+								<form method="get" id="searchform" action="http://www.web2citizen.info/blog/">
+		<label for="s" class="assistive-text">Search</label>
+		<input type="text" class="field" name="s" id="s" placeholder="Search" />
+		<input type="submit" class="submit" name="submit" id="searchsubmit" value="Search" />
+	</form>
+			
+			<nav id="access" role="navigation">
+				<h3 class="assistive-text">Main menu</h3>
+								<div class="skip-link"><a class="assistive-text" href="#content" title="Skip to primary content">Skip to primary content</a></div>
+				<div class="skip-link"><a class="assistive-text" href="#secondary" title="Skip to secondary content">Skip to secondary content</a></div>
+								<div class="menu"><ul><li ><a href="http://www.web2citizen.info/blog/" title="ホーム">ホーム</a></li><li class="page_item page-item-201"><a href="http://www.web2citizen.info/blog/shitenou-com/">shitenou.com</a></li><li class="page_item page-item-106"><a href="http://www.web2citizen.info/blog/the%e3%82%aa%e3%83%af%e3%82%b3%e3%83%b3/">theオワコン</a></li></ul></div>
+			</nav><!-- #access -->
+	</header><!-- #branding -->
+
+
+	<div id="main">
+
+		<div id="primary">
+			<div id="content" role="main">
+
+				
+					<nav id="nav-single">
+						<h3 class="assistive-text">Post navigation</h3>
+						<span class="nav-previous"><a href="http://www.web2citizen.info/blog/2012/10/fuelphp%e3%81%ae%e8%87%aa%e4%bd%9c%e8%aa%8d%e8%a8%bc%e3%82%af%e3%83%a9%e3%82%b9%e3%82%92%e5%85%ac%e9%96%8b%e3%81%97%e3%81%be%e3%81%97%e3%81%9f/" rel="prev"><span class="meta-nav">&larr;</span> Previous</a></span>
+						<span class="nav-next"></span>
+					</nav><!-- #nav-single -->
+
+					
+<article id="post-409" class="post-409 post type-post status-publish format-standard hentry category-web category-1 tag-fuelphp">
+	<header class="entry-header">
+		<h1 class="entry-title">FuelPHPのスパムフィルタパッケージ</h1>
+
+				<div class="entry-meta">
+			<span class="sep">Posted on </span><a href="http://www.web2citizen.info/blog/2012/12/fuelphp%e3%81%ae%e3%82%b9%e3%83%91%e3%83%a0%e3%83%95%e3%82%a3%e3%83%ab%e3%82%bf%e3%83%91%e3%83%83%e3%82%b1%e3%83%bc%e3%82%b8/" title="3:14 PM" rel="bookmark"><time class="entry-date" datetime="2012-12-08T15:14:36+00:00" pubdate>2012年12月8日</time></a><span class="by-author"> <span class="sep"> by </span> <span class="author vcard"><a class="url fn n" href="http://www.web2citizen.info/blog/author/web2citizen/" title="View all posts by web2citizen" rel="author">web2citizen</a></span></span>		</div><!-- .entry-meta -->
+			</header><!-- .entry-header -->
+
+	<div class="entry-content">
+		<p><a href="http://atnd.org/events/33753">FuelPHP Advent Calendar 2012</a>8日目です。昨日は<a href="http://blog.omoon.org/20121207/523">FuelPHPのFieldsetクラス利用時のオレオレTips集</a>（<a href="https://twitter.com/@omoon">@omooon</a>さん）でした。</p>
+
+<p>以前作成したFuelPHPで作成したWebサイト（ほぼ放置していますが･･･）にスパムが多々投稿されているので、FuelPHPでのパッケージ作成方法の勉強をかねて、スパム対策のためのフィルタを作成してみました。<br />
+･･･と作成を開始してから気がついたのですが、このパッケージには、スパム情報の管理画面も含めておいた方が便利なため、Advent Calendarでも<a href="https://twitter.com/@mikakane_info">@mikakane_info</a>さんや<a href="https://twitter.com/@sa2yasu">@sa2yasu</a>さんが記事にしている、モジュールとして開発した方がよかったかなあと少し後悔しています。<br />
+とはいえ、作成したものについては<a href="https://github.com/web2citizen/antispam">ここ</a>で公開しています。
+まだドキュメント等が整備されていないので、以下で解説していきます。</p>
+
+<h2>今回作成するパッケージの機能</h2>
+
+<p>投稿時に呼び出すことで、下記の内容をチェックし、投稿の制限を行います。</p>
+
+<ul>
+<li>指定IPからの投稿禁止</li>
+<li>指定した文言を含む投稿の禁止</li>
+</ul>
+
+<p>また、すでに投稿されているテーブルを検索し、過度な投稿を行うIPや投稿内容を自動的に制限対象に入れる機能も実装しました。ただし、投稿内容について、単語レベルで自動的にブラックリストに追加まではしておらず、投稿内容全体をみてブラックリストに追加しています。<br />
+（例えば、「出会い系サイト”デアエルノ”へご案内！」という投稿が大量になされた場合でも、「デアエルノ」という単語単体が自動的にブラックリストに入るわけではありません。）
+NGIP、NGワードの保存先DBへの接続情報は、WEBアプリの接続先とはとは別途指定することができるので、複数のWEBアプリで共通のNG情報を共有することができます。</p>
+
+<h2>パッケージ構成</h2>
+
+<p>FuelPHPにおけるパッケージの基本構成（<a href="http://fuelphp.com/docs/general/packages.html">公式ドキュメント</a>参照）を参考にして、下記の様に作成しました。</p>
+
+<hr />
+
+<p>/antispam　　<strong>パッケージルート fuel/packages に格納</strong><br />
+　/bootstrap.php　　<strong>クラスファイル読込</strong><br />
+　/readme.md　　<strong>マニュアル</strong><br />
+　/classes<br />
+　　/antispam.php　　<strong>基幹クラス</strong><br />
+　　/antispam<br />
+　　　/driver.php　　<strong>インスタンスクラス</strong><br />
+　/config<br />
+　　/antispam.php　　<strong>設定ファイル</strong><br />
+　/sql<br />
+　　/create_sample.sql　　<strong>スパムフィルタ用テーブル作成クエリ</strong><br />
+　/tasks<br />
+　　/spamcheck.php　　<strong>タスク設定例</strong><br />
+　/test<br />
+　　/antispam<br />
+　　　/antispam_Test.php　　<strong>ユニットテスト</strong><br />
+　　/fixture<br />
+　　　/blackip_fixt.yml　　<strong>テスト用YAMLファイル</strong><br />
+　　　/blackword_fixt.yml　　<strong>テスト用YAMLファイル</strong></p>
+
+<hr />
+
+<h2>設置方法</h2>
+
+<p>パッケージルートの /antispam ディレクトリを fuel/packages ディレクトリに格納してください。（/sqlディレクトリ、 /tasksディレクトリはサンプル、/testディレクトリはユニットテスト用ディレクトリなので、格納しなくてもよいです。）</p>
+
+<h2>設定ファイル</h2>
+
+<p>下記の項目があるので、他のコンフィグファイルと同じ要領で編集し、fuel/app/configディレクトリに格納してください。</p>
+
+<ul>
+<li>db_connection　DB接続情報。nullの場合、アプリケーション標準の接続情報を使用します。</li>
+<li>black_ip_table_name　NGIPアドレスを格納するテーブル名  </li>
+<li>black_word_table_name  NGワードを格納するテーブル名</li>
+<li>ip_column_name  NGIPを集計する際に集計するカラム名</li>
+<li>post_check_term  NGIP、ワード集計時のチェック期間</li>
+<li>post_limit_count  NGIP、ワード集計時のチェックカウント数</li>
+</ul>
+
+<h2>初期化・設定読み込み</h2>
+
+<p>設定ファイルの内容を読み込んで初期化するには、下記の様に記述します。<br />
+<code>Antispam::forge()</code><br />
+ファイルの内容と別の設定を行う場合は下記になります。
+<code>Antispam::forge(array('post_check_term' =&gt; 3600))</code><br />
+（設定していない項目に関しては設定ファイルの内容となります。）<br />
+NGIP、NGワード格納用のテーブルは create_sample.sql のクエリを実行することで生成できます。</p>
+
+<h2>使用例・投稿制御</h2>
+
+<p>ユーザの投稿時のチェックメソッドは3つあります。全てのメソッドで、投稿がOKの場合はtrue、NGの場合はfalseを返します。<br />
+<code>check_ip() //投稿者のIPアドレスのチェック</code><br />
+<code>check_word($contents) //投稿内容にNGワードが含まれているかチェック</code><br />
+<code>check_post($contents) //IPアドレス、NGワードの両方をチェック</code></p>
+
+<p>使用例：<br />
+ユーザからの投稿をcontrollerの action(post)_ メソッドで受けた際に下記のように処理を行います。
+<code>$contents = Input::post('contents');</code><br />
+<code>if(Antispam::forge()-&gt;check_post($contents))</code><br />
+<code>　　// 登録処理</code><br />
+<code>else</code><br />
+<code>　　// NG処理</code></p>
+
+<h2>使用例・NGID,NGワード設定</h2>
+
+<p>コンフィグで指定した期間の間に指定した回数以上の投稿があったIP、投稿内容をチェックして、ブラックリストテーブルに登録します。<br />
+たとえば、コンフィグファイル標準の設定だと、1日に10回以上投稿のあったIPアドレス、投稿内容をNGとして登録します。<br />
+<code>set_black_ip($table_name, $active = 0) //NGIP登録</code><br />
+<code>public function set_black_word($table_name, $column_name, $active = 0) //NG投稿登録</code><br />
+$active=1 の時NGID,NGワードとして登録されます。デフォルトでは0のため、自動でNGとまではならず、登録されたものを手動でチェックしてNGにしていくことを想定しています。（そのため、モジュール化して管理ビューも作ればよかったと後悔）</p>
+
+<p>taskとして作成し、cronで実行させることで、自動的にNGIPやNG投稿内容を追加していくことができます。</p>
+
+<p>使用例：
+tasks/spamcheck.php をoilコマンドによって実行するときの例です。<br />
+・commentテーブルのipカラムをチェック<br />
+<code>php oil r spamcheck set_black_ips comment</code><br />
+・commentテーブルのtextカラムをチェック<br />
+<code>php oil r spamcheck set_black_ips comment text</code></p>
+
+<h2>終わりに</h2>
+
+<p>本当はパッケージの作り方のような観点から記事を作りたかったのですが、ほとんど中身の解説だけになってしまいました。<br />
+とはいえ、今後パッケージを作る型の参考になれば幸いです。<br />
+明日は<a href="http://shiroyama.us/blog/2012/12/08/fuelphp%E3%81%A7%E4%BF%9D%E5%AE%88%E6%80%A7%E3%81%AE%E9%AB%98%E3%81%84%E3%83%9E%E3%83%AB%E3%83%81%E3%83%87%E3%83%90%E3%82%A4%E3%82%B9%E5%AF%BE%E5%BF%9C%E3%82%92%E8%80%83%E3%81%88%E3%82%8B/">FuelPHPのマルチデバイス対応TIPS。特にガラケー</a>（<a href="https://twitter.com/fushiroyama">@fushiroyama</a>さん）です。お楽しみに！</p>
+<div class="twttr_button">
+				<a href="http://twitter.com/share?url=http://www.web2citizen.info/blog/2012/12/fuelphp%e3%81%ae%e3%82%b9%e3%83%91%e3%83%a0%e3%83%95%e3%82%a3%e3%83%ab%e3%82%bf%e3%83%91%e3%83%83%e3%82%b1%e3%83%bc%e3%82%b8/&text=FuelPHPのスパムフィルタパッケージ" target="_blank" title="Click here if you liked this article.">
+					<img src="http://www.web2citizen.info/blog/wp-content/plugins/twitter-plugin/images/twitt.gif" alt="Twitt" />
+				</a>
+			</div>			</div><!-- .entry-content -->
+
+	<footer class="entry-meta">
+		This entry was posted in <a href="http://www.web2citizen.info/blog/category/web%e9%96%8b%e7%99%ba/" title="Web開発 の投稿をすべて表示" rel="category tag">Web開発</a>, <a href="http://www.web2citizen.info/blog/category/%e6%9c%aa%e5%88%86%e9%a1%9e/" title="未分類 の投稿をすべて表示" rel="category tag">未分類</a> and tagged <a href="http://www.web2citizen.info/blog/tag/fuelphp/" rel="tag">FuelPHP</a> by <a href="http://www.web2citizen.info/blog/author/web2citizen/">web2citizen</a>. Bookmark the <a href="http://www.web2citizen.info/blog/2012/12/fuelphp%e3%81%ae%e3%82%b9%e3%83%91%e3%83%a0%e3%83%95%e3%82%a3%e3%83%ab%e3%82%bf%e3%83%91%e3%83%83%e3%82%b1%e3%83%bc%e3%82%b8/" title="Permalink to FuelPHPのスパムフィルタパッケージ" rel="bookmark">permalink</a>.		
+			</footer><!-- .entry-meta -->
+</article><!-- #post-409 -->
+
+						<div id="comments">
+	
+	
+	
+									<div id="respond">
+				<h3 id="reply-title">コメントを残す <small><a rel="nofollow" id="cancel-comment-reply-link" href="/blog/2012/12/fuelphp%E3%81%AE%E3%82%B9%E3%83%91%E3%83%A0%E3%83%95%E3%82%A3%E3%83%AB%E3%82%BF%E3%83%91%E3%83%83%E3%82%B1%E3%83%BC%E3%82%B8/#respond" style="display:none;">コメントをキャンセル</a></small></h3>
+									<form action="http://www.web2citizen.info/blog/wp-comments-post.php" method="post" id="commentform">
+																			<p class="comment-notes">メールアドレスが公開されることはありません。</p>							<p class="comment-form-author"><label for="author">名前</label> <input id="author" name="author" type="text" value="" size="30" /></p>
+<p class="comment-form-email"><label for="email">メールアドレス</label> <input id="email" name="email" type="text" value="" size="30" /></p>
+<p class="comment-form-url"><label for="url">ウェブサイト</label><input id="url" name="url" type="text" value="" size="30" /></p>
+												<p class="comment-form-comment"><label for="comment">コメント</label><textarea id="comment" name="comment" cols="45" rows="8" aria-required="true"></textarea></p>						<p class="form-allowed-tags">次の<abbr title="HyperText Markup Language">HTML</abbr> タグと属性が使えます:  <code>&lt;a href=&quot;&quot; title=&quot;&quot;&gt; &lt;abbr title=&quot;&quot;&gt; &lt;acronym title=&quot;&quot;&gt; &lt;b&gt; &lt;blockquote cite=&quot;&quot;&gt; &lt;cite&gt; &lt;code&gt; &lt;del datetime=&quot;&quot;&gt; &lt;em&gt; &lt;i&gt; &lt;q cite=&quot;&quot;&gt; &lt;strike&gt; &lt;strong&gt; </code></p>						<p class="form-submit">
+							<input name="submit" type="submit" id="submit" value="コメントを送信" />
+							<input type='hidden' name='comment_post_ID' value='409' id='comment_post_ID' />
+<input type='hidden' name='comment_parent' id='comment_parent' value='0' />
+						</p>
+											</form>
+							</div><!-- #respond -->
+						
+</div><!-- #comments -->
+
+				
+			</div><!-- #content -->
+		</div><!-- #primary -->
+
+		<div id="secondary" class="widget-area" role="complementary">
+			<aside id="adinj-2" class="widget adinjwidget">
+<!--Ad Injection mfunc mode ad include code--><!--mfunc include_once('/var/www/wordpress/wp-content/plugins/ad-injection/adshow.php') --><!--/mfunc-->
+
+<!--Ad Injection mfunc mode ad code--><!--mfunc adshow_display_ad_file_v2(array('ad_widget_2_1.txt'), array(100), array('align' => '', 'clear' => '', 'margin_top' => '', 'margin_bottom' => '', 'padding_top' => '', 'padding_bottom' => ''), array(), array()) -->
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-1112880688554798";
+/* ブログ */
+google_ad_slot = "4863124574";
+google_ad_width = 180;
+google_ad_height = 150;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script><!--/mfunc-->
+</aside><aside id="linkcat-26" class="widget widget_links"><h3 class="widget-title">自作サイト</h3>
+	<ul class='xoxo blogroll'>
+<li><a href="http://shitenou.com" rel="me" title="四天王ネタで遊ぶサイトです" target="_blank">shitenou.com</a></li>
+<li><a href="http://www.owacon.info/" rel="me" title="オワコン情報共有サイト" target="_blank">theオワコン</a></li>
+
+	</ul>
+</aside>
+<aside id="calendar-3" class="widget widget_calendar"><h3 class="widget-title">&nbsp;</h3><div id="calendar_wrap"><table id="wp-calendar">
+	<caption>2012年12月</caption>
+	<thead>
+	<tr>
+		<th scope="col" title="日曜日">日</th>
+		<th scope="col" title="月曜日">月</th>
+		<th scope="col" title="火曜日">火</th>
+		<th scope="col" title="水曜日">水</th>
+		<th scope="col" title="木曜日">木</th>
+		<th scope="col" title="金曜日">金</th>
+		<th scope="col" title="土曜日">土</th>
+	</tr>
+	</thead>
+
+	<tfoot>
+	<tr>
+		<td colspan="3" id="prev"><a href="http://www.web2citizen.info/blog/2012/10/" title="2012年10月の投稿を表示">&laquo; 10月</a></td>
+		<td class="pad">&nbsp;</td>
+		<td colspan="3" id="next" class="pad">&nbsp;</td>
+	</tr>
+	</tfoot>
+
+	<tbody>
+	<tr>
+		<td colspan="6" class="pad">&nbsp;</td><td>1</td>
+	</tr>
+	<tr>
+		<td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td><a href="http://www.web2citizen.info/blog/2012/12/08/" title="FuelPHPのスパムフィルタパッケージ">8</a></td>
+	</tr>
+	<tr>
+		<td id="today">9</td><td>10</td><td>11</td><td>12</td><td>13</td><td>14</td><td>15</td>
+	</tr>
+	<tr>
+		<td>16</td><td>17</td><td>18</td><td>19</td><td>20</td><td>21</td><td>22</td>
+	</tr>
+	<tr>
+		<td>23</td><td>24</td><td>25</td><td>26</td><td>27</td><td>28</td><td>29</td>
+	</tr>
+	<tr>
+		<td>30</td><td>31</td>
+		<td class="pad" colspan="5">&nbsp;</td>
+	</tr>
+	</tbody>
+	</table></div></aside>		<aside id="recent-posts-3" class="widget widget_recent_entries">		<h3 class="widget-title">最近の投稿</h3>		<ul>
+				<li><a href="http://www.web2citizen.info/blog/2012/12/fuelphp%e3%81%ae%e3%82%b9%e3%83%91%e3%83%a0%e3%83%95%e3%82%a3%e3%83%ab%e3%82%bf%e3%83%91%e3%83%83%e3%82%b1%e3%83%bc%e3%82%b8/" title="FuelPHPのスパムフィルタパッケージ">FuelPHPのスパムフィルタパッケージ</a></li>
+				<li><a href="http://www.web2citizen.info/blog/2012/10/fuelphp%e3%81%ae%e8%87%aa%e4%bd%9c%e8%aa%8d%e8%a8%bc%e3%82%af%e3%83%a9%e3%82%b9%e3%82%92%e5%85%ac%e9%96%8b%e3%81%97%e3%81%be%e3%81%97%e3%81%9f/" title="FuelPHPの自作認証クラスを公開しました">FuelPHPの自作認証クラスを公開しました</a></li>
+				<li><a href="http://www.web2citizen.info/blog/2012/09/twitter-updates-for-2012-09-24/" title="Twitter Updates for 2012-09-24">Twitter Updates for 2012-09-24</a></li>
+				<li><a href="http://www.web2citizen.info/blog/2012/09/fuelphp%e5%8b%89%e5%bc%b7%e4%bc%9a%e6%9d%b1%e4%ba%acvol-2%e3%81%a7%e7%99%ba%e8%a1%a8%e3%81%97%e3%81%9f/" title="FuelPHP勉強会東京Vol.2で発表した">FuelPHP勉強会東京Vol.2で発表した</a></li>
+				<li><a href="http://www.web2citizen.info/blog/2012/09/twitter-updates-for-2012-09-23/" title="Twitter Updates for 2012-09-23">Twitter Updates for 2012-09-23</a></li>
+				</ul>
+		</aside><aside id="recent-comments-3" class="widget widget_recent_comments"><h3 class="widget-title">最近のコメント</h3><ul id="recentcomments"><li class="recentcomments"><a href="http://www.web2citizen.info/blog/2012/10/fuelphp%e3%81%ae%e8%87%aa%e4%bd%9c%e8%aa%8d%e8%a8%bc%e3%82%af%e3%83%a9%e3%82%b9%e3%82%92%e5%85%ac%e9%96%8b%e3%81%97%e3%81%be%e3%81%97%e3%81%9f/#comment-34">FuelPHPの自作認証クラスを公開しました</a> に web2citizen より</li><li class="recentcomments"><a href="http://www.web2citizen.info/blog/2012/10/fuelphp%e3%81%ae%e8%87%aa%e4%bd%9c%e8%aa%8d%e8%a8%bc%e3%82%af%e3%83%a9%e3%82%b9%e3%82%92%e5%85%ac%e9%96%8b%e3%81%97%e3%81%be%e3%81%97%e3%81%9f/#comment-24">FuelPHPの自作認証クラスを公開しました</a> に 森崎 より</li></ul></aside><aside id="archives-3" class="widget widget_archive"><h3 class="widget-title">アーカイブ</h3>		<ul>
+			<li><a href='http://www.web2citizen.info/blog/2012/12/' title='2012年12月'>2012年12月</a>&nbsp;(1)</li>
+	<li><a href='http://www.web2citizen.info/blog/2012/10/' title='2012年10月'>2012年10月</a>&nbsp;(1)</li>
+	<li><a href='http://www.web2citizen.info/blog/2012/09/' title='2012年9月'>2012年9月</a>&nbsp;(4)</li>
+	<li><a href='http://www.web2citizen.info/blog/2012/07/' title='2012年7月'>2012年7月</a>&nbsp;(3)</li>
+	<li><a href='http://www.web2citizen.info/blog/2012/06/' title='2012年6月'>2012年6月</a>&nbsp;(6)</li>
+	<li><a href='http://www.web2citizen.info/blog/2012/05/' title='2012年5月'>2012年5月</a>&nbsp;(3)</li>
+	<li><a href='http://www.web2citizen.info/blog/2012/04/' title='2012年4月'>2012年4月</a>&nbsp;(7)</li>
+	<li><a href='http://www.web2citizen.info/blog/2012/03/' title='2012年3月'>2012年3月</a>&nbsp;(8)</li>
+	<li><a href='http://www.web2citizen.info/blog/2012/02/' title='2012年2月'>2012年2月</a>&nbsp;(18)</li>
+	<li><a href='http://www.web2citizen.info/blog/2012/01/' title='2012年1月'>2012年1月</a>&nbsp;(4)</li>
+	<li><a href='http://www.web2citizen.info/blog/2011/12/' title='2011年12月'>2011年12月</a>&nbsp;(6)</li>
+	<li><a href='http://www.web2citizen.info/blog/2011/11/' title='2011年11月'>2011年11月</a>&nbsp;(17)</li>
+	<li><a href='http://www.web2citizen.info/blog/2011/10/' title='2011年10月'>2011年10月</a>&nbsp;(5)</li>
+		</ul>
+</aside><aside id="categories-4" class="widget widget_categories"><h3 class="widget-title">カテゴリー</h3>		<ul>
+	<li class="cat-item cat-item-30"><a href="http://www.web2citizen.info/blog/category/shitenou-com/" title="shitenou.com に含まれる投稿をすべて表示">shitenou.com</a> (1)
+</li>
+	<li class="cat-item cat-item-25"><a href="http://www.web2citizen.info/blog/category/the%e3%82%aa%e3%83%af%e3%82%b3%e3%83%b3/" title="theオワコン に含まれる投稿をすべて表示">theオワコン</a> (2)
+</li>
+	<li class="cat-item cat-item-10"><a href="http://www.web2citizen.info/blog/category/tweet/" title="tweet に含まれる投稿をすべて表示">tweet</a> (38)
+</li>
+	<li class="cat-item cat-item-22"><a href="http://www.web2citizen.info/blog/category/web%e9%96%8b%e7%99%ba/" title="Web開発 に含まれる投稿をすべて表示">Web開発</a> (11)
+</li>
+	<li class="cat-item cat-item-3"><a href="http://www.web2citizen.info/blog/category/%e3%81%93%e3%81%ae%e3%82%b5%e3%82%a4%e3%83%88%e3%81%ab%e3%81%a4%e3%81%84%e3%81%a6/" title="このサイトについて に含まれる投稿をすべて表示">このサイトについて</a> (3)
+</li>
+	<li class="cat-item cat-item-8"><a href="http://www.web2citizen.info/blog/category/%e3%81%af%e3%81%a6%e3%83%96/" title="はてブ に含まれる投稿をすべて表示">はてブ</a> (4)
+</li>
+	<li class="cat-item cat-item-1"><a href="http://www.web2citizen.info/blog/category/%e6%9c%aa%e5%88%86%e9%a1%9e/" title="未分類 に含まれる投稿をすべて表示">未分類</a> (1)
+</li>
+	<li class="cat-item cat-item-4"><a href="http://www.web2citizen.info/blog/category/%e9%9b%91%e8%a8%98/" title="雑記 に含まれる投稿をすべて表示">雑記</a> (8)
+</li>
+		</ul>
+</aside><aside id="tag_cloud-3" class="widget widget_tag_cloud"><h3 class="widget-title">タグ</h3><div class="tagcloud"><a href='http://www.web2citizen.info/blog/tag/android/' class='tag-link-11' title='2件のトピック' style='font-size: 9.953488372093pt;'>Android</a>
+<a href='http://www.web2citizen.info/blog/tag/apache/' class='tag-link-5' title='1件のトピック' style='font-size: 8pt;'>apache</a>
+<a href='http://www.web2citizen.info/blog/tag/fuelphp/' class='tag-link-20' title='12件のトピック' style='font-size: 16.790697674419pt;'>FuelPHP</a>
+<a href='http://www.web2citizen.info/blog/tag/git/' class='tag-link-21' title='2件のトピック' style='font-size: 9.953488372093pt;'>git</a>
+<a href='http://www.web2citizen.info/blog/tag/github/' class='tag-link-35' title='1件のトピック' style='font-size: 8pt;'>github</a>
+<a href='http://www.web2citizen.info/blog/tag/jenkins/' class='tag-link-34' title='1件のトピック' style='font-size: 8pt;'>Jenkins</a>
+<a href='http://www.web2citizen.info/blog/tag/nginx/' class='tag-link-24' title='1件のトピック' style='font-size: 8pt;'>nginx</a>
+<a href='http://www.web2citizen.info/blog/tag/php/' class='tag-link-19' title='1件のトピック' style='font-size: 8pt;'>php</a>
+<a href='http://www.web2citizen.info/blog/tag/smartphone/' class='tag-link-12' title='1件のトピック' style='font-size: 8pt;'>smartphone</a>
+<a href='http://www.web2citizen.info/blog/tag/tpp/' class='tag-link-16' title='1件のトピック' style='font-size: 8pt;'>TPP</a>
+<a href='http://www.web2citizen.info/blog/tag/tweet/' class='tag-link-10' title='38件のトピック' style='font-size: 22pt;'>tweet</a>
+<a href='http://www.web2citizen.info/blog/tag/twitter/' class='tag-link-9' title='1件のトピック' style='font-size: 8pt;'>twitter</a>
+<a href='http://www.web2citizen.info/blog/tag/twitterbootstrap/' class='tag-link-31' title='1件のトピック' style='font-size: 8pt;'>twitterbootstrap</a>
+<a href='http://www.web2citizen.info/blog/tag/web/' class='tag-link-14' title='1件のトピック' style='font-size: 8pt;'>web</a>
+<a href='http://www.web2citizen.info/blog/tag/wordpress/' class='tag-link-6' title='2件のトピック' style='font-size: 9.953488372093pt;'>wordpress</a>
+<a href='http://www.web2citizen.info/blog/tag/%e3%81%af%e3%81%a6%e3%83%96/' class='tag-link-8' title='1件のトピック' style='font-size: 8pt;'>はてブ</a>
+<a href='http://www.web2citizen.info/blog/tag/%e3%82%b9%e3%83%9e%e3%83%bc%e3%83%88%e3%83%95%e3%82%a9%e3%83%b3/' class='tag-link-33' title='1件のトピック' style='font-size: 8pt;'>スマートフォン</a>
+<a href='http://www.web2citizen.info/blog/tag/%e3%82%bb%e3%82%ad%e3%83%a5%e3%83%aa%e3%83%86%e3%82%a3/' class='tag-link-13' title='1件のトピック' style='font-size: 8pt;'>セキュリティ</a>
+<a href='http://www.web2citizen.info/blog/tag/%e3%82%bf%e3%83%96%e3%83%ac%e3%83%83%e3%83%88/' class='tag-link-23' title='1件のトピック' style='font-size: 8pt;'>タブレット</a>
+<a href='http://www.web2citizen.info/blog/tag/%e3%83%87%e3%83%9e/' class='tag-link-17' title='1件のトピック' style='font-size: 8pt;'>デマ</a>
+<a href='http://www.web2citizen.info/blog/tag/%e3%83%aa%e3%83%9e%e3%82%a4%e3%83%b3%e3%83%89/' class='tag-link-7' title='1件のトピック' style='font-size: 8pt;'>リマインド</a>
+<a href='http://www.web2citizen.info/blog/tag/%e5%8d%b0%e8%b1%a1%e6%93%8d%e4%bd%9c/' class='tag-link-18' title='1件のトピック' style='font-size: 8pt;'>印象操作</a>
+<a href='http://www.web2citizen.info/blog/tag/%e6%95%99%e8%82%b2/' class='tag-link-15' title='1件のトピック' style='font-size: 8pt;'>教育</a>
+<a href='http://www.web2citizen.info/blog/tag/%e9%9b%91%e8%a8%98/' class='tag-link-4' title='4件のトピック' style='font-size: 12.341085271318pt;'>雑記</a></div>
+</aside><aside id="meta-2" class="widget widget_meta"><h3 class="widget-title">メタ情報</h3>			<ul>
+						<li><a href="http://www.web2citizen.info/blog/wp-login.php">ログイン</a></li>
+			<li><a href="http://www.web2citizen.info/blog/feed/" title="このサイトを RSS2.0 で購読">投稿の <abbr title="Really Simple Syndication">RSS</abbr></a></li>
+			<li><a href="http://www.web2citizen.info/blog/comments/feed/" title="すべての投稿への最新コメントを RSS で購読">コメントの <abbr title="Really Simple Syndication">RSS</abbr></a></li>
+			<li><a href="http://ja.wordpress.org/" title="Powered by WordPress, state-of-the-art semantic personal publishing platform.">WordPress.org</a></li>
+						</ul>
+</aside>		</div><!-- #secondary .widget-area -->
+
+	</div><!-- #main -->
+
+	<footer id="colophon" role="contentinfo">
+
+			
+
+			<div id="site-generator">
+								<a href="http://wordpress.org/" title="Semantic Personal Publishing Platform" rel="generator">Proudly powered by WordPress</a>
+			</div>
+	</footer><!-- #colophon -->
+</div><!-- #page -->
+
+
+</body>
+</html>
