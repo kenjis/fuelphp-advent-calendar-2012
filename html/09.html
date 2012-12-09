@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<!--[if IE 6]>
+<html id="ie6" dir="ltr" lang="ja">
+<![endif]-->
+<!--[if IE 7]>
+<html id="ie7" dir="ltr" lang="ja">
+<![endif]-->
+<!--[if IE 8]>
+<html id="ie8" dir="ltr" lang="ja">
+<![endif]-->
+<!--[if !(IE 6) | !(IE 7) | !(IE 8)  ]><!-->
+<html dir="ltr" lang="ja">
+<!--<![endif]-->
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width" />
+<title>FuelPHPで保守性の高いマルチデバイス対応を考える | SHIROYAMA.US</title>
+<link rel="profile" href="http://gmpg.org/xfn/11" />
+<link rel="stylesheet" type="text/css" media="all" href="http://shiroyama.us/blog/wp-content/themes/twentyeleven/style.css" />
+<link rel="pingback" href="http://shiroyama.us/blog/xmlrpc.php" />
+<!--[if lt IE 9]>
+<script src="http://shiroyama.us/blog/wp-content/themes/twentyeleven/js/html5.js" type="text/javascript"></script>
+<![endif]-->
+<link rel="alternate" type="application/rss+xml" title="SHIROYAMA.US &raquo; フィード" href="http://shiroyama.us/blog/feed/" />
+<link rel="alternate" type="application/rss+xml" title="SHIROYAMA.US &raquo; コメントフィード" href="http://shiroyama.us/blog/comments/feed/" />
+
+			<script type="text/javascript">//<![CDATA[
+			// Google Analytics for WordPress by Yoast v4.2.8 | http://yoast.com/wordpress/google-analytics/
+			var _gaq = _gaq || [];
+			_gaq.push(['_setAccount', 'UA-22050152-1']);
+							_gaq.push(['_trackPageview']);
+			(function () {
+				var ga = document.createElement('script');
+				ga.type = 'text/javascript';
+				ga.async = true;
+				ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+				var s = document.getElementsByTagName('script')[0];
+				s.parentNode.insertBefore(ga, s);
+			})();
+			//]]></script>
+			<link rel="alternate" type="application/rss+xml" title="SHIROYAMA.US &raquo; FuelPHPで保守性の高いマルチデバイス対応を考える のコメントのフィード" href="http://shiroyama.us/blog/2012/12/08/fuelphp%e3%81%a7%e4%bf%9d%e5%ae%88%e6%80%a7%e3%81%ae%e9%ab%98%e3%81%84%e3%83%9e%e3%83%ab%e3%83%81%e3%83%87%e3%83%90%e3%82%a4%e3%82%b9%e5%af%be%e5%bf%9c%e3%82%92%e8%80%83%e3%81%88%e3%82%8b/feed/" />
+<script type='text/javascript' src='http://shiroyama.us/blog/wp-includes/js/comment-reply.js?ver=3.4.2'></script>
+<script type='text/javascript' src='http://shiroyama.us/blog/wp-includes/js/jquery/jquery.js?ver=1.7.2'></script>
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://shiroyama.us/blog/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://shiroyama.us/blog/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='Google I/O 2012 Day 0 〜サンフランシスコへ降り立つ〜' href='http://shiroyama.us/blog/2012/07/22/google-io-2012-day-0-%e3%80%9c%e3%82%b5%e3%83%b3%e3%83%95%e3%83%a9%e3%83%b3%e3%82%b7%e3%82%b9%e3%82%b3%e3%81%b8%e9%99%8d%e3%82%8a%e7%ab%8b%e3%81%a4%e3%80%9c/' />
+<meta name="generator" content="WordPress 3.4.2" />
+<link rel='canonical' href='http://shiroyama.us/blog/2012/12/08/fuelphp%e3%81%a7%e4%bf%9d%e5%ae%88%e6%80%a7%e3%81%ae%e9%ab%98%e3%81%84%e3%83%9e%e3%83%ab%e3%83%81%e3%83%87%e3%83%90%e3%82%a4%e3%82%b9%e5%af%be%e5%bf%9c%e3%82%92%e8%80%83%e3%81%88%e3%82%8b/' />
+<link rel='shortlink' href='http://shiroyama.us/blog/?p=93' />
+	<style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>
+<meta id="syntaxhighlighteranchor" name="syntaxhighlighter-version" content="3.1.3" />
+</head>
+
+<body class="single single-post postid-93 single-format-standard single-author singular two-column right-sidebar">
+<div id="page" class="hfeed">
+	<header id="branding" role="banner">
+			<hgroup>
+				<h1 id="site-title"><span><a href="http://shiroyama.us/blog/" title="SHIROYAMA.US" rel="home">SHIROYAMA.US</a></span></h1>
+				<h2 id="site-description">〜東洋太平洋ブログ三日坊主チャンピオン〜</h2>
+			</hgroup>
+
+						<a href="http://shiroyama.us/blog/">
+									<img src="http://shiroyama.us/blog/wp-content/themes/twentyeleven/images/headers/hanoi.jpg" width="1000" height="288" alt="" />
+							</a>
+			
+								<form method="get" id="searchform" action="http://shiroyama.us/blog/">
+		<label for="s" class="assistive-text">検索</label>
+		<input type="text" class="field" name="s" id="s" placeholder="検索" />
+		<input type="submit" class="submit" name="submit" id="searchsubmit" value="検索" />
+	</form>
+			
+			<nav id="access" role="navigation">
+				<h3 class="assistive-text">メインメニュー</h3>
+								<div class="skip-link"><a class="assistive-text" href="#content" title="メインコンテンツへ移動">メインコンテンツへ移動</a></div>
+				<div class="skip-link"><a class="assistive-text" href="#secondary" title="サブコンテンツへ移動">サブコンテンツへ移動</a></div>
+								<div class="menu"><ul><li ><a href="http://shiroyama.us/blog/" title="ホーム">ホーム</a></li><li class="page_item page-item-2"><a href="http://shiroyama.us/blog/profile/">自己紹介</a></li></ul></div>
+			</nav><!-- #access -->
+	</header><!-- #branding -->
+
+
+	<div id="main">
+
+		<div id="primary">
+			<div id="content" role="main">
+
+				
+					<nav id="nav-single">
+						<h3 class="assistive-text">投稿ナビゲーション</h3>
+						<span class="nav-previous"><a href="http://shiroyama.us/blog/2012/07/22/google-io-2012-day-0-%e3%80%9c%e3%82%b5%e3%83%b3%e3%83%95%e3%83%a9%e3%83%b3%e3%82%b7%e3%82%b9%e3%82%b3%e3%81%b8%e9%99%8d%e3%82%8a%e7%ab%8b%e3%81%a4%e3%80%9c/" rel="prev"><span class="meta-nav">&larr;</span> 前へ</a></span>
+						<span class="nav-next"></span>
+					</nav><!-- #nav-single -->
+
+					
+<article id="post-93" class="post-93 post type-post status-publish format-standard hentry category-fuelphp">
+	<header class="entry-header">
+		<h1 class="entry-title">FuelPHPで保守性の高いマルチデバイス対応を考える</h1>
+
+				<div class="entry-meta">
+			<span class="sep">投稿日:</span><a href="http://shiroyama.us/blog/2012/12/08/fuelphp%e3%81%a7%e4%bf%9d%e5%ae%88%e6%80%a7%e3%81%ae%e9%ab%98%e3%81%84%e3%83%9e%e3%83%ab%e3%83%81%e3%83%87%e3%83%90%e3%82%a4%e3%82%b9%e5%af%be%e5%bf%9c%e3%82%92%e8%80%83%e3%81%88%e3%82%8b/" title="12:07 PM" rel="bookmark"><time class="entry-date" datetime="2012-12-08T12:07:17+00:00" pubdate>2012年12月8日</time></a><span class="by-author"> <span class="sep">作成者:</span> <span class="author vcard"><a class="url fn n" href="http://shiroyama.us/blog/author/shiroyama/" title="shiroyama の投稿をすべて表示" rel="author">shiroyama</a></span></span>		</div><!-- .entry-meta -->
+			</header><!-- .entry-header -->
+
+	<div class="entry-content">
+		<h2>FuelPHP Advent Calendar 2012</h2>
+<p><a href="http://atnd.org/events/33753" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://atnd.org']);" target="_blank">FuelPHP Advent Calendar 2012</a> に参加してみました。<br />
+こんばんは、 <a href="https://twitter.com/fushiroyama" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://twitter.com']);" target="_blank">@fushiroyama</a> です。僕の担当は9日目です。<br />
+昨日は <a href="https://twitter.com/web2citizen" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://twitter.com']);" target="_blank">@web2citizen</a> さんの <a href="http://www.web2citizen.info/blog/2012/12/fuelphp%E3%81%AE%E3%82%B9%E3%83%91%E3%83%A0%E3%83%95%E3%82%A3%E3%83%AB%E3%82%BF%E3%83%91%E3%83%83%E3%82%B1%E3%83%BC%E3%82%B8/" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://www.web2citizen.info']);" target="_blank">FuelPHPのスパムフィルタパッケージ</a> でした。</p>
+<p>9日目も張り切っていきましょう！</p>
+<h2>マルチデバイス対応</h2>
+<p>ウェブエンジニアにとって「マルチデバイス対応」は避けて通れない課題だと思います。急速にスマートフォンの波が押し寄せている昨今ですが、まだまだ案件によってはフィーチャーフォン（いわゆるガラケー）は無視できないシェアを持っているからです。</p>
+<p>私事ですが、先日入籍いたしました。挙式するにあたって妻に、</p>
+<blockquote><p>「招待状の送り先住所や宿泊の有無・交通手段などをメモするのが大変だから、メールに貼り付けて送れるウェブシステム作ってよ。出来るでしょ、エンジニア！」</p></blockquote>
+<p>と言われました。</p>
+<p>これは勉強し始めたばかりのFuelPHPを使って何か作るには格好のチャンスです！<br />
+最初は「2時間で出来る！（ｷﾘｯ」と勢い良く返答したのですが、よく考えると私の友人も妻の友人も少なからぬ割合のガラケーユーザーがいるのです。</p>
+<blockquote><p>「弱ったな…仕事ですら色々苦労が絶えないマルチデバイス対応しないといけないじゃないか…」</p></blockquote>
+<p>これが最初の正直な感想です。</p>
+<p>しかしご安心ください。FuelPHPはさすがでした！<br />
+FuelPHPを使うといとも簡単にマルチデバイス対応なウェブサービスを構築することができたのです。本稿ではそのときのノウハウなどをご紹介できればと思います。</p>
+<p>なお、本稿ではFuelPHPのHello World的なことは解説しておりません。<br />
+FuelPHPの基本的な使い方やMVCの考え方などは、他の素晴らしい記事や <a href="https://twitter.com/kenji_s" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://twitter.com']);" target="_blank">@kenji_s</a> さんの著書 <a href="http://tatsu-zine.com/books/fuelphp1st" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://tatsu-zine.com']);" target="_blank">はじめてのフレームワークとしてのFuelPHP</a> 等をご参照ください。</p>
+<h2>保守性の高いウェブサービスとはなんだろうか</h2>
+<p>FuelPHPでマルチデバイス対応を考えた時、まず真っ先に思いつくのが「デバイスごとにコントローラを分ける」という方法です。</p>
+<ul>
+<li>http://shiroyama.us/service [PC]</li>
+<li>http://shiroyama.us/service_sp [SmartPhone]</li>
+<li>http://shiroyama.us/service_mb [FeaturePhone]</li>
+</ul>
+<p>といった具合です。</p>
+<p>Fuel PHPではControllerクラス群を継承し、対応するパスのPHPクラスを用意するだけでいとも簡単に以上のような対応が可能です。</p>
+<p>ところがこの方法は個人的にはオススメできません。<br />
+これは普段ウェブサービスに関わる身として実感を持って断言できるのですが、同じ役目をするコントローラがデバイスが違うという理由だけで複数存在するとロクなことになりません。開発・保守・改良すべてにおいて膨大な負債として後々重くのしかかってきます。</p>
+<p>しかも、今回の私の案件では「ひとつのURIをメールにコピペして送れること」という要求がクライアント（妻）から突き付けられています。尚更この方法は採れません。</p>
+<p>では「コントローラの中でデバイスごとに場合分けする」方法にしましょうか。<br />
+以下のコードをご覧ください。（条件式だけ擬似コードです）</p>
+<pre class="brush: php; title: ; notranslate" title="">
+    public function action_index() {
+        $view;
+        if ($is_feature_phone) {
+            $view = View::forge('mobile/marriage/index');
+        } elseif ($is_smart_phone) {
+            $view = View::forge('smartphone/marriage/index');
+        } else {
+            $view = View::forge('pc/marriage/index');
+        }
+        $view-&gt;set('hoge', $hoge);
+        $view-&gt;set('fuga', $fuga);
+        $this-&gt;template-&gt;content = $view;
+</pre>
+<p>そんなに悪くはなさそうです。</p>
+<p>ただ、処理内容が明らかに異なるときに場合分けするのは自然なのですが、単にViewを出し分けるためだけにif elseをダラダラと書いてしまっているのがいかにも面倒です。<br />
+これをすべてのコントローラ内で書いていくと思うと目眩がしてきますね。</p>
+<p>やはり、</p>
+<pre class="brush: php; title: ; notranslate" title="">
+    public function action_index() {
+        $view = View::forge('marriage/index');
+        $view-&gt;set('hoge', $hoge);
+        $view-&gt;set('fuga', $fuga);
+        $this-&gt;template-&gt;content = $view;
+</pre>
+<p>この方が処理内容に集中できそうです。</p>
+<p>本稿のテーマは「保守性の高いマルチデバイス対応」です。<br />
+したがって本エントリのゴールのひとつは、このようなシンプルなコードで &#8220;Viewだけデバイスによって自動的に選び分けられている&#8221; ところを目指すことです。</p>
+<p>実は簡単にできるんですよ。そう、FuelPHPならね。</p>
+<h2>FuelPHPのコアクラスの拡張性</h2>
+<p>個人的に感じているFuelPHPの最大の魅力は、コアクラス群の読みやすさ、拡張のしやすさです。</p>
+<p>実は私自身、FuelPHPを本格的に使ったのは今回が初めてに等しく、何を隠そうPHPすら数年前に数行書いたことがある程度です。そんな私でもちょっと中身をみて簡単に拡張することができました。</p>
+<p>これから順を追って、</p>
+<ol>
+<li>Agentコアクラスを拡張し、ガラケーやスマホ判定を追加</li>
+<li>Inputコアクラスを拡張し、ガラケーからの入力を適切に変換</li>
+<li>Responseコアクラスを拡張し、ガラケーへの出力を適切に変換</li>
+<li>Viewコアクラスを拡張し、自動的にデバイスごとにViewを選び分ける</li>
+</ol>
+<p>までを解説していきたいと思います。</p>
+<h2>Agentコアクラスを拡張し、ガラケーやスマホ判定を追加</h2>
+<p>マルチデバイス対応にあたり、まずはやはりデバイスの判定を適切にできなくてはなりません。</p>
+<p>FuelPHPにはAgentクラスという便利なクラスがあり、アクセスしているユーザのブラウザや言語情報などを知ることができます。<br />
+しかしながら残念ことに、この島国のフィーチャーフォンを判定できるような機能までは備わっていません。</p>
+<pre class="brush: php; title: ; notranslate" title="">
+Agent::is_mobiledevice()
+</pre>
+<p>というメソッドはあるのですが、これは「PC以外」というぐらいのザックリした判定で、iPhoneもiPadもAndroidもガラケーも一緒くたに判定されてしまうようです。<br />
+ということで、日本でウェブサービスを展開する上で使えそうな「ガラケー判定」や「スマホ判定」を追加しましょう。</p>
+<p>尚、この先のステップでコアクラスの拡張作業がいくつか発生するので、念のためコアクラスの拡張方法を以下にに箇条書きします。</p>
+<ol>
+<li>fuel/app/classes/ 以下に、コアクラスと同じ名前でphpファイルを作成</li>
+<li>class Agent extends \Fuel\Core\Agent {} のように、同名で継承</li>
+<li>好きなメソッドを追加したりオーバーライドする</li>
+<li>bootstrap.php にAutoloader設定を追加（後述）</li>
+</ol>
+<p>まずは以下のような agent.php を用意します。</p>
+<p>※スマホ判定の部分は、時間の都合で <a href="http://btt.hatenablog.com/" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://btt.hatenablog.com']);" target="_blank">BTT&#8217;s blog</a> さんの <a href="http://btt.hatenablog.com/entry/2012/07/04/001254" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://btt.hatenablog.com']);" target="_blank">FuelPHPのAgentクラスと拡張</a> をそのまま流用させていただいております。とても参考になるエントリですので、是非合わせてお読みください。</p>
+<pre class="brush: php; title: ; notranslate" title="">
+/* fuel/app/classes/agent.php */
+
+&lt;?php
+class Agent extends Fuel\Core\Agent
+{
+    public static function _init()
+    {
+        parent::_init();
+
+        // smartphone
+        $sp_list = array(
+                       'iPhone',
+                       'iPod',
+                       'Android',
+                       'IEMobile',
+                       'dream',
+                       'CUPCAKE',
+                       'blackberry9500',
+                       'blackberry9530',
+                       'blackberry9520',
+                       'blackberry9550',
+                       'blackberry9800',
+                       'webOS',
+                       'incognito',
+                       'webmate'
+                   );
+
+        $pattern = '/'.implode('|', $sp_list).'/i';
+        static::$properties['x_issmartphone'] = preg_match($pattern, static::$user_agent) ? true : false;
+
+        // docomo
+        static::$properties['x_isdocomo'] = preg_match(&quot;/DoCoMo/&quot;, static::$user_agent) ? true : false;
+
+        // softbank
+        static::$properties['x_issoftbank'] = preg_match(&quot;/Vodafone|J\-PHONE|MOT|SoftBank/&quot;, static::$user_agent) ? true : false;
+
+        // au
+        static::$properties['x_isau'] = preg_match(&quot;/UP\.Browser/&quot;, static::$user_agent) ? true : false;
+
+        // feature phone
+        static::$properties['x_isfeaturephone'] = (static::is_docomo() || static::is_softbank() || static::is_au());
+    }
+
+    public static function is_smartphone()
+    {
+        return static::$properties['x_issmartphone'];
+    }
+
+    public static function is_docomo()
+    {
+        return static::$properties['x_isdocomo'];
+    }
+
+    public static function is_softbank()
+    {
+        return static::$properties['x_issoftbank'];
+    }
+
+    public static function is_au()
+    {
+        return static::$properties['x_isau'];
+    }
+
+    public static function is_feature_phone()
+    {
+        return static::$properties['x_isfeaturephone'];
+    }
+
+}
+</pre>
+<p>やっていることはシンプルで、UserAgent情報を正規表現でマッチさせてフラグを立ててstaticメソッドで参照しているだけです。ガラケーに関しては各キャリアがIPアドレス帯も公開しているので、IPアドレス判定も追加するとUA偽装にも対処できますね。</p>
+<p>次に bootstrap.php を編集します。</p>
+<pre class="brush: php; title: ; notranslate" title="">
+Autoloader::add_classes(array(
+    'Agent'    =&gt; APPPATH . 'classes/agent.php',
+    'Input'    =&gt; APPPATH . 'classes/input.php',
+    'Response' =&gt; APPPATH . 'classes/response.php',
+    'View'     =&gt; APPPATH . 'classes/view.php',
+));
+</pre>
+<p>こうすることでコアクラスの代わりに自作のクラスをロードすることができます。<br />
+Input, Response, View も、このあと追加していくので先走って書いておきました。</p>
+<h2>ガラケーの文字コード問題</h2>
+<p>Input, Response の拡張の前にこの話はしておかないといけないなと思ったので書いておきます。</p>
+<p>ガラケー対応の際に忘れてはならないのが、文字コードです。</p>
+<p>PCの近代的なブラウザやスマホのほとんどのブラウザは複数の文字コードに対応しています。<br />
+これはヘッダで文字コードが正しく宣言されており、コンテンツが対応する文字コードで正しくエンコードされている限りにおいて、正しくマルチバイト文字を表示できることを意味します。</p>
+<p>一方、ガラケーは特定の文字コードしか扱えないケースがまだまだ多いのが現状です。<br />
+一応ウェブサービスを作る上での定石では「ガラケーはShift_JIS」というのがあります。ただしソフトバンクの一部機種などにUTF-8を扱えるものがあることから、今回は「ソフトバンクでUTF-8を扱えるものはUTF-8、それ以外のガラケーはShift_JIS」という方針で作っていこうと思います。</p>
+<p>なお、FuelPHPのガラケー対応については、去年のAdvent Calendarで <a href="http://d.hatena.ne.jp/codeigniter/" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://d.hatena.ne.jp']);" target="_blank">bossatama</a> さんが <a href="http://d.hatena.ne.jp/codeigniter/20111225/1324801262" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://d.hatena.ne.jp']);" target="_blank">FuelPHPでフィーチャフォン（ガラケー）対応について考えてみた</a> というエントリで書いておられます。<br />
+文字コードについても分かりやすく的確に言及されている記事ですので、合わせて読んでいただければと思います。</p>
+<p>本エントリの例でも、モデル・ビュー・コントローラ・その他拡張したコアクラスなど、すべてUTF-8で記述するように統一してあります。他の文字コードが必要な境界面でのみ適宜変換を行うことで余計なトラブルに巻き込まれることが減ると思います。</p>
+<h2>Inputコアクラスを拡張し、ガラケーからの入力を適切に変換</h2>
+<p>ガラケーをShift_JISにするという方針なので、ガラケーからの入力は当然Shift_JISで来ます。ところがPCその他のデバイスからの入力はUTF-8で来ます。</p>
+<p>前述の保守性の高いウェブサービスに対する考察の通り、コントローラ内でいちいちガラケーかどうか判定して文字列を変換する処理を入れるのは避けたいです。<br />
+コントローラでは何も考えずに処理に集中するために、その前段階のInputクラスを拡張して文字コード変換を隠蔽します。</p>
+<pre class="brush: php; title: ; notranslate" title="">
+/* fuel/app/classes/input.php */
+
+&lt;?php                  
+                       
+class Input extends \Fuel\Core\Input
+{                  
+
+    protected static function hydrate()
+    {   
+        parent::hydrate();
+        
+        if (Agent::is_feature_phone() &amp;&amp; !Agent::is_softbank()) {
+            $encoded = array();
+            foreach (static::$input as $key =&gt; $val) {
+                $encoded[$key] = mb_convert_encoding($val, &quot;UTF-8&quot;, &quot;SJIS-win&quot;);
+            }
+            static::$input = $encoded;
+        }
+    }
+}
+</pre>
+<p>先ほど作成したAgentクラスを早速活用し、ガラケーかつソフトバンク以外の場合には入力をUTF-8に変換しています。<br />
+こうすることでPCその他のデバイスも含め、コントローラ内ではすべてUTF-8として扱えるので保守性が向上します。</p>
+<h2>Responseコアクラスを拡張し、ガラケーへの出力を適切に変換</h2>
+<p>こちらは先程のInputの逆で、実際にユーザに表示する際に適宜文字コード変換して返す処理を隠蔽します。<br />
+こうすることでコントローラ内では何も考えずにUTF-8のまま文字列を扱い、Viewに渡った時には自動的に適切な文字コードに変換されます。</p>
+<pre class="brush: php; title: ; notranslate" title="">
+/* fuel/app/classes/response.php */
+
+class Response extends Fuel\Core\Response {
+
+    public function body($value = false) {
+        if ($value === false) {
+            return $this-&gt;body;
+        }
+
+        // PC, smartphone
+        if (!Agent::is_feature_phone()) {
+            $this-&gt;set_header(&quot;Content-type&quot;, &quot;text/html; charset=UTF-8&quot;);
+            return parent::body($value);
+        }
+
+        // auのキャッシュ対策
+        if (Agent::is_au()) {
+            $this-&gt;set_header('Cache-Control', 'no-cache');
+        }
+
+        // softbankでUTF-8を表示可能なもの
+        if (Agent::is_softbank() &amp;&amp; Agent::accepts_charset('UTF-8')) {
+            $this-&gt;set_header(&quot;Content-type&quot;, &quot;application/xhtml+xml; charset=UTF-8&quot;);
+            return parent::body($value);
+        }
+
+        // それ以外はShift_JISに変換して返す
+        $this-&gt;body = mb_convert_encoding($value, &quot;SJIS-win&quot;, &quot;UTF-8&quot;);
+        $this-&gt;set_header(&quot;Content-type&quot;, &quot;application/xhtml+xml; charset=Shift_JIS&quot;);
+        return $this;
+    }
+}
+</pre>
+<p>書いてある通りなので特に解説することもないかと思います。</p>
+<h2>Viewコアクラスを拡張し、自動的にデバイスごとにViewを選び分ける</h2>
+<p>いよいよ大詰めです！</p>
+<p>本稿の最初の方で書いた、Viewの選び分けの隠蔽処理です。<br />
+まずはコードを見ていただき、その後で解説しようと思います。</p>
+<pre class="brush: php; title: ; notranslate" title="">
+
+class View extends \Fuel\Core\View
+{
+    public function set_filename($file) {
+        if ( Agent::is_smartphone() ) {
+            $file = 'smartphone/' . $file;
+        } else if ( Agent::is_feature_phone() ) {
+            $file = 'featurephone/'. $file;
+        }
+            
+        return parent::set_filename($file); 
+    }           
+}
+</pre>
+<p>…といってもやっていることはたったこれだけです。</p>
+<pre class="brush: php; title: ; notranslate" title="">
+fuel/app/views
+</pre>
+<p>の下にviewファイルを設置するかと思いますが、その時に smartphone, featurephone など任意の名前のディレクトリを作り、PCのビューと全く同じファイル構成にします。smartphone, featurephone という一階層深くなる以外は全く同じようにファイルを配置しないと正しく動かないことに注意してください。</p>
+<p>たとえば http://shiroyama.us/marriage/index にアクセスしてもらってマルチデバイス対応するためには以下のようにファイルを配置します。</p>
+<ul>
+<li>fuel/app/views/marriage/index.php</li>
+<li>fuel/app/views/marriage/smartphone/index.php</li>
+<li>fuel/app/views/marriage/featurephone/index.php</li>
+</ul>
+<p>これで http://shiroyama.us/marriage にアクセスすると、まったく同じURIでUserAgent次第で違うViewファイルが適切な文字コードで出力されます！ﾜｰﾊﾟﾁﾊﾟﾁﾊﾟﾁ</p>
+<p>コード上も</p>
+<pre class="brush: php; title: ; notranslate" title="">
+$view = View::forge('marriage/index');
+</pre>
+<p>するだけで、スマホなら勝手に /smartphone/marriage/index が、ガラケーなら /featurephone/marriage/index が選択され、コントローラ内では余計なことをまったく考えずに処理に集中できる訳です。</p>
+<h2>まとめ</h2>
+<p>いかがだったでしょうか。</p>
+<p>趣味でちょっとしたものを作られている方の中には「マルチデバイス対応だけで何てしちめんどうくさいことをしているんだ…」と思われた方も少なくないかも知れません。<br />
+ただ、職業的ウェブエンジニアとして大規模かつ長期的メンテナンスが必要なものに関わった場合、こういった一手間が将来の何100時間を節約してくれるのも事実です。</p>
+<p>こういったことが、むしろこの程度のコード片でデキてしまうFuelPHPの使いやすさ、改めて好きになりました！みなさんもFuelPHPで楽しいウェブ開発ライフを！</p>
+			</div><!-- .entry-content -->
+
+	<footer class="entry-meta">
+		カテゴリー: <a href="http://shiroyama.us/blog/category/fuelphp/" title="FuelPHP の投稿をすべて表示" rel="category tag">FuelPHP</a> &nbsp; 作成者: <a href="http://shiroyama.us/blog/author/shiroyama/">shiroyama</a> <a href="http://shiroyama.us/blog/2012/12/08/fuelphp%e3%81%a7%e4%bf%9d%e5%ae%88%e6%80%a7%e3%81%ae%e9%ab%98%e3%81%84%e3%83%9e%e3%83%ab%e3%83%81%e3%83%87%e3%83%90%e3%82%a4%e3%82%b9%e5%af%be%e5%bf%9c%e3%82%92%e8%80%83%e3%81%88%e3%82%8b/" title="FuelPHPで保守性の高いマルチデバイス対応を考える へのパーマリンク" rel="bookmark">パーマリンク</a>		
+			</footer><!-- .entry-meta -->
+</article><!-- #post-93 -->
+
+						<div id="comments">
+	
+	
+	
+									<div id="respond">
+				<h3 id="reply-title">コメントを残す <small><a rel="nofollow" id="cancel-comment-reply-link" href="/blog/2012/12/08/fuelphp%E3%81%A7%E4%BF%9D%E5%AE%88%E6%80%A7%E3%81%AE%E9%AB%98%E3%81%84%E3%83%9E%E3%83%AB%E3%83%81%E3%83%87%E3%83%90%E3%82%A4%E3%82%B9%E5%AF%BE%E5%BF%9C%E3%82%92%E8%80%83%E3%81%88%E3%82%8B/#respond" style="display:none;">コメントをキャンセル</a></small></h3>
+									<form action="http://shiroyama.us/blog/wp-comments-post.php" method="post" id="commentform">
+																			<p class="comment-notes">メールアドレスが公開されることはありません。 <span class="required">*</span> が付いている欄は必須項目です</p>							<p class="comment-form-author"><label for="author">名前</label> <span class="required">*</span><input id="author" name="author" type="text" value="" size="30" aria-required='true' /></p>
+<p class="comment-form-email"><label for="email">メールアドレス</label> <span class="required">*</span><input id="email" name="email" type="text" value="" size="30" aria-required='true' /></p>
+<p class="comment-form-url"><label for="url">ウェブサイト</label><input id="url" name="url" type="text" value="" size="30" /></p>
+												<p class="comment-form-comment"><label for="comment">コメント</label><textarea id="comment" name="comment" cols="45" rows="8" aria-required="true"></textarea></p>						<p class="form-allowed-tags">次の<abbr title="HyperText Markup Language">HTML</abbr> タグと属性が使えます:  <code>&lt;a href=&quot;&quot; title=&quot;&quot;&gt; &lt;abbr title=&quot;&quot;&gt; &lt;acronym title=&quot;&quot;&gt; &lt;b&gt; &lt;blockquote cite=&quot;&quot;&gt; &lt;cite&gt; &lt;code&gt; &lt;del datetime=&quot;&quot;&gt; &lt;em&gt; &lt;i&gt; &lt;q cite=&quot;&quot;&gt; &lt;strike&gt; &lt;strong&gt; </code></p>						<p class="form-submit">
+							<input name="submit" type="submit" id="submit" value="コメントを送信" />
+							<input type='hidden' name='comment_post_ID' value='93' id='comment_post_ID' />
+<input type='hidden' name='comment_parent' id='comment_parent' value='0' />
+						</p>
+						<p style="display: none;"><input type="hidden" id="akismet_comment_nonce" name="akismet_comment_nonce" value="8d3b1d1c19" /></p>					</form>
+							</div><!-- #respond -->
+				<script type="text/javascript">
+		jQuery(document).ready(function () {
+			jQuery('#commentform').submit(function () {
+				_gaq.push(
+					['_setAccount', 'UA-22050152-1'],
+					['_trackEvent', 'comment', 'submit']
+				);
+			});
+		});
+	</script>
+				
+</div><!-- #comments -->
+
+				
+			</div><!-- #content -->
+		</div><!-- #primary -->
+
+
+	</div><!-- #main -->
+
+	<footer id="colophon" role="contentinfo">
+
+			
+
+			<div id="site-generator">
+								<a href="http://ja.wordpress.org/" title="セマンティックなパブリッシングツール" rel="generator">Proudly powered by WordPress</a>
+			</div>
+	</footer><!-- #colophon -->
+</div><!-- #page -->
+
+<script type='text/javascript' src='http://shiroyama.us/blog/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shCore.js?ver=3.0.83c'></script>
+<script type='text/javascript' src='http://shiroyama.us/blog/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushPhp.js?ver=3.0.83c'></script>
+<script type='text/javascript'>
+	(function(){
+		var corecss = document.createElement('link');
+		var themecss = document.createElement('link');
+		var corecssurl = "http://shiroyama.us/blog/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shCore.css?ver=3.0.83c";
+		if ( corecss.setAttribute ) {
+				corecss.setAttribute( "rel", "stylesheet" );
+				corecss.setAttribute( "type", "text/css" );
+				corecss.setAttribute( "href", corecssurl );
+		} else {
+				corecss.rel = "stylesheet";
+				corecss.href = corecssurl;
+		}
+		document.getElementsByTagName("head")[0].insertBefore( corecss, document.getElementById("syntaxhighlighteranchor") );
+		var themecssurl = "http://shiroyama.us/blog/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shThemeDefault.css?ver=3.0.83c";
+		if ( themecss.setAttribute ) {
+				themecss.setAttribute( "rel", "stylesheet" );
+				themecss.setAttribute( "type", "text/css" );
+				themecss.setAttribute( "href", themecssurl );
+		} else {
+				themecss.rel = "stylesheet";
+				themecss.href = themecssurl;
+		}
+		//document.getElementById("syntaxhighlighteranchor").appendChild(themecss);
+		document.getElementsByTagName("head")[0].insertBefore( themecss, document.getElementById("syntaxhighlighteranchor") );
+	})();
+	SyntaxHighlighter.config.strings.expandSource = 'ソースを表示';
+	SyntaxHighlighter.config.strings.help = 'SyntaxHighlighterについて';
+	SyntaxHighlighter.config.strings.alert = 'SyntaxHighlighter\n\n';
+	SyntaxHighlighter.config.strings.noBrush = '指定のブラシが見つかりませんでした: ';
+	SyntaxHighlighter.config.strings.brushNotHtmlScript = 'HTMLスクリプトのオプションのためにブラシが構成されませんでした: ';
+	SyntaxHighlighter.defaults['pad-line-numbers'] = false;
+	SyntaxHighlighter.defaults['toolbar'] = false;
+	SyntaxHighlighter.all();
+</script>
+
+</body>
+</html>
