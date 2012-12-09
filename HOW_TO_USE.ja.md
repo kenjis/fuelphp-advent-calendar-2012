@@ -23,19 +23,19 @@
 	例:
 	$ php get-blog.php http://d.hatena.ne.jp/Kenji_s/20121201/fuelphp_this_year md 01
 
-### 画像ファイルの取得
-
-	$ php get-blog.php (URL) image (章)
-
-	例:
-	$ php get-blog.php http://d.hatena.ne.jp/Kenji_s/20121201/fuelphp_this_year image 01
-
 ### Markdownファイルの調整
 
 	$ php get-blog.php (URL) adjust (章)
 
 	例:
 	$ php get-blog.php http://d.hatena.ne.jp/Kenji_s/20121201/fuelphp_this_year adjust 01
+
+### 画像ファイルの取得
+
+	$ php get-blog.php (URL) image (章)
+
+	例:
+	$ php get-blog.php http://d.hatena.ne.jp/Kenji_s/20121201/fuelphp_this_year image 01
 
 ## MarkdownファイルのReVIEW化
 
