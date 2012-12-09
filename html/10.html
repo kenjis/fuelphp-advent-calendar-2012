@@ -1,0 +1,295 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="ja">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>FuelPHP用ソーシャルログイン専用認証パッケージDsAuthでNinjAuthをもっと簡単に利用する | DASALOG -ださろぐ</title>
+<link rel="stylesheet" href="http://dasalog.eg2mix.com/wp-content/themes/renownedmint/style.css" type="text/css" />
+<link rel="pingback" href="http://dasalog.eg2mix.com/xmlrpc.php" />
+<link rel="shortcut icon" href="/favicon.ico" />
+<link rel="alternate" type="application/rss+xml" title="DASALOG -ださろぐ &raquo; フィード" href="http://dasalog.eg2mix.com/feed/" />
+<link rel="alternate" type="application/rss+xml" title="DASALOG -ださろぐ &raquo; コメントフィード" href="http://dasalog.eg2mix.com/comments/feed/" />
+
+			<script type="text/javascript">//<![CDATA[
+			// Google Analytics for WordPress by Yoast v4.2.8 | http://yoast.com/wordpress/google-analytics/
+			var _gaq = _gaq || [];
+			_gaq.push(['_setAccount', 'UA-26824357-1']);
+							_gaq.push(['_trackPageview']);
+			(function () {
+				var ga = document.createElement('script');
+				ga.type = 'text/javascript';
+				ga.async = true;
+				ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+				var s = document.getElementsByTagName('script')[0];
+				s.parentNode.insertBefore(ga, s);
+			})();
+			//]]></script>
+			<link rel="alternate" type="application/rss+xml" title="DASALOG -ださろぐ &raquo; FuelPHP用ソーシャルログイン専用認証パッケージDsAuthでNinjAuthをもっと簡単に利用する のコメントのフィード" href="http://dasalog.eg2mix.com/fuel-advent2012-dsauth/feed/" />
+<script type='text/javascript' src='http://dasalog.eg2mix.com/wp-includes/js/comment-reply.js?ver=20090102'></script>
+<script type='text/javascript' src='http://dasalog.eg2mix.com/wp-includes/js/jquery/jquery.js?ver=1.7.1'></script>
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://dasalog.eg2mix.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://dasalog.eg2mix.com/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='CakePHP1.3系でhttpsを経由するととセッションIDの再作成が出来ない問題の対応方法' href='http://dasalog.eg2mix.com/cakephp1-3-session/' />
+<meta name="generator" content="WordPress 3.3" />
+<link rel='shortlink' href='http://dasalog.eg2mix.com/?p=397' />
+
+<!-- All in One SEO Pack 1.6.15.2 by Michael Torbert of Semper Fi Web Design[259,411] -->
+<link rel="canonical" href="http://dasalog.eg2mix.com/fuel-advent2012-dsauth/" />
+<!-- /all in one seo pack -->
+<!-- BEGIN: WP Social Bookmarking Light -->
+<script type="text/javascript" src="http://connect.facebook.net/ja_JP/all.js#xfbml=1"></script>
+<style type="text/css">
+div.wp_social_bookmarking_light{border:0 !important;padding:0px 0 0px 0 !important;margin:0 !important;}
+div.wp_social_bookmarking_light div{float:left !important;border:0 !important;padding:0 4px 0px 0 !important;margin:0 !important;height:21px !important;text-indent:0 !important;}
+div.wp_social_bookmarking_light img{border:0 !important;padding:0;margin:0;vertical-align:top !important;}
+.wp_social_bookmarking_light_clear{clear:both !important;}
+</style>
+<!-- END: WP Social Bookmarking Light -->
+<meta id="syntaxhighlighteranchor" name="syntaxhighlighter-version" content="3.1.3" />
+</head>
+<body class="single single-post postid-397 single-format-standard">
+<div id="container">
+	<div id="header">
+		<div id="headings">
+			<h1><a href="http://dasalog.eg2mix.com/">DASALOG -ださろぐ</a></h1>
+			<h2>システム開発者からコーヒー屋への道。</h2>
+		</div>
+		<div id="movement">
+			<div id="searchbox">
+				<form role="search" method="get" action="http://dasalog.eg2mix.com">
+					<div id="search-input-text-wrapper"><input id="search-input-text" type="text" name="s" value="" class="input-text" /></div>
+					<div id="search-input-submit-wrapper"><input id="search-input-submit" type="image" src="http://dasalog.eg2mix.com/wp-content/themes/renownedmint/images/button.png" value="Search" class="input-submit" /></div>
+				</form>
+			</div>
+			<ul id="navigation">
+<li class="page_item page-item-19"><a href="http://dasalog.eg2mix.com/author/">author</a></li>
+			</ul>
+		</div>
+	</div>	<div id="content_wrapper">
+		<div id="content">
+			<div class="navigation">
+			<div class="alignleft">&laquo; <a href="http://dasalog.eg2mix.com/cakephp1-3-session/" rel="prev">CakePHP1.3系でhttpsを経由するととセッションIDの再作成が出来ない問題の対応方法</a></div>
+			<div class="alignright"></div>
+		</div>
+		<div class="post-397 post type-post status-publish format-standard hentry category-fuelphp category-php" id="post-397">
+			<h2 class="post-title-single">FuelPHP用ソーシャルログイン専用認証パッケージDsAuthでNinjAuthをもっと簡単に利用する</h2>
+			<div class="post-date-single">12月 9th, 2012 at 23:59</div>
+			<div class="entry">
+				<p><a href="http://atnd.org/events/33753" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://atnd.org']);">FuelPHP Advent Calendar2012</a>参加記事です。<br />
+昨日は<a href="https://twitter.com/fushiroyama" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://twitter.com']);">@fushiroyama</a>さんの<a title="FuelPHPで保守性の高いマルチデバイス対応を考える" href="http://shiroyama.us/blog/2012/12/08/fuelphp%E3%81%A7%E4%BF%9D%E5%AE%88%E6%80%A7%E3%81%AE%E9%AB%98%E3%81%84%E3%83%9E%E3%83%AB%E3%83%81%E3%83%87%E3%83%90%E3%82%A4%E3%82%B9%E5%AF%BE%E5%BF%9C%E3%82%92%E8%80%83%E3%81%88%E3%82%8B/" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://shiroyama.us']);">FuelPHPで保守性の高いマルチデバイス対応を考える</a>でした。<br />
+Fuelはコアクラスを拡張してアレコレするのがやりやすいですね。</p>
+<p>10日担当の私(@<a href="https://twitter.com/EGMC" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://twitter.com']);">EGMC</a>)は自作の認証パッケージの紹介です。<br />
+「<a title="FuelPHP 勉強会 東京 vol.2でOAuthログインの発表をしてきた" href="http://dasalog.eg2mix.com/fuelphp-%e5%8b%89%e5%bc%b7%e4%bc%9a-%e6%9d%b1%e4%ba%ac-vol-2%e3%81%a7oauth%e3%83%ad%e3%82%b0%e3%82%a4%e3%83%b3%e3%81%ae%e7%99%ba%e8%a1%a8%e3%82%92%e3%81%97%e3%81%a6%e3%81%8d%e3%81%9f/" >FuelPHP 勉強会 東京 vol.2でOAuthログインの発表をしてきた</a>」の続きでもあります。</p>
+<h2>ソーシャル連携のログイン機能</h2>
+<p>最近のWebサービスにおいてよくみかける「facebookでログイン」、「Twitterでログイン」のような外部サービスを利用したログインの仕組みがあります。<br />
+FuelPHPで利用可能なパッケージとしてNinjAuthがありますが、NinjAuthは標準でSimpleAuth、Sentry、Wardenの各ユーザー認証パッケージと連携可能となっています。</p>
+<p>標準のSimpleAuthなどをそのまま使っても良いのですが、基本的にどの実装もemail、パスワード項目が必須となっています。</p>
+<p>ログイン方法がわからなくなった場合の対応や、ユーザーへの連絡のためにemail、パスワードを設定必須にするというのはサービスによっては大事なことですが、自分が作りたいちょっとした小物webサービスにとってはそもそもアイパス認証なくてもいいかな、ということも多く、かつユーザーテーブルもカスタマイズしたかったので自前で専用の認証パッケージをこさえてみました。</p>
+<h2>DsAuth</h2>
+<p><a href="https://github.com/egmc/fuel-dsauth" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://github.com']);">https://github.com/egmc/fuel-dsauth</a></p>
+<ul>
+<li><a href="https://github.com/happyninjas/fuel-ninjauth" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://github.com']);">NinjAuth</a>に完全に依存した、IDパスワードによるログイン機能を持たないユーザー認証パッケージ</li>
+<li>ライセンスはMITで公開しています</li>
+</ul>
+<h2>動作サンプル</h2>
+<p>こちらで<a href="http://dsauth-sample.eg2mix.com/"  target="_blank">サンプルページ</a>を公開しています。</p>
+<p>※実際にログイン可能ですがサンプルなのでアプリは特に何もしません。必要なユーザー情報とトークンは取得しています。</p>
+<h2>インストール方法</h2>
+<p>githubで<a href="https://github.com/egmc/fuel-dsauth#installation" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://github.com']);">簡単なドキュメント</a>を公開しています。<br />
+基本的に必要なパッケージを配置してマイグレーションを実施すれば準備OKです。<br />
+ポイントはNinjAuthのAdapterとしてDsAuthを指定することです。</p>
+<p>コントローラーは例えば下記のように実装して、fuel/app/classes/controller/auth.phpとして配置します。</p>
+<pre class="brush: php; title: ; notranslate" title="">
+&lt;?php
+class Controller_Auth extends \DsAuth\Controller {
+
+    public function action_logout() {
+        DsAuth::logout();
+        Session::set_flash('flash_message', 'ログアウトしました');
+        Response::redirect('/');
+    }
+
+    public function action_linked() {
+        Session::set_flash('flash_message', 'アカウントの紐付けをしました');
+        Response::redirect('/');
+    }
+
+}
+</pre>
+<h2>認証情報の取得</h2>
+<p>ログインに成功するとセッションに取得したユーザー情報が保持されます。<br />
+ログイン情報へのアクセスはDsAuthクラスの各静的メソッドを経由して行います。</p>
+<p>ログイン状態の確認</p>
+<pre class="brush: php; title: ; notranslate" title="">
+// ログインの有無を取得
+DsAuth::is_logged_in()
+</pre>
+<p>ログインユーザー情報の取得</p>
+<pre class="brush: php; title: ; notranslate" title="">
+// ログインユーザーレコードを配列で取得
+DsAuth::get_user_info()
+</pre>
+<p>なお、DsAuthクラスはFuelのコアクラス同様グローバルにエイリアスされているので、名前空間を都度指定する必要はありません。</p>
+<h2>指定可能なオプション</h2>
+<ul>
+<li>db_connection dbコネクション</li>
+<li>login_hash_salt ログインチェック用ハッシュソルト</li>
+<li>table_columns ログイン時に取得するカラムリスト</li>
+<li>table_name ユーザーテーブル名</li>
+<li>always_confirm_username 新規登録時に常にユーザー名を入力させる</li>
+<li>allow_duplicated_username ユーザー名の重複を許可する</li>
+<li>auto_modify_userinfo 外部サービスから取得した情報を自動で修正する</li>
+</ul>
+<h2>今後の予定</h2>
+<ul>
+<li>FuelPHP1.4での確認</li>
+<li>エラーチェックが甘いのでなんとかする</li>
+<li>デフォルトのcookieセッションの場合、有効なcookieがが送られるとDBの状態に関係なくログイン状態になってしまうのでそのあたりを考える</li>
+<li>小規模サービスで実際に使ってみる</li>
+</ul>
+<p>とりあえず動くと思いますが現状はまだ甘い実装となっているので、是非フィードバックを頂ければと思います。</p>
+<div class='wp_social_bookmarking_light'><div><a href="http://b.hatena.ne.jp/entry/http://dasalog.eg2mix.com/fuel-advent2012-dsauth/" onclick="javascript:_gaq.push(['_trackEvent','outbound-article','http://b.hatena.ne.jp']);" class="hatena-bookmark-button" data-hatena-bookmark-title="FuelPHP用ソーシャルログイン専用認証パッケージDsAuthでNinjAuthをもっと簡単に利用する" data-hatena-bookmark-layout="standard" title="このエントリーをはてなブックマークに追加"> <img src="http://b.st-hatena.com/images/entry-button/button-only.gif" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="http://b.st-hatena.com/js/bookmark_button_wo_al.js" charset="utf-8" async="async"></script></div><div><fb:like href="http://dasalog.eg2mix.com/fuel-advent2012-dsauth/" send="false" layout="button_count" width="100" show_faces="false" action="like" colorscheme="light" font=""></fb:like></div><div><iframe allowtransparency="true" frameborder="0" scrolling="no" src="http://platform.twitter.com/widgets/tweet_button.html?url=http%3A%2F%2Fdasalog.eg2mix.com%2Ffuel-advent2012-dsauth%2F&amp;text=FuelPHP%E7%94%A8%E3%82%BD%E3%83%BC%E3%82%B7%E3%83%A3%E3%83%AB%E3%83%AD%E3%82%B0%E3%82%A4%E3%83%B3%E5%B0%82%E7%94%A8%E8%AA%8D%E8%A8%BC%E3%83%91%E3%83%83%E3%82%B1%E3%83%BC%E3%82%B8DsAuth%E3%81%A7NinjAuth%E3%82%92%E3%82%82%E3%81%A3%E3%81%A8%E7%B0%A1%E5%8D%98%E3%81%AB%E5%88%A9%E7%94%A8%E3%81%99%E3%82%8B&amp;via=EGMC&amp;lang=ja&amp;count=horizontal" style="width:120px; height:20px;"></iframe></div></div><br class='wp_social_bookmarking_light_clear' /><p>No related posts.</p>												<p class="postmetadata alt">
+					<small>
+						In <a href="http://dasalog.eg2mix.com/category/php/fuelphp/" title="fuelphp の投稿をすべて表示" rel="category tag">fuelphp</a>, <a href="http://dasalog.eg2mix.com/category/php/" title="php の投稿をすべて表示" rel="category tag">php</a>.
+													You can <a href="#respond">leave a response</a>, or <a href="http://dasalog.eg2mix.com/fuel-advent2012-dsauth/trackback/" rel="trackback">trackback</a> from your site.
+											</small>
+				</p>
+			</div>
+		</div>
+				
+	 <div id="respond">
+<h3>Leave a Reply</h3>
+<div class="cancel-comment-reply">
+	<small><a rel="nofollow" id="cancel-comment-reply-link" href="/fuel-advent2012-dsauth/#respond" style="display:none;">返信をキャンセルする。</a></small>
+</div>
+<form action="http://dasalog.eg2mix.com/wp-comments-post.php" method="post" id="commentform">
+<p><input type="text" name="author" id="author" value="" size="22" tabindex="1" aria-required='true' />
+<label for="author"><small>Name (required)</small></label></p>
+<p><input type="text" name="email" id="email" value="" size="22" tabindex="2" aria-required='true' />
+<label for="email"><small>Mail (will not be published) (required)</small></label></p>
+<p><input type="text" name="url" id="url" value="" size="22" tabindex="3" />
+<label for="url"><small>Website</small></label></p>
+<p><textarea name="comment" id="comment" cols="100%" rows="10" tabindex="4"></textarea></p>
+<p><small><strong>XHTML:</strong> You can use these tags: <code>&lt;a href=&quot;&quot; title=&quot;&quot;&gt; &lt;abbr title=&quot;&quot;&gt; &lt;acronym title=&quot;&quot;&gt; &lt;b&gt; &lt;blockquote cite=&quot;&quot;&gt; &lt;cite&gt; &lt;code&gt; &lt;del datetime=&quot;&quot;&gt; &lt;em&gt; &lt;i&gt; &lt;q cite=&quot;&quot;&gt; &lt;strike&gt; &lt;strong&gt; </code></small></p>
+<p><input name="submit" type="submit" id="submit" tabindex="5" value="Submit Comment" />
+<input type='hidden' name='comment_post_ID' value='397' id='comment_post_ID' />
+<input type='hidden' name='comment_parent' id='comment_parent' value='0' />
+</p>
+<p style="display: none;"><input type="hidden" id="akismet_comment_nonce" name="akismet_comment_nonce" value="7eb041dcc7" /></p></form>
+</div>
+			</div>
+	</div>
+<div style="clear: both;"></div> <!-- sometimes .navigation breaks the layout without this -->
+</div><!-- /container -->
+<div id="footer_wrapper">
+	<div id="footer">
+		<div id="column-1">
+			<h4>Archives</h4>
+			<div class="floatitems">
+				<div class="floatitem"><a href='http://dasalog.eg2mix.com/2012/12/' title='2012年12月'>2012年12月</a>&nbsp;(1)</div>
+				<div class="floatitem"><a href='http://dasalog.eg2mix.com/2012/11/' title='2012年11月'>2012年11月</a>&nbsp;(1)</div>
+				<div class="floatitem"><a href='http://dasalog.eg2mix.com/2012/09/' title='2012年9月'>2012年9月</a>&nbsp;(1)</div>
+				<div class="floatitem"><a href='http://dasalog.eg2mix.com/2012/05/' title='2012年5月'>2012年5月</a>&nbsp;(1)</div>
+				<div class="floatitem"><a href='http://dasalog.eg2mix.com/2012/03/' title='2012年3月'>2012年3月</a>&nbsp;(1)</div>
+				<div class="floatitem"><a href='http://dasalog.eg2mix.com/2012/02/' title='2012年2月'>2012年2月</a>&nbsp;(2)</div>
+				<div class="floatitem"><a href='http://dasalog.eg2mix.com/2011/12/' title='2011年12月'>2011年12月</a>&nbsp;(1)</div>
+				<div class="floatitem"><a href='http://dasalog.eg2mix.com/2011/11/' title='2011年11月'>2011年11月</a>&nbsp;(4)</div>
+				<div class="floatitem"><a href='http://dasalog.eg2mix.com/2011/07/' title='2011年7月'>2011年7月</a>&nbsp;(1)</div>
+				<div class="floatitem"><a href='http://dasalog.eg2mix.com/2010/11/' title='2010年11月'>2010年11月</a>&nbsp;(1)</div>
+				<div class="floatitem"><a href='http://dasalog.eg2mix.com/2010/08/' title='2010年8月'>2010年8月</a>&nbsp;(2)</div>
+				<div class="floatitem"><a href='http://dasalog.eg2mix.com/2010/06/' title='2010年6月'>2010年6月</a>&nbsp;(1)</div>
+			</div><!-- /floatitems -->
+		</div><!-- /column-1 -->
+		<div id="column-2">
+			<h4>Categories</h4>
+			<ul class="floatitems">
+	<li class="cat-item cat-item-32"><a href="http://dasalog.eg2mix.com/category/php/fuelphp/" title="fuelphp に含まれる投稿をすべて表示">fuelphp</a> (2)
+</li>
+	<li class="cat-item cat-item-6"><a href="http://dasalog.eg2mix.com/category/misc/" title="misc に含まれる投稿をすべて表示">misc</a> (3)
+</li>
+	<li class="cat-item cat-item-5"><a href="http://dasalog.eg2mix.com/category/php/" title="php に含まれる投稿をすべて表示">php</a> (10)
+</li>
+	<li class="cat-item cat-item-19"><a href="http://dasalog.eg2mix.com/category/service/" title="service に含まれる投稿をすべて表示">service</a> (2)
+</li>
+	<li class="cat-item cat-item-8"><a href="http://dasalog.eg2mix.com/category/env/" title="環境 に含まれる投稿をすべて表示">環境</a> (8)
+</li>
+			</ul><!-- /floatitems -->
+		</div><!-- /column-2 -->
+		<div id="column-3">
+						<h4>Site Information</h4>
+			<ul id="site_info">
+			<li>Content &copy; 2012 <a href="http://dasalog.eg2mix.com">DASALOG -ださろぐ</a> except where otherwise noted.</li>
+			<li>Powered by <a href="http://www.wordpress.org" target="_blank">WordPress</a>.<br />Theme is <a href="http://renownedmedia.com/blog/renownedmint-wordpress-theme/" target="_blank">RenownedMint</a> by <a href="http://renownedmedia.com" target="_blank">Renowned Media</a>.</li>
+			</ul>
+					</div><!-- /column-3 -->
+	</div><!-- /footer -->
+</div><!-- /footer_wrapper -->
+</div><!-- /container -->
+<!-- BEGIN: WP Social Bookmarking Light -->
+<!-- END: WP Social Bookmarking Light -->
+<script type='text/javascript' src='http://dasalog.eg2mix.com/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shCore.js?ver=3.0.83c'></script>
+<script type='text/javascript' src='http://dasalog.eg2mix.com/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushAS3.js?ver=3.0.83c'></script>
+<script type='text/javascript' src='http://dasalog.eg2mix.com/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushBash.js?ver=3.0.83c'></script>
+<script type='text/javascript' src='http://dasalog.eg2mix.com/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushColdFusion.js?ver=3.0.83c'></script>
+<script type='text/javascript' src='http://dasalog.eg2mix.com/wp-content/plugins/syntaxhighlighter/third-party-brushes/shBrushClojure.js?ver=20090602'></script>
+<script type='text/javascript' src='http://dasalog.eg2mix.com/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushCpp.js?ver=3.0.83c'></script>
+<script type='text/javascript' src='http://dasalog.eg2mix.com/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushCSharp.js?ver=3.0.83c'></script>
+<script type='text/javascript' src='http://dasalog.eg2mix.com/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushCss.js?ver=3.0.83c'></script>
+<script type='text/javascript' src='http://dasalog.eg2mix.com/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushDelphi.js?ver=3.0.83c'></script>
+<script type='text/javascript' src='http://dasalog.eg2mix.com/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushDiff.js?ver=3.0.83c'></script>
+<script type='text/javascript' src='http://dasalog.eg2mix.com/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushErlang.js?ver=3.0.83c'></script>
+<script type='text/javascript' src='http://dasalog.eg2mix.com/wp-content/plugins/syntaxhighlighter/third-party-brushes/shBrushFSharp.js?ver=20091003'></script>
+<script type='text/javascript' src='http://dasalog.eg2mix.com/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushGroovy.js?ver=3.0.83c'></script>
+<script type='text/javascript' src='http://dasalog.eg2mix.com/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushJava.js?ver=3.0.83c'></script>
+<script type='text/javascript' src='http://dasalog.eg2mix.com/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushJavaFX.js?ver=3.0.83c'></script>
+<script type='text/javascript' src='http://dasalog.eg2mix.com/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushJScript.js?ver=3.0.83c'></script>
+<script type='text/javascript' src='http://dasalog.eg2mix.com/wp-content/plugins/syntaxhighlighter/third-party-brushes/shBrushLatex.js?ver=20090613'></script>
+<script type='text/javascript' src='http://dasalog.eg2mix.com/wp-content/plugins/syntaxhighlighter/third-party-brushes/shBrushMatlabKey.js?ver=20091209'></script>
+<script type='text/javascript' src='http://dasalog.eg2mix.com/wp-content/plugins/syntaxhighlighter/third-party-brushes/shBrushObjC.js?ver=20091207'></script>
+<script type='text/javascript' src='http://dasalog.eg2mix.com/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushPerl.js?ver=3.0.83c'></script>
+<script type='text/javascript' src='http://dasalog.eg2mix.com/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushPhp.js?ver=3.0.83c'></script>
+<script type='text/javascript' src='http://dasalog.eg2mix.com/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushPlain.js?ver=3.0.83c'></script>
+<script type='text/javascript' src='http://dasalog.eg2mix.com/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushPowerShell.js?ver=3.0.83c'></script>
+<script type='text/javascript' src='http://dasalog.eg2mix.com/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushPython.js?ver=3.0.83c'></script>
+<script type='text/javascript' src='http://dasalog.eg2mix.com/wp-content/plugins/syntaxhighlighter/third-party-brushes/shBrushR.js?ver=20100919'></script>
+<script type='text/javascript' src='http://dasalog.eg2mix.com/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushRuby.js?ver=3.0.83c'></script>
+<script type='text/javascript' src='http://dasalog.eg2mix.com/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushScala.js?ver=3.0.83c'></script>
+<script type='text/javascript' src='http://dasalog.eg2mix.com/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushSql.js?ver=3.0.83c'></script>
+<script type='text/javascript' src='http://dasalog.eg2mix.com/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushVb.js?ver=3.0.83c'></script>
+<script type='text/javascript' src='http://dasalog.eg2mix.com/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushXml.js?ver=3.0.83c'></script>
+<script type='text/javascript'>
+	(function(){
+		var corecss = document.createElement('link');
+		var themecss = document.createElement('link');
+		var corecssurl = "http://dasalog.eg2mix.com/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shCore.css?ver=3.0.83c";
+		if ( corecss.setAttribute ) {
+				corecss.setAttribute( "rel", "stylesheet" );
+				corecss.setAttribute( "type", "text/css" );
+				corecss.setAttribute( "href", corecssurl );
+		} else {
+				corecss.rel = "stylesheet";
+				corecss.href = corecssurl;
+		}
+		document.getElementsByTagName("head")[0].insertBefore( corecss, document.getElementById("syntaxhighlighteranchor") );
+		var themecssurl = "http://dasalog.eg2mix.com/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shThemeEmacs.css?ver=3.0.83c";
+		if ( themecss.setAttribute ) {
+				themecss.setAttribute( "rel", "stylesheet" );
+				themecss.setAttribute( "type", "text/css" );
+				themecss.setAttribute( "href", themecssurl );
+		} else {
+				themecss.rel = "stylesheet";
+				themecss.href = themecssurl;
+		}
+		//document.getElementById("syntaxhighlighteranchor").appendChild(themecss);
+		document.getElementsByTagName("head")[0].insertBefore( themecss, document.getElementById("syntaxhighlighteranchor") );
+	})();
+	SyntaxHighlighter.config.strings.expandSource = 'ソースを表示';
+	SyntaxHighlighter.config.strings.help = 'SyntaxHighlighterについて';
+	SyntaxHighlighter.config.strings.alert = 'SyntaxHighlighter\n\n';
+	SyntaxHighlighter.config.strings.noBrush = '指定のブラシが見つかりませんでした: ';
+	SyntaxHighlighter.config.strings.brushNotHtmlScript = 'HTMLスクリプトのオプションのためにブラシが構成されませんでした: ';
+	SyntaxHighlighter.defaults['light'] = true;
+	SyntaxHighlighter.defaults['pad-line-numbers'] = false;
+	SyntaxHighlighter.defaults['toolbar'] = false;
+	SyntaxHighlighter.all();
+</script>
+</body>
+</html>
