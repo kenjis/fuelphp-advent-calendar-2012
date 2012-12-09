@@ -137,5 +137,30 @@ class BlogArticleTest extends PHPUnit_Framework_TestCase
         $expected = 'ワーパチパチパチ';
         $this->assertEquals($expected, $test);
     }
+    
+    public function test_convertZenkakuParentheses()
+    {
+        $line = '（[公式ドキュメント](http://fuelphp.com/docs/general/packages.html)参照）';
+        $test = $this->blog->convertZenkakuParentheses($line);
+        $expected = '([公式ドキュメント](http://fuelphp.com/docs/general/packages.html)参照)';
+        $this->assertEquals($expected, $test);
+    }
+    
+    public function test_convertHankakuKanaDot()
+    {
+        $line = 'FuelPHPで作成したWebサイト（ほぼ放置していますが･･･）にスパムが';
+        $test = $this->blog->convertHankakuKanaDot($line);
+        $expected = 'FuelPHPで作成したWebサイト（ほぼ放置していますが…）にスパムが';
+        $this->assertEquals($expected, $test);
+    }
+
+    public function test_removeBackslash()
+    {
+        $line = '\$active=1';
+        $test = $this->blog->removeBackslash($line);
+        $expected = '$active=1';
+        $this->assertEquals($expected, $test);
+    }
+
 }
 

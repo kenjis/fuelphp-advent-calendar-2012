@@ -218,6 +218,9 @@
             $line = $this->convertBackslash($line);
             $line = $this->removeDoubleWidthSpace($line);
             $line = $this->convertHankakuKana($line);
+            $line = $this->convertZenkakuParentheses($line);
+            $line = $this->convertHankakuKanaDot($line);
+            $line = $this->removeBackslash($line);
 
             if ($this->blogType === 'hatena diary') {
                 $line = $this->removeHatenaKeywordLink($line);
@@ -292,6 +295,33 @@
             echo 'Convert Hankaku Kana: ', $line, PHP_EOL;
         }
         return $newline;
+    }
+    
+    public function convertZenkakuParentheses($line)
+    {
+        if (preg_match('/（|）/u', $line, $matches)) {
+            echo 'Convert Zenkaku Parentheses: ', $line, PHP_EOL;
+            $line = str_replace(array('（', '）'), array('(', ')'), $line);
+        }
+        return $line;
+    }
+
+    public function convertHankakuKanaDot($line)
+    {
+        if (preg_match('/･･･/u', $line, $matches)) {
+            echo 'Convert Hankaku Kana Dot: ', $line, PHP_EOL;
+            $line = $line = str_replace('･･･', '…', $line);
+        }
+        return $line;
+    }
+
+    public function removeBackslash($line)
+    {
+        if (preg_match('/\\$/u', $line, $matches)) {
+            echo 'Remove Backslash: ', $line, PHP_EOL;
+            $line = str_replace('\\$', '$', $line);
+        }
+        return $line;
     }
 }
 
