@@ -217,7 +217,8 @@
             $line = $this->replaceNoBreakSpace($line);
             $line = $this->convertBackslash($line);
             $line = $this->removeDoubleWidthSpace($line);
-            
+            $line = $this->convertHankakuKana($line);
+
             if ($this->blogType === 'hatena diary') {
                 $line = $this->removeHatenaKeywordLink($line);
             }
@@ -281,6 +282,15 @@
         }
         $newline .= $line;
         
+        return $newline;
+    }
+
+    public function convertHankakuKana($line)
+    {
+        $newline = mb_convert_kana($line, 'KV');
+        if ($line !== $newline) {
+            echo 'Convert Hankaku Kana: ', $line, PHP_EOL;
+        }
         return $newline;
     }
 }

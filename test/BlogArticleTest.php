@@ -129,5 +129,13 @@ class BlogArticleTest extends PHPUnit_Framework_TestCase
         $expected = '昨日は [@kenji_s](https://twitter.com/kenji_s) さんの「[FuelPHPのこの1年](http://d.hatena.ne.jp/Kenji_s/20121201/fuelphp_this_year)」でした。';
         $this->assertEquals($expected, $test);
     }
+
+    public function test_convertHankakuKana()
+    {
+        $line = 'ﾜｰﾊﾟﾁﾊﾟﾁﾊﾟﾁ';
+        $test = $this->blog->convertHankakuKana($line);
+        $expected = 'ワーパチパチパチ';
+        $this->assertEquals($expected, $test);
+    }
 }
 
