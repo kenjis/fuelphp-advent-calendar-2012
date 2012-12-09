@@ -317,7 +317,8 @@
 
     public function removeBackslash($line)
     {
-        if (preg_match('/\\$/u', $line, $matches)) {
+        // if there is '\$', remove '\'
+        if (preg_match('/\\\\\$/u', $line, $matches)) {
             echo 'Remove Backslash: ', $line, PHP_EOL;
             $line = str_replace('\\$', '$', $line);
         }

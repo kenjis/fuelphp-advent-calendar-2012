@@ -156,11 +156,18 @@ class BlogArticleTest extends PHPUnit_Framework_TestCase
 
     public function test_removeBackslash()
     {
-        $line = '\$active=1';
+        $line = '\\$active=1';
         $test = $this->blog->removeBackslash($line);
         $expected = '$active=1';
         $this->assertEquals($expected, $test);
     }
 
+    public function test_removeBackslash_no_backslash()
+    {
+        $line = '$active=1';
+        $test = $this->blog->removeBackslash($line);
+        $expected = '$active=1';
+        $this->assertEquals($expected, $test);
+    }
 }
 
