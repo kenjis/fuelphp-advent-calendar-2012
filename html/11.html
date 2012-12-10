@@ -1,0 +1,1036 @@
+<!DOCTYPE html>
+<!--[if IE 6]>
+<html id="ie6" dir="ltr" lang="ja" xmlns:og="http://ogp.me/ns#">
+<![endif]-->
+<!--[if IE 7]>
+<html id="ie7" dir="ltr" lang="ja" xmlns:og="http://ogp.me/ns#">
+<![endif]-->
+<!--[if IE 8]>
+<html id="ie8" dir="ltr" lang="ja" xmlns:og="http://ogp.me/ns#">
+<![endif]-->
+<!--[if !(IE 6) | !(IE 7) | !(IE 8)  ]><!-->
+<html dir="ltr" lang="ja" xmlns:og="http://ogp.me/ns#">
+  <!--<![endif]-->
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>FuelPHP + NetBeans + Gitで高速開発環境を整える | Work Tool Smith [ワークツールスミス]</title>
+    <link rel="profile" href="http://gmpg.org/xfn/11" />
+    <link rel="stylesheet" type="text/css" media="all" href="http://worktoolsmith.com/wp/wp-content/themes/wp-th-wts3/style.css" />
+    <link rel="stylesheet" type="text/css" media="all" href="http://worktoolsmith.com/wp/wp-content/themes/wp-th-wts3/syntaxhighlighter.css" />
+    <link rel="pingback" href="http://worktoolsmith.com/wp/xmlrpc.php" />
+    <!--[if lt IE 9]>
+    <script src="http://worktoolsmith.com/wp/wp-content/themes/wp-th-wts3/js/html5.js" type="text/javascript"></script>
+    <![endif]-->
+    <!--[if lt IE 9]>
+    <script src="http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE9.js"></script>
+    <![endif]-->
+    <script type="text/javascript">
+      var turl= "http://worktoolsmith.com/wp/wp-content/themes/wp-th-wts3";
+    </script>
+    
+<script type="text/javascript">
+var TB_pluginPath = 'http://worktoolsmith.com/wp/wp-content/plugins/tweet-blender';
+var TB_config = {
+'widget_show_photos':false,
+'widget_show_source':false,
+'widget_show_header':false,
+'general_link_screen_names':false,
+'general_link_hash_tags':false,
+'general_link_urls':false,
+'widget_check_sources':false,
+'widget_show_user':false,
+'general_timestamp_format':false,
+'general_seo_tweets_googleoff':false,
+'general_seo_footer_googleoff':false,
+'widget_show_reply_link':false,
+'widget_show_follow_link':false,
+'archive_show_user':false,
+'archive_show_photos':false,
+'archive_show_source':false,
+'archive_tweets_num':'10',
+'archive_is_disabled':false,
+'archive_show_reply_link':false,
+'archive_show_follow_link':false,
+'archive_auto_page':false,
+'archive_keep_tweets':'0',
+'advanced_reroute_on':false,
+'advanced_show_limit_msg':false,
+'advanced_disable_cache':false,
+'advanced_no_search_api':false,
+'filter_lang':' ',
+'filter_hide_mentions':false,
+'filter_hide_replies':false,
+'filter_location_name':false,
+'filter_location_dist':false,
+'filter_location_dist_units':false,
+'filter_bad_strings':false,
+'filter_limit_per_source':false,
+'filter_limit_per_source_time':'0',
+'filter_hide_same_text':false,
+'filter_hide_not_replies':false
+}</script>
+<link rel="alternate" type="application/rss+xml" title="Work Tool Smith [ワークツールスミス] &raquo; フィード" href="http://worktoolsmith.com/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Work Tool Smith [ワークツールスミス] &raquo; コメントフィード" href="http://worktoolsmith.com/comments/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Work Tool Smith [ワークツールスミス] &raquo; FuelPHP + NetBeans + Gitで高速開発環境を整える のコメントのフィード" href="http://worktoolsmith.com/2012/12/fuelphp_atnd_netbeans/feed/" />
+<link rel='stylesheet' id='wordpress-popular-posts-css'  href='http://worktoolsmith.com/wp/wp-content/plugins/wordpress-popular-posts/style/wpp.css?ver=3.4.2' type='text/css' media='all' />
+<link rel='stylesheet' id='contact-form-7-css'  href='http://worktoolsmith.com/wp/wp-content/plugins/contact-form-7/includes/css/styles.css?ver=3.3.1' type='text/css' media='all' />
+<link rel='stylesheet' id='lightboxStyle-css'  href='http://worktoolsmith.com/wp/wp-content/plugins/lightbox-plus/css/shadowed/colorbox.css?ver=2.0.2' type='text/css' media='screen' />
+<link rel='stylesheet' id='pre-tag-css'  href='http://worktoolsmith.com/wp/wp-content/plugins/wp-syntaxhighlighter/css/pre.css?ver=1.0' type='text/css' media='all' />
+<link rel='stylesheet' id='core3.0-css'  href='http://worktoolsmith.com/wp/wp-content/plugins/wp-syntaxhighlighter/syntaxhighlighter3/styles/shCore.css?ver=3.0' type='text/css' media='all' />
+<link rel='stylesheet' id='core-Emacs3.0-css'  href='http://worktoolsmith.com/wp/wp-content/plugins/wp-syntaxhighlighter/syntaxhighlighter3/styles/shCoreEmacs.css?ver=3.0' type='text/css' media='all' />
+<link rel='stylesheet' id='theme-Emacs3.0-css'  href='http://worktoolsmith.com/wp/wp-content/plugins/wp-syntaxhighlighter/syntaxhighlighter3/styles/shThemeEmacs.css?ver=3.0' type='text/css' media='all' />
+<script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js?ver=3.4.2'></script>
+<script type='text/javascript' src='http://worktoolsmith.com/wp/wp-content/themes/wp-th-wts3/js/bgSwitcher.js?ver=3.4.2'></script>
+<script type='text/javascript' src='http://worktoolsmith.com/wp/wp-content/themes/wp-th-wts3/js/wts-effects.js?ver=3.4.2'></script>
+<script type='text/javascript' src='http://worktoolsmith.com/wp/wp-content/themes/wp-th-wts3/js/particle.js?ver=3.4.2'></script>
+<script type='text/javascript' src='http://worktoolsmith.com/wp/wp-content/themes/wp-th-wts3/js/addfav.js?ver=3.4.2'></script>
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://worktoolsmith.com/wp/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://worktoolsmith.com/wp/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='【クーポンプレゼント！】年賀状ソフトが500円割引になります' href='http://worktoolsmith.com/2012/12/nengajo_coupon_500/' />
+<meta name="generator" content="WordPress 3.4.2" />
+<link rel='shortlink' href='http://worktoolsmith.com/?p=2847' />
+
+<!-- All in One SEO Pack 1.6.15.2 by Michael Torbert of Semper Fi Web Design[515,638] -->
+<meta name="description" content="こんにちは。 FuelPHP Advent" />
+<meta name="keywords" content="advent calender,fuelphp,netbeans,php,mac,webプログラム,windows" />
+<link rel="canonical" href="http://worktoolsmith.com/2012/12/fuelphp_atnd_netbeans/" />
+<!-- /all in one seo pack -->
+<link rel="alternate" media="handheld" type="text/html" href="http://worktoolsmith.com/2012/12/fuelphp_atnd_netbeans/" />
+
+<!-- WP SyntaxHighlighter Ver.1.7.3 CSS for code Begin -->
+<style type='text/css'>
+.syntaxhighlighter,
+.syntaxhighlighter a,
+.syntaxhighlighter div,
+.syntaxhighlighter code,
+.syntaxhighlighter table,
+.syntaxhighlighter table td,
+.syntaxhighlighter table tr,
+.syntaxhighlighter table tbody,
+.syntaxhighlighter table thead,
+.syntaxhighlighter table caption,
+.syntaxhighlighter textarea {
+font-size: 12px !important; /* Set the font size in pixels */  
+font-family: "Consolas", "Bitstream Vera Sans Mono", "Courier New", Courier, monospace !important; /* Set the font type */  
+}
+.syntaxhighlighter table caption {
+/* For Title(Caption) */  
+font-size: 14px !important; /* Set the font size in pixels */  
+font-family: "Consolas", "Bitstream Vera Sans Mono", "Courier New", Courier, monospace !important; /* Set the font type */  
+}
+.syntaxhighlighter.nogutter td.code .line {
+/* Set the left padding space when no-gutter in ver. 3.0 */  
+padding-left: 3px !important;
+}
+.syntaxhighlighter {
+/* For Chrome/Safari(WebKit) */  
+/* Hide the superfluous vertical scrollbar in ver. 3.0 */  
+overflow-y: hidden !important;
+padding: 1px !important;
+}
+.widget-area.syntaxhighlighter a,
+.widget-area.syntaxhighlighter div,
+.widget-area.syntaxhighlighter code,
+.widget-area.syntaxhighlighter table,
+.widget-area.syntaxhighlighter table td,
+.widget-area.syntaxhighlighter table tr,
+.widget-area.syntaxhighlighter table tbody,
+.widget-area.syntaxhighlighter table thead,
+.widget-area.syntaxhighlighter table caption,
+.widget-area.syntaxhighlighter textarea {
+/* For Widget */  
+font-size: 14px !important; /* Set the font size in pixels */  
+font-family: "Consolas", "Bitstream Vera Sans Mono", "Courier New", Courier, monospace !important; /* Set the font type */  
+}
+.widget-area table caption {
+/* For Widget */  
+/* For Title(Caption) */  
+font-size: 10px !important; /* Set the font size in pixels */  
+font-family: "Consolas", "Bitstream Vera Sans Mono", "Courier New", Courier, monospace !important; /* Set the font type */  
+}
+</style>
+<!-- WP SyntaxHighlighter Ver.1.7.3 CSS for code End -->
+<!-- Wordpress Popular Posts v2.3.2 -->
+<script type="text/javascript">
+    /* <![CDATA[ */				
+	jQuery.post('http://worktoolsmith.com/wp/wp-admin/admin-ajax.php', {action: 'wpp_update', token: 'daf1a0c1ed', id: 2847}, function(data){/*alert(data);*/});
+    /* ]]> */
+</script>
+<!-- End Wordpress Popular Posts v2.3.2 -->
+            
+<!-- WordPress Facebook Open Graph protocol plugin (WPFBOGP v2.0.7) http://rynoweb.com/wordpress-plugins/ -->
+<meta property="fb:admins" content="takefumi.o"/>
+<meta property="og:url" content="http://worktoolsmith.com/2012/12/fuelphp_atnd_netbeans/"/>
+<meta property="og:title" content="FuelPHP + NetBeans + Gitで高速開発環境を整える"/>
+<meta property="og:site_name" content="Work Tool Smith [ワークツールスミス]"/>
+<meta property="og:description" content=""/>
+<meta property="og:type" content="article"/>
+<meta property="og:image" content="http://worktoolsmith.com/wp/wp-content/uploads/2012/12/2012-12-01_12h31_27-300x120.png"/>
+<meta property="og:image" content="http://worktoolsmith.com/wp/wp-content/uploads/2012/12/2012-11-21-22.42.47_thumb.png"/>
+<meta property="og:image" content="http://worktoolsmith.com/wp/wp-content/uploads/2012/12/2012-11-21-22.43.03_thumb.png"/>
+<meta property="og:image" content="http://worktoolsmith.com/wp/wp-content/uploads/2012/12/2012-11-21-22_thumb.png"/>
+<meta property="og:image" content="http://worktoolsmith.com/wp/wp-content/uploads/2012/12/2012-11-21-22.43.13_thumb.png"/>
+<meta property="og:image" content="http://worktoolsmith.com/wp/wp-content/uploads/2012/12/2012-11-21-22.43.36_thumb.png"/>
+<meta property="og:image" content="http://worktoolsmith.com/wp/wp-content/uploads/2012/12/2012-11-21-22.43.47_thumb.png"/>
+<meta property="og:image" content="http://worktoolsmith.com/wp/wp-content/uploads/2012/12/2012-11-21-22.44.48_thumb.png"/>
+<meta property="og:image" content="http://worktoolsmith.com/wp/wp-content/uploads/2012/12/2012-11-21-22.45.06_thumb.png"/>
+<meta property="og:image" content="http://worktoolsmith.com/wp/wp-content/uploads/2012/12/2012-11-21-23.39.36_thumb.png"/>
+<meta property="og:image" content="http://worktoolsmith.com/wp/wp-content/uploads/2012/12/2012-11-21-22.45.30_thumb.png"/>
+<meta property="og:image" content="http://worktoolsmith.com/wp/wp-content/uploads/2012/12/2012-11-21-22.51.11_thumb.png"/>
+<meta property="og:image" content="http://worktoolsmith.com/wp/wp-content/uploads/2012/12/2012-11-21-222_thumb.png"/>
+<meta property="og:image" content="http://worktoolsmith.com/wp/wp-content/uploads/2012/12/2012-11-21-22.59.31_thumb.png"/>
+<meta property="og:image" content="http://worktoolsmith.com/wp/wp-content/uploads/2012/12/2012-11-21-22.59.41_thumb.png"/>
+<meta property="og:image" content="http://worktoolsmith.com/wp/wp-content/uploads/2012/12/2012-11-21-23.32.03_thumb.png"/>
+<meta property="og:image" content="http://worktoolsmith.com/wp/wp-content/uploads/2012/12/2012-11-21-23.36.26_thumb.png"/>
+<meta property="og:image" content="http://worktoolsmith.com/wp/wp-content/uploads/2012/12/2012-11-21-23.38.23_thumb.png"/>
+<meta property="og:image" content="http://worktoolsmith.com/wp/wp-content/uploads/2012/12/2012-11-21-23.38.35_thumb.png"/>
+<meta property="og:image" content="http://worktoolsmith.com/wp/wp-content/uploads/2012/12/2012-11-21-23.39.06_thumb.png"/>
+<meta property="og:image" content="http://worktoolsmith.com/wp/wp-content/uploads/2012/12/2012-11-21-23.39.10_thumb.png"/>
+<meta property="og:image" content="http://worktoolsmith.com/wp/wp-content/uploads/2012/12/2012-11-21-23.40.39_thumb.png"/>
+<meta property="og:image" content="http://worktoolsmith.com/wp/wp-content/uploads/2012/12/2012-11-21-23.40.56_thumb.png"/>
+<meta property="og:image" content="http://worktoolsmith.com/wp/wp-content/uploads/2012/12/2012-11-21-23.41.07_thumb.png"/>
+<meta property="og:image" content="http://worktoolsmith.com/wp/wp-content/uploads/2012/12/2012-11-21-23.41.26_thumb.png"/>
+<meta property="og:image" content="http://worktoolsmith.com/wp/wp-content/uploads/2012/12/2012-11-21-23.41.39_thumb.png"/>
+<meta property="og:image" content="http://worktoolsmith.com/wp/wp-content/uploads/2012/12/2012-12-01_13h20_39_thumb.png"/>
+<meta property="og:image" content="http://worktoolsmith.com/wp/wp-content/uploads/2012/12/2012-11-21-232_thumb.png"/>
+<meta property="og:image" content="http://worktoolsmith.com/wp/wp-content/uploads/2012/12/2012-12-01_13h42_14_thumb.png"/>
+<meta property="og:image" content="http://worktoolsmith.com/wp/wp-content/uploads/2012/12/2012-11-21-23_thumb.png"/>
+<meta property="og:image" content="http://worktoolsmith.com/wp/wp-content/uploads/2012/12/2012-11-21-233_thumb.png"/>
+<meta property="og:image" content="http://worktoolsmith.com/wp/wp-content/uploads/2012/12/2012-11-21-232_thumb1.png"/>
+<meta property="og:image" content="http://worktoolsmith.com/wp/wp-content/uploads/2012/12/2012-11-21-23.43.47_thumb.png"/>
+<meta property="og:image" content="http://worktoolsmith.com/wp/wp-content/uploads/2012/12/2012-11-21-23_thumb1.png"/>
+<meta property="og:image" content="http://worktoolsmith.com/wp/wp-content/uploads/2012/12/2012-11-21-23.44.24_thumb.png"/>
+<meta property="og:image" content="http://worktoolsmith.com/wp/wp-content/uploads/2012/12/2012-11-21-23.44.32_thumb.png"/>
+<meta property="og:image" content="http://worktoolsmith.com/wp/wp-content/uploads/2012/12/2012-11-21-23.45.17_thumb.png"/>
+<meta property="og:image" content="http://worktoolsmith.com/wp/wp-content/uploads/2012/12/2012-11-21-23.49.04_thumb.png"/>
+<meta property="og:image" content="http://worktoolsmith.com/wp/wp-content/uploads/2012/12/2012-11-21-23.49.25_thumb.png"/>
+<meta property="og:image" content="http://worktoolsmith.com/wp/wp-content/uploads/2012/12/2012-11-21-23.49.44_thumb.png"/>
+<meta property="og:image" content="http://worktoolsmith.com/wp/wp-content/uploads/2012/12/2012-11-21-23.50.46_thumb.png"/>
+<meta property="og:image" content="https://fbcdn-profile-a.akamaihd.net/hprofile-ak-snc4/260924_1490211136_970798339_n.jpg"/>
+<meta property="og:locale" content="ja"/>
+<!-- // end wpfbogp -->
+<link type="text/css" media="screen" rel="stylesheet" href="http://worktoolsmith.com/wp/wp-content/plugins/tweet-blender/css/tweets.css" />
+
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-2531091-46']);
+      _gaq.push(['_trackPageview']);
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+    
+    <script type="text/javascript">window.___gcfg = {lang: 'ja'};
+    (function() {
+      var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+      po.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);})();
+    </script>
+    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+    <script type="text/javascript" src="http://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+  </head>
+
+  <body class="single single-post postid-2847 single-format-standard single-author two-column right-sidebar">
+    <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/ja_JP/all.js#xfbml=1";
+    fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+
+    <header id="branding" role="banner">
+      <hgroup>
+        <div id="header-left">
+          <a href="http://worktoolsmith.com/" title="Work Tool Smith [ワークツールスミス]" rel="home">
+            <h1 id="site-title">Work Tool Smith [ワークツールスミス]</h1>
+          </a>
+          <h2 id="site-description">良い仕事はあなたを輝かせる。　仕事のためのツールとヒントをあなたへ　「ワークツールスミス」　パソコン作業の高速化、リアル単純作業の高速化テクニックの紹介。パソコンツール、仕事道具の紹介、体当たり製品レビューなど。</h2>
+        </div>
+        <div id="header-right">
+          <form action="http://www.google.co.jp" id="cse-search-box" target="_blank">
+            <div>
+              <input type="hidden" name="cx" value="partner-pub-4561278562347971:4125937919" />
+              <input type="hidden" name="ie" value="UTF-8" />
+              <input type="text" name="q" size="20" />
+              <input type="submit" name="sa" value="検索" />
+            </div>
+          </form>
+          <script type="text/javascript" src="http://www.google.co.jp/coop/cse/brand?form=cse-search-box&amp;lang=ja"></script>
+          <script type="text/javascript" src="http://www.google.com/cse/query_renderer.js"></script>
+          <div id="queries"></div>
+          <script src="http://www.google.com/cse/api/partner-pub-4561278562347971/cse/4125937919/queries/js?oe=UTF-8&amp;callback=(new+PopularQueryRenderer(document.getElementById(%22queries%22))).render"></script>
+
+                    <div class="social-badges">
+                        <a href="http://twitter.com/landscapesketch"><img src="http://worktoolsmith.com/wp/wp-content/themes/wp-th-wts3/images/social24/twitter.png" alt="ツイートボタン" title="ツイートする"/></a>
+            <a href="https://www.facebook.com/WorkToolSmith"><img src="http://worktoolsmith.com/wp/wp-content/themes/wp-th-wts3/images/social24/facebook.png" alt="Facebookに送信ボタン" title="Facebookに送信"/></a>
+            <a href="http://b.hatena.ne.jp/append?http://worktoolsmith.com "><img src="http://worktoolsmith.com/wp/wp-content/themes/wp-th-wts3/images/social24/hatena.png" alt="はてなブックマークに追加ボタン" title="はてなブックマークに追加"/></a>
+            <a href="https://plus.google.com/110169583626207068207" ><img src="http://worktoolsmith.com/wp/wp-content/themes/wp-th-wts3/images/social24/google-plus.png" alt="Google Plusに送信ボタン" title="Google Plusに送信" /></a>
+            <a href="javascript:void(0)" onclick="return BookmarkApp.addBookmark(this)"><img src="http://worktoolsmith.com/wp/wp-content/themes/wp-th-wts3/images/social24/add-this.png" alt="お気に入りに追加ボタン" title="お気に入りに追加" /></a>
+            <a href="http://feeds.feedburner.com/wts/rss" title="WorkToolSmithのフィードを購読する" rel="alternate" type="application/rss+xml"><img src="http://www.feedburner.com/fb/images/pub/feed-icon32x32.png" alt="" style="border:0"/></a>
+          </div>
+        </div>
+        <div class="clear"></div>
+        <nav id="access" role="navigation">
+          <div class="menu-main-container"><ul id="menu-main" class="menu"><li id="menu-item-793" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-793"><a href="http://worktoolsmith.com/">ホーム</a></li>
+<li id="menu-item-2343" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-2343"><a href="#parent">仮想化</a></li>
+<li id="menu-item-2206" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-2206"><a href="#parent">製品レビュー</a></li>
+<li id="menu-item-2346" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-2346"><a href="#parent">DocuWorks</a></li>
+<li id="menu-item-2521" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-2521"><a href="#parent">書評・良書紹介</a></li>
+<li id="menu-item-2776" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-2776"><a href="#parent">ブログ</a></li>
+<li id="menu-item-2203" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-2203"><a href="#parent">プログラム</a></li>
+<li id="menu-item-2347" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-2347"><a href="#parent">このページについて</a></li>
+</ul></div>        </nav><!-- #access -->
+      </hgroup>
+      <div class="clear">
+    </header><!-- #branding -->
+              <ul id="sub-menu-2343" class="sub-menu" style="display: none">
+            <div class="wrapper">
+                              <li id="sub-menu-item-2343">
+                  <a href="http://worktoolsmith.com/category/virtualization/">仮想化(Windows, Mac)</a></li>
+                                <li id="sub-menu-item-2343">
+                  <a href="http://worktoolsmith.com/category/server_virtualization/">サーバー仮想化</a></li>
+                                <li id="sub-menu-item-2343">
+                  <a href="http://worktoolsmith.com/vmware-fusion5-parallels-8-virtualbox4-1-mac%e4%bb%ae%e6%83%b3%e5%8c%96%e3%82%bd%e3%83%95%e3%83%88%e5%af%be%e6%b1%ba-2012/">Mac仮想化比較</a></li>
+                            </div>
+          </ul>
+                    <ul id="sub-menu-2206" class="sub-menu" style="display: none">
+            <div class="wrapper">
+                              <li id="sub-menu-item-2206">
+                  <a href="http://worktoolsmith.com/%e3%83%8f%e3%83%bc%e3%83%89%ef%bc%86%e3%82%bd%e3%83%95%e3%83%88%e4%bd%bf%e7%94%a8%e3%83%ac%e3%83%93%e3%83%a5%e3%83%bc/">もくじ</a></li>
+                                <li id="sub-menu-item-2206">
+                  <a href="http://worktoolsmith.com/%e3%83%8f%e3%83%bc%e3%83%89%ef%bc%86%e3%82%bd%e3%83%95%e3%83%88%e4%bd%bf%e7%94%a8%e3%83%ac%e3%83%93%e3%83%a5%e3%83%bc/%e3%83%81%e3%82%a7%e3%83%83%e3%82%af%e4%b8%ad%e3%81%ae%e5%95%86%e5%93%81%e3%80%81%e6%ac%b2%e3%81%97%e3%81%84%e5%95%86%e5%93%81/">検証中の商品</a></li>
+                                <li id="sub-menu-item-2206">
+                  <a href="http://worktoolsmith.com/vmware-fusion5-parallels-8-virtualbox4-1-mac%e4%bb%ae%e6%83%b3%e5%8c%96%e3%82%bd%e3%83%95%e3%83%88%e5%af%be%e6%b1%ba-2012/">仮想化ソフト検証</a></li>
+                            </div>
+          </ul>
+                    <ul id="sub-menu-2346" class="sub-menu" style="display: none">
+            <div class="wrapper">
+                              <li id="sub-menu-item-2346">
+                  <a href="http://worktoolsmith.com/docuworks/">もくじ</a></li>
+                                <li id="sub-menu-item-2346">
+                  <a href="http://worktoolsmith.com/whats_docuworks/why_docuworks/">なぜDocuWorksか</a></li>
+                                <li id="sub-menu-item-2346">
+                  <a href="http://worktoolsmith.com/whats_docuworks/paperless1/">書類の電子化とは</a></li>
+                                <li id="sub-menu-item-2346">
+                  <a href="http://worktoolsmith.com/docuworks_plugin/">DocuWorks用プラグイン</a></li>
+                            </div>
+          </ul>
+                    <ul id="sub-menu-2521" class="sub-menu" style="display: none">
+            <div class="wrapper">
+                              <li id="sub-menu-item-2521">
+                  <a href="http://worktoolsmith.com/%e8%89%af%e6%9b%b8%e7%b4%b9%e4%bb%8b/">もくじ</a></li>
+                                <li id="sub-menu-item-2521">
+                  <a href="http://worktoolsmith.com/%e8%89%af%e6%9b%b8%e7%b4%b9%e4%bb%8b/%e3%83%93%e3%82%b8%e3%83%8d%e3%82%b9%e3%81%ae%e8%89%af%e6%9b%b8/">ビジネスの良書</a></li>
+                                <li id="sub-menu-item-2521">
+                  <a href="http://worktoolsmith.com/%e8%89%af%e6%9b%b8%e7%b4%b9%e4%bb%8b/delphi%e3%83%97%e3%83%ad%e3%82%b0%e3%83%a9%e3%83%a0%e3%81%ae%e8%89%af%e6%9b%b8/">Delphiプログラムの良書</a></li>
+                            </div>
+          </ul>
+                    <ul id="sub-menu-2776" class="sub-menu" style="display: none">
+            <div class="wrapper">
+                              <li id="sub-menu-item-2776">
+                  <a href="http://worktoolsmith.com/category/mac/">Mac</a></li>
+                                <li id="sub-menu-item-2776">
+                  <a href="http://worktoolsmith.com/category/windows/">Windows</a></li>
+                                <li id="sub-menu-item-2776">
+                  <a href="http://worktoolsmith.com/category/new-pc/">最新PC</a></li>
+                                <li id="sub-menu-item-2776">
+                  <a href="http://worktoolsmith.com/category/%e6%9c%80%e6%96%b0%e3%82%bd%e3%83%95%e3%83%88/">最新ソフト</a></li>
+                                <li id="sub-menu-item-2776">
+                  <a href="http://worktoolsmith.com/category/%e7%89%b9%e4%be%a1%e6%83%85%e5%a0%b1/">特価情報</a></li>
+                            </div>
+          </ul>
+                    <ul id="sub-menu-2203" class="sub-menu" style="display: none">
+            <div class="wrapper">
+                              <li id="sub-menu-item-2203">
+                  <a href="http://worktoolsmith.com/%e3%83%97%e3%83%ad%e3%82%b0%e3%83%a9%e3%83%a0/">もくじ</a></li>
+                                <li id="sub-menu-item-2203">
+                  <a href="http://worktoolsmith.com/category/webprogram/php/">PHP</a></li>
+                                <li id="sub-menu-item-2203">
+                  <a href="http://worktoolsmith.com/category/delphi/">Delphi</a></li>
+                            </div>
+          </ul>
+                    <ul id="sub-menu-2347" class="sub-menu" style="display: none">
+            <div class="wrapper">
+                              <li id="sub-menu-item-2347">
+                  <a href="http://worktoolsmith.com/%e3%82%88%e3%81%86%e3%81%93%e3%81%9dworktoolsmith%e3%81%b8/">WorkToolSmith</a></li>
+                                <li id="sub-menu-item-2347">
+                  <a href="http://worktoolsmith.com/%e7%ae%a1%e7%90%86%e8%80%85%e3%81%b8%e3%81%ae%e3%81%8a%e5%95%8f%e3%81%84%e5%90%88%e3%82%8f%e3%81%9b/">お問い合わせ</a></li>
+                            </div>
+          </ul>
+              <div id="special-info" >
+      <div class="wrapper">
+        現在特別情報はありません。
+      </div>
+    </div>
+    <div id="page" class="hfeed">
+      <div id="main"><!-- single -->
+
+		<div id="primary">
+			<div id="content" role="main">
+				
+					<nav id="nav-single">
+						<h3 class="assistive-text">投稿ナビゲーション</h3>
+						<span class="nav-previous"><a href="http://worktoolsmith.com/2012/12/nengajo_coupon_500/" rel="prev"><span class="meta-nav">&larr;</span> 前へ</a></span>
+						<span class="nav-next"></span>
+					</nav><!-- #nav-single -->
+          
+					<!-- content-single -->
+<!-- content-single -->
+<article id="post-2847" class="post-2847 post type-post status-publish format-standard hentry category-fuelphp category-mac category-netbeans-2 category-php category-webprogram category-windows tag-advent-calender tag-fuelphp tag-netbeans tag-php">
+      <div id="aa-header">
+      <div id="text-32">			<div class="textwidget"><script type="text/javascript"><!--
+google_ad_client = "ca-pub-4561278562347971";
+/* WTS TOP 300 */
+google_ad_slot = "9379603296";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script></div>
+		</div>    </div>
+	<header class="entry-header">
+		<h1 class="entry-title">FuelPHP + NetBeans + Gitで高速開発環境を整える</h1>
+
+				<div class="entry-meta">
+			<span class="sep">投稿日:</span><a href="http://worktoolsmith.com/2012/12/fuelphp_atnd_netbeans/" title="11:55 PM" rel="bookmark"><time class="entry-date" datetime="2012-12-10T23:55:21+00:00" pubdate>2012年12月10日</time></a><span class="by-author"> <span class="sep">作成者:</span> <span class="author vcard"><a class="url fn n" href="http://worktoolsmith.com/author/wts-takefumi/" title="タケ の投稿をすべて表示" rel="author">タケ</a></span></span>		</div><!-- .entry-meta -->
+		    
+          <div class="share-buttons">
+        <a href="https://twitter.com/share" class="twitter-share-button" data-count="vertical" data-via="landscapesketch" data-lang="ja">ツイート</a><script type="text/javascript" src="//platform.twitter.com/widgets.js"></script>
+        <div class="fb-like" data-href="http://worktoolsmith.com/2012/12/fuelphp_atnd_netbeans/" data-send="false" data-layout="box_count" data-width="70" data-show-faces="true" data-font="arial"></div>
+        <a href="http://b.hatena.ne.jp/entry/http://worktoolsmith.com/2012/12/fuelphp_atnd_netbeans/" class="hatena-bookmark-button" data-hatena-bookmark-title="FuelPHP + NetBeans + Gitで高速開発環境を整える - Work Tool Smith [ワークツールスミス]" data-hatena-bookmark-layout="vertical" title="このエントリーをはてなブックマークに追加"><img src="http://b.st-hatena.com/images/entry-button/button-only.gif" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a>
+        <script type="text/javascript" src="http://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+        <g:plusone size="tall"></g:plusone>
+      </div>
+          	</header><!-- .entry-header -->
+
+	<div class="entry-content">
+		<p>こんにちは。<br />
+<strong>FuelPHP Advent Calendar</strong>初参加のタケです。</p>
+<p>昨日は@EGMCさんの「<a href="http://dasalog.eg2mix.com/fuel-advent2012-dsauth/" target="_blank">FuelPHP用ソーシャルログイン専用認証パッケージDsAuthでNinjAuthをもっと簡単に利用する</a>」でした。</p>
+<p>今日の私の記事はFuelPHP + NetBeans + Gitで高速で便利な開発環境を作る手順です。</p>
+<p>画像ばかりでしかも長くなってしまいましたが、お付き合いください。</p>
+<p><span id="more-2847"></span></p>
+<h3>NetBeansのダウンロード</h3>
+<p>まずは<a href="http://ja.netbeans.org/" target="_blank">NetBeans公式ページ</a>から、NetBeans本体をダウンロードしセットアップしてください。</p>
+<p><a href="http://worktoolsmith.com/wp/wp-content/uploads/2012/12/2012-12-01_12h31_27.png" rel="lightbox[2847]" title="NetBeansのダウンロード"><img src="http://worktoolsmith.com/wp/wp-content/uploads/2012/12/2012-12-01_12h31_27-300x120.png" border="0" alt="NetBeansのダウンロード" title="NetBeansのダウンロード" width="300" height="120" class="size-medium wp-image-2848" style="background-image: none; padding-left: 0px; padding-right: 0px; padding-top: 0px; border: 0px;" /></a></p>
+<p>セットアップはセットアップファイルをダブルクリックするだけでOK。JDKも必要になりますので、Macは別途Oracleから入手する必要があります。</p>
+<h3>FuelPHPを展開</h3>
+<p>FuelPHPをダウンロードし、必要な場所に展開します。</p>
+<p><a href="http://worktoolsmith.com/wp/wp-content/uploads/2012/12/2012-11-21-22.42.47.png" rel="lightbox[2847]" title="スクリーンショット 2012-11-21 22.42.47"><img src="http://worktoolsmith.com/wp/wp-content/uploads/2012/12/2012-11-21-22.42.47_thumb.png" border="0" alt="スクリーンショット 2012-11-21 22.42.47" title="スクリーンショット 2012-11-21 22.42.47" width="300" height="219" style="background-image: none; padding-left: 0px; padding-right: 0px; display: inline; padding-top: 0px; border: 0px;" /></a></p>
+<h3>NetBeansでプロジェクトの作成</h3>
+<p>NetBeansを起動します。</p>
+<p><a href="http://worktoolsmith.com/wp/wp-content/uploads/2012/12/2012-11-21-22.43.03.png" rel="lightbox[2847]" title="スクリーンショット 2012-11-21 22.43.03"><img src="http://worktoolsmith.com/wp/wp-content/uploads/2012/12/2012-11-21-22.43.03_thumb.png" border="0" alt="スクリーンショット 2012-11-21 22.43.03" title="スクリーンショット 2012-11-21 22.43.03" width="300" height="199" style="background-image: none; padding-left: 0px; padding-right: 0px; display: inline; padding-top: 0px; border: 0px;" /></a></p>
+<p>&nbsp;</p>
+<p>NetBeansでプロジェクトを作成します。<br />
+ファイル &gt; 新規プロジェクト　をポイント</p>
+<p><a href="http://worktoolsmith.com/wp/wp-content/uploads/2012/12/2012-11-21-22.png" rel="lightbox[2847]" title="スクリーンショット 2012-11-21 22"><img src="http://worktoolsmith.com/wp/wp-content/uploads/2012/12/2012-11-21-22_thumb.png" border="0" alt="スクリーンショット 2012-11-21 22" title="スクリーンショット 2012-11-21 22" width="227" height="300" style="background-image: none; padding-left: 0px; padding-right: 0px; display: inline; padding-top: 0px; border: 0px;" /></a></p>
+<p>&nbsp;</p>
+<p><a href="http://worktoolsmith.com/wp/wp-content/uploads/2012/12/2012-11-21-22.43.13.png" rel="lightbox[2847]" title="スクリーンショット 2012-11-21 22.43.13"><img src="http://worktoolsmith.com/wp/wp-content/uploads/2012/12/2012-11-21-22.43.13_thumb.png" border="0" alt="スクリーンショット 2012-11-21 22.43.13" title="スクリーンショット 2012-11-21 22.43.13" width="300" height="215" style="background-image: none; padding-left: 0px; padding-right: 0px; display: inline; padding-top: 0px; border: 0px;" /></a></p>
+<p>「既存のソースを使用するPHPアプリケーション」を選択し、次へ</p>
+<p>&nbsp;</p>
+<p><a href="http://worktoolsmith.com/wp/wp-content/uploads/2012/12/2012-11-21-22.43.36.png" rel="lightbox[2847]" title="スクリーンショット 2012-11-21 22.43.36"><img src="http://worktoolsmith.com/wp/wp-content/uploads/2012/12/2012-11-21-22.43.36_thumb.png" border="0" alt="スクリーンショット 2012-11-21 22.43.36" title="スクリーンショット 2012-11-21 22.43.36" width="300" height="190" style="background-image: none; padding-left: 0px; padding-right: 0px; display: inline; padding-top: 0px; border: 0px;" /></a></p>
+<p>プロジェクトフォルダの選択となります。<br />
+先ほど展開した <strong>fuelphp</strong> のフォルダを選び、開きます。</p>
+<p><a href="http://worktoolsmith.com/wp/wp-content/uploads/2012/12/2012-11-21-22.43.47.png" rel="lightbox[2847]" title="スクリーンショット 2012-11-21 22.43.47"><img src="http://worktoolsmith.com/wp/wp-content/uploads/2012/12/2012-11-21-22.43.47_thumb.png" border="0" alt="スクリーンショット 2012-11-21 22.43.47" title="スクリーンショット 2012-11-21 22.43.47" width="300" height="214" style="background-image: none; padding-left: 0px; padding-right: 0px; display: inline; padding-top: 0px; border: 0px;" /></a></p>
+<p>詳細設定が出てきます。<br />
+プロジェクト名とは、NetBeansのプロジェクトペインに表示される名前です。私は通常、アプリケーション名を付けています。</p>
+<p>&nbsp;</p>
+<h3>次に実行構成の編集です</h3>
+<p>もしFTPでサーバーにアップロードする場合はここで設定をするとラクです。<br />
+ローカルだけで動かす場合はこの段落は無視してください。</p>
+<p>&nbsp;</p>
+<p><a href="http://worktoolsmith.com/wp/wp-content/uploads/2012/12/2012-11-21-22.44.48.png" rel="lightbox[2847]" title="スクリーンショット 2012-11-21 22.44.48"><img src="http://worktoolsmith.com/wp/wp-content/uploads/2012/12/2012-11-21-22.44.48_thumb.png" border="0" alt="スクリーンショット 2012-11-21 22.44.48" title="スクリーンショット 2012-11-21 22.44.48" width="300" height="186" style="background-image: none; padding-left: 0px; padding-right: 0px; display: inline; padding-top: 0px; border: 0px;" /></a></p>
+<p>基本的な接続設定をします。</p>
+<p>&nbsp;</p>
+<p><a href="http://worktoolsmith.com/wp/wp-content/uploads/2012/12/2012-11-21-22.45.06.png" rel="lightbox[2847]" title="スクリーンショット 2012-11-21 22.45.06"><img src="http://worktoolsmith.com/wp/wp-content/uploads/2012/12/2012-11-21-22.45.06_thumb.png" border="0" alt="スクリーンショット 2012-11-21 22.45.06" title="スクリーンショット 2012-11-21 22.45.06" width="300" height="96" style="background-image: none; padding-left: 0px; padding-right: 0px; display: inline; padding-top: 0px; border: 0px;" /></a></p>
+<p>この画面で「<strong>手動</strong>」を選択しておくと、ファイルごとにアップ、ダウン、同期が選べるメニュー追加され、不用意にファイルを更新してしまうリスクをなくせます。</p>
+<p>&nbsp;</p>
+<p><a href="http://worktoolsmith.com/wp/wp-content/uploads/2012/12/2012-11-21-23.39.36.png" rel="lightbox[2847]" title="スクリーンショット 2012-11-21 23.39.36"><img src="http://worktoolsmith.com/wp/wp-content/uploads/2012/12/2012-11-21-23.39.36_thumb.png" border="0" alt="スクリーンショット 2012-11-21 23.39.36" title="スクリーンショット 2012-11-21 23.39.36" width="158" height="300" style="background-image: none; padding-left: 0px; padding-right: 0px; display: inline; padding-top: 0px; border: 0px;" /></a></p>
+<p>ファイルを右クリックするとこのようなメニューが現れるようになります。</p>
+<p>&nbsp;</p>
+<p>設定が終わりましたら「終了」を押します。</p>
+<h3>設定完了</h3>
+<p>設定が終わるとプロジェクトとしてペインに表示されます。</p>
+<p><a href="http://worktoolsmith.com/wp/wp-content/uploads/2012/12/2012-11-21-22.45.30.png" rel="lightbox[2847]" title="スクリーンショット 2012-11-21 22.45.30"><img src="http://worktoolsmith.com/wp/wp-content/uploads/2012/12/2012-11-21-22.45.30_thumb.png" border="0" alt="スクリーンショット 2012-11-21 22.45.30" title="スクリーンショット 2012-11-21 22.45.30" width="250" height="300" style="background-image: none; padding-left: 0px; padding-right: 0px; display: inline; padding-top: 0px; border: 0px;" /></a></p>
+<p>&nbsp;</p>
+<h3>プラグインの追加</h3>
+<p>さてここでまた<strong>寄り道</strong>。FuelPHP用のプラグインを追加します。</p>
+<p>このプラグインはインストールしなくても、このあとの説明には問題ありません。時間がある人だけ読んでください。</p>
+<p>&nbsp;</p>
+<p>NetBeansでFuelPHPを便利に使うために、プラグインが開発されています。ただ、現状はほとんど機能が搭載されていないのですが、プロジェクトのアイコンがFuelPHPタイプに変化してうれしいので入れておきます。</p>
+<p>ダウンロードはこちら　＞　<a title="https://github.com/junichi11/fuelphp-netbeans/downloads" href="https://github.com/junichi11/fuelphp-netbeans/downloads">https://github.com/junichi11/fuelphp-netbeans/downloads</a></p>
+<p>&nbsp;</p>
+<p>NetBeansの<strong>7.2</strong>、<strong>7.2.1</strong>で分かれています。</p>
+<p><a href="http://worktoolsmith.com/wp/wp-content/uploads/2012/12/2012-11-21-22.51.11.png" rel="lightbox[2847]" title="スクリーンショット 2012-11-21 22.51.11"><img src="http://worktoolsmith.com/wp/wp-content/uploads/2012/12/2012-11-21-22.51.11_thumb.png" border="0" alt="スクリーンショット 2012-11-21 22.51.11" title="スクリーンショット 2012-11-21 22.51.11" width="300" height="106" style="background-image: none; padding-left: 0px; padding-right: 0px; display: inline; padding-top: 0px; border: 0px;" /></a></p>
+<p>バージョンが違うとインストールエラーになりますので必ずあわせてください。</p>
+<p>&nbsp;</p>
+<p>ダウンロードすると「<strong>.nbm</strong>」ファイルが保存されています。<br />
+これがNetNeansのプラグインファイルです。</p>
+<p>&nbsp;</p>
+<p>NetBeansに戻り、ツール &gt; プラグイン を開きます。</p>
+<p>「ダウンロード済み」タブをクリック</p>
+<p>「プラグインの追加」ボタンをクリック</p>
+<p>先ほどダウンロードした .nbm ファイルを選択。</p>
+<p>「インストール」をクリック</p>
+<p>&nbsp;</p>
+<p>正常に登録されると、</p>
+<p><a href="http://worktoolsmith.com/wp/wp-content/uploads/2012/12/2012-11-21-222.png" rel="lightbox[2847]" title="スクリーンショット 2012-11-21 22(2)"><img src="http://worktoolsmith.com/wp/wp-content/uploads/2012/12/2012-11-21-222_thumb.png" border="0" alt="スクリーンショット 2012-11-21 22(2)" title="スクリーンショット 2012-11-21 22(2)" width="300" height="296" style="background-image: none; padding-left: 0px; padding-right: 0px; display: inline; padding-top: 0px; border: 0px;" /></a></p>
+<p>こんなアイコンに変わります。</p>
+<p><strong>カワイイ！</strong>（それだけ！？）</p>
+<p>&nbsp;</p>
+<h3>コード補完用ファイルを持ってくる</h3>
+<p>次にコード補完をするために、<a href="https://twitter.com/kenji_s" target="_blank">@kenjis</a>さんのページから補完用作ります。</p>
+<p>こちら &gt; <a title="http://d.hatena.ne.jp/Kenji_s/20120123/1327301678" href="http://d.hatena.ne.jp/Kenji_s/20120123/1327301678">http://d.hatena.ne.jp/Kenji_s/20120123/1327301678</a></p>
+<p>&nbsp;</p>
+<p>autocomplete.phpを作り、ソース・ファイル直下に置きます。</p>
+<p><a href="http://worktoolsmith.com/wp/wp-content/uploads/2012/12/2012-11-21-22.59.31.png" rel="lightbox[2847]" title="スクリーンショット 2012-11-21 22.59.31"><img src="http://worktoolsmith.com/wp/wp-content/uploads/2012/12/2012-11-21-22.59.31_thumb.png" border="0" alt="スクリーンショット 2012-11-21 22.59.31" title="スクリーンショット 2012-11-21 22.59.31" width="223" height="178" style="background-image: none; padding-left: 0px; padding-right: 0px; display: inline; padding-top: 0px; border: 0px;" /></a></p>
+<p>&nbsp;</p>
+<p>中身は<a href="https://twitter.com/kenji_s" target="_blank">@kenjis</a>さんのページからコピーしてください。</p>
+<p><a href="http://worktoolsmith.com/wp/wp-content/uploads/2012/12/2012-11-21-22.59.41.png" rel="lightbox[2847]" title="スクリーンショット 2012-11-21 22.59.41"><img src="http://worktoolsmith.com/wp/wp-content/uploads/2012/12/2012-11-21-22.59.41_thumb.png" border="0" alt="スクリーンショット 2012-11-21 22.59.41" title="スクリーンショット 2012-11-21 22.59.41" width="300" height="178" style="background-image: none; padding-left: 0px; padding-right: 0px; display: inline; padding-top: 0px; border: 0px;" /></a></p>
+<p>&nbsp;</p>
+<p>このファイルを置いておくことでクラスなどのコード補完が使えます。</p>
+<p>&nbsp;</p>
+<h3>強力なコードテンプレートを使う</h3>
+<p>NetBeansにはカンタンに登録でき、非常に使える<strong>コードテンプレート</strong>が搭載されています。コードテンプレートとは、よく使うコードをわずかな文字数で呼び出せる機能です。実際に使ってみましょう。</p>
+<p>&nbsp;</p>
+<p>今回はFuelPHPでよく使う構文</p>
+<p style="padding-left: 60px;">return Response::forge(View::forge(‘hogehoge’));</p>
+<p>をテンプレートにしてみます。</p>
+<p>&nbsp;</p>
+<p>NetBeansの　ツール &gt; オプション　をポイント</p>
+<p>出てきたダイアログで　エディタ &gt; コードテンプレート　を開きます。</p>
+<p>言語から　PHP　を選択します。</p>
+<p><a href="http://worktoolsmith.com/wp/wp-content/uploads/2012/12/2012-11-21-23.32.03.png" rel="lightbox[2847]" title="スクリーンショット 2012-11-21 23.32.03"><img src="http://worktoolsmith.com/wp/wp-content/uploads/2012/12/2012-11-21-23.32.03_thumb.png" border="0" alt="スクリーンショット 2012-11-21 23.32.03" title="スクリーンショット 2012-11-21 23.32.03" width="300" height="197" style="background-image: none; padding-left: 0px; padding-right: 0px; display: inline; padding-top: 0px; border: 0px;" /></a></p>
+<p>&nbsp;</p>
+<p>右にある「新規」ボタンをクリック</p>
+<p><a href="http://worktoolsmith.com/wp/wp-content/uploads/2012/12/2012-11-21-23.36.26.png" rel="lightbox[2847]" title="スクリーンショット 2012-11-21 23.36.26"><img src="http://worktoolsmith.com/wp/wp-content/uploads/2012/12/2012-11-21-23.36.26_thumb.png" border="0" alt="スクリーンショット 2012-11-21 23.36.26" title="スクリーンショット 2012-11-21 23.36.26" width="300" height="138" style="background-image: none; padding-left: 0px; padding-right: 0px; display: inline; padding-top: 0px; border: 0px;" /></a></p>
+<p>省略名とは実際にキーボードから打ち込む文字です。<br />
+すでに登録されてい名前は使えません。</p>
+<p>&nbsp;</p>
+<p>今回は「<strong>retview</strong>」としてみます。</p>
+<p><a href="http://worktoolsmith.com/wp/wp-content/uploads/2012/12/2012-11-21-23.38.23.png" rel="lightbox[2847]" title="スクリーンショット 2012-11-21 23.38.23"><img src="http://worktoolsmith.com/wp/wp-content/uploads/2012/12/2012-11-21-23.38.23_thumb.png" border="0" alt="スクリーンショット 2012-11-21 23.38.23" title="スクリーンショット 2012-11-21 23.38.23" width="291" height="129" style="background-image: none; padding-left: 0px; padding-right: 0px; display: inline; padding-top: 0px; border: 0px;" /></a></p>
+<p>&nbsp;</p>
+<p>テンプレートの編集モードになりますので、展開後のコードを書きます。</p>
+<p><a href="http://worktoolsmith.com/wp/wp-content/uploads/2012/12/2012-11-21-23.38.35.png" rel="lightbox[2847]" title="スクリーンショット 2012-11-21 23.38.35"><img src="http://worktoolsmith.com/wp/wp-content/uploads/2012/12/2012-11-21-23.38.35_thumb.png" border="0" alt="スクリーンショット 2012-11-21 23.38.35" title="スクリーンショット 2012-11-21 23.38.35" width="300" height="74" style="background-image: none; padding-left: 0px; padding-right: 0px; display: inline; padding-top: 0px; border: 0px;" /></a></p>
+<p>具体的には</p>
+<p style="padding-left: 60px;">return Response::forge(View::forge(‘${cursor}’);</p>
+<p>と記入します。ちなみに　<strong>${cursor}</strong>　とは、コードを展開後に「カーソルをその部分に移動しろ」というテンプレート変数です。</p>
+<p>&nbsp;</p>
+<p>OKを押して全てを閉じます。</p>
+<p>&nbsp;</p>
+<p>ではコードを使ってみます。</p>
+<p>コントローラーのコードを開きます。<br />
+<strong>retview</strong>とだけ打って、「tabキー」をしてください。</p>
+<p><a href="http://worktoolsmith.com/wp/wp-content/uploads/2012/12/2012-11-21-23.39.06.png" rel="lightbox[2847]" title="スクリーンショット 2012-11-21 23.39.06"><img src="http://worktoolsmith.com/wp/wp-content/uploads/2012/12/2012-11-21-23.39.06_thumb.png" border="0" alt="スクリーンショット 2012-11-21 23.39.06" title="スクリーンショット 2012-11-21 23.39.06" width="300" height="88" style="background-image: none; padding-left: 0px; padding-right: 0px; display: inline; padding-top: 0px; border: 0px;" /></a></p>
+<p>&nbsp;</p>
+<p><a href="http://worktoolsmith.com/wp/wp-content/uploads/2012/12/2012-11-21-23.39.10.png" rel="lightbox[2847]" title="スクリーンショット 2012-11-21 23.39.10"><img src="http://worktoolsmith.com/wp/wp-content/uploads/2012/12/2012-11-21-23.39.10_thumb.png" border="0" alt="スクリーンショット 2012-11-21 23.39.10" title="スクリーンショット 2012-11-21 23.39.10" width="300" height="82" style="background-image: none; padding-left: 0px; padding-right: 0px; display: inline; padding-top: 0px; border: 0px;" /></a></p>
+<p><strong>ワオ！すばらしい！</strong></p>
+<p>forge(‘’)の中にカーソルが移っていますので、すぐに書けますね！</p>
+<p>&nbsp;</p>
+<p>コードテンプレートは前方の変数名を取得したりするなど、たくさんの便利機能があります。</p>
+<p>ぜひ使ってみてください。</p>
+<p>&nbsp;</p>
+<h3>プロジェクトをGitとして初期化する</h3>
+<p>バーション管理のためにGitを使います。</p>
+<p>まずはプロジェクトをGitのリポジトリとして初期化しましょう。</p>
+<p>&nbsp;</p>
+<p>プロジェクト名を右クリックし、バーション管理 &gt; Gitリポジトリの初期化　をポイント</p>
+<p><a href="http://worktoolsmith.com/wp/wp-content/uploads/2012/12/2012-11-21-23.40.39.png" rel="lightbox[2847]" title="スクリーンショット 2012-11-21 23.40.39"><img src="http://worktoolsmith.com/wp/wp-content/uploads/2012/12/2012-11-21-23.40.39_thumb.png" border="0" alt="スクリーンショット 2012-11-21 23.40.39" title="スクリーンショット 2012-11-21 23.40.39" width="300" height="135" style="background-image: none; padding-left: 0px; padding-right: 0px; display: inline; padding-top: 0px; border: 0px;" /></a></p>
+<p>確認が表示されますのでOKを押します。</p>
+<p>&nbsp;</p>
+<p><a href="http://worktoolsmith.com/wp/wp-content/uploads/2012/12/2012-11-21-23.40.56.png" rel="lightbox[2847]" title="スクリーンショット 2012-11-21 23.40.56"><img src="http://worktoolsmith.com/wp/wp-content/uploads/2012/12/2012-11-21-23.40.56_thumb.png" border="0" alt="スクリーンショット 2012-11-21 23.40.56" title="スクリーンショット 2012-11-21 23.40.56" width="300" height="65" style="background-image: none; padding-left: 0px; padding-right: 0px; display: inline; padding-top: 0px; border: 0px;" /></a></p>
+<p>下部にメッセージが出て初期化の状況がわかります。<br />
+すぐに終わります。</p>
+<p>&nbsp;</p>
+<p>コミットします。プロジェクト名を右クリックすると「Git」メニューが増えています。</p>
+<p>Git &gt; コミット …　をポイント</p>
+<p><a href="http://worktoolsmith.com/wp/wp-content/uploads/2012/12/2012-11-21-23.41.07.png" rel="lightbox[2847]" title="スクリーンショット 2012-11-21 23.41.07"><img src="http://worktoolsmith.com/wp/wp-content/uploads/2012/12/2012-11-21-23.41.07_thumb.png" border="0" alt="スクリーンショット 2012-11-21 23.41.07" title="スクリーンショット 2012-11-21 23.41.07" width="182" height="300" style="background-image: none; padding-left: 0px; padding-right: 0px; display: inline; padding-top: 0px; border: 0px;" /></a></p>
+<p>&nbsp;</p>
+<p>確認が表示されます。</p>
+<p><a href="http://worktoolsmith.com/wp/wp-content/uploads/2012/12/2012-11-21-23.41.26.png" rel="lightbox[2847]" title="スクリーンショット 2012-11-21 23.41.26"><img src="http://worktoolsmith.com/wp/wp-content/uploads/2012/12/2012-11-21-23.41.26_thumb.png" border="0" alt="スクリーンショット 2012-11-21 23.41.26" title="スクリーンショット 2012-11-21 23.41.26" width="300" height="229" style="background-image: none; padding-left: 0px; padding-right: 0px; display: inline; padding-top: 0px; border: 0px;" /></a></p>
+<p>コミット・メッセージには必ず状況説明を記入します。入れないとコミットできません。<br />
+下半分はコミットされるファイルの一覧です。</p>
+<p>&nbsp;</p>
+<p>緑色だったファイル名が黒色に戻り、コミットされたことがわかります。</p>
+<p><a href="http://worktoolsmith.com/wp/wp-content/uploads/2012/12/2012-11-21-23.41.39.png" rel="lightbox[2847]" title="スクリーンショット 2012-11-21 23.41.39"><img src="http://worktoolsmith.com/wp/wp-content/uploads/2012/12/2012-11-21-23.41.39_thumb.png" border="0" alt="スクリーンショット 2012-11-21 23.41.39" title="スクリーンショット 2012-11-21 23.41.39" width="189" height="300" style="background-image: none; padding-left: 0px; padding-right: 0px; display: inline; padding-top: 0px; border: 0px;" /></a></p>
+<p>&nbsp;</p>
+<p>ちなみにファイル名の色は</p>
+<p><span style="color: #008080;"><strong>緑</strong></span>＝新規追加ファイル</p>
+<p><span style="color: #0000ff;"><strong>青</strong></span>＝変更され、コミットされていないファイル</p>
+<p><strong>黒</strong>＝コミット完了のファイル</p>
+<p>となっています。</p>
+<p>&nbsp;</p>
+<h3>BitBucketの準備</h3>
+<p>次はGitホストを用意します。</p>
+<p>&nbsp;</p>
+<p>今回はGitHubではなくて<a href="https://bitbucket.org/" target="_blank">BitBucket</a>を使用します。BitBucketは無料でプライベートリポジトリを無制限に作れますので、秘密でお金をかけず作りたい人に向いています。(笑)</p>
+<p>&nbsp;</p>
+<p>まずはBitBucketでアカウントを作成します。BitBucketはこちら　＞　<a title="https://bitbucket.org/" href="https://bitbucket.org/">https://bitbucket.org/</a></p>
+<p>&nbsp;</p>
+<p>ログインしましたら、Repositoriesから「Create repository」を選択します。</p>
+<p><a href="http://worktoolsmith.com/wp/wp-content/uploads/2012/12/2012-12-01_13h20_39.png" rel="lightbox[2847]" title="2012-12-01_13h20_39"><img src="http://worktoolsmith.com/wp/wp-content/uploads/2012/12/2012-12-01_13h20_39_thumb.png" border="0" alt="2012-12-01_13h20_39" title="2012-12-01_13h20_39" width="229" height="269" style="background-image: none; margin: 0px; padding-left: 0px; padding-right: 0px; display: inline; padding-top: 0px; border: 0px;" /></a></p>
+<p>&nbsp;</p>
+<p>必要な項目を記入します。</p>
+<p><a href="http://worktoolsmith.com/wp/wp-content/uploads/2012/12/2012-11-21-232.png" rel="lightbox[2847]" title="スクリーンショット 2012-11-21 23(2)"><img src="http://worktoolsmith.com/wp/wp-content/uploads/2012/12/2012-11-21-232_thumb.png" border="0" alt="スクリーンショット 2012-11-21 23(2)" title="スクリーンショット 2012-11-21 23(2)" width="300" height="172" style="background-image: none; padding-left: 0px; padding-right: 0px; display: inline; padding-top: 0px; border: 0px;" /></a></p>
+<p>「This is a private repository」にチェックを入れますと、自分と許可した人だけが見られるプライベートリポジトリとなります。</p>
+<p>「Create repository」を押せばリポジトリが作成されます。</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>次の操作のために<strong>リポジトリURL</strong>を取得します。</p>
+<p>&nbsp;</p>
+<p><a href="http://worktoolsmith.com/wp/wp-content/uploads/2012/12/2012-12-01_13h42_14.png" rel="lightbox[2847]" title="2012-12-01_13h42_14"><img src="http://worktoolsmith.com/wp/wp-content/uploads/2012/12/2012-12-01_13h42_14_thumb.png" border="0" alt="2012-12-01_13h42_14" title="2012-12-01_13h42_14" width="300" height="43" style="background-image: none; padding-left: 0px; padding-right: 0px; display: inline; padding-top: 0px; border: 0px;" /></a></p>
+<p>上部にこのようなボタンがあります。</p>
+<p>&nbsp;</p>
+<p>Clone　を押します。</p>
+<p><a href="http://worktoolsmith.com/wp/wp-content/uploads/2012/12/2012-11-21-23.png" rel="lightbox[2847]" title="スクリーンショット 2012-11-21 23"><img src="http://worktoolsmith.com/wp/wp-content/uploads/2012/12/2012-11-21-23_thumb.png" border="0" alt="スクリーンショット 2012-11-21 23" title="スクリーンショット 2012-11-21 23" width="300" height="106" style="background-image: none; padding-left: 0px; padding-right: 0px; display: inline; padding-top: 0px; border: 0px;" /></a></p>
+<p>&nbsp;</p>
+<p>SSH の部分を押します。</p>
+<p><a href="http://worktoolsmith.com/wp/wp-content/uploads/2012/12/2012-11-21-233.png" rel="lightbox[2847]" title="スクリーンショット 2012-11-21 23(3)"><img src="http://worktoolsmith.com/wp/wp-content/uploads/2012/12/2012-11-21-233_thumb.png" border="0" alt="スクリーンショット 2012-11-21 23(3)" title="スクリーンショット 2012-11-21 23(3)" width="300" height="94" style="background-image: none; padding-left: 0px; padding-right: 0px; display: inline; padding-top: 0px; border: 0px;" /></a></p>
+<p>HTTPSを選択します。</p>
+<p>&nbsp;</p>
+<p>すると</p>
+<p><a href="http://worktoolsmith.com/wp/wp-content/uploads/2012/12/2012-11-21-2321.png" rel="lightbox[2847]" title="スクリーンショット 2012-11-21 23(2)"><img src="http://worktoolsmith.com/wp/wp-content/uploads/2012/12/2012-11-21-232_thumb1.png" border="0" alt="スクリーンショット 2012-11-21 23(2)" title="スクリーンショット 2012-11-21 23(2)" width="300" height="55" style="background-image: none; padding-left: 0px; padding-right: 0px; display: inline; padding-top: 0px; border: 0px;" /></a></p>
+<p>https://　から始まるURLが現れます。</p>
+<p>このURLがNetBeansで使えます。<br />
+クリップボードにコピー、もしくはメモなどに貼り付けておいてください。</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<h3>BitBucketにプッシュする</h3>
+<p>BitBucketプッシュします。</p>
+<p>&nbsp;</p>
+<p>NetBeansに戻り、プロジェクト名を右クリックし、Git &gt; リモート &gt; プッシュ…　をポイントします。</p>
+<p><a href="http://worktoolsmith.com/wp/wp-content/uploads/2012/12/2012-11-21-23.43.47.png" rel="lightbox[2847]" title="スクリーンショット 2012-11-21 23.43.47"><img src="http://worktoolsmith.com/wp/wp-content/uploads/2012/12/2012-11-21-23.43.47_thumb.png" border="0" alt="スクリーンショット 2012-11-21 23.43.47" title="スクリーンショット 2012-11-21 23.43.47" width="213" height="300" style="background-image: none; padding-left: 0px; padding-right: 0px; display: inline; padding-top: 0px; border: 0px;" /></a></p>
+<p>&nbsp;</p>
+<p>登録するリポジトリの設定画面が出ます。</p>
+<p><a href="http://worktoolsmith.com/wp/wp-content/uploads/2012/12/2012-11-21-231.png" rel="lightbox[2847]" title="スクリーンショット 2012-11-21 23"><img src="http://worktoolsmith.com/wp/wp-content/uploads/2012/12/2012-11-21-23_thumb1.png" border="0" alt="スクリーンショット 2012-11-21 23" title="スクリーンショット 2012-11-21 23" width="300" height="223" style="background-image: none; padding-left: 0px; padding-right: 0px; display: inline; padding-top: 0px; border: 0px;" /></a></p>
+<p>&nbsp;</p>
+<p>リポジトリURLが最初は空になっています。</p>
+<p>ここに<strong>先ほどコピーしたBitBucketのリポジトリURL</strong>を記入します。</p>
+<p>ユーザー名、パスワードはBitBucketのログインパスワードと同じです。</p>
+<p>次へを押します。</p>
+<p>&nbsp;</p>
+<p><a href="http://worktoolsmith.com/wp/wp-content/uploads/2012/12/2012-11-21-23.44.24.png" rel="lightbox[2847]" title="スクリーンショット 2012-11-21 23.44.24"><img src="http://worktoolsmith.com/wp/wp-content/uploads/2012/12/2012-11-21-23.44.24_thumb.png" border="0" alt="スクリーンショット 2012-11-21 23.44.24" title="スクリーンショット 2012-11-21 23.44.24" width="300" height="221" style="background-image: none; padding-left: 0px; padding-right: 0px; display: inline; padding-top: 0px; border: 0px;" /></a></p>
+<p>何も考えず master &gt; master にチェックを入れます</p>
+<p>&nbsp;</p>
+<p><a href="http://worktoolsmith.com/wp/wp-content/uploads/2012/12/2012-11-21-23.44.32.png" rel="lightbox[2847]" title="スクリーンショット 2012-11-21 23.44.32"><img src="http://worktoolsmith.com/wp/wp-content/uploads/2012/12/2012-11-21-23.44.32_thumb.png" border="0" alt="スクリーンショット 2012-11-21 23.44.32" title="スクリーンショット 2012-11-21 23.44.32" width="300" height="222" style="background-image: none; padding-left: 0px; padding-right: 0px; display: inline; padding-top: 0px; border: 0px;" /></a></p>
+<p>終了を押します。</p>
+<p>&nbsp;</p>
+<p>正常にプッシュされるとBitBucketに反映されます。</p>
+<p><a href="http://worktoolsmith.com/wp/wp-content/uploads/2012/12/2012-11-21-23.45.17.png" rel="lightbox[2847]" title="スクリーンショット 2012-11-21 23.45.17"><img src="http://worktoolsmith.com/wp/wp-content/uploads/2012/12/2012-11-21-23.45.17_thumb.png" border="0" alt="スクリーンショット 2012-11-21 23.45.17" title="スクリーンショット 2012-11-21 23.45.17" width="300" height="136" style="background-image: none; padding-left: 0px; padding-right: 0px; display: inline; padding-top: 0px; border: 0px;" /></a></p>
+<p>&nbsp;</p>
+<p>これでプッシュ完了です。</p>
+<p>&nbsp;</p>
+<h3>クローンから再生</h3>
+<p>次にBitBucketからプロジェクトを読みこんでみます。</p>
+<p>プロジェクトが無い状態からはじめます。</p>
+<p>&nbsp;</p>
+<p><a href="http://worktoolsmith.com/wp/wp-content/uploads/2012/12/2012-11-21-23.49.04.png" rel="lightbox[2847]" title="スクリーンショット 2012-11-21 23.49.04"><img src="http://worktoolsmith.com/wp/wp-content/uploads/2012/12/2012-11-21-23.49.04_thumb.png" border="0" alt="スクリーンショット 2012-11-21 23.49.04" title="スクリーンショット 2012-11-21 23.49.04" width="300" height="139" style="background-image: none; padding-left: 0px; padding-right: 0px; display: inline; padding-top: 0px; border: 0px;" /></a></p>
+<p>NetBeansのチーム &gt; Git &gt; クローン…　をポイント</p>
+<p>&nbsp;</p>
+<p>BitBucketのリポジトリURL、パスワードなどを入力し、次へ</p>
+<p>&nbsp;</p>
+<p>masterを選択</p>
+<p><a href="http://worktoolsmith.com/wp/wp-content/uploads/2012/12/2012-11-21-23.49.25.png" rel="lightbox[2847]" title="スクリーンショット 2012-11-21 23.49.25"><img src="http://worktoolsmith.com/wp/wp-content/uploads/2012/12/2012-11-21-23.49.25_thumb.png" border="0" alt="スクリーンショット 2012-11-21 23.49.25" title="スクリーンショット 2012-11-21 23.49.25" width="300" height="197" style="background-image: none; padding-left: 0px; padding-right: 0px; display: inline; padding-top: 0px; border: 0px;" /></a></p>
+<p>&nbsp;</p>
+<p>保存する親ディレクトリ、ディレクトリ名などを設定します。</p>
+<p><a href="http://worktoolsmith.com/wp/wp-content/uploads/2012/12/2012-11-21-23.49.44.png" rel="lightbox[2847]" title="スクリーンショット 2012-11-21 23.49.44"><img src="http://worktoolsmith.com/wp/wp-content/uploads/2012/12/2012-11-21-23.49.44_thumb.png" border="0" alt="スクリーンショット 2012-11-21 23.49.44" title="スクリーンショット 2012-11-21 23.49.44" width="300" height="199" style="background-image: none; padding-left: 0px; padding-right: 0px; display: inline; padding-top: 0px; border: 0px;" /></a></p>
+<p>&nbsp;</p>
+<p>正常にクローンされると、プロジェクトを開くかどうかの質問が出ますので、「開く」を選択。</p>
+<p>&nbsp;</p>
+<p><a href="http://worktoolsmith.com/wp/wp-content/uploads/2012/12/2012-11-21-23.50.46.png" rel="lightbox[2847]" title="スクリーンショット 2012-11-21 23.50.46"><img src="http://worktoolsmith.com/wp/wp-content/uploads/2012/12/2012-11-21-23.50.46_thumb.png" border="0" alt="スクリーンショット 2012-11-21 23.50.46" title="スクリーンショット 2012-11-21 23.50.46" width="266" height="264" style="background-image: none; padding-left: 0px; padding-right: 0px; display: inline; padding-top: 0px; border: 0px;" /></a></p>
+<p>無事に再生されました。</p>
+<p>&nbsp;</p>
+<h3>まとめ</h3>
+<p>いかがでしたでしょうか？</p>
+<p>だいぶ長くなってしまいました。ここまで読んでくださってありがとうございます。</p>
+<p>&nbsp;</p>
+<p>NetBeansは動作も比較的軽く、サポート機能が充実しています。</p>
+<p>また、設定を一括でエクスポート、インポート出来るおかげでWindows、Mac、Linuxで使いやすい環境をすぐに作り上げることができます。</p>
+<p>未体験の方はぜひ使ってみてください。</p>
+<h3>明日は</h3>
+<p>あすは@seltzerさんの「Coda + FuelPHPでお手軽開発環境を作る」です。</p>
+<p>おたのしみに！</p>
+<h3>P.S.</h3>
+<p>完全に内容を欲張りすぎましたね・・・こんな長い記事になってしまってすみません。</p>
+			</div><!-- .entry-content -->
+
+	<footer class="entry-meta">
+          <div class="share-buttons">
+        <a href="https://twitter.com/share" class="twitter-share-button" data-count="vertical" data-via="landscapesketch" data-lang="ja">ツイート</a><script type="text/javascript" src="//platform.twitter.com/widgets.js"></script>
+        <div class="fb-like" data-href="http://worktoolsmith.com/2012/12/fuelphp_atnd_netbeans/" data-send="false" data-layout="box_count" data-width="70" data-show-faces="true" data-font="arial"></div>
+        <a href="http://b.hatena.ne.jp/entry/http://worktoolsmith.com/2012/12/fuelphp_atnd_netbeans/" class="hatena-bookmark-button" data-hatena-bookmark-title="FuelPHP + NetBeans + Gitで高速開発環境を整える - Work Tool Smith [ワークツールスミス]" data-hatena-bookmark-layout="vertical" title="このエントリーをはてなブックマークに追加"><img src="http://b.st-hatena.com/images/entry-button/button-only.gif" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a>
+        <script type="text/javascript" src="http://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+        <g:plusone size="tall"></g:plusone>
+      </div>
+              <div class="rss-message">
+          
+          <a href="http://feeds.feedburner.com/wts/rss" title="WorkToolSmithのフィードを購読する" rel="alternate" type="application/rss+xml"><img src="http://www.feedburner.com/fb/images/pub/feed-icon32x32.png" alt="" style="border:0"/></a>
+          初めて当ページにいらっしゃいましたか？それとも何度か見ていただいていますか？もし気に入っていただけましたら、
+          ぜひ<a href="http://feeds.feedburner.com/wts/rss" title="WorkToolSmithのフィードを購読する" rel="alternate" type="application/rss+xml">RSSリーダーへ登録</a>してください。
+        </div>
+        		カテゴリー: <a href="http://worktoolsmith.com/category/webprogram/fuelphp/" title="FuelPHP の投稿をすべて表示" rel="category tag">FuelPHP</a>, <a href="http://worktoolsmith.com/category/mac/" title="Mac の投稿をすべて表示" rel="category tag">Mac</a>, <a href="http://worktoolsmith.com/category/netbeans-2/" title="NetBeans の投稿をすべて表示" rel="category tag">NetBeans</a>, <a href="http://worktoolsmith.com/category/webprogram/php/" title="PHP の投稿をすべて表示" rel="category tag">PHP</a>, <a href="http://worktoolsmith.com/category/webprogram/" title="Webプログラム の投稿をすべて表示" rel="category tag">Webプログラム</a>, <a href="http://worktoolsmith.com/category/windows/" title="Windows の投稿をすべて表示" rel="category tag">Windows</a> &nbsp; タグ: <a href="http://worktoolsmith.com/tag/advent-calender/" rel="tag">Advent Calender</a>, <a href="http://worktoolsmith.com/tag/fuelphp/" rel="tag">FuelPHP</a>, <a href="http://worktoolsmith.com/tag/netbeans/" rel="tag">netbeans</a>, <a href="http://worktoolsmith.com/tag/php/" rel="tag">PHP</a>  &nbsp; 作成者: <a href="http://worktoolsmith.com/author/wts-takefumi/">タケ</a> &nbsp; <a href="http://worktoolsmith.com/2012/12/fuelphp_atnd_netbeans/" title="FuelPHP + NetBeans + Gitで高速開発環境を整える へのパーマリンク" rel="bookmark">この投稿のパーマリンク</a>		
+			</footer><!-- .entry-meta -->
+  </article><!-- #post-2847 -->
+<!-- /content-single -->
+					
+
+<div id="comments">
+
+  
+    <div class="fb-box">
+    <h2>コメントはお気軽に</h2>
+    <p>記事についての疑問、感想などお気軽にどうぞ。他に試してほしいことがありましたら教えてください。
+      応援の言葉をいただけたら、最高にうれしいです。</p>
+　  <div class="fb-comments" data-href="http://worktoolsmith.com/2012/12/fuelphp_atnd_netbeans/" data-num-posts="3" data-width="500"></div>
+  </div>
+  
+  <div class="wpp">
+    <!-- Wordpress Popular Posts Plugin v2.3.2 [SC] [daily] [custom] -->
+<h2>ほかにはこんな記事が人気です</h2><ul>
+<li><a href="http://worktoolsmith.com/vmware-fusion5-parallels-8-virtualbox4-1-mac%e4%bb%ae%e6%83%b3%e5%8c%96%e3%82%bd%e3%83%95%e3%83%88%e5%af%be%e6%b1%ba-2012/" title="VMware Fusion5 / Parallels 8 / VirtualBox4.1 [Mac仮想化ソフト対決 2012]" class="wpp-post-title">VMware Fusion5 / Parallels 8 / VirtualBox4.1 [Mac仮想化ソフト対決 2012]</a> </li>
+<li><a href="http://worktoolsmith.com/mac%e7%94%a8%e4%bb%ae%e6%83%b3pc%e3%82%bd%e3%83%95%e3%83%88%e5%af%be%e6%b1%ba%ef%bc%81-vmware-parallels-virtualbox/" title="Mac用仮想PCソフト対決！ VMware Parallels VirtualBox" class="wpp-post-title">Mac用仮想PCソフト対決！ VMware Parallels VirtualBox</a> </li>
+<li><a href="http://worktoolsmith.com/%e6%9c%80%e6%96%b0macbook-air%e3%81%a8%e4%bb%ae%e6%83%b3windows-7%e3%81%af%e3%81%a9%e3%82%8c%e3%81%a0%e3%81%91%e9%80%9f%e3%81%84%e3%81%ae%e3%81%8b%ef%bc%9f/" title="最新MacBook Airと仮想Windows 7はどれだけ速いのか？" class="wpp-post-title">最新MacBook Airと仮想Windows 7はどれだけ速いのか？</a> </li>
+<li><a href="http://worktoolsmith.com/2012/03/pasori-rc-s370%e3%81%a8mac%e3%80%80%e3%83%81%e3%83%a3%e3%83%bc%e3%82%b8%e3%81%a7%e3%81%8d%e3%82%8b%e3%81%ae%ef%bc%9f/" title="pasori RC-S370とMacでチャージできるの？" class="wpp-post-title">pasori RC-S370とMacでチャージできるの？</a> </li>
+<li><a href="http://worktoolsmith.com/%e3%83%8f%e3%83%bc%e3%83%89%ef%bc%86%e3%82%bd%e3%83%95%e3%83%88%e4%bd%bf%e7%94%a8%e3%83%ac%e3%83%93%e3%83%a5%e3%83%bc/iphone-textforce-%e3%83%aa%e3%83%a5%e3%82%a6%e3%83%89%e3%81%ae%e3%82%ad%e3%83%bc%e3%83%9c%e3%83%bc%e3%83%89%e3%81%a7%e6%9c%80%e5%bc%b7%e5%9f%b7%e7%ad%86%e7%92%b0%e5%a2%83%e3%82%92%e6%95%b4/" title="iPhone + TextForce + リュウドのキーボードで最強執筆環境を整える" class="wpp-post-title">iPhone + TextForce + リュウドのキーボードで最強執筆環境を整える</a> </li>
+<li><a href="http://worktoolsmith.com/2011/11/windows%e7%94%a8xampp%e3%81%8b%e3%82%89microsoft-sql-server%e3%81%ab%e6%8e%a5%e7%b6%9a%e3%81%a7%e3%81%8d%e3%81%aa%e3%81%84/" title="Windows用XAMPPからMicrosoft SQL Serverに接続できない" class="wpp-post-title">Windows用XAMPPからMicrosoft SQL Serverに接続できない</a> </li>
+<li><a href="http://worktoolsmith.com/%e3%83%8f%e3%83%bc%e3%83%89%ef%bc%86%e3%82%bd%e3%83%95%e3%83%88%e4%bd%bf%e7%94%a8%e3%83%ac%e3%83%93%e3%83%a5%e3%83%bc/mac%e3%81%a7edy%e3%83%81%e3%83%a3%e3%83%bc%e3%82%b8%e3%81%99%e3%82%8b%e6%9c%80%e7%9f%ad%e3%81%ae%e9%81%93/" title="MacでEdyチャージする最短の道" class="wpp-post-title">MacでEdyチャージする最短の道</a> </li>
+<li><a href="http://worktoolsmith.com/2012/11/%e4%bb%8a%e6%97%a5%e3%81%ae%e3%81%8c%e3%81%a3%e3%81%a1%e3%82%8a%e3%83%9e%e3%83%b3%e3%83%87%e3%83%bc%e3%81%af%e3%83%aa%e3%83%96%e3%82%bb%e3%83%b3%e3%82%b9%e3%81%ae%e6%9d%91%e4%b8%8a%e7%a4%be%e9%95%b7/" title="がっちりマンデー リブセンスの村上社長 26歳" class="wpp-post-title">がっちりマンデー リブセンスの村上社長 26歳</a> </li>
+<li><a href="http://worktoolsmith.com/2012/11/fuelphp-1-3%e3%81%8b%e3%82%891-4%e3%81%b8%e3%83%90%e3%83%bc%e3%82%b8%e3%83%a7%e3%83%b3%e3%82%a2%e3%83%83%e3%83%97/" title="FuelPHP 1.3から1.4へバージョンアップ" class="wpp-post-title">FuelPHP 1.3から1.4へバージョンアップ</a> </li>
+<li><a href="http://worktoolsmith.com/2012/11/%e3%82%84%e3%81%99%e3%81%a3%ef%bc%819980%e5%86%86%ef%bc%81%e3%83%89%e3%82%b9%e3%83%91%e3%83%a9%e3%81%8c%e3%82%aa%e3%83%aa%e3%82%b8%e3%83%8a%e3%83%abandroid4-1-7%e3%82%a4%e3%83%b3%e3%83%81%e3%82%bf/" title="やすっ！9,980円！ドスパラがオリジナルAndroid4.1 7インチタブレット発売 (A07I-D15A)" class="wpp-post-title">やすっ！9,980円！ドスパラがオリジナルAndroid4.1 7インチタブレット発売 (A07I-D15A)</a> </li>
+</ul>
+<!-- End Wordpress Popular Posts Plugin v2.3.2 -->
+  </div>
+    
+
+</div><!-- #comments -->
+
+				
+			</div><!-- #content -->
+		</div><!-- #primary -->
+
+<!--sidebar-->
+		<div id="secondary" class="widget-area" role="complementary">
+			<aside id="text-39" class="widget widget_text"><h3 class="widget-title">年賀状作りに新しいプリンターを</h3>			<div class="textwidget">私はプリンターはCanonが好きです。
+
+<div class="kaerebalink-box" style="text-align:left;padding-bottom:20px;font-size:small;/zoom: 1;overflow: hidden;"><div class="kaerebalink-image" style="float:left;margin:0 15px 10px 0;"><a href="http://c.af.moshimo.com/af/c/click?a_id=239278&p_id=54&pc_id=54&pl_id=616&s_v=b5Rz2P0601xu&url=http%3A%2F%2Fitem.rakuten.co.jp%2Fedion%2F4960999848068%2F" rel="nofollow" target="_blank"><img src="http://thumbnail.image.rakuten.co.jp/@0_mall/edion/cabinet/goods/l1/img059/4960999848068_l1.jpg?_ex=128x128" style="border: none;" /></a></div><div class="kaerebalink-info" style="line-height:120%;/zoom: 1;overflow: hidden;"><div class="kaerebalink-name" style="margin-bottom:10px;line-height:120%"><a href="http://c.af.moshimo.com/af/c/click?a_id=239278&p_id=54&pc_id=54&pl_id=616&s_v=b5Rz2P0601xu&url=http%3A%2F%2Fitem.rakuten.co.jp%2Fedion%2F4960999848068%2F" rel="nofollow" target="_blank">【送料無料】キヤノン ワイヤレスプリンタ PIXUS ブラック MG6330BK [MG6330BK]</a><div class="kaerebalink-powered-date" style="font-size:8pt;margin-top:5px;font-family:verdana;line-height:120%">posted with <a href="http://kaereba.com" target="_blank">カエレバ</a></div></div><div class="kaerebalink-detail" style="margin-bottom:5px;"> エディオン　楽天市場店     </div><div class="kaerebalink-link1" style="margin-top:10px;"><div class="shoplinkrakuten" style="margin-right:5px;background: url('http://img.yomereba.com/kl.gif') 0 -50px no-repeat;padding: 2px 0 2px 18px;white-space: nowrap;"><a href="http://c.af.moshimo.com/af/c/click?a_id=239278&p_id=54&pc_id=54&pl_id=616&s_v=b5Rz2P0601xu&url=http%3A%2F%2Fsearch.rakuten.co.jp%2Fsearch%2Fmall%2F%25E9%2580%2581%25E6%2596%2599%25E7%2584%25A1%25E6%2596%2599%2F-%2Ff.1-p.1-s.1-sf.0-st.A-v.2%3Fx%3D0" rel="nofollow" target="_blank" title="楽天市場" >楽天市場</a></div><div class="shoplinkamazon" style="margin-right:5px;background: url('http://img.yomereba.com/kl.gif') 0 0 no-repeat;padding: 2px 0 2px 18px;white-space: nowrap;"><a href="http://www.amazon.co.jp/gp/search?keywords=%91%97%97%BF%96%B3%97%BF&__mk_ja_JP=%83J%83%5E%83J%83i&tag=worktoolsmith-22" rel="nofollow" target="_blank" title="アマゾン" >Amazon</a></div><div class="shoplinkyahoo" style="margin-right:5px;background: url('http://img.yomereba.com/kl.gif') 0 -150px no-repeat;padding: 2px 0 2px 18px;white-space: nowrap;"><a href="http://ck.jp.ap.valuecommerce.com/servlet/referral?sid=2818777&pid=880644339&vc_url=http%3A%2F%2Fshopping.search.yahoo.co.jp%2Fsearch%3FuIv%3Don%26ei%3DUTF-8%26tab_ex%3Dcommerce%26slider%3D0%26va%3D%25E9%2580%2581%25E6%2596%2599%25E7%2584%25A1%25E6%2596%2599" target="_blank" title="Yahooショッピング" >Yahooショッピング<img src="http://ad.jp.ap.valuecommerce.com/servlet/gifbanner?sid=2818777&pid=880644339" height="1" width="1" border="0"></a></div><div class="shoplinkkakakucom" style="margin-right:5px;background: url('http://img.yomereba.com/kl2.gif') 0 -100px no-repeat;padding: 2px 0 2px 18px;white-space: nowrap;"><a href="http://kakaku.com/search_results/%91%97%97%BF%96%B3%97%BF/" rel="nofollow" target="_blank" title="kakakucom" >価格.com</a></div></div></div><div class="booklink-footer" style="clear: left"></div></div></div>
+		</aside><aside id="text-24" class="widget widget_text"><h3 class="widget-title">Mac用仮想PCソフト対決！ VMware Parallels VirtualBox</h3>			<div class="textwidget"><p><a href="http://worktoolsmith.com/2012/11/vmware-fusion-5-%e3%83%91%e3%83%83%e3%82%b1%e3%83%bc%e3%82%b8%e7%89%88%e3%82%82%e8%b2%b7%e3%81%a3%e3%81%a6%e3%81%bf%e3%81%9f%e3%82%88amazon%e3%81%8b%e3%82%89/"><br />
+<img src="/images/fusion5.png" /><br />
+VMware Fusion 5パッケージ版を購入した感想はこちらの記事へどうぞ。<br />
+</a></p>
+<p><img src="http://worktoolsmith.com/images/vmicon/vmicon3.png"><br />
+Mac用仮想PCソフトを３つ比べてみました。<br />
+ご検討中の方はぜひ見てみてください。</p>
+<p><strong>2012年最新版</strong>での比較を追加しました。<br />
+<a href="http://worktoolsmith.com/vmware-fusion5-parallels-8-virtualbox4-1-mac%E4%BB%AE%E6%83%B3%E5%8C%96%E3%82%BD%E3%83%95%E3%83%88%E5%AF%BE%E6%B1%BA-2012/">VMware Fusion5 / Parallels 8 / VirtualBox4.1 </a></p>
+<p><strong>2011年時点での</strong>仮想化ソフト比較<br />
+<A href="http://worktoolsmith.com/mac%E7%94%A8%E4%BB%AE%E6%83%B3pc%E3%82%BD%E3%83%95%E3%83%88%E5%AF%BE%E6%B1%BA%EF%BC%81-vmware-parallels-virtualbox/">レビュー　Mac用仮想PCソフト対決！ VMware Parallels VirtualBox</a></p>
+<p>MacBook Air（Mid 2012）でもベンチマークを取ってみました。<br />
+<a href="http://worktoolsmith.com/最新macbook-airと仮想windows-7はどれだけ速いのか？/"> 最新MacBook Airと仮想Windows 7はどれだけ速いのか？</a></p>
+<p>MacBook Air（Late2010）でもベンチを取ってみました。<br />
+<a href="http://worktoolsmith.com/%E3%83%8F%E3%83%BC%E3%83%89%EF%BC%86%E3%82%BD%E3%83%95%E3%83%88%E4%BD%BF%E7%94%A8%E3%83%AC%E3%83%93%E3%83%A5%E3%83%BC/parallels_macbook_air/">レビュー Parallels + Macbook Air(Late 2010)で3DMarkを試してみた</a></p>
+</div>
+		</aside><aside id="text-26" class="widget widget_text"><h3 class="widget-title">iPhone + TextForce + キーボードで最強執筆環境を整える</h3>			<div class="textwidget">iPhone (iPod Touch) はちょっとした文章を書くのにも非常に便利に使えます。<br>
+さらに本格的な文章に対応できるか、テキストエディタTextForceとリュウドのBlueToothキーボードを試してみました。
+<br><br>
+<a href="http://worktoolsmith.com/%E3%83%8F%E3%83%BC%E3%83%89%EF%BC%86%E3%82%BD%E3%83%95%E3%83%88%E4%BD%BF%E7%94%A8%E3%83%AC%E3%83%93%E3%83%A5%E3%83%BC/1252-2/">リュウド BlueTooth折りたたみキーボード RBK-2300BTi</a><br><br>
+<a href="http://worktoolsmith.com/%E3%83%8F%E3%83%BC%E3%83%89%EF%BC%86%E3%82%BD%E3%83%95%E3%83%88%E4%BD%BF%E7%94%A8%E3%83%AC%E3%83%93%E3%83%A5%E3%83%BC/iphone-textforce-%E3%83%AA%E3%83%A5%E3%82%A6%E3%83%89%E3%81%AE%E3%82%AD%E3%83%BC%E3%83%9C%E3%83%BC%E3%83%89%E3%81%A7%E6%9C%80%E5%BC%B7%E5%9F%B7%E7%AD%86%E7%92%B0%E5%A2%83%E3%82%92%E6%95%B4/">iPhone + TextForce + キーボードで最強執筆環境を整える</a></div>
+		</aside><aside id="text-27" class="widget widget_text"><h3 class="widget-title">このサイトについて</h3>			<div class="textwidget"><div align="center"><img src="http://worktoolsmith.com/images/photo2.jpg" /></div>
+<p>運営者　<strong>タケ</strong><br />
+1976年生まれ。ふたご座。静岡県在住。<br />
+パソコンを7歳からいじり始めて28年。とにかくパソコンが好きです。<br />
+パソコンを使う上で大切なのは、「基本をおぼえる」ことではなくて「今すぐ使える」こと。<br />
+仕事に役立つ、使いやすくなるハード、ソフト、ツールなどをこだわりの視点でレビュー・解説します。</p>
+<p><img src="http://worktoolsmith.com/images/16/twitter_2.png" />Twitter <a href="https://twitter.com/LandscapeSketch">@LandscapeSketch</a><br />
+<img src="http://worktoolsmith.com/images/16/feed.png" />RSS <a href="http://worktoolsmith.com/feed">更新情報登録</a><br />
+<img src="http://worktoolsmith.com/images/16/mail_box.png" />お問い合わせ <a href="http://worktoolsmith.com/%E7%AE%A1%E7%90%86%E8%80%85%E3%81%B8%E3%81%AE%E3%81%8A%E5%95%8F%E3%81%84%E5%90%88%E3%82%8F%E3%81%9B/">直接のお問い合わせ</a></p>
+<p><span style="color:#f00;">↓ランキング参加中です。ぜひワンクリックを！</span><br />
+<a href="http://blog.with2.net/link.php?1407750" title="人気ブログランキングへ"><img src="http://image.with2.net/img/banner/banner_12.gif" width="80" height="15" border="0" /></a><br /><a href="http://blog.with2.net/link.php?1407750" style="font-size:12px;">人気ブログランキングへ</a></p>
+<p><a href="http://blogranking.fc2.com/in.php?id=753042" target="_blank"><img src="http://blogranking.fc2.com/ranking_banner/a_01.gif" style="border:0px;"></a></p>
+<p><a href="http://pckaden.blogmura.com/mac/"><img src="http://pckaden.blogmura.com/mac/img/mac88_31.gif" width="88" height="31" border="0" alt="にほんブログ村 PC家電ブログ Macへ" /></a></p>
+</div>
+		</aside>		<aside id="recent-posts-2" class="widget widget_recent_entries">		<h3 class="widget-title">最新の記事</h3>		<ul>
+				<li><a href="http://worktoolsmith.com/2012/12/fuelphp_atnd_netbeans/" title="FuelPHP + NetBeans + Gitで高速開発環境を整える">FuelPHP + NetBeans + Gitで高速開発環境を整える</a></li>
+				<li><a href="http://worktoolsmith.com/2012/12/nengajo_coupon_500/" title="【クーポンプレゼント！】年賀状ソフトが500円割引になります">【クーポンプレゼント！】年賀状ソフトが500円割引になります</a></li>
+				<li><a href="http://worktoolsmith.com/2012/12/%e3%82%82%e3%82%8a%e3%82%82%e3%82%8a%e3%83%a1%e3%83%a2%e3%83%aa%e3%81%a3%e3%81%a6%e3%80%81%e3%83%80%e3%82%b8%e3%83%a3%e3%83%ac%e3%81%af%e3%81%84%e3%81%84%e3%81%8b%e3%82%89/" title="もりもりメモリって、ダジャレはいいから">もりもりメモリって、ダジャレはいいから</a></li>
+				<li><a href="http://worktoolsmith.com/2012/12/4tb-hdd%e3%82%82%e6%99%ae%e9%80%9a%e3%81%ab%e3%81%aa%e3%81%a3%e3%81%a6%e3%81%8d%e3%81%9f%e3%81%8b%e3%83%bb%e3%83%bb%e3%83%bb/" title="4TB HDDも普通になってきたか・・・">4TB HDDも普通になってきたか・・・</a></li>
+				<li><a href="http://worktoolsmith.com/2012/12/%e3%82%84%e3%81%a3%e3%81%9f%ef%bc%81xserver-ssh%e6%8e%a5%e7%b6%9a%e3%80%80%e8%a7%a3%e7%a6%81%ef%bc%81%ef%bc%81/" title="やった！XServer SSH接続　解禁！！">やった！XServer SSH接続　解禁！！</a></li>
+				<li><a href="http://worktoolsmith.com/2012/12/%e3%81%a8%e3%81%ab%e3%81%8b%e3%81%8f%e4%bd%bf%e3%81%84%e3%82%84%e3%81%99%e3%81%84%ef%bc%81%e3%83%84%e3%82%a4%e3%83%83%e3%82%bf%e3%83%bc%e7%94%a8%e3%82%bd%e3%83%95%e3%83%88%e3%80%8cjanetter%e3%80%8d/" title="とにかく使いやすい！ツイッター用ソフト「Janetter」">とにかく使いやすい！ツイッター用ソフト「Janetter」</a></li>
+				<li><a href="http://worktoolsmith.com/2012/12/intel_ssd_usb30/" title="感動の速さ！Intel SSD+USB3.0ケースでベンチマーク！">感動の速さ！Intel SSD+USB3.0ケースでベンチマーク！</a></li>
+				<li><a href="http://worktoolsmith.com/2012/12/chicken_soup_for_the_soul/" title="心がささくれている・・・そんな夜にはこころのチキンスープ">心がささくれている・・・そんな夜にはこころのチキンスープ</a></li>
+				</ul>
+		</aside><aside id="text-28" class="widget widget_text"><h3 class="widget-title">検証中の商品</h3>			<div class="textwidget"><p><a href="http://worktoolsmith.com/%e3%83%81%e3%82%a7%e3%83%83%e3%82%af%e4%b8%ad%e3%81%ae%e5%95%86%e5%93%81%e3%80%81%e6%ac%b2%e3%81%97%e3%81%84%e5%95%86%e5%93%81/">検証中リスト</a></p>
+<p>現在検証中の商品一覧です。後日レビュー記事にします。<br />
+同じ商品を検討中の方はレビューを待っているといいかも？</p>
+</div>
+		</aside><aside id="categories-5" class="widget widget_categories"><h3 class="widget-title">カテゴリー</h3>		<ul>
+	<li class="cat-item cat-item-359"><a href="http://worktoolsmith.com/category/c/" title="c++ に含まれる投稿をすべて表示">c++</a> (2)
+</li>
+	<li class="cat-item cat-item-49"><a href="http://worktoolsmith.com/category/webprogram/cakephp/" title="CakePHP に含まれる投稿をすべて表示">CakePHP</a> (3)
+</li>
+	<li class="cat-item cat-item-57"><a href="http://worktoolsmith.com/category/webprogram/codeigniter/" title="CodeIgniter に含まれる投稿をすべて表示">CodeIgniter</a> (6)
+</li>
+	<li class="cat-item cat-item-16"><a href="http://worktoolsmith.com/category/delphi/" title="Delphi に含まれる投稿をすべて表示">Delphi</a> (55)
+</li>
+	<li class="cat-item cat-item-3"><a href="http://worktoolsmith.com/category/docuworks/" title="DocuWorks に含まれる投稿をすべて表示">DocuWorks</a> (26)
+</li>
+	<li class="cat-item cat-item-59"><a href="http://worktoolsmith.com/category/docuworks/docuworks-api/" title="DocuWorks API に含まれる投稿をすべて表示">DocuWorks API</a> (15)
+</li>
+	<li class="cat-item cat-item-72"><a href="http://worktoolsmith.com/category/docuworks/docuworks%e3%83%97%e3%83%a9%e3%82%b0%e3%82%a4%e3%83%b3/" title="DocuWorksプラグイン に含まれる投稿をすべて表示">DocuWorksプラグイン</a> (5)
+</li>
+	<li class="cat-item cat-item-428"><a href="http://worktoolsmith.com/category/eclipse/" title="Eclipse に含まれる投稿をすべて表示">Eclipse</a> (2)
+</li>
+	<li class="cat-item cat-item-9"><a href="http://worktoolsmith.com/category/evernote/" title="Evernote に含まれる投稿をすべて表示">Evernote</a> (14)
+</li>
+	<li class="cat-item cat-item-350"><a href="http://worktoolsmith.com/category/webprogram/fuelphp/" title="FuelPHP に含まれる投稿をすべて表示">FuelPHP</a> (7)
+</li>
+	<li class="cat-item cat-item-223"><a href="http://worktoolsmith.com/category/iphone-app/" title="iPhone App に含まれる投稿をすべて表示">iPhone App</a> (4)
+</li>
+	<li class="cat-item cat-item-170"><a href="http://worktoolsmith.com/category/webprogram/javascript/" title="JavaScript に含まれる投稿をすべて表示">JavaScript</a> (4)
+</li>
+	<li class="cat-item cat-item-55"><a href="http://worktoolsmith.com/category/webprogram/joomla/" title="Joomla! に含まれる投稿をすべて表示">Joomla!</a> (1)
+</li>
+	<li class="cat-item cat-item-135"><a href="http://worktoolsmith.com/category/webprogram/jquery-webprogram/" title="jQuery に含まれる投稿をすべて表示">jQuery</a> (3)
+</li>
+	<li class="cat-item cat-item-15"><a href="http://worktoolsmith.com/category/linux/" title="Linux に含まれる投稿をすべて表示">Linux</a> (15)
+</li>
+	<li class="cat-item cat-item-40"><a href="http://worktoolsmith.com/category/mac/" title="Mac に含まれる投稿をすべて表示">Mac</a> (46)
+</li>
+	<li class="cat-item cat-item-102"><a href="http://worktoolsmith.com/category/webprogram/movable-type/" title="Movable Type に含まれる投稿をすべて表示">Movable Type</a> (2)
+</li>
+	<li class="cat-item cat-item-134"><a href="http://worktoolsmith.com/category/netbeans-2/" title="NetBeans に含まれる投稿をすべて表示">NetBeans</a> (8)
+</li>
+	<li class="cat-item cat-item-360"><a href="http://worktoolsmith.com/category/opencv/" title="OpenCV に含まれる投稿をすべて表示">OpenCV</a> (2)
+</li>
+	<li class="cat-item cat-item-52"><a href="http://worktoolsmith.com/category/webprogram/php/" title="PHP に含まれる投稿をすべて表示">PHP</a> (12)
+</li>
+	<li class="cat-item cat-item-361"><a href="http://worktoolsmith.com/category/webprogram/python/" title="Python に含まれる投稿をすべて表示">Python</a> (2)
+</li>
+	<li class="cat-item cat-item-13"><a href="http://worktoolsmith.com/category/server_virtualization/vmware-server/" title="VMware Server に含まれる投稿をすべて表示">VMware Server</a> (7)
+</li>
+	<li class="cat-item cat-item-158"><a href="http://worktoolsmith.com/category/web%e3%83%87%e3%82%b6%e3%82%a4%e3%83%b3/" title="Webデザイン に含まれる投稿をすべて表示">Webデザイン</a> (11)
+</li>
+	<li class="cat-item cat-item-38"><a href="http://worktoolsmith.com/category/webprogram/" title="Webプログラム に含まれる投稿をすべて表示">Webプログラム</a> (32)
+</li>
+	<li class="cat-item cat-item-98"><a href="http://worktoolsmith.com/category/windows/" title="Windows に含まれる投稿をすべて表示">Windows</a> (47)
+</li>
+	<li class="cat-item cat-item-51"><a href="http://worktoolsmith.com/category/webprogram/wordpress/" title="WordPress に含まれる投稿をすべて表示">WordPress</a> (8)
+</li>
+	<li class="cat-item cat-item-65"><a href="http://worktoolsmith.com/category/%e3%81%9d%e3%81%ae%e4%bb%96/" title="その他 に含まれる投稿をすべて表示">その他</a> (37)
+</li>
+	<li class="cat-item cat-item-230"><a href="http://worktoolsmith.com/category/%e3%82%b2%e3%83%bc%e3%83%a0/" title="ゲーム に含まれる投稿をすべて表示">ゲーム</a> (2)
+</li>
+	<li class="cat-item cat-item-12"><a href="http://worktoolsmith.com/category/server_virtualization/" title="サーバー仮想化に関しての考察や失敗や構築に関しての記録。">サーバー仮想化</a> (2)
+</li>
+	<li class="cat-item cat-item-477"><a href="http://worktoolsmith.com/category/design/" title="デザイン に含まれる投稿をすべて表示">デザイン</a> (1)
+</li>
+	<li class="cat-item cat-item-96"><a href="http://worktoolsmith.com/category/%e3%83%96%e3%83%ad%e3%82%b0/" title="ブログ に含まれる投稿をすべて表示">ブログ</a> (17)
+</li>
+	<li class="cat-item cat-item-69"><a href="http://worktoolsmith.com/category/docuworks/%e3%83%9a%e3%83%bc%e3%83%91%e3%83%bc%e3%83%ac%e3%82%b9%e5%8c%96/" title="ペーパーレス化 に含まれる投稿をすべて表示">ペーパーレス化</a> (3)
+</li>
+	<li class="cat-item cat-item-491"><a href="http://worktoolsmith.com/category/%e3%83%a9%e3%82%a4%e3%83%95%e3%83%8f%e3%83%83%e3%82%af/" title="ライフハック に含まれる投稿をすべて表示">ライフハック</a> (3)
+</li>
+	<li class="cat-item cat-item-460"><a href="http://worktoolsmith.com/category/virtualization/" title="さまざまな仮想化ソフト、仮想化環境のレビュー、体験記などです。">仮想化(Windows, Mac)</a> (7)
+</li>
+	<li class="cat-item cat-item-141"><a href="http://worktoolsmith.com/category/%e4%bd%bf%e3%81%88%e3%82%8bweb%e3%82%b5%e3%83%bc%e3%83%93%e3%82%b9/" title="使えるWebサービス に含まれる投稿をすべて表示">使えるWebサービス</a> (14)
+</li>
+	<li class="cat-item cat-item-94"><a href="http://worktoolsmith.com/category/%e4%bd%bf%e3%81%88%e3%82%8b%e3%83%84%e3%83%bc%e3%83%ab%e7%b4%b9%e4%bb%8b/" title="使えるツール紹介 に含まれる投稿をすべて表示">使えるツール紹介</a> (27)
+</li>
+	<li class="cat-item cat-item-113"><a href="http://worktoolsmith.com/category/%e4%bd%bf%e3%81%88%e3%82%8b%e4%bb%95%e4%ba%8b%e9%81%93%e5%85%b7/" title="使える仕事道具 に含まれる投稿をすべて表示">使える仕事道具</a> (13)
+</li>
+	<li class="cat-item cat-item-87"><a href="http://worktoolsmith.com/category/new-pc/" title="最新PC に含まれる投稿をすべて表示">最新PC</a> (47)
+</li>
+	<li class="cat-item cat-item-340"><a href="http://worktoolsmith.com/category/%e6%9c%80%e6%96%b0%e3%82%bd%e3%83%95%e3%83%88/" title="最新ソフト に含まれる投稿をすべて表示">最新ソフト</a> (26)
+</li>
+	<li class="cat-item cat-item-1"><a href="http://worktoolsmith.com/category/%e6%9c%aa%e5%88%86%e9%a1%9e/" title="未分類 に含まれる投稿をすべて表示">未分類</a> (2)
+</li>
+	<li class="cat-item cat-item-528"><a href="http://worktoolsmith.com/category/%e7%89%b9%e4%be%a1%e6%83%85%e5%a0%b1/" title="特価情報 に含まれる投稿をすべて表示">特価情報</a> (6)
+</li>
+	<li class="cat-item cat-item-478"><a href="http://worktoolsmith.com/category/%e8%aa%ad%e6%9b%b8%e6%84%9f%e6%83%b3%e3%80%81%e6%9b%b8%e8%a9%95/" title="読書感想、書評 に含まれる投稿をすべて表示">読書感想、書評</a> (5)
+</li>
+		</ul>
+</aside><aside id="pages-3" class="widget widget_pages"><h3 class="widget-title">ページ</h3>		<ul>
+			<li class="page_item page-item-1610"><a href="http://worktoolsmith.com/docuworks/">DocuWorks関連</a></li>
+<li class="page_item page-item-780"><a href="http://worktoolsmith.com/mac%e7%94%a8%e4%bb%ae%e6%83%b3pc%e3%82%bd%e3%83%95%e3%83%88%e5%af%be%e6%b1%ba%ef%bc%81-vmware-parallels-virtualbox/">Mac用仮想PCソフト対決！ VMware Parallels VirtualBox</a></li>
+<li class="page_item page-item-2214"><a href="http://worktoolsmith.com/vmware-fusion5-parallels-8-virtualbox4-1-mac%e4%bb%ae%e6%83%b3%e5%8c%96%e3%82%bd%e3%83%95%e3%83%88%e5%af%be%e6%b1%ba-2012/">VMware Fusion5 / Parallels 8 / VirtualBox4.1 [Mac仮想化ソフト対決 2012]</a></li>
+<li class="page_item page-item-79"><a href="http://worktoolsmith.com/%e3%82%88%e3%81%86%e3%81%93%e3%81%9dworktoolsmith%e3%81%b8/">ようこそWorkToolSmith.comへ!</a></li>
+<li class="page_item page-item-2034"><a href="http://worktoolsmith.com/%e3%82%b5%e3%82%a4%e3%83%88%e5%86%85%e6%a4%9c%e7%b4%a2%e7%b5%90%e6%9e%9c/">サイト内検索結果</a></li>
+<li class="page_item page-item-1243"><a href="http://worktoolsmith.com/%e3%83%8f%e3%83%bc%e3%83%89%ef%bc%86%e3%82%bd%e3%83%95%e3%83%88%e4%bd%bf%e7%94%a8%e3%83%ac%e3%83%93%e3%83%a5%e3%83%bc/">ハード＆ソフト使用レビュー</a>
+<ul class='children'>
+	<li class="page_item page-item-1370"><a href="http://worktoolsmith.com/%e3%83%8f%e3%83%bc%e3%83%89%ef%bc%86%e3%82%bd%e3%83%95%e3%83%88%e4%bd%bf%e7%94%a8%e3%83%ac%e3%83%93%e3%83%a5%e3%83%bc/parallels_macbook_air/">Parallels + Macbook Air(Late 2010)で3DMarkをベンチしてみた</a></li>
+	<li class="page_item page-item-2738"><a href="http://worktoolsmith.com/%e3%83%8f%e3%83%bc%e3%83%89%ef%bc%86%e3%82%bd%e3%83%95%e3%83%88%e4%bd%bf%e7%94%a8%e3%83%ac%e3%83%93%e3%83%a5%e3%83%bc/wzr-600dhp/">Mac + Buffaloルーターで300Mbpsは可能か！？ WZR-600DHPレビュー</a></li>
+	<li class="page_item page-item-2071"><a href="http://worktoolsmith.com/%e3%83%8f%e3%83%bc%e3%83%89%ef%bc%86%e3%82%bd%e3%83%95%e3%83%88%e4%bd%bf%e7%94%a8%e3%83%ac%e3%83%93%e3%83%a5%e3%83%bc/mac%e3%81%a7edy%e3%83%81%e3%83%a3%e3%83%bc%e3%82%b8%e3%81%99%e3%82%8b%e6%9c%80%e7%9f%ad%e3%81%ae%e9%81%93/">MacでEdyチャージする最短の道</a></li>
+	<li class="page_item page-item-2454"><a href="http://worktoolsmith.com/%e3%83%8f%e3%83%bc%e3%83%89%ef%bc%86%e3%82%bd%e3%83%95%e3%83%88%e4%bd%bf%e7%94%a8%e3%83%ac%e3%83%93%e3%83%a5%e3%83%bc/mac%e3%81%ab%e3%82%82windows%e3%81%ab%e3%82%82%e6%9c%80%e9%81%a9%e3%81%aanas%e3%83%8d%e3%83%83%e3%83%88%e3%83%af%e3%83%bc%e3%82%af%e3%83%8f%e3%83%bc%e3%83%89%e3%83%87%e3%82%a3%e3%82%b9%e3%82%af/">MacにもWindowsにも最適なNAS(ネットワークハードディスク)とは？</a></li>
+	<li class="page_item page-item-2973"><a href="http://worktoolsmith.com/%e3%83%8f%e3%83%bc%e3%83%89%ef%bc%86%e3%82%bd%e3%83%95%e3%83%88%e4%bd%bf%e7%94%a8%e3%83%ac%e3%83%93%e3%83%a5%e3%83%bc/intel_ssd_usb30_green_line/">これがSSD+USB3.0の実力！Intel SSD 330と1分BOX USB3.0 GREEN LINE</a></li>
+	<li class="page_item page-item-1495"><a href="http://worktoolsmith.com/%e3%83%8f%e3%83%bc%e3%83%89%ef%bc%86%e3%82%bd%e3%83%95%e3%83%88%e4%bd%bf%e7%94%a8%e3%83%ac%e3%83%93%e3%83%a5%e3%83%bc/%e3%83%81%e3%82%a7%e3%83%83%e3%82%af%e4%b8%ad%e3%81%ae%e5%95%86%e5%93%81%e3%80%81%e6%ac%b2%e3%81%97%e3%81%84%e5%95%86%e5%93%81/">検証中の商品、欲しい商品</a></li>
+	<li class="page_item page-item-1245"><a href="http://worktoolsmith.com/%e3%83%8f%e3%83%bc%e3%83%89%ef%bc%86%e3%82%bd%e3%83%95%e3%83%88%e4%bd%bf%e7%94%a8%e3%83%ac%e3%83%93%e3%83%a5%e3%83%bc/iphone-textforce-%e3%83%aa%e3%83%a5%e3%82%a6%e3%83%89%e3%81%ae%e3%82%ad%e3%83%bc%e3%83%9c%e3%83%bc%e3%83%89%e3%81%a7%e6%9c%80%e5%bc%b7%e5%9f%b7%e7%ad%86%e7%92%b0%e5%a2%83%e3%82%92%e6%95%b4/">iPhone + TextForce + リュウドのキーボードで最強執筆環境を整える</a></li>
+	<li class="page_item page-item-1252"><a href="http://worktoolsmith.com/%e3%83%8f%e3%83%bc%e3%83%89%ef%bc%86%e3%82%bd%e3%83%95%e3%83%88%e4%bd%bf%e7%94%a8%e3%83%ac%e3%83%93%e3%83%a5%e3%83%bc/1252-2/">リュウド BlueTooth折りたたみキーボード RBK-2300BTi</a></li>
+</ul>
+</li>
+<li class="page_item page-item-647"><a href="http://worktoolsmith.com/%e3%83%97%e3%83%ad%e3%82%b0%e3%83%a9%e3%83%a0/">プログラム</a>
+<ul class='children'>
+	<li class="page_item page-item-1178"><a href="http://worktoolsmith.com/%e3%83%97%e3%83%ad%e3%82%b0%e3%83%a9%e3%83%a0/%e6%83%85%e5%a0%b1%e5%95%86%e6%9d%90%e7%94%a8%e3%82%bd%e3%83%95%e3%83%88%e3%82%a6%e3%82%a7%e3%82%a2%e5%88%b6%e4%bd%9c/">情報商材用ソフトウェア制作</a></li>
+</ul>
+</li>
+<li class="page_item page-item-1922"><a href="http://worktoolsmith.com/%e6%9c%80%e6%96%b0macbook-air%e3%81%a8%e4%bb%ae%e6%83%b3windows-7%e3%81%af%e3%81%a9%e3%82%8c%e3%81%a0%e3%81%91%e9%80%9f%e3%81%84%e3%81%ae%e3%81%8b%ef%bc%9f/">最新MacBook Airと仮想Windows 7はどれだけ速いのか？</a></li>
+<li class="page_item page-item-1241"><a href="http://worktoolsmith.com/%e8%89%b2%e3%81%8c%e3%81%84%e3%81%84%ef%bc%81dell-24%e3%82%a4%e3%83%b3%e3%83%81%e3%83%a2%e3%83%8b%e3%82%bf-u2410%e3%82%923%e3%83%b6%e6%9c%88%e4%bd%bf%e3%81%a3%e3%81%a6%e6%80%9d%e3%81%86%e3%81%93/">深い色と広い画面そして安い！　こんなモニタが欲しかった！</a></li>
+<li class="page_item page-item-2991"><a href="http://worktoolsmith.com/bylaw/">特定商取引に関する法律に基づく表示</a></li>
+<li class="page_item page-item-1490"><a href="http://worktoolsmith.com/%e7%ae%a1%e7%90%86%e8%80%85%e3%81%b8%e3%81%ae%e3%81%8a%e5%95%8f%e3%81%84%e5%90%88%e3%82%8f%e3%81%9b/">管理者へのお問い合わせ</a></li>
+<li class="page_item page-item-557"><a href="http://worktoolsmith.com/%e8%89%af%e6%9b%b8%e7%b4%b9%e4%bb%8b/">良書紹介</a>
+<ul class='children'>
+	<li class="page_item page-item-730"><a href="http://worktoolsmith.com/%e8%89%af%e6%9b%b8%e7%b4%b9%e4%bb%8b/%e3%83%93%e3%82%b8%e3%83%8d%e3%82%b9%e3%81%ae%e8%89%af%e6%9b%b8/">ビジネスの良書</a></li>
+	<li class="page_item page-item-731"><a href="http://worktoolsmith.com/%e8%89%af%e6%9b%b8%e7%b4%b9%e4%bb%8b/delphi%e3%83%97%e3%83%ad%e3%82%b0%e3%83%a9%e3%83%a0%e3%81%ae%e8%89%af%e6%9b%b8/">Delphiプログラムの良書</a></li>
+</ul>
+</li>
+<li class="page_item page-item-5"><a href="http://worktoolsmith.com/docuworks_plugin/">DocuWorks用プラグイン</a>
+<ul class='children'>
+	<li class="page_item page-item-81"><a href="http://worktoolsmith.com/docuworks_plugin/high-speed-work-docuworks-plugin/">DocuWorksプラグインで仕事をすごく早く</a></li>
+	<li class="page_item page-item-107"><a href="http://worktoolsmith.com/docuworks_plugin/ocr-text-replace-plugin-for-docuworks/">OCR文字置換プラグイン for DocuWorks(R)</a>
+	<ul class='children'>
+		<li class="page_item page-item-252"><a href="http://worktoolsmith.com/docuworks_plugin/ocr-text-replace-plugin-for-docuworks/ocrr_manual_download/">OCR文字置換プラグイン 説明書ダウンロード</a></li>
+		<li class="page_item page-item-278"><a href="http://worktoolsmith.com/docuworks_plugin/ocr-text-replace-plugin-for-docuworks/ocr_replace_plugin_versionup/">OCR文字置換プラグイン　バージョン情報</a></li>
+	</ul>
+</li>
+	<li class="page_item page-item-160"><a href="http://worktoolsmith.com/docuworks_plugin/how-to-install-plugin/">プラグインのインストール</a></li>
+	<li class="page_item page-item-43"><a href="http://worktoolsmith.com/docuworks_plugin/gradation-chart-plugin-for-docuworks/">グラデーションチャート作成プラグイン for DocuWorks(R)</a></li>
+	<li class="page_item page-item-55"><a href="http://worktoolsmith.com/docuworks_plugin/easy-marking-plugin-for-docuworks/">かんたん単語マーキングプラグイン for DocuWorks(R)</a></li>
+	<li class="page_item page-item-93"><a href="http://worktoolsmith.com/docuworks_plugin/page-grepout-plugin-for-docuworks/">ページ検索抽出プラグイン for DocuWorks(R)</a></li>
+</ul>
+</li>
+<li class="page_item page-item-12"><a href="http://worktoolsmith.com/whats_docuworks/">DocuWorksとは</a>
+<ul class='children'>
+	<li class="page_item page-item-40"><a href="http://worktoolsmith.com/whats_docuworks/why_docuworks/">なぜDocuWorksか</a></li>
+	<li class="page_item page-item-25"><a href="http://worktoolsmith.com/whats_docuworks/paperless1/">書類の電子化とは</a></li>
+	<li class="page_item page-item-18"><a href="http://worktoolsmith.com/whats_docuworks/paperless_benefits/">書類を電子化するメリットとは？</a></li>
+</ul>
+</li>
+<li class="page_item page-item-150"><a href="http://worktoolsmith.com/docuworks_plugin_request/">DocuWorksプラグイン要望受付</a></li>
+		</ul>
+		</aside><aside id="text-6" class="widget widget_text"><h3 class="widget-title">DocuWorksプラグインインストール方法</h3>			<div class="textwidget"><a href="http://www.worktoolsmith.com/docuwork_plugin/how-to-install-plugin"><img title="プラグインインストール手順ボタン" src="http://www.worktoolsmith.com/images/btn_plugin_manual.png" alt="プラグインインストール手順" width="200" height="60" /></a></div>
+		</aside><aside id="text-4" class="widget widget_text"><h3 class="widget-title">DocuWorksの購入</h3>			<div class="textwidget"><p><a href="http://www.amazon.co.jp/gp/search?keywords=DocuWorks7.3&__mk_ja_JP=カタカナ&tag=worktoolsmith-22"><img src="http://worktoolsmith.com/images/dw7.jpg" /></a>
+</p>
+<p>
+<a href="http://c.af.moshimo.com/af/c/click?a_id=239278&amp;p_id=54&amp;pc_id=54&amp;pl_id=616&amp;s_v=b5Rz2P0601xu&amp;url=http%3A//search.rakuten.co.jp/search/mall/DocuWorks7.3/-/f.1-p.1-s.1-sf.0-st.A-v.2?x=0" rel="nofollow" target="_blank" title="楽天市場" >楽天市場</a> | <a href="http://www.amazon.co.jp/gp/search?keywords=DocuWorks7.3&amp;__mk_ja_JP=%83J%83%5E%83J%83i&amp;tag=worktoolsmith-22" rel="nofollow" target="_blank" title="アマゾン" >Amazon</a> | <a href="http://ck.jp.ap.valuecommerce.com/servlet/referral?sid=2818777&amp;pid=880644339&amp;vc_url=http%3A%2F%2Fshopping.search.yahoo.co.jp%2Fsearch%3FuIv%3Don%26ei%3DUTF-8%26tab_ex%3Dcommerce%26slider%3D0%26va%3DDocuWorks7.3" target="_blank" title="Yahooショッピング" >Yahooショッピング</a>
+</p></div>
+		</aside><aside id="text-10" class="widget widget_text"><h3 class="widget-title">DocuWorks Viewer for iPod, iPad, iPhone</h3>			<div class="textwidget"><table class="itms-link" style="border:0;"><tbody><tr style="border:0;"><td style="border:0; vertical-align: middle;"><a href="http://click.linksynergy.com/fs-bin/click?id=uFbRGNgXJf4&subid=0&offerid=94348.1&type=10&tmpid=3910&RD_PARM0=http%3A%2F%2Fitunes.apple.com%2Fjp%2Fapp%2Fdocuworks-viewer-light%2Fid412415307%3Fmt%3D8%2526uo%3D4&RD_PARM1=http%3A%2F%2Fitunes.apple.com%2Fjp%2Fapp%2Fdocuworks-viewer-light%2Fid412415307%3Fmt%3D8%2526uo%3D4" rel="nofollow" target="_blank"><img src="http://a2.mzstatic.com/us/r1000/115/Purple/v4/f4/3f/c3/f43fc3dd-017a-ce43-e5b5-3ca003fe77b7/Icon.png" width="60" height="auto" alt="DocuWorks Viewer Light" title="DocuWorks Viewer Light" style="border-radius: 6%;"></a></td><td style="border:0; vertical-align:middle;"><div class="itms-link-text"><a href="http://click.linksynergy.com/fs-bin/click?id=uFbRGNgXJf4&subid=0&offerid=94348.1&type=10&tmpid=3910&RD_PARM0=http%3A%2F%2Fitunes.apple.com%2Fjp%2Fapp%2Fdocuworks-viewer-light%2Fid412415307%3Fmt%3D8%2526uo%3D4&RD_PARM1=http%3A%2F%2Fitunes.apple.com%2Fjp%2Fapp%2Fdocuworks-viewer-light%2Fid412415307%3Fmt%3D8%2526uo%3D4" rel="nofollow" target="_blank" style="font-size:1.2em;text-decoration:none;font-weight:bold;color:#333;">DocuWorks Viewer Light</a><br><a href="http://itunes.apple.com/jp/artist/fuji-xerox-co.-ltd./id372351204?uo=4" rel="nofollow" target="_blank" style="color:#666;text-decoration:none;">Fuji Xerox Co., Ltd.</a><br><a href="$aflink" style="font-weight:bold;color:#900;margin-right:12px;text-decoration: none;" rel="nofollow" target="_blank">無料</a><small>(2012/08/02現在)</small><br><a href="http://click.linksynergy.com/fs-bin/click?id=uFbRGNgXJf4&subid=0&offerid=94348.1&type=10&tmpid=3910&RD_PARM0=http%3A%2F%2Fitunes.apple.com%2Fjp%2Fapp%2Fdocuworks-viewer-light%2Fid412415307%3Fmt%3D8%2526uo%3D4&RD_PARM1=http%3A%2F%2Fitunes.apple.com%2Fjp%2Fapp%2Fdocuworks-viewer-light%2Fid412415307%3Fmt%3D8%2526uo%3D4" rel="nofollow" target="_blank"><img src="http://gracix.com/images/itms/App_Store_small_badge.gif" alt="iTunesで見る" style="border-style:none;margin: 8px;margin-left:0;"></a></div></td></tr></tbody></table></div>
+		</aside><aside id="text-20" class="widget widget_text"><h3 class="widget-title">DocuWorks(R) Viewer</h3>			<div class="textwidget">DocuWorks Viewer（ドキュワークスビューワー）はDocuWorksを持っていない方がDocWorksファイルをもらった時に使う、閲覧のみができるソフトです。
+Xeroxさんのページから無料で入手できます。
+<a href="http://www.fujixerox.co.jp/soft/docuworks/viewer.html">こちら</a>
+
+ちなみにDocuWorksのファイルは拡張子が「.xdw」となっています。</div>
+		</aside><aside id="text-38" class="widget widget_text"><h3 class="widget-title">私が信頼するセキュリティソフト</h3>			<div class="textwidget"><div class="kaerebalink-box" style="text-align:left;padding-bottom:20px;font-size:small;/zoom: 1;overflow: hidden;"><div class="kaerebalink-image" style="float:left;margin:0 15px 10px 0;"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/B0098QN6YY/worktoolsmith-22/ref=nosim/" rel="nofollow" target="_blank"><img src="http://ecx.images-amazon.com/images/I/51DkRhJarZL._SL160_.jpg" style="border: none;" /></a></div><div class="kaerebalink-info" style="line-height:120%;/zoom: 1;overflow: hidden;"><div class="kaerebalink-name" style="margin-bottom:10px;line-height:120%"><a href="http://www.amazon.co.jp/exec/obidos/ASIN/B0098QN6YY/worktoolsmith-22/ref=nosim/" rel="nofollow" target="_blank">カスペルスキー2013マルチプラットフォームセキュリティ 1年プライベート版</a><div class="kaerebalink-powered-date" style="font-size:8pt;margin-top:5px;font-family:verdana;line-height:120%">posted with <a href="http://kaereba.com" target="_blank">カエレバ</a></div></div><div class="kaerebalink-detail" style="margin-bottom:5px;"> 株式会社 カスペルスキー 2012-10-11    </div><div class="kaerebalink-link1" style="margin-top:10px;"><div class="shoplinkamazon" style="display:inline;margin-right:5px"><a href="http://www.amazon.co.jp/gp/search?keywords=%83J%83X%83y%83%8B%83X%83L%81%5B&__mk_ja_JP=%83J%83%5E%83J%83i&tag=worktoolsmith-22" rel="nofollow" target="_blank" title="アマゾン" >Amazon</a></div><div class="shoplinkrakuten" style="display:inline;margin-right:5px"><a href="http://c.af.moshimo.com/af/c/click?a_id=239278&p_id=54&pc_id=54&pl_id=616&s_v=b5Rz2P0601xu&url=http%3A%2F%2Fsearch.rakuten.co.jp%2Fsearch%2Fmall%2F%25E3%2582%25AB%25E3%2582%25B9%25E3%2583%259A%25E3%2583%25AB%25E3%2582%25B9%25E3%2582%25AD%25E3%2583%25BC%2F-%2Ff.1-p.1-s.1-sf.0-st.A-v.2%3Fx%3D0" rel="nofollow" target="_blank" title="楽天市場" >楽天市場</a></div><div class="shoplinkyahoo" style="display:inline;margin-right:5px"><a href="http://ck.jp.ap.valuecommerce.com/servlet/referral?sid=2818777&pid=880644339&vc_url=http%3A%2F%2Fshopping.search.yahoo.co.jp%2Fsearch%3FuIv%3Don%26ei%3DUTF-8%26tab_ex%3Dcommerce%26slider%3D0%26va%3D%25E3%2582%25AB%25E3%2582%25B9%25E3%2583%259A%25E3%2583%25AB%25E3%2582%25B9%25E3%2582%25AD%25E3%2583%25BC" target="_blank" title="Yahooショッピング" >Yahooショッピング<img src="http://ad.jp.ap.valuecommerce.com/servlet/gifbanner?sid=2818777&pid=880644339" height="1" width="1" border="0"></a></div><div class="shoplinkkakakucom" style="display:inline;margin-right:5px"><a href="http://kakaku.com/search_results/%83J%83X%83y%83%8B%83X%83L%81%5B/" rel="nofollow" target="_blank" title="kakakucom" >価格.com</a></div></div></div><div class="booklink-footer" style="clear: left"></div></div></div>
+		</aside><aside id="text-25" class="widget widget_text"><h3 class="widget-title">情報商材用ソフト制作</h3>			<div class="textwidget">情報商材用のソフトを制作します。
+詳しくは<a href="http://worktoolsmith.com/プログラム/情報商材用ソフトウェア制作/">こちら</a></div>
+		</aside><aside id="tag_cloud-5" class="widget widget_tag_cloud"><h3 class="widget-title">タグ</h3><div class="tagcloud"><a href='http://worktoolsmith.com/tag/2009/' class='tag-link-75' title='4件のトピック' style='font-size: 9.5909090909091pt;'>2009</a>
+<a href='http://worktoolsmith.com/tag/adobe/' class='tag-link-279' title='4件のトピック' style='font-size: 9.5909090909091pt;'>adobe</a>
+<a href='http://worktoolsmith.com/tag/amazon/' class='tag-link-311' title='7件のトピック' style='font-size: 12.772727272727pt;'>Amazon</a>
+<a href='http://worktoolsmith.com/tag/amd/' class='tag-link-89' title='3件のトピック' style='font-size: 8pt;'>AMD</a>
+<a href='http://worktoolsmith.com/tag/android/' class='tag-link-219' title='4件のトピック' style='font-size: 9.5909090909091pt;'>android</a>
+<a href='http://worktoolsmith.com/tag/apple/' class='tag-link-284' title='4件のトピック' style='font-size: 9.5909090909091pt;'>Apple</a>
+<a href='http://worktoolsmith.com/tag/css/' class='tag-link-159' title='4件のトピック' style='font-size: 9.5909090909091pt;'>CSS</a>
+<a href='http://worktoolsmith.com/tag/delphi/' class='tag-link-16' title='29件のトピック' style='font-size: 22pt;'>Delphi</a>
+<a href='http://worktoolsmith.com/tag/docuworks/' class='tag-link-3' title='14件のトピック' style='font-size: 17.227272727273pt;'>DocuWorks</a>
+<a href='http://worktoolsmith.com/tag/epub/' class='tag-link-285' title='5件のトピック' style='font-size: 10.863636363636pt;'>ePub</a>
+<a href='http://worktoolsmith.com/tag/fuelphp/' class='tag-link-350' title='5件のトピック' style='font-size: 10.863636363636pt;'>FuelPHP</a>
+<a href='http://worktoolsmith.com/tag/google/' class='tag-link-396' title='5件のトピック' style='font-size: 10.863636363636pt;'>Google</a>
+<a href='http://worktoolsmith.com/tag/hp/' class='tag-link-312' title='6件のトピック' style='font-size: 11.977272727273pt;'>hp</a>
+<a href='http://worktoolsmith.com/tag/html/' class='tag-link-160' title='5件のトピック' style='font-size: 10.863636363636pt;'>HTML</a>
+<a href='http://worktoolsmith.com/tag/iphone/' class='tag-link-154' title='5件のトピック' style='font-size: 10.863636363636pt;'>iPhone</a>
+<a href='http://worktoolsmith.com/tag/java-script/' class='tag-link-46' title='3件のトピック' style='font-size: 8pt;'>Java Script</a>
+<a href='http://worktoolsmith.com/tag/javascript/' class='tag-link-170' title='4件のトピック' style='font-size: 9.5909090909091pt;'>JavaScript</a>
+<a href='http://worktoolsmith.com/tag/jquery/' class='tag-link-44' title='3件のトピック' style='font-size: 8pt;'>Jquery</a>
+<a href='http://worktoolsmith.com/tag/js/' class='tag-link-45' title='3件のトピック' style='font-size: 8pt;'>JS</a>
+<a href='http://worktoolsmith.com/tag/linux/' class='tag-link-15' title='11件のトピック' style='font-size: 15.636363636364pt;'>Linux</a>
+<a href='http://worktoolsmith.com/tag/mac/' class='tag-link-40' title='18件のトピック' style='font-size: 18.818181818182pt;'>Mac</a>
+<a href='http://worktoolsmith.com/tag/microsoft/' class='tag-link-125' title='7件のトピック' style='font-size: 12.772727272727pt;'>Microsoft</a>
+<a href='http://worktoolsmith.com/tag/mountain-lion/' class='tag-link-417' title='5件のトピック' style='font-size: 10.863636363636pt;'>Mountain Lion</a>
+<a href='http://worktoolsmith.com/tag/netbeans/' class='tag-link-132' title='7件のトピック' style='font-size: 12.772727272727pt;'>netbeans</a>
+<a href='http://worktoolsmith.com/tag/os-x/' class='tag-link-105' title='5件のトピック' style='font-size: 10.863636363636pt;'>OS X</a>
+<a href='http://worktoolsmith.com/tag/parallels/' class='tag-link-168' title='6件のトピック' style='font-size: 11.977272727273pt;'>Parallels</a>
+<a href='http://worktoolsmith.com/tag/php/' class='tag-link-52' title='11件のトピック' style='font-size: 15.636363636364pt;'>PHP</a>
+<a href='http://worktoolsmith.com/tag/sony/' class='tag-link-234' title='4件のトピック' style='font-size: 9.5909090909091pt;'>Sony</a>
+<a href='http://worktoolsmith.com/tag/ubuntu/' class='tag-link-20' title='8件のトピック' style='font-size: 13.568181818182pt;'>Ubuntu</a>
+<a href='http://worktoolsmith.com/tag/vmware/' class='tag-link-22' title='4件のトピック' style='font-size: 9.5909090909091pt;'>Vmware</a>
+<a href='http://worktoolsmith.com/tag/web/' class='tag-link-43' title='3件のトピック' style='font-size: 8pt;'>Web</a>
+<a href='http://worktoolsmith.com/tag/webprogram/' class='tag-link-38' title='3件のトピック' style='font-size: 8pt;'>Webプログラム</a>
+<a href='http://worktoolsmith.com/tag/windows/' class='tag-link-98' title='18件のトピック' style='font-size: 18.818181818182pt;'>Windows</a>
+<a href='http://worktoolsmith.com/tag/windows-8/' class='tag-link-407' title='4件のトピック' style='font-size: 9.5909090909091pt;'>Windows 8</a>
+<a href='http://worktoolsmith.com/tag/windows-live-writer/' class='tag-link-95' title='3件のトピック' style='font-size: 8pt;'>Windows Live Writer</a>
+<a href='http://worktoolsmith.com/tag/wordpress/' class='tag-link-51' title='8件のトピック' style='font-size: 13.568181818182pt;'>WordPress</a>
+<a href='http://worktoolsmith.com/tag/xe2/' class='tag-link-42' title='6件のトピック' style='font-size: 11.977272727273pt;'>XE2</a>
+<a href='http://worktoolsmith.com/tag/%e3%82%a8%e3%83%a9%e3%83%bc/' class='tag-link-48' title='3件のトピック' style='font-size: 8pt;'>エラー</a>
+<a href='http://worktoolsmith.com/tag/%e3%82%bb%e3%82%ad%e3%83%a5%e3%83%aa%e3%83%86%e3%82%a3/' class='tag-link-198' title='4件のトピック' style='font-size: 9.5909090909091pt;'>セキュリティ</a>
+<a href='http://worktoolsmith.com/tag/%e3%83%96%e3%83%ad%e3%82%b0/' class='tag-link-96' title='3件のトピック' style='font-size: 8pt;'>ブログ</a>
+<a href='http://worktoolsmith.com/tag/%e3%83%97%e3%83%a9%e3%82%b0%e3%82%a4%e3%83%b3/' class='tag-link-5' title='8件のトピック' style='font-size: 13.568181818182pt;'>プラグイン</a>
+<a href='http://worktoolsmith.com/tag/%e3%83%97%e3%83%ad%e3%82%b0%e3%83%a9%e3%83%a0/' class='tag-link-39' title='8件のトピック' style='font-size: 13.568181818182pt;'>プログラム</a>
+<a href='http://worktoolsmith.com/tag/%e4%b8%80%e5%a4%aa%e9%83%8e/' class='tag-link-288' title='4件のトピック' style='font-size: 9.5909090909091pt;'>一太郎</a>
+<a href='http://worktoolsmith.com/tag/%e4%bb%ae%e6%83%b3pc/' class='tag-link-25' title='4件のトピック' style='font-size: 9.5909090909091pt;'>仮想PC</a>
+<a href='http://worktoolsmith.com/tag/%e4%bb%ae%e6%83%b3%e3%82%b5%e3%83%bc%e3%83%90/' class='tag-link-26' title='5件のトピック' style='font-size: 10.863636363636pt;'>仮想サーバ</a></div>
+</aside><aside id="text-3" class="widget widget_text"><h3 class="widget-title">商標、名称など</h3>			<div class="textwidget"><small>DocuWorks(R)、DocuCentre、Apeosなどの名称、商標は富士ゼロックス株式会社の登録商標です。<br /><br />当ページにて頒布、販売しているDocuWorks(R)用プラグイン、フリーソフト、シェアウェアなどは富士ゼロックス株式会社の正規ライセンス商品ではありません。</small></div>
+		</aside><aside id="text-40" class="widget widget_text"><h3 class="widget-title">心を開放する</h3>			<div class="textwidget"><p><a href="http://123direct.info/tracking/af/252448/lwVcUQlt/"><br />
+<img src="http://www.affiliatecenter.jp/directbook/image/item/bjs_s.jpg"></p>
+<p>
+<strong>自分を不幸にしない１３の習慣</strong><br />
+</a></p>
+<p>　　心がつかれた・・・</p>
+<p>　　なぜなんにもうまくいかないんだ？</p>
+<p>　　なんで人間関係がこんなにギスギスしているんだろう？</p>
+<p>私が友達に３セット配ってとても感謝されたCD。iPodにも入れ、うまくいかない時には必ず聴いています。オススメ。</p>
+</div>
+		</aside>		</div><!-- #secondary .widget-area -->
+<!--/sidebar--><!--footer-->
+
+	</div><!-- #main -->
+</div><!-- #page -->
+
+	<footer id="colophon" role="contentinfo">
+    <div class="wrapper">
+			
+    
+      <div class="footer-info">
+        <a href="http://worktoolsmith.com/" class="copyright" title="Work Tool Smith [ワークツールスミス]" rel="home">
+          Copyright 2012  Work Tool Smith [ワークツールスミス] some rights reserved.
+        </a>
+      </div>
+    </div>
+	</footer><!-- #colophon -->
+
+<!-- Lightbox Plus v2.3 - 2011.08.11 - Message: 0-->
+<script type="text/javascript">
+jQuery(document).ready(function($){
+  $("a[rel*=lightbox]").colorbox({opacity:0.8});
+});
+</script>
+<script type='text/javascript' src='http://worktoolsmith.com/wp/wp-content/plugins/lightbox-plus/js/jquery.colorbox-min.js?ver=1.3.17.2'></script>
+<script type='text/javascript' src='http://worktoolsmith.com/wp/wp-content/plugins/tweet-blender/js/jquery.json-2.2.min.js?ver=3.4.2'></script>
+<script type='text/javascript' src='http://worktoolsmith.com/wp/wp-content/plugins/tweet-blender/js/jquery.jsonp-2.1.4.min.js?ver=3.4.2'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var TB_labels = {"no_config":"No configuration settings found","twitter_logo":"Twitter Logo","kino":"Development by Kirill Novitchenko","refresh":"Refresh","no_sources":"Twitter sources to blend are not defined","no_global_config":"Cannot retrieve Tweet Blender configuration options","version_msg":"Powered by Tweet Blender plugin v{0} blending {1}","limit_msg":"You reached Twitter API connection limit","no_tweets_msg":"No tweets found for {0}","loading_msg":"Loading tweets...","time_past":"{0} {1} ago","time_future":"in {0} {1}","second":"second","seconds":"seconds","minute":"minute","minutes":"minutes","hour":"hour","hours":"hours","day":"day","days":"days","week":"week","weeks":"weeks","month":"month","months":"months","year":"year","years":"years","check_fail":"Check failed","limit_num":"Max is {0}\/hour","limit_left":"You have {0} left","from":"from","reply":"reply","follow":"follow","limit_reset":"Next reset","view_more":"view more"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='http://worktoolsmith.com/wp/wp-content/plugins/tweet-blender/js/lib.js?ver=3.4.2'></script>
+<script type='text/javascript' src='http://worktoolsmith.com/wp/wp-content/plugins/tweet-blender/js/main.js?ver=3.4.2'></script>
+<script type='text/javascript' src='http://worktoolsmith.com/wp/wp-includes/js/jquery/jquery.color.js?ver=2.0-4561m'></script>
+<script type='text/javascript' src='http://worktoolsmith.com/wp/wp-content/plugins/contact-form-7/includes/js/jquery.form.min.js?ver=3.18'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var _wpcf7 = {"loaderUrl":"http:\/\/worktoolsmith.com\/wp\/wp-content\/plugins\/contact-form-7\/images\/ajax-loader.gif","sending":"\u9001\u4fe1\u4e2d ...","cached":"1"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='http://worktoolsmith.com/wp/wp-content/plugins/contact-form-7/includes/js/scripts.js?ver=3.3.1'></script>
+<p id="go-top"><a href="#top">一番上へ戻る</a></p>
+</body>
+<!-- /footer -->
+</html><!-- /single -->
+<!-- Dynamic page generated in 0.460 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2012-12-10 23:59:44 -->
+
+<!-- Compression = gzip -->
+<!-- super cache -->
