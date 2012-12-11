@@ -179,6 +179,10 @@
     public function getFileExtension($file)
     {
         $path_parts = pathinfo($file);
+        if ( ! isset($path_parts['extension']))
+        {
+            $path_parts['extension'] = '';
+        }
         return strtolower($path_parts['extension']);
     }
 
