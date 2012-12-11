@@ -31,8 +31,7 @@
     public function checkUrl()
     {
         if ( ! filter_var($this->url, FILTER_VALIDATE_URL)) {
-            echo 'Invalid URL!' . PHP_EOL;
-            exit(1);
+            throw new RuntimeException('Invalid URL!');
         }
     }
 
@@ -78,13 +77,13 @@
             if ( ! is_null($dom->find('.post-outer', 0))) {
                 $html = $dom->find('.post-outer', 0)->outertext;
             } else {
-                exit('Error: can\'t scrape blogspot article');
+                throw new RuntimeException('Error: can\'t scrape blogspot article');
             }
         } elseif ($this->blogType === 'hatena diary') {
             if ( ! is_null($dom->find('.section', 0))) {
                 $html = $dom->find('.section', 0)->outertext;
             } else {
-                exit('Error: can\'t scrape hatena diary article');
+                throw new RuntimeException('Error: can\'t scrape hatena diary article');
             }
         }
         // WordPress
@@ -125,19 +124,41 @@
             // image line
             if (preg_match('/(.*)!\[(.*?)\]\((.+?)\)(.*)/u', $line)) {
                 $img = $this->processImageLine($line);
-                
+
                 // get image file
-                echo 'Getting: ', $img['path'], PHP_EOL;
-                $img_data = file_get_contents($img['path']);
-                
-                // save image file
                 $img_file = basename($img['path']);
+                $ext = $this->getFileExtension($img_file);
+                // LaTex can't handle filename with dot, so replace by "_"
+                $img_file = basename($img_file, '.' . $ext);
+                $img_file = str_replace('.', '_', $img_file) . '.' . $ext;
+
                 if (file_exists($img_dir . '/' . $img_file)) {
                     echo 'Error: ', $img_file . ' already exists', PHP_EOL;
                 } else {
+                    echo 'Getting Image: ', $img['path'], PHP_EOL;
+                    $img_data = file_get_contents($img['path']);
                     file_put_contents($img_dir . '/' . $img_file, $img_data);
                 }
-                
+
+                // get linked image file
+                $ext = $this->getFileExtension($img['link']);
+                if ($ext === 'png' || $ext === 'jpg' || $ext === 'gif') {
+                    $img_file = basename($img['link']);  // override
+                    $img_file = basename($img_file, '.' . $ext);
+                    $img_file = str_replace('.', '_', $img_file) . '.' . $ext;
+
+                    if (file_exists($img_dir . '/' . $img_file)) {
+                        echo 'Error: ', $img_file . ' already exists', PHP_EOL;
+                    } else {
+                        echo 'Getting Linked Image: ', $img['link'], PHP_EOL;
+                        $img_data = file_get_contents($img['link']);
+                        file_put_contents($img_dir . '/' . $img_file, $img_data);
+                    }
+
+                    $img['before'] = '';
+                    $img['after']  = '';
+                }
+
                 // change image path
                 $img['path'] = 'images/' . $this->chap . '/' . $img_file;
                 if ($img['title'] !== '') {
@@ -155,23 +176,50 @@
         file_put_contents($this->markdown_file, $contents);
     }
     
+    public function getFileExtension($file)
+    {
+        $path_parts = pathinfo($file);
+        return strtolower($path_parts['extension']);
+    }
+
     public function processImageLine($line)
     {
         // ![Alt text](/path/to/img.jpg)
         // ![Alt text](/path/to/img.jpg "Optional title")
 
         $title = '';
-        
+        $link  = '';
+
         if (preg_match('/(.*)!\[(.*?)\]\((.+?)\)(.*)/u', $line, $matches)) {
-            //var_dump($matches); exit;            
-            $alt  = $matches[2];
-            $path = $matches[3];
-            
+            //var_dump($matches); exit;
+            $before = $matches[1];
+            $alt    = $matches[2];
+            $path   = $matches[3];
+            $after  = $matches[4];
+
             if (strpos($path, ' ') !== false) {
                 $paths = explode(' ', $path, 2);
                 
                 $path  = $paths[0];
                 $title = trim($paths[1], '"\'');
+            }
+
+            // has link to image file?
+            if ($before === '[')
+            {
+                // ](/path/to/img.jpg "Optional title")
+
+                if (preg_match('/\]\((.+?)\)(.*)/u', $after, $matches)) {
+                    $link = $matches[1];
+
+                    if (strpos($link, ' ') !== false) {
+                        $paths = explode(' ', $link, 2);
+                        
+                        $link  = $paths[0];
+                    }
+                } else {
+                    throw new RuntimeException('image link format error: ' . $line);
+                }
             }
         } else {
             throw new RuntimeException('image format error: ' . $line);
@@ -194,11 +242,12 @@
         }
         
         $img = array(
-            'before' => $matches[1],
+            'before' => $before,
             'alt'    => $alt,
             'path'   => $path,
+            'link'   => $link,
             'title'  => $title,
-            'after'  => $matches[4],
+            'after'  => $after,
         );
         
         return $img;

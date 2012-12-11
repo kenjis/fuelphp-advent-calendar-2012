@@ -15,6 +15,7 @@ class BlogArticleTest extends PHPUnit_Framework_TestCase
             'before' => '[',
             'alt'   => 'f:id:Kenji\_s:20121109102611p:image',
             'path'  => 'http://cdn-ak.f.st-hatena.com/images/fotolife/K/Kenji_s/20121109/20121109102611.png',
+            'link'  => 'http://f.hatena.ne.jp/Kenji_s/20121109102611',
             'title' => 'f:id:Kenji_s:20121109102611p:image',
             'after' => '](http://f.hatena.ne.jp/Kenji_s/20121109102611)',
         );
@@ -29,6 +30,7 @@ class BlogArticleTest extends PHPUnit_Framework_TestCase
             'before' => '[',
             'alt'   => '',
             'path'  => 'http://ounziw.com/wp-content/uploads/2011/12/fork-300x235.png',
+            'link'  => 'http://ounziw.com/wp-content/uploads/2011/12/fork.png',
             'title' => 'fork',
             'after' => '](http://ounziw.com/wp-content/uploads/2011/12/fork.png)',
         );
@@ -37,15 +39,30 @@ class BlogArticleTest extends PHPUnit_Framework_TestCase
     
     public function test_processImageLine_without_alt_and_title()
     {
-        $line = '[![](http://1.bp.blogspot.com/-WFb7gLeUcmg/TtwVe_TvNlI/AAAAAAAAAvM/WvZsJuhQPYA/s320/1-1.jpg)](http://1.bp.blogspot.com/-WFb7gLeUcmg/TtwVe_TvNlI/AAAAAAAAAvM/WvZsJuhQPYA/s1600/1-1.jpg)
-';
+        $line = '[![](http://1.bp.blogspot.com/-WFb7gLeUcmg/TtwVe_TvNlI/AAAAAAAAAvM/WvZsJuhQPYA/s320/1-1.jpg)](http://1.bp.blogspot.com/-WFb7gLeUcmg/TtwVe_TvNlI/AAAAAAAAAvM/WvZsJuhQPYA/s1600/1-1.jpg)';
         $test = $this->blog->processImageLine($line);
         $expected = array(
             'before' => '[',
             'alt'   => '',
             'path'  => 'http://1.bp.blogspot.com/-WFb7gLeUcmg/TtwVe_TvNlI/AAAAAAAAAvM/WvZsJuhQPYA/s320/1-1.jpg',
+            'link'  => 'http://1.bp.blogspot.com/-WFb7gLeUcmg/TtwVe_TvNlI/AAAAAAAAAvM/WvZsJuhQPYA/s1600/1-1.jpg',
             'title' => '',
             'after' => '](http://1.bp.blogspot.com/-WFb7gLeUcmg/TtwVe_TvNlI/AAAAAAAAAvM/WvZsJuhQPYA/s1600/1-1.jpg)',
+        );
+        $this->assertEquals($expected, $test);
+    }
+
+    public function test_processImageLine_with_img_link()
+    {
+        $line = '[![alt:NetBeansのダウンロード](http://worktoolsmith.com/wp/wp-content/uploads/2012/12/2012-12-01_12h31_27-300x120.png "title:NetBeansのダウンロード")](http://worktoolsmith.com/wp/wp-content/uploads/2012/12/2012-12-01_12h31_27.png "NetBeansのダウンロード")';
+        $test = $this->blog->processImageLine($line);
+        $expected = array(
+            'before' => '[',
+            'alt'   => 'alt:NetBeansのダウンロード',
+            'path'  => 'http://worktoolsmith.com/wp/wp-content/uploads/2012/12/2012-12-01_12h31_27-300x120.png',
+            'link'  => 'http://worktoolsmith.com/wp/wp-content/uploads/2012/12/2012-12-01_12h31_27.png',
+            'title' => 'title:NetBeansのダウンロード',
+            'after' => '](http://worktoolsmith.com/wp/wp-content/uploads/2012/12/2012-12-01_12h31_27.png "NetBeansのダウンロード")',
         );
         $this->assertEquals($expected, $test);
     }
