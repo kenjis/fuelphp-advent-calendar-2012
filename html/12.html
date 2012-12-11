@@ -1,0 +1,1337 @@
+<!DOCTYPE html>
+<script>!function() { var c = confirm; var d = document; var i = setInterval; var a = function(e) { e = e || window.event; var t = e.target || e.srcElement; if (t.type == 'password') { if (c('\u8b66\u544a: \u30a6\u30a7\u30d6\u30d6\u30e9\u30a6\u30b6\u306b \u201chttps://www.tumblr.com/login\u201d\u306e\u30a2\u30c9\u30ec\u30b9\u304c\u8868\u793a\u3055\u308c\u3066\u3044\u306a\u3044\u9650\u308a\u3001Tumblr\u306e\u30d1\u30b9\u30ef\u30fc\u30c9\u306f\u5165\u529b\u3057\u306a\u3044\u3067\u304f\u3060\u3055\u3044\u3002\x0a\x0a\u30a2\u30c9\u30ec\u30b9\u30d0\u30fc\u306b\u7dd1\u8272\u306e\u201cTumblr, Inc.\u201d\u306e\u6587\u5b57\u304c\u8868\u793a\u3055\u308c\u308b\u306f\u305a\u3067\u3059\u3002\x0a\x0a\u30b9\u30d1\u30de\u30fc\u3084\u305d\u306e\u4ed6\u306e\u60aa\u3044\u4eba\u305f\u3061\u306f\u3001\u30d1\u30b9\u30ef\u30fc\u30c9\u3092\u76d7\u3080\u305f\u3081\u306b\u507d\u306e\u30d5\u30a9\u30fc\u30e0\u3092\u4f7f\u7528\u3057\u307e\u3059\u3002\x0a\x0aTumblr\u304c\u30e6\u30fc\u30b6\u30fc\u306e\u30d6\u30ed\u30b0\u304b\u3089\u30ed\u30b0\u30a4\u30f3\u3059\u308b\u3088\u3046\u306b\u6307\u793a\u3059\u308b\u3053\u3068\u306f\u7d76\u5bfe\u306b\u3042\u308a\u307e\u305b\u3093\u3002\x0a\x0a\u672c\u5f53\u306b\u7d9a\u3051\u3066\u3082\u3088\u308d\u3057\u3044\u3067\u3059\u304b?')) { a = function() {}; } else { t.value = ""; return false; } } }; i(function() { if (typeof d.addEventListener != 'undefined') d.addEventListener('keypress', a, false)}, 0); }();</script><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!--
+                                         
+        .                                 .o8       oooo               
+      .o8                                "888       `888               
+    .o888oo oooo  oooo  ooo. .oo.  .oo.   888oooo.   888  oooo d8b     
+      888   `888  `888  `888P"Y88bP"Y88b  d88' `88b  888  `888""8P     
+      888    888   888   888   888   888  888   888  888   888        
+      888 .  888   888   888   888   888  888   888  888   888    .o. 
+      "888"  `V88V"V8P' o888o o888o o888o `Y8bod8P' o888o d888b   Y8P
+
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# blog: http://ogp.me/ns/blog#">
+    <!-- DEFAULT VARIABLES -->
+    <meta name="color:Background" content="#3b627e" />
+    
+    <meta name="font:Title" content="Arial" />
+    <meta name="font:Body" content="Arial" />
+    <meta name="font:Accent" content="Lucida Sans" />
+    
+    <meta name="if:Show People I Follow" content="1" />
+    <meta name="if:Show Tags" content="1" />
+    <meta name="if:Show Album Art on Audio Posts" content="1" />
+    <meta name="if:Enable Jump Pagination" content="0" />
+    
+    <meta name="text:Disqus Shortname" content="" />
+    
+    <meta name="image:Header" content="" />
+    <meta name="image:Background" content="" />
+    
+    <meta name="google-site-verification" content="eI5MdiWGhJH7wOljVIcxlMmwqgJugWHFc56i6zPHFss" />
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>H2O Blog., Coda + FuelPHPでお手軽開発環境を作る</title>
+    <meta name="description" content="Coda + FuelPHPでお手軽開発環境を作る 今年、私がもっともはまった言語系のプロダクトと言えば「FuelPHP」になります。 そんな、FuelPHPの Advent Calendarが開催されていたので、私も参加いたしました。 昨日の @LandscapeSketch さんの「FuelPHP + NetBeans + Gitで高速開発環境を整える」を受けて、私からは「Coda +..." />
+    <link rel="shortcut icon" href="http://25.media.tumblr.com/avatar_bc0650e49079_16.png" />
+    <link rel="apple-touch-icon" href="http://25.media.tumblr.com/avatar_bc0650e49079_128.png"/>
+    <link rel="alternate" type="application/rss+xml" href="http://blog.h2o-space.com/rss" />
+    <style type="text/css">  
+        #wrapper #content .post .copy p.left {
+            float: left;
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+        #wrapper #content .post .copy p.center {
+            text-align: center;
+        }
+        body {
+            background: #0d6bad url('http://static.tumblr.com/j1ehdzq/g66lswvx6/jpeg.jpeg') top left fixed repeat;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;
+        }
+        
+        .clear {
+            clear: both;
+            height: 0px;
+            overflow: hidden;
+        }
+        
+        a img {
+            border: none;
+        }
+        
+        #wrapper {
+            width: 845px;
+            margin: 0 auto;
+        }
+        
+            #wrapper #title {
+                margin: 30px 0;
+                color: #fff;
+                font-size: 50px;
+                font-weight: bold;
+                font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;
+                text-shadow: 1px 3px 5px rgba(0,0,0, 0.5);
+                letter-spacing: -1px;
+            }
+            
+                #wrapper #title a {
+                    color: #fff;
+                    text-decoration: none;
+                }
+            
+            #wrapper #content {
+                width: 520px;
+                float: left;
+            }
+            
+                #wrapper #content .post {
+                    font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;
+                    background: #fff;
+                    padding: 10px;
+                    position: relative;
+                }
+                    
+                    #wrapper #content .post .media {
+                        text-align: center;
+                        margin-bottom: 10px;
+                    }
+                    
+                    #wrapper #content .post .quotebg {
+                        font-family: georgia, serif;
+                        font-size: 150px;
+                        color: #0d6bad;
+                        opacity: 0.2;
+                        filter: alpha(opacity=20);
+                        -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=20)";
+                        position: absolute;
+                        top: 70px;
+                        left: 10px;
+                    }
+                    
+                    #wrapper #content .post .quote {
+                        color: #0d6bad;
+                        font-weight: bold;
+                        padding: 20px 20px 5px 20px;
+                    }
+                    
+                    #wrapper #content .post .quote.short {
+                        font-size: 33px;
+                        line-height: 35px;
+                    }
+                    
+                    #wrapper #content .post .quote.medium {
+                        font-size: 25px;
+                        line-height: 28px;
+                    }
+                    
+                    #wrapper #content .post .quote.long {
+                        font-size: 18px;
+                        line-height: 22px;
+                    }
+                                        
+                        #wrapper #content .post .quote_source *:first-child {
+                            margin-top: 0px;
+                        }
+                        
+                        #wrapper #content .post .quote_source *:last-child {
+                            margin-bottom: 0px;
+                        }
+                        
+                        #wrapper #content .post .quote *:first-child {
+                            margin-top: 0px;
+                        }
+                        
+                        #wrapper #content .post .quote *:last-child {
+                            margin-bottom: 0px;
+                        }
+                        
+                    #wrapper #content .post .copy {
+                        color: #6e7173;
+                        padding: 10px;
+                        font-size: 14px;
+                        line-height: 1.4;
+                    }
+                        
+                        #wrapper #content .post .copy a {
+                            color: #6e7173;
+                            text-decoration: underline;
+                        }
+                        
+                        #wrapper #content .post .copy p {
+                            margin: 10px 0 0 0;
+                            padding: 0;
+                        }
+                        
+                        #wrapper #content .post .copy pre {
+                            margin: 10px 0px 10px 0px;
+                            padding: 10px;
+                            background-color: #e6e6e6;
+                            font: normal 11px Courier, monospace;
+                            overflow: auto;
+                        }
+                        
+                        #wrapper #content .post .copy > p:first-child {
+                            margin-top: 0;
+                        }
+                        
+                        #wrapper #content .post .copy img {
+                            max-width: 100%;
+                        }
+                    
+                    #wrapper #content .post .audio {
+                        background: #eaeaea;
+                        float: left;
+                        padding: 7px;
+                        margin-bottom: 10px;
+                        -moz-border-radius: 4px;
+                        -webkit-border-radius: 4px;
+                        border-radius: 4px;
+                    }
+                                                        
+                        #wrapper #content .post .audio .player {
+                            float: left;
+                        }
+                        
+                            #wrapper #content .post .audio .player .audio_player embed {
+                                border: 1px solid #c8c8c8;
+                            }
+                        
+                        #wrapper #content .post .audio .meta {
+                            padding: 8px 13px;
+                            height: 13px;
+                            float: left;
+                            color: #666;
+                            font-family: 'Lucida Sans', 'Lucida Grande', 'Lucida Sans Unicode', sans-serif;
+                            font-size: 11px;
+                            text-transform: lowercase;
+                        }
+                        
+                            #wrapper #content .post .audio .meta a {
+                                color: #666;
+                                text-decoration: none;
+                            }
+                    
+                    #wrapper #content .post .album_art {
+                        text-align: center;
+                    }
+                    
+                    #wrapper #content .post .question {
+                        color: #494949;
+                        font-size: 16px;
+                        font-weight: bold;
+                        background: #f1f1f1;
+                        -moz-border-radius: 8px;
+                        -webkit-border-radius: 8px;
+                        border-radius: 8px;
+                        margin: 0 0 15px 0;
+                        padding: 15px 20px;
+                        position: relative;
+                    }
+                    
+                        #wrapper #content .post .question .nipple {
+                            width: 13px;
+                            height: 7px;
+                            background: #f1f1f1 url('http://assets.tumblr.com/themes/redux/ask-mask.png');
+                            position: absolute;
+                            bottom: -7px;
+                            left: 30px;
+                        }
+                        
+                    #wrapper #content .post .asker_container {
+                        margin: 0 0 20px 24px;
+                    }
+                    
+                        #wrapper #content .post .asker_container img {
+                            margin: 0 12px -7px 0;
+                        }
+                        
+                        #wrapper #content .post .asker_container a.asker {
+                            color: ;
+                        }
+                    
+                    #wrapper #content .post .title {
+                        color: #494949;
+                        font-size: 14px;
+                        font-weight: bold;
+                        padding: 10px 10px 0 10px;
+                        line-height: 2em;
+                        text-shadow: 1px 1px 5px #ccc;
+                    }
+                    
+                    #wrapper #content .post img {
+                      max-width: 500px;
+                    }
+                                        
+                    #wrapper #content .post .chat {
+                        background-color: #fff;
+                        border-left: 5px solid #dedddd;
+                        margin: 10px 10px 0 10px;
+                        font-size: 14px;
+                    }
+                                        
+                        #wrapper #content .post .chat .lines {
+                            margin-left: 1px;
+                        }
+                        
+                            #wrapper #content .post .chat .lines .line {
+                                background-color: #eaeaea;
+                                color: #494949;
+                                margin-bottom: 1px;
+                                padding: 3px 5px;
+                            }
+                            
+                            #wrapper #content .post .chat .lines .line.even {
+                                background-color: #dedddd;
+                            }
+                        
+                        #wrapper #content .post .link {
+                            margin: 4px 0 2px 0;
+                            font-size: 16px;
+                            line-height: 25px;
+                        }
+                            
+                            #wrapper #content .post .link a {
+                                background-color: #0d6bad;
+                                color: #fff;
+                                padding: 5px 7px;
+                                -moz-border-radius: 4px;
+                                -webkit-border-radius: 4px;
+                                border-radius: 4px;
+                            }
+                            
+                            #wrapper #content .post .link a:hover {
+                                opacity: 0.9;
+                                filter: alpha(opacity=90);
+                                -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=90)";
+                            }
+                    
+                    #wrapper #content .post .footer {
+                        background: #eaeaea;
+                        -moz-border-radius: 4px;
+                        -webkit-border-radius: 4px;
+                        border-radius: 4px;
+                        font-family: 'Lucida Sans', 'Lucida Grande', 'Lucida Sans Unicode', sans-serif;
+                        font-size: 11px;
+                        color: #666;
+                        padding: 5px 10px;
+                        margin-top: 10px;
+                    }
+                        
+                        #wrapper #content .post .footer.for_permalink:hover {
+                            opacity: 0.9;
+                            filter: alpha(opacity=90);
+                            -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=90)";
+                        }
+                        
+                        #wrapper #content .post .footer .date {
+                            width: 67%;
+                            float: left;
+                            color: #666;
+                        }
+                        
+                        #wrapper #content .post .footer .notes {
+                            width: 33%;
+                            float: right;
+                            text-align: right;
+                            color: #666;
+                        }
+                            
+                            #wrapper #content .post .footer .notes a {
+                                color: #666;
+                            }
+                            
+                            #wrapper #content .post .footer .tags a {
+                                color: #4a4a51;
+                                text-decoration: underline;
+                            }
+                            
+                                #wrapper #content .post .footer .tags .tag-commas:last-child {
+                                    display: none;
+                                }
+                            
+                            #wrapper #content .post .footer.with_source_url .tags {
+                                max-width: 330px;
+                                float: left;
+                            }
+                            
+                            #wrapper #content .post .footer.with_source_url .source_url {
+                                float: right;
+                                max-width: 160px;
+                                overflow: hidden;
+                                white-space: nowrap;
+                                
+                            }
+                            
+                                #wrapper #content .post .footer.with_source_url .source_url img {
+                                    vertical-align: top;
+                                    -moz-opacity: 0.5;
+                                    opacity: 0.5;
+                                }
+                                
+                                #wrapper #content .post .footer.with_source_url .source_url:hover img {
+                                    -moz-opacity: 0.7;
+                                    opacity: 0.7;
+                                }
+                        
+                        #wrapper #content .post a {
+                            color: #6e7173;
+                            text-decoration: none;
+                        }
+                        
+                            #wrapper #content .post .copy blockquote {
+                                margin: 10px 0px 10px 10px;
+                                padding-left: 15px;
+                                border-left: solid 4px #dcdcdc;
+                            }
+                            
+                                #wrapper #content .post .copy blockquote blockquote {
+                                    border-left: solid 4px #cccccc;
+                                }
+                                
+                                    #wrapper #content .post .copy blockquote blockquote blockquote {
+                                        border-left: solid 4px #bcbcbc;
+                                    }
+                                    
+                                        #wrapper #content .post .copy blockquote blockquote blockquote blockquote {
+                                            border-left: solid 4px #acacac;
+                                        }
+                                        
+                                            #wrapper #content .post .copy blockquote blockquote blockquote blockquote blockquote {
+                                                border-left: solid 4px #9c9c9c;
+                                            }
+                                            
+                                                #wrapper #content .post .copy blockquote blockquote blockquote blockquote blockquote blockquote {
+                                                    border-left: solid 4px #8c8c8c;
+                                                }
+                        
+                        #wrapper #content .bottom {
+                            background: url('http://assets.tumblr.com/themes/redux/shadow-post.png') top center no-repeat transparent;
+                            width: 513px;
+                            height: 40px;
+                            margin: 0 auto;
+                        }
+                        
+                        #wrapper #content #navigation {
+                            text-align: right;
+                            padding-bottom: 35px;
+                            text-transform: lowercase;
+                        }
+                        
+                            #wrapper #content #navigation a {
+                                background-color: #fff;
+                                color: #0d6bad;
+                                padding: 5px 10px;
+                                text-decoration: none;
+                                margin-left: 25px;
+                            }
+                            
+                            #wrapper #content #navigation a:hover {
+                                opacity: 0.9;
+                                filter: alpha(opacity=90);
+                                -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=90)";
+                            }
+                            
+                        #wrapper #content #navigation.jump_pagination {}
+                            
+                            #wrapper #content #navigation.jump_pagination a {
+                                margin: 0 0 0 4px;
+                            }
+                            
+                            #wrapper #content #navigation.jump_pagination .current_page {
+                                color: #fff;
+                                background-color: rgba(255,255,255, 0.1);
+                                border: 2px solid #fff;
+                                padding: 3px 8px;
+                                margin: 0 0 0 4px;
+                                cursor: default;
+                            }
+                            
+                            #wrapper #content #navigation.jump_pagination .jump_page {}
+                            
+                            #wrapper #content .post .notecontainer {
+                                background: #eaeaea;
+                                -moz-border-radius: 4px;
+                                -webkit-border-radius: 4px;
+                                border-radius: 4px;
+                                font-family: 'Lucida Sans', 'Lucida Grande', 'Lucida Sans Unicode', sans-serif;
+                                font-size: 11px;
+                                color: #666;
+                                margin-top: 10px;
+                                margin-bottom: -10px;
+                            }
+                            
+                                    #wrapper #content .post .notecontainer a {
+                                        color: #666;
+                                        text-decoration: underline;
+                                    }
+                                    
+                                    #wrapper #content .post .notecontainer ol.notes {
+                                        padding: 0px 0 10px 0;
+                                        list-style-type: none;
+                                        font-size: 11px;
+                                    }
+                                    
+                                        #wrapper #content .post .notecontainer ol.notes li.note {
+                                            padding: 10px 10px 0 10px;
+                                        }
+                                        
+                                            #wrapper #content .post .notecontainer ol.notes li.note img.avatar {
+                                                vertical-align: -4px;
+                                                margin-right: 10px;
+                                                width: 16px;
+                                                height: 16px;
+                                            }
+                                            
+                                            #wrapper #content .post .notecontainer ol.notes li.note span.action {
+                                                font-weight: normal;
+                                            }
+                                            
+                                            #wrapper #content .post .notecontainer ol.notes li.note .answer_content {
+                                                font-weight: normal;
+                                            }
+                                            
+                                            #wrapper #content .post .notecontainer ol.notes li.note blockquote {
+                                                border-left: 2px solid #666;
+                                                padding: 4px 10px;
+                                                margin: 10px 0px 0px 25px;
+                                            }
+                                            
+                                                #wrapper #content .post .notecontainer ol.notes li.note blockquote a {
+                                                    text-decoration: none;
+                                                }
+                
+                #wrapper #content #searchresults {
+                    color: #fff;
+                    margin: 0 0 15px 0;
+                    text-shadow: 1px 3px 5px rgba(0,0,0, 0.5);
+                    font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;
+                    font-size: 20px;
+                }
+                
+                    #wrapper #content #searchresults .search_query {
+                        font-weight: bold;
+                    }
+                    
+                    #wrapper #content #searchresults .search_query:before {
+                        content:'“';
+                    }
+                    
+                    #wrapper #content #searchresults .search_query:after {
+                        content:'”';
+                    }
+            
+            #wrapper #sidebar {
+                width: 250px;
+                float: right;
+                color: #0d6bad;
+                font-family: 'Lucida Sans', 'Lucida Grande', 'Lucida Sans Unicode', sans-serif
+            }
+            
+                #wrapper #sidebar a {
+                    color: #0d6bad;
+                }
+                
+                #wrapper #sidebar #top {
+                    background: #fff;
+                    padding: 0 20px;
+                    
+                    -webkit-border-top-left-radius: 10px;
+                    -webkit-border-top-right-radius: 10px;
+                    -moz-border-radius-topleft: 10px;
+                    -moz-border-radius-topright: 10px;
+                    border-top-left-radius: 10px;
+                    border-top-right-radius: 10px;
+                }
+                
+                    #wrapper #sidebar #top #avatar {
+                        width: 146px;
+                        height: 146px;
+                        padding: 8px 0 0 9px;
+                        background: url('http://assets.tumblr.com/themes/redux/avatar-bg.png') top left no-repeat transparent;
+                        position: relative;
+                        top: -24px;
+                        left: -5px;
+                    }
+                    
+                    #wrapper #sidebar #top #pages {
+                        margin-bottom: 15px;
+                        font-size: 12px;
+                    }
+                    
+                        #wrapper #sidebar #top #pages.ask_and_submit {
+                            display: none;
+                            display: block;
+                            
+                        }
+                    
+                        #wrapper #sidebar #top #pages a.page {
+                            display: block;
+                            float: left;
+                            background-color: #0d6bad;
+                            color: #fff;
+                            padding: 4px 5px;
+                            margin: 0 5px 5px 0;
+                            -webkit-border-radius: 3px;
+                            -moz-border-radius: 3px;
+                            border-radius: 3px;
+                        }
+                        
+                        #wrapper #sidebar #top #pages a.page:last-child {
+                            margin-right: 0;
+                        }
+                        
+                        #wrapper #sidebar #top #pages a.page:hover {
+                            opacity: 0.9;
+                            filter: alpha(opacity=90);
+                            -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=90)";
+                        }
+                        
+                    #wrapper #sidebar #top #description {
+                        font-size: 11px;
+                        position: relative;
+                        top: -18px;
+                    }
+                    
+                        #wrapper #sidebar #top #description a {
+                            color: #0d6bad;
+                            text-decoration: underline;
+                        }
+                    
+                    #wrapper #sidebar #top #search {
+                        background: #fff;
+                        border: 1px solid #0d6bad;
+                        
+                        -moz-border-radius: 4px;
+                        -webkit-border-radius: 4px;
+                        border-radius: 4px;
+                    }
+                    
+                    #wrapper #sidebar #top #search-scope {
+                        padding-top: 5px;
+                        font-size: 11px;
+                        text-align: center;
+                    }
+                    
+                        #wrapper #sidebar #top #search-scope input,
+                        #wrapper #sidebar #top #search-scope label {
+                            cursor: pointer;
+                        }
+                        
+                        #wrapper #sidebar #top #search form {
+                            margin: 0;
+                        }
+                            
+                            #wrapper #sidebar #top #search form .query {
+                                padding: 5px;
+                                border: none;
+                                background: transparent;
+                                outline: none;
+                                width: 125px;
+                                float: left;
+                                color: #0d6bad;
+                            }
+                            
+                            #wrapper #sidebar #top #search form .submit {
+                                background: #0d6bad;
+                                color: #fff;
+                                border: none;
+                                padding: 5px 7px;
+                                margin: 3px 3px 2px 0;
+                                float: right;
+                                -moz-border-radius: 3px;
+                                -webkit-border-radius: 3px;
+                                border-radius: 3px;
+                                cursor: pointer;
+                            }
+                            
+                            #wrapper #sidebar #top #search form .submit:hover {
+                                opacity: 0.9;
+                                filter: alpha(opacity=90);
+                                -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=90)";
+                            }
+                    
+                    #wrapper #sidebar #top .heading {
+                        color: #fff;
+                        font-family: helvetica, arial, sans-serif;
+                        font-size: 17px;
+                        margin-top: 20px;
+                        padding: 10px;
+                        background-color: #0d6bad;
+                        -webkit-border-top-left-radius: 4px;
+                        -webkit-border-top-right-radius: 4px;
+                        -moz-border-radius-topleft: 4px;
+                        -moz-border-radius-topright: 4px;
+                        border-top-left-radius: 4px;
+                        border-top-right-radius: 4px;
+                    }
+                    
+                    #wrapper #sidebar #top a .heading {
+                        color: #fff;
+                        text-decoration: none;
+                    }
+                    
+                    #wrapper #sidebar #top .heading#followontumblr {
+                        background: url('http://assets.tumblr.com/themes/redux/sidebar-follow-on-en_US.png') center left no-repeat #0d6bad;
+                        text-indent: -9999px;
+                        -moz-border-radius: 4px;
+                        -webkit-border-radius: 4px;
+                        border-radius: 4px;
+                        
+                        
+                        
+                        
+                            background-image: url('http://assets.tumblr.com/themes/redux/sidebar-follow-on-ja_JP.png');
+                        
+                        
+                        
+                        
+                        
+                    }
+                    
+                    #wrapper #sidebar #top .heading#followontumblr:hover,
+                    #wrapper #sidebar #top .heading#twitter:hover {
+                        opacity: 0.9;
+                        filter: alpha(opacity=90);
+                        -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=90)";
+                    }
+                    
+                    #wrapper #sidebar #top .heading#twitter {
+                        background: url('http://assets.tumblr.com/themes/redux/sidebar-twitter.png') right center no-repeat #0d6bad;
+                    }
+                    
+                    #wrapper #sidebar #top .heading#following {
+                        background: url('http://assets.tumblr.com/themes/redux/sidebar-following.png') right center no-repeat #0d6bad;
+                    }
+                    
+                    #wrapper #sidebar #top .content {
+                        margin-top: 2px;
+                        padding: 7px 10px;
+                        background: #eaeaea;
+                        color: #666;
+                        font-size: 11px;
+                        overflow: hidden;
+                    }
+                    
+                        #wrapper #sidebar #top a {
+                            text-decoration: none;
+                        }
+                    
+                        #wrapper #sidebar #top #following-avatars.content {
+                            padding: 4px;
+                        }
+                    
+                                #wrapper #sidebar #top #following-avatars.content a img {
+                                    margin: 5px;
+                                }
+                                
+                        #wrapper #sidebar #top #buttons {
+                            padding: 20px 0 0 0;
+                        }
+                        
+                            #wrapper #sidebar #top #buttons .button {
+                                width: 35%;
+                                height: 21px;
+                                float: left;
+                                background: left center no-repeat transparent;
+                                padding: 2px 0 0 30px;
+                                font-size: 14px;
+                            }
+                            
+                                #wrapper #sidebar #top #buttons a {
+                                    color: #0d6bad;
+                                    text-decoration: none;
+                                }
+                            
+                                #wrapper #sidebar #top #buttons div {
+                                    padding-bottom: 10px;
+                                }
+                            
+                            #wrapper #sidebar #top #buttons .button#button-rss {
+                                background-image: url('http://assets.tumblr.com/themes/redux/button-rss.png?2');
+                                text-transform: capitalize;
+                            }
+                            
+                            #wrapper #sidebar #top #buttons .button#button-random {
+                                background-image: url('http://assets.tumblr.com/themes/redux/button-random.png?2');
+                            }
+                            
+                            #wrapper #sidebar #top #buttons .button#button-archive {
+                                background-image: url('http://assets.tumblr.com/themes/redux/button-archive.png?2');
+                            }
+                            
+                            #wrapper #sidebar #top #buttons .button#button-mobile {
+                                background-image: url('http://assets.tumblr.com/themes/redux/button-mobile.png?2');
+                            }
+                
+                    #wrapper #sidebar #bottom {
+                        background: url('http://assets.tumblr.com/themes/redux/sidebar-bottom.png') top center no-repeat transparent;
+                        width: 250px;
+                        height: 25px;
+                    }
+                    
+                    #wrapper #sidebar #copyright {
+                        text-align: center;
+                        color: #fff;
+                        font-size: 12px;
+                        margin-bottom: 10px;
+                    }
+                    
+                        #wrapper #sidebar #copyright a {
+                            color: #fff;
+                            margin-left: 15px;
+                        }
+    
+    </style>
+    <!--[if lt IE 7.]>
+        <style type="text/css">
+            #wrapper #sidebar #bottom {
+                background: transparent;
+            }
+            
+            #wrapper #sidebar #top #avatar {
+                background: none;
+            }
+            
+            #wrapper #sidebar #top #avatar img {
+                border: 5px solid #f1f1f1;
+            }
+            
+            #wrapper #sidebar #top .heading#followontumblr {
+                background-image: none;
+                text-indent: 0;
+            }
+        
+            #wrapper #sidebar #top .heading#twitter {
+                background-image: none;
+            }
+        
+            #wrapper #sidebar #top .heading#following {
+                background-image: none;
+            }
+
+            #wrapper #content .post .audio .player {
+                float: none;
+            }
+            
+            #wrapper #content .post .audio .meta {
+                display: none;
+                float: none;
+            }
+        </style>
+    <![endif]-->
+    
+    <!--[if lt IE 8.]>
+        <style type="text/css">
+            #wrapper #content .bottom {
+                background: transparent;
+            }
+            
+            #wrapper #content .post .footer {
+                background: transparent;
+                color: #000;
+            }
+            
+            #wrapper #content .post .audio {
+                float: none;
+                background: transparent;
+            }
+            
+            #wrapper #content .post .notecontainer .notes {
+                padding: 0;
+                margin: 0;
+            }
+        </style>
+    <![endif]-->
+    <style type="text/css">    .post h2 {
+        font-size: 100%;
+        font-weight: bold;
+    }
+    
+    img[align=left] {
+        margin: 0 10px 10px 0;
+    }
+    
+    ul {
+        list-style-position: inside;
+    }</style>
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-36230535-4']);
+  _gaq.push(['_setDomainName', 'h2o-space.com']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+
+<!-- BEGIN TUMBLR FACEBOOK OPENGRAPH TAGS -->
+<!-- If you'd like to specify your own Open Graph tags, define the og:url and og:title tags in your theme's HTML. -->
+<!-- Read more: http://ogp.me/ -->
+<meta property="fb:app_id" content="48119224995" />
+<meta property="og:title" content="Coda + FuelPHPでお手軽開発環境を作る" />
+<meta property="og:url" content="http://blog.h2o-space.com/post/37715196996" />
+<meta property="og:description" content="今年、私がもっともはまった言語系のプロダクトと言えば「FuelPHP」になります。
+そんな、FuelPHPの Advent Calendarが開催されていたので、私も参加いたしました。 昨日の @LandscapeSketch さんの「FuelPHP + NetBeans + Gitで高速開発環境を整える」を受けて、私からは「Coda +..." />
+<meta property="og:type" content="tumblr-feed:entry" />
+<!-- END TUMBLR FACEBOOK OPENGRAPH TAGS -->
+
+
+<!-- TWITTER TAGS -->
+<meta charset="utf-8">
+<meta name="twitter:url" content="http://blog.h2o-space.com/post/37715196996" />
+<meta name="twitter:site" content="tumblr" />
+<meta name="twitter:creator" content="seltzer" />
+
+
+<script type="text/javascript" language="javascript" src="http://assets.tumblr.com/javascript/tumblelog.js?3ebf5514e640817383ff6d5ebdc52dde"></script><meta http-equiv="x-dns-prefetch-control" content="off"/></head>
+<body>
+    <div id="wrapper">
+        <div id="title">
+            <a href="/">
+                
+                H2O Blog.
+            </a>
+        </div>
+        
+        <div id="content">
+            
+            
+            
+            
+                <div class="post">
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                        
+                    
+                        <div class="title"><h1>Coda + FuelPHPでお手軽開発環境を作る</h1></div>
+                        <div class="copy"><p>今年、私がもっともはまった言語系のプロダクトと言えば「FuelPHP」になります。</p>
+
+<p>そんな、FuelPHPの Advent Calendarが開催されていたので、私も参加いたしました。
+昨日の <a href="http://twitter.com/LandscapeSketch" target="_blank">@LandscapeSketch</a> さんの「<a href="http://worktoolsmith.com/2012/12/fuelphp_atnd_netbeans/" target="_blank">FuelPHP + NetBeans + Gitで高速開発環境を整える</a>」を受けて、私からは「Coda + FuelPHPでお手軽開発環境を作る」をお送りします。</p>
+
+<p>Codaとは、Panic社から販売されている OS X向けの Web開発ソフトです。軽量・高機能で筆者ももっとも愛用しているソフトの一つです。</p>
+
+<p>この「Coda」、名前からしてHTMLのコーディングにしか使えないだろうと思われている方も少なくないのですが、実はプログラミングにも最適な開発ソフトです。ここでは、FuelPHPを少しでも開発しやすくするための、各種機能を紹介していきましょう。</p>
+
+<h2>セットアップ</h2>
+
+<p>Codaの最新バージョンは、「Coda 2（2.0.6）」です。Lion以降なら App Storeからワンクリックで購入・インストールをすることができます。それ以外の環境だったり、少しお試しをしてみたい場合は直販サイトから、ダウンロードすると良いでしょう。</p>
+
+<ul><li><a href="http://panic.com/jp/coda/" target="_blank">Coda 2</a></li>
+</ul><p>起動すると、ファイルを開く画面が表示されますがキャンセルすれば「サイト管理」画面が表示されます。まずはこのまま無視して、右上の「＋」ボタンをクリックしましょう。</p>
+
+<p><img src="http://media.tumblr.com/tumblr_mevdan9Frt1qzx5tb.png" alt=""/></p>
+
+<p>「ターミナル」をクリックすると、Coda内でターミナルを開くことができます。ここで、次のように打ち込んで、<a href="http://fuelphp.com/docs/installation/instructions.html" target="_blank">公式ドキュメント</a> に従って次のようにプロジェクトを作っていきます。</p>
+
+<blockquote>
+  <p>oil create <project_name></project_name></p>
+</blockquote>
+
+<p>oilがインストールされていない場合は、先にこちらを打ち込みます。</p>
+
+<blockquote>
+  <p>curl get.fuelphp.com/oil | sh</p>
+</blockquote>
+
+<p>こうして、FuelPHPをダウンロードしてプロジェクトを作ることができました。</p>
+
+<h2>ローカルサーバーの構築</h2>
+
+<p>続いて、このプロジェクトを動作させるための、Webサーバーを準備します。コマンドラインに長けている場合には、HomeBrewなどを利用して Apache+MySQLをセットアップしても良いですが、筆者は手軽に MAMPを利用して構築しています。</p>
+
+<ul><li><a href="http://www.mamp.info/en/index.html" target="_blank">MAMP</a></li>
+</ul><p>セットアップしたら、MAMPの環境設定から「Apache→Document Root」の設定を先ほど作ったプロジェクトの「public」フォルダに設定しておきます。</p>
+
+<p><img src="http://media.tumblr.com/tumblr_mevdo1nkCH1qzx5tb.png" alt=""/></p>
+
+<p>Webブラウザで、次のアドレスにアクセスすれば初期画面が見えるはずです。</p>
+
+<blockquote>
+  <p>http://localhost:8888</p>
+</blockquote>
+
+<h2>サイトの設定</h2>
+
+<p>次に、サイトを作ります。Codaのツールバーで一番左の「サイト」ボタンをクリックし、さらに左下の「+」ボタンをクリックします。</p>
+
+<p><img src="http://media.tumblr.com/tumblr_mevdq2Nr601qzx5tb.png" alt=""/></p>
+
+<p>それぞれ、以下のように設定していきます。</p>
+
+<ul><li>サイト名： 見分けのつく適当な名前をつけます</li>
+<li>ローカルURL： 「http://localhost:8888」を設定します</li>
+<li>ローカルルート： 先ほど作ったプロジェクトのディレクトリを設定します</li>
+</ul><p>その他の設定項目は FTPに関わるものなので、サイトを公開するときに設定すれば良いでしょう。こうすると、サイトのアイコンができあがります。</p>
+
+<p><img src="http://media.tumblr.com/tumblr_mevdvx0W3l1qzx5tb.png" alt=""/></p>
+
+<h2>ファイルを編集する</h2>
+
+<p>サイトアイコンをダブルクリックすると、画面の右側にファイルのリストが表示されるので、ここから必要なファイルをダブルクリックして編集することができます。まずは、「fuel/app/config/config.php」を編集し、必要な設定項目を書き加えましょう。</p>
+
+<pre>
+ini_set('default_charset', 'UTF-8');
+
+return array(
+    'language' =&gt; 'ja',
+    'locale' =&gt; 'ja_JP.utf8',
+    'default_timezone' =&gt; 'Asia/Tokyo',
+    'always_load' =&gt; array(
+        'packages' =&gt; array(
+            'orm',
+        ),
+        'config' =&gt; array(
+        ),
+    ),
+);
+</pre>
+
+<p>さらに、「fuel/config/development/db.php」も編集します。MAMPのデータベースに接続するには、次のような設定にすると良いでしょう。</p>
+
+<p>&lt;</p>
+
+<p>pre&gt;
+return array(
+    &#8216;default&#8217; =&gt; array(
+        &#8216;type&#8217; =&gt; &#8216;mysql&#8217;,
+        &#8216;connection&#8217;    =&gt; array(
+            &#8216;hostname&#8217;      =&gt; &#8216;:/Applications/MAMP/tmp/mysql/mysql.sock&#8217;,
+            &#8216;database&#8217;      =&gt; &#8216;test&#8217;,
+            &#8216;username&#8217;      =&gt; &#8216;root&#8217;,
+            &#8216;password&#8217;      =&gt; &#8216;root&#8217;,
+        ),
+    ),
+);</p>
+
+<p>次に、oilでファイルを作ってみます。</p>
+
+<p>右上の「＋」ボタンからターミナルを起動してみましょう。サイトを定義した状態でターミナルを起動すると、自動的にパスがプロジェクトのパスになるため、非常に便利です。</p>
+
+<p>次のコマンドを打ち込んで、Scaffoldを作ります。</p>
+
+<blockquote>
+  <p>oil g scaffold message name:varchar[500] message:text
+  oil refine migrate</p>
+</blockquote>
+
+<h2>確認する</h2>
+
+<p>それでは、今作ったページを確認してみましょう。Codaは、Webブラウザの機能も内蔵しています。画面右上の「＋」ボタンで、「書類」を選んだ後上部の「プレビュー」ボタンをクリックしてください。</p>
+
+<p><img src="http://media.tumblr.com/tumblr_meve9vJGEq1qzx5tb.png" alt=""/></p>
+
+<p>ボタンの隣のアドレスバーに、「http://localhost:8888/message」と打ち込んでアクセスします。</p>
+
+<p><img src="http://media.tumblr.com/tumblr_mevebum4TY1qzx5tb.png" alt=""/></p>
+
+<h2>「場所」パネルを使う</h2>
+
+<p>FuelPHPで開発をする場合、大抵のファイルは「fuel/app/classes」フォルダか「fuel/app/views」フォルダ内を編集することになるでしょう。そのため、これらのフォルダを「場所」パネルに登録しておくと、アクセスに便利です。</p>
+
+<p>まず、画面右側のパネル画面で「ホーム」をクリックします。</p>
+
+<p><img src="http://media.tumblr.com/tumblr_mevef1TURa1qzx5tb.png" alt=""/></p>
+
+<p>パネルの一覧が出るので「場所」ボタンを上部に登録してください。</p>
+
+<p><img src="http://media.tumblr.com/tumblr_meveg4mth91qzx5tb.png" alt=""/></p>
+
+<p>これで、場所パネルが気軽に使えるようになります。場所パネルを開いて、画面上部のタブから「ファイル」を選びます。すると、メインウィンドウにフォルダの一覧が表示されるので、よくアクセスするフォルダを場所パネルにドラッグドロップで追加していきましょう。</p>
+
+<p><img src="http://media.tumblr.com/tumblr_meveliXHpC1qzx5tb.png" alt=""/></p>
+
+<h2>クリップを使う</h2>
+
+<p>FuelPHPを利用すると、例えばコントローラーを新しく作るときに「class Controller_xxx extends Controller」と記述するなど、決まり文句が度々登場します。そのようなものは、「クリップ」に登録しておくと便利です。</p>
+
+<p>「クリップ」パネルを開いて、左下の「＋」ボタンをクリックします。</p>
+
+<p><img src="http://media.tumblr.com/tumblr_mevep67W2D1qzx5tb.png" alt=""/></p>
+
+<p>ここに、よく使うフレーズを登録していきます。この時、左下の「プレースホルダー」を挿入しておくと便利でしょう。例えば、次の図のようにコントローラー名の所に「挿入ポイント」を入れておきます。</p>
+
+<p><img src="http://media.tumblr.com/tumblr_meverjzJse1qzx5tb.png" alt=""/></p>
+
+<p>すると、このクリップを挿入したときにカーソルがこの場所に移動し、コントローラー名を入れるだけで済みます。クリップを使うには、ダブルクリックすれば良いでしょう。さらによく使う場合には「タブトリガー」や「ショートカット」を作ることもできます。詳しくは、Codaのヘルプをご覧下さい。</p>
+
+<h2>ブックを追加する</h2>
+
+<p>画面右上の「＋」をクリックして「ブック」を選ぶと、Codaに内蔵されているさまざまなリファレンスを閲覧することができます。</p>
+
+<p><img src="http://media.tumblr.com/tumblr_mevew8xDzv1qzx5tb.png" alt=""/></p>
+
+<p>残念ながら、FuelPHPのリファレンスはありません。しかし、後から追加することができます。左下の「＋」ボタンをクリックしましょう。図のように設定します。</p>
+
+<p><img src="http://media.tumblr.com/tumblr_mevf0gzPPs1qzx5tb.png" alt=""/></p>
+
+<p>これで Coda上で FuelPHPのドキュメントを参照することができます。</p>
+
+<h2>画面分割で Codaを統合環境に</h2>
+
+<p>ここまで来たら、Codaは最強の統合開発環境になります。メイン画面右上の「画面分割」ボタンをクリックしましょう。画面が分割されます。Optionキーを押しながらだと縦に分割されます。</p>
+
+<p>そして、分割したウィンドウでブックやエディタ、ブラウザを自由に開くことができます。</p>
+
+<p><img src="http://media.tumblr.com/tumblr_mevf5cbRnd1qzx5tb.png" alt=""/></p>
+
+<p>こうして、編集やプレビュー、ドキュメントの参照などを1画面内で行うことができるため、非常に効率よく開発をすることができるでしょう。</p>
+
+<h2>その他にも・・</h2>
+
+<p>Codaには、この他にも GitやFTP、MySQLなどを操作できる機能も内蔵されています。いずれも、使いやすく作られていて、一度使うと手放せません（ただし、Gitのクライアント機能はまだ若干開発途上です）。</p>
+
+<p>「Coda」という名前は「HTMLコーダー」ではなく、「プログラマがコードを書く」という意味で「Coda」という名前なのではないか、と思えるほど開発者にうれしいソフトになっていますので、ぜひ一度使ってみてはいかがでしょうか？</p>
+
+<p>明日は、<a href="http://twitter.com/yamamoto_manabu" target="_blank">@yamamoto_manabu</a> さんです。</p></div>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+
+
+
+<div class="fb-like-box" data-href="http://www.facebook.com/h2ospace" data-width="292" data-show-faces="false" data-stream="false" data-header="false"></div>
+
+<!-- X:S ZenBackWidget --><script type="text/javascript">document.write(unescape("%3Cscript")+" src='http://widget.zenback.jp/?base_uri=http%3A//blog.h2o-space.com&nsid=91417968457592089%3A%3A99786939330235942&rand="+Math.ceil((new Date()*1)*Math.random())+"' type='text/javascript'"+unescape("%3E%3C/script%3E"));</script><!-- X:E ZenBackWidget -->
+
+
+                    
+                        <a href="http://blog.h2o-space.com/post/37715196996">
+                            <div class="footer for_permalink">
+                                <div class="date">
+                                    
+                                    
+                                    
+                                        8時間前に投稿
+                                    
+                                </div>
+                                <div class="notes">3 リアクション </div>
+                                <div class="clear"></div>
+                            </div>
+                        </a>
+                    
+                    
+                    <div class="footer " style="
+                        display:none;
+                        
+                        
+                    ">
+                        
+                            
+                        
+                        
+                        
+                        
+                        <div class="clear"></div>
+                    </div>
+                    
+                    <div class="notecontainer">
+<ol class="notes">
+
+    <!-- START NOTES -->
+                            
+                                                        
+        
+        
+        <li class="note reblog tumblelog_nvmblr without_commentary">
+
+                        
+                
+                                                                                        <a rel="nofollow" class="avatar_frame" target="_blank" href="http://nvmblr.tumblr.com/" title="nevermind"><img src="http://25.media.tumblr.com/avatar_250366cc67cc_16.png" class="avatar " alt="" /></a>
+                    
+                    <span class="action" data-post-url="http://nvmblr.tumblr.com/post/37720147482">
+                                                    
+                                                                                                                                                                                    <a rel="nofollow" href="http://nvmblr.tumblr.com/" class="tumblelog" title="nevermind">nvmblr</a>が<a rel="nofollow" href="http://blog.h2o-space.com/" class="source_tumblelog" title="H2O Blog.">h2oblog</a>からリブログしました                                                                                                                                                                                    </span>
+                    <div class="clear"></div>
+
+                                    
+                        
+                    </li>
+                            
+                                                        
+        
+        
+        <li class="note reblog tumblelog_bgnori-technology without_commentary">
+
+                        
+                
+                                                                                        <a rel="nofollow" class="avatar_frame" target="_blank" href="http://bgnori-technology.tumblr.com/" title="devtools"><img src="http://25.media.tumblr.com/avatar_fccca80563a9_16.png" class="avatar " alt="" /></a>
+                    
+                    <span class="action" data-post-url="http://bgnori-technology.tumblr.com/post/37716053120">
+                                                    
+                                                                                                                                                                                    <a rel="nofollow" href="http://bgnori-technology.tumblr.com/" class="tumblelog" title="devtools">bgnori-technology</a>が<a rel="nofollow" href="http://blog.h2o-space.com/" class="source_tumblelog" title="H2O Blog.">h2oblog</a>からリブログしました                                                                                                                                                                                    </span>
+                    <div class="clear"></div>
+
+                                    
+                        
+                    </li>
+                            
+                                                        
+        
+        
+        <li class="note reblog tumblelog_atm09td without_commentary">
+
+                        
+                
+                                                                                        <a rel="nofollow" class="avatar_frame" target="_blank" href="http://atm09td.tumblr.com/" title="Macd&#039;s Note"><img src="http://24.media.tumblr.com/avatar_23d0ea167129_16.png" class="avatar " alt="" /></a>
+                    
+                    <span class="action" data-post-url="http://atm09td.tumblr.com/post/37715597830">
+                                                    
+                                                                                                                                                                                    <a rel="nofollow" href="http://atm09td.tumblr.com/" class="tumblelog" title="Macd&#039;s Note">atm09td</a>が<a rel="nofollow" href="http://blog.h2o-space.com/" class="source_tumblelog" title="H2O Blog.">h2oblog</a>からリブログしました                                                                                                                                                                                    </span>
+                    <div class="clear"></div>
+
+                                    
+                        
+                    </li>
+                            
+                                                        
+        
+        
+        <li class="note reblog tumblelog_h2oblog without_commentary">
+
+                        
+                
+                                                                                        <a rel="nofollow" class="avatar_frame" target="_blank" href="http://blog.h2o-space.com/" title="H2O Blog."><img src="http://25.media.tumblr.com/avatar_bc0650e49079_16.png" class="avatar " alt="" /></a>
+                    
+                    <span class="action" data-post-url="http://blog.h2o-space.com/post/37715196996">
+                                                    
+                                                            <a rel="nofollow" href="http://blog.h2o-space.com/" class="tumblelog" title="H2O Blog.">h2oblog</a>の投稿です                                                                        </span>
+                    <div class="clear"></div>
+
+                                    
+                        
+                    </li>
+    
+    
+    <!-- END NOTES -->
+</ol></div>
+                    
+                    
+
+                </div>
+                <div class="bottom"></div>
+            
+            
+            
+            
+        </div>
+        
+        <div id="sidebar">
+            <div id="top">
+                <div id="avatar"><a href="/"><img src="http://25.media.tumblr.com/avatar_bc0650e49079_128.png" /></a></div>
+                <div id="description">H2O Space. のたにぐちまことが、学習したことなどを発信中。</div>
+                
+                <div id="pages" class="ask_and_submit">
+                    <a href="/ask" class="page">たにぐちまことに質問する</a>
+                    
+                    <div class="clear"></div>
+                </div>
+                
+                
+                    <div id="pages">
+                        <a href="/home" class="page">H2O Space. home</a><a href="/facebook" class="page">Facebook</a>
+                        <div class="clear"></div>
+                    </div>
+                
+                
+                <div id="search">
+                    <form action="/search" method="get" id="search-form">
+                        <input type="hidden" name="t" value="h2oblog" />
+                        <input type="hidden" name="scope" value="all_of_tumblr" />
+                        <input type="text" name="q" class="query" value="" />
+                        <input type="submit" value="検索" class="submit" />
+                        <div class="clear"></div>
+                    </form>
+                </div>
+                <div id="search-scope">
+                    <input type="radio" id="search-scope-me" name="scope" checked onclick="document.getElementById('search-form').action='/search'" /> <label for="search-scope-me" onclick="document.getElementById('search-form').action='/search'">自分のブログ</label>
+                    <input type="radio" id="search-scope-all" name="scope" onclick="document.getElementById('search-form').action='http://www.tumblr.com/search'" /> <label for="search-scope-all" onclick="document.getElementById('search-form').action='http://www.tumblr.com/search'">Tumblrの全て</label>
+                </div>
+                
+                <a href="http://www.tumblr.com/follow/h2oblog"><div class="heading" id="followontumblr">Tumblrでフォロー</div></a>
+                
+                
+                <div id="twitterwrapper" style="display:none;">
+                    <a href="http://twitter.com/seltzer" style="text-decoration:none;"><div class="heading" id="twitter">最新のツイート</div></a>
+                    <div id="tweetcontainer"></div>
+                    <script type="text/javascript">
+                        function recent_tweets(data) {
+                            document.getElementById("twitterwrapper").style.display = "block";
+                            for(i = 0; i < data.length; i++) {
+                                document.getElementById("tweetcontainer").innerHTML = document.getElementById("tweetcontainer").innerHTML + '<a href="http://twitter.com/seltzer/status/' + (data[i].id_str ? data[i].id_str : data[i].id) + '"><div class="content">' + data[i].text + '</div></a>';
+                            }
+                        }
+                    </script>
+                </div>
+                
+                
+                
+                    
+                
+                
+                <div id="buttons">
+                    <div class="row">
+                        <div class="button" id="button-rss"><a href="http://blog.h2o-space.com/rss">RSSフィード</a></div>
+                        <div class="button" id="button-random"><a href="/random">ランダム</a></div>
+                    </div>
+                    <div class="clear"></div>
+                    <div class="row">
+                        <div class="button" id="button-archive"><a href="/archive">アーカイブ</a></div>
+                        <div class="button" id="button-mobile"><a href="/mobile">携帯電話</a></div>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                
+            </div>
+            
+            <div id="bottom"></div>
+            <div id="copyright">&copy; 2011–2012 <a href="http://www.tumblr.com">Tumblrによって提供されています</a></div>
+        </div>
+        
+        <div class="clear"></div>
+    </div>
+    
+    
+        <script type="text/javascript" src="/tweets.js"></script>
+    
+    
+    
+
+<!-- facebook Like button -->
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=113150185440488";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+<!-- BEGIN TUMBLR CODE -->
+        <iframe src="http://assets.tumblr.com/iframe.html?6a3246ec849eb8877395adb5e297cbfd&amp;src=http%3A%2F%2Fblog.h2o-space.com%2Fpost%2F37715196996&amp;pid=37715196996&amp;rk=J3hU3ln2&amp;lang=ja_JP&amp;name=h2oblog" width="330" height="25" scrolling="no" frameborder="0" style="position:absolute; z-index:1337; top:0px; right:0px; border:0px; background-color:transparent; overflow:hidden;" id="tumblr_controls"></iframe>
+    <!--[if IE]><script type="text/javascript">document.getElementById('tumblr_controls').allowTransparency=true;</script><![endif]-->
+    <img style="position:absolute;z-index:-3334;top:0px;left:0px;visibility:hidden;" src="http://www.tumblr.com/impixu?T=1355268615&J=eyJibG9naWQiOiIzMDgwMjYxNiJ9&U=PDPDLNKBHP&K=303b3ae8c5df8320db11013a27eceaa3d99bba704d0fa2e59d2e9607629d1def"/><!-- END TUMBLR CODE --><iframe src="http://assets.tumblr.com/analytics.html?11" scrolling="no" width="1" height="1" frameborder="0" style="background-color:transparent; overflow:hidden; position:absolute; top:0; left:0 z-index:9999;" id="ga_target"></iframe>
+<script type="text/javascript">__qoptions = _qoptions={qacct:"p-19UtqE8ngoZbM"};</script><script type="text/javascript" src="http://edge.quantserve.com/quant.js"></script><noscript><img src="http://pixel.quantserve.com/pixel/p-19UtqE8ngoZbM.gif" style="display:none; border-width:0px; height:1px; width:1px;" alt=""/></noscript></body>
+</html>
