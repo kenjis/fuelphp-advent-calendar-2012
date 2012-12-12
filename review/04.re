@@ -76,8 +76,7 @@ git cloneでもzip展開でも良いのですが、使うのはmodule_refactor.p
 
 手っ取り早くScaffoldで例示しますね。
 
-#@# lang: .syntax-highlight
-//emlist{
+//cmd{
 $ oil g scaffold sample_user user_id:varchar[10]
 $ oil r migrate
 //}
@@ -90,8 +89,7 @@ $ oil r migrate
 
 以下のように実行できます。
 
-#@# lang: .syntax-highlight
-//emlist{
+//cmd{
 $ oil r module_refactor <module_name> <type> <name> <delete>
 //}
 
@@ -104,8 +102,7 @@ $ oil r module_refactor <module_name> <type> <name> <delete>
 
 ScaffoldはMVC全部あるので以下のようにタスクを実行します。
 
-#@# lang: .syntax-highlight
-//emlist{
+//cmd{
 $ oil r module_refactor test controller sample_user true
 $ oil r module_refactor test model sample_user true
 //}

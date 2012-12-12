@@ -41,8 +41,8 @@ fuelの公式ドキュメントにも堂々と「tasks」の文字が追加さ�
 
 moduleのtasksディレクトリ以下に@<tt>{namespace Fuel\Tasks;}でtaskファイルを用意すれば、後は、
 
-//emlist{
-php oil refine modulename::classname
+//cmd{
+$ php oil refine modulename::classname
 //}
 
 
