@@ -67,6 +67,21 @@ class BlogArticleTest extends PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $test);
     }
 
+    public function test_processImageLine_with_space_in_head_and_img_link()
+    {
+        $line = ' [![FuelPHP\_Hello](http://yamamoto.phpapps.jp/wp-content/uploads/2012/12/2-1024x593.png "FuelPHP_Hello")](http://yamamoto.phpapps.jp/wp-content/uploads/2012/12/2.png)';
+        $test = $this->blog->processImageLine($line);
+        $expected = array(
+            'before' => ' [',
+            'alt'   => 'FuelPHP\_Hello',
+            'path'  => 'http://yamamoto.phpapps.jp/wp-content/uploads/2012/12/2-1024x593.png',
+            'link'  => 'http://yamamoto.phpapps.jp/wp-content/uploads/2012/12/2.png',
+            'title' => 'FuelPHP_Hello',
+            'after' => '](http://yamamoto.phpapps.jp/wp-content/uploads/2012/12/2.png)',
+        );
+        $this->assertEquals($expected, $test);
+    }
+
     public function test_replaceNoBreakSpace()
     {
         $line = '    private static $exts = array(); // nbsp';  // nbsp (C2 A0)

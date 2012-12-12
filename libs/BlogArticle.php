@@ -124,6 +124,7 @@
             // image line
             if (preg_match('/(.*)!\[(.*?)\]\((.+?)\)(.*)/u', $line)) {
                 $img = $this->processImageLine($line);
+                //var_dump($img);
 
                 // get image file
                 $img_file = basename($img['path']);
@@ -209,7 +210,7 @@
             }
 
             // has link to image file?
-            if ($before === '[')
+            if (substr($before, -1) === '[')
             {
                 // ](/path/to/img.jpg "Optional title")
 
