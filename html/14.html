@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <title>就職活動サイトの構築にFuelPHPを使ったので事例紹介 | OfferBox | オファーボックス</title>
+    <meta charset="utf-8">
+    <meta content="OfferBoxは、新しいカタチの就活サービスです。本サイトで動画や画像を使って自己PRすることで、企業があなたをみつけて「オファー」をしてくれます。" name="description">
+    <meta content="OfferBox, オファーボックス, 就活, オファー" name="keywords">
+    <meta http-equiv="X-UA-Compatible" content="IE=7">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="http://offerbox.jp/wp/wp-content/themes/offerbox/js/bootstrap.min.js" type="text/javascript"></script>
+    <!--[if lt IE 8]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link rel="stylesheet" href="http://offerbox.jp/wp/wp-content/themes/offerbox/style.css" type="text/css">
+    <script src="http://offerbox.jp/wp/wp-content/themes/offerbox/js/jquery.bxSlider.min.js" type="text/javascript"></script>
+    <script>
+      //<![CDATA[
+        $(function(){
+            $("#slide").fadeIn(2000).show();
+            $("#slide").bxSlider({
+                mode:'fade',
+                auto:'true',
+                speed: 1000,
+                pause: 5000
+        　　　　});
+        });
+      //]]>
+    </script>
+    <link href="http://offerbox.jp/wp/wp-content/themes/offerbox/js/bx_styles/bx_styles.css" rel="stylesheet" type="text/css">
+<!-- BEGIN:OGP -->
+<meta property="og:title" content="就職活動サイトの構築にFuelPHPを使ったので事例紹介｜OfferBox | オファーボックス" />
+<meta property="og:type" content="article" />
+<meta property="og:image" content="http://offerbox.jp/wp/wp-content/uploads/2012/12/Untitled-300x2053-100x100.png" />
+<meta property="og:url" content="http://offerbox.jp/engineer/440/" />
+<meta property="og:description" content="こんにちは。FuelPHP Advent Calendar 2012に参加します上村と言います。 　 Advent Calendarの前日記事は@yamamoto_manabuさんでした。 FuelPHP + eXcal [...]..." />
+<meta property="og:site_name" content="OfferBox | オファーボックス" />
+<meta property="fb:app_id" content="388403631244300" />
+<!-- END:OGP -->
+
+  <!-- Google Analytics -->
+	<script type="text/javascript">
+	  var _gaq = _gaq || [];
+	  _gaq.push(['_setAccount', 'UA-34102673-1']);
+	  _gaq.push(['_trackPageview']);
+
+	  (function() {
+	    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	  })();
+	</script>
+	<!-- Google Analytics -->
+
+  <? wp_header();?>
+  </head>
+  <body class="single single-post postid-440 single-format-standard" >
+    <div class="navbar" id="top">
+      <div class="navbar-inner navbar-color-2">
+        <a class="brand" href="http://offerbox.jp">就活の新しいカタチ　OfferBox</a>
+        <ul class="nav pull-right">
+          <li class="divider-vertical"></li>
+         <li>
+            <a href="http://offerbox.jp">ホーム</a>
+          </li>
+          <li class="divider-vertical"></li>
+          <li>
+            <a href="http://offerbox.jp/about">OfferBoxとは</a>
+          </li>
+          <li class="divider-vertical"></li>
+           <li>
+            <a href="http://offerbox.jp/faq">よくある質問</a>
+          </li>
+          <li class="divider-vertical"></li>
+          <li>
+            <a href="https://offerbox.jp/offerbox/slogin/" target="_blank" >学生ログイン</a>
+          </li>
+          <li class="divider-vertical"></li>
+        </ul>
+      </div>
+    </div>
+    <!-- /global nav -->
+
+    <header>
+    <h1 class="pull-left" id="sitelogo">
+      <a href="http://offerbox.jp">
+        <img height="35" src="http://offerbox.jp/wp/wp-content/themes/offerbox/img/common/logo.png" width="177">
+      </a>
+    </h1>
+   <div id="socialbutton" class="pull-right">
+              <ul>
+                <li>
+                  <a href="http://www.facebook.com/share.php?u=http://offerbox.jp" target="_blank">
+                    <img alt="Facebookでシェア" src="http://offerbox.jp/wp/wp-content/themes/offerbox/img/common/btn_fb.png" />
+                  </a>
+                </li>
+                <li>
+                  <a href="http://twitter.com/home?status=「探す人」から「選ばれる人」へ。新しい就活のカタチ「OfferBox」" target="_blank" title="Twitterに投稿する">
+                    <img class="ml20" src="http://offerbox.jp/wp/wp-content/themes/offerbox/img/common/btn_tw.png" />
+                  </a>
+                </li>
+              </ul>
+            </div>
+    <!-- /social -->
+    <br class="clear">
+    </header>
+
+    <div id="main-image">
+<img src="http://offerbox.jp/wp/wp-content/themes/offerbox/img/under/under_img.jpg" />
+<div class="breadcrumbs">
+    <!-- Breadcrumb NavXT 4.2.0 -->
+<a title="Go to ホーム." href="http://offerbox.jp">ホーム</a> &gt; <a title="Go to the 開発者ブログ category archives." href="http://offerbox.jp/engineer/">開発者ブログ</a> &gt; 就職活動サイトの構築にFuelPHPを使ったので事例紹介</div>
+</div>
+<!-- /header -->
+<div class="container">
+  <div class="row">
+    <div class="span9" id="main">
+      <div class="row">
+        <div class="span9">
+          <div class="widget whatsnew">
+            <div class="widget-header">
+              <h3>開発者ブログ</h3>
+            </div>
+            <div class="widget-content column">
+                            <p class="post_time"> <i class="icon-time"></i>2012/12/14</p>
+              <h1>就職活動サイトの構築にFuelPHPを使ったので事例紹介</h1>
+              <!-- social btn -->
+              <div id="socialbtn">
+              <table><tr>
+               <td class="hatebuButton pr10"><a href="http://b.hatena.ne.jp/entry/http://offerbox.jp/engineer/440/" class="hatena-bookmark-button" data-hatena-bookmark-title="就職活動サイトの構築にFuelPHPを使ったので事例紹介" data-hatena-bookmark-layout="vertical" title="このエントリーをはてなブックマークに追加"><img src="http://b.st-hatena.com/images/entry-button/button-only.gif" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a></td>
+              <td class="tweetButton pr10"><a href="https://twitter.com/share" class="twitter-share-button" data-count="vertical" data-url="http://offerbox.jp/engineer/440/" data-text="就職活動サイトの構築にFuelPHPを使ったので事例紹介" data-via="" data-lang="ja">ツイート</a></td>
+              <td class="likeButton pr10"><div class="fb-like" data-href="http://offerbox.jp/engineer/440/" data-send="false" data-layout="box_count" data-width="72" data-show-faces="false"></div></td>
+              <td class="gplusButton pr10"><g:plusone size="tall" href="http://offerbox.jp/engineer/440/"></g:plusone></td>
+              <td class="EvernoteButton"><a href="#" onclick="Evernote.doClip({}); return false;"><img src="http://static.evernote.com/article-clipper-vert.png" alt="Clip to Evernote" /></a></td>
+              </tr></table>
+              </div>
+              <!-- /social btn -->
+              					                               <p>こんにちは。<a href="http://atnd.org/events/33753" title="FuelPHP Advent Calendar 2012" target~"_blank">FuelPHP Advent Calendar 2012</a>に参加します上村と言います。<br />
+　<br />
+Advent Calendarの前日記事は<a href="https://twitter.com/yamamoto_manabu" target="_blank">@yamamoto_manabu</a>さんでした。<br />
+<a href="http://yamamoto.phpapps.jp/2012/12/13/6/" target="_blank">FuelPHP + eXcale | No Regret No Life</a><br />
+eXcaleという国産PaaSサービス上でFuelPHPを動かす方法を紹介しています。eXcaleは今なら無料だそうですよ!これはいいですね。<br />
+　<br />
+さて、私は就職活動に関するマッチングサイトOfferBoxを開発しており、そのシステムでFuelPHPを利用しています。<br />
+ここではその事例紹介と、ログイン周辺の実装についてご紹介します。<br />
+　<br />
+　</p>
+<h2>OfferBoxの紹介</h2>
+<p><a href="http://offerbox.jp/" target="_blank">OfferBox</a>という、就職活動マッチングサイトをFuelPHPで構築し、2012年9月から運用しています。<br />
+非会員用の紹介サイトはWordPressで作り、会員専用画面をFuelPHPで作っています。<br />
+ログイン画面はこちらです。<br />
+<a href="https://offerbox.jp/offerbox/slogin" target="_blank">https://offerbox.jp/offerbox/slogin</a><br />
+　<br />
+<strong>開発の流れ</strong><br />
+2012/7 開発着手<br />
+2012/9  α版リリース<br />
+2012/12 β版リリース<br />
+　<br />
+<strong>開発規模</strong><br />
+さくらVPS 4G<br />
+Apache + MySQL + PHP<br />
+FuelPHP V1.2.1<br />
+　<br />
+MySQL Table数:13<br />
+Controller数: 26<br />
+View数: 87<br />
+　<br />
+このOffeBoxというサイトでは、企業が自分のニーズに合った新卒の採用人材を検索し、適合する人材にコンタクトをとることができます。<br />
+学生とのコミュニケーションを図れるSNSのような機能を持っており、企業が学生に対してお気に入りをつけたりメッセージを送受信することができます。<br />
+気に入った学生が見つかれば、オファーをして面接の段取りを進めることができます。<br />
+　<br />
+<a href="http://offerbox.jp/wp/wp-content/uploads/2012/12/Untitled.png"><img src="http://offerbox.jp/wp/wp-content/uploads/2012/12/Untitled.png" alt="" title="Untitled"  class="alignleft size-medium wp-image-442" /></a><br />
+　<br />
+　</p>
+<h2>2種類のログイン画面。その実装方法</h2>
+<p>このシステムは学生と企業の双方が使うシステムであり、それぞれログインが必要ですので、学生用のログインと企業用のログインを別々に用意しています。<br />
+FuelPHPではログイン処理を作る際のひな形として<a href="http://fuelphp.com/docs/packages/auth/simpleauth/intro.html" target="_blank">SimpleAuth</a>があり、その枠組みを利用するとログイン機能を1から作らなくても済みます。<br />
+SimpleAuthを使ったログイン機能の実装の事例は、いくつか紹介されています。<br />
+　<br />
+<a href="http://w.builwing.info/2012/02/28/fuelphp%E3%81%A7%E7%B0%A1%E5%8D%98%E8%AA%8D%E8%A8%BC%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0/" target="_blank">FuelPHPで簡単認証システム | WinRoad徒然草</a><br />
+<a href="http://btt.hatenablog.com/entry/2012/06/16/015506" target="_blank">FuelPHPでログイン機能をサクっと実装 &#8211; BTT&#8217;s blog</a><br />
+<a href="http://9ensan.com/blog/programming/php/fuelphp/fuelphp-login-auth/" target="_blank">[FuelPHP] FuelPHPで作るログイン管理 | 9ensanのLifeHack<br />
+</a><br />
+　<br />
+しかし、複数のログイン機能を持ったサイト事例は無いみたいで、いろいろ探したのですが見つかりませんでした。<br/><br />
+そのような状況で手探りで実装し、分からないことがいっぱいでしたが、なんとか作れましたのでご紹介します。<br />
+　<br />
+　</p>
+<h3>auth使用の宣言</h3>
+<p>fuel/app/config/config.php<br />
+に定義します。</p>
+<pre class="brush:php">
+'packages'  => array(
+	'auth'
+),
+</pre>
+<p>　<br />
+fuel/packages/auth/config/auth.php<br />
+を<br />
+fuel/app/config/<br />
+の下にコピーし、以下のように書きます。<strong>StudentAuth</strong>(学生ログイン用)と<strong>CompanyAuth</strong>(企業ログイン用)の2つのドライバを登録します。</p>
+<pre class="brush:php">
+return array(
+	'driver' => array('StudentAuth', 'CompanyAuth'),
+	'verify_multiple_logins' => false,
+	'salt' => '(適当な文字列)'
+);
+</pre>
+<p>　<br />
+　</p>
+<h3>ログイン用テーブルの作成</h3>
+<p>fuel/packages/auth/config/simpleauth.php<br />
+をコピーして、<br />
+fuel/packages/config/studentauth.php<br />
+にrenameし、以下のように書きます。</p>
+<pre class="brush:php">
+	'table_name' => 'student',
+</pre>
+<p>これはテーブル名の定義ですが、&#8217;users&#8217;となっていたテーブル名を&#8217;student&#8217;という名前に変えてます。<br />
+　<br />
+同様に、<br />
+fuel/packages/config/companyauth.php<br />
+を作成し、以下のように書きます。</p>
+<pre class="brush:php">
+	'table_name' => 'company',
+</pre>
+<p>こちらは企業ログイン用のテーブルです。<br />
+　<br />
+MySQLテーブルは、本家<a href="http://fuelphp.com/docs/packages/auth/simpleauth/intro.html" target="_blank">SimpleAuthのマニュアル</a>に載っている<br />
+SQL文を使います。テーブル名はstudentとcompanyで作ります。</p>
+<pre class="brush:sql">
+CREATE TABLE IF NOT EXISTS `student` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(50) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `group` int(11) NOT NULL DEFAULT '1',
+  `email` varchar(255) NOT NULL,
+  `last_login` varchar(25) NOT NULL,
+  `login_hash` varchar(255) NOT NULL,
+  `profile_fields` text NOT NULL,
+  `created` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `username` (`username`,`email`)
+);
+CREATE TABLE IF NOT EXISTS `company` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(50) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `group` int(11) NOT NULL DEFAULT '1',
+  `email` varchar(255) NOT NULL,
+  `last_login` varchar(25) NOT NULL,
+  `login_hash` varchar(255) NOT NULL,
+  `profile_fields` text NOT NULL,
+  `created` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `username` (`username`,`email`)
+)
+</pre>
+<p>　<br />
+　</p>
+<h3>認証ロジックの作成</h3>
+<p>認証のためのロジックはfuel/packeges/の下に置くことになります。<br />
+このディレクトリはFuelPHPパッケージコアに含まれる部分なので、ここに手を入れるとFuelPHPコアとユーザ開発ロジックが分離できなくなるし、バージョンアップ時にも気を遣うので、僕はこのディレクトリはあまり触りたくないのですが、まぁでもここを触るしか方法が無いのでしょうがないですね。<br />
+　<br />
+fuel/packages/auth/bootstrap.phpは以下のようにします。<br />
+StudentAuthとCompanyAuth関連の定義を追加しています。</p>
+<pre class="brush:php; highlight:[9,10,14,15,22,23,24,25,26,27]">
+Autoloader::add_classes(array(
+	'Auth\\Auth'           => __DIR__.'/classes/auth.php',
+	'Auth\\AuthException'  => __DIR__.'/classes/auth.php',
+
+	'Auth\\Auth_Driver'  => __DIR__.'/classes/auth/driver.php',
+
+	'Auth\\Auth_Acl_Driver'     => __DIR__.'/classes/auth/acl/driver.php',
+	'Auth\\Auth_Acl_SimpleAcl'  => __DIR__.'/classes/auth/acl/simpleacl.php',
+	'Auth\\Auth_Acl_StudentAcl'  => __DIR__.'/classes/auth/acl/studentacl.php',
+	'Auth\\Auth_Acl_CompanyAcl'  => __DIR__.'/classes/auth/acl/companyacl.php',
+		
+	'Auth\\Auth_Group_Driver'       => __DIR__.'/classes/auth/group/driver.php',
+	'Auth\\Auth_Group_SimpleGroup'  => __DIR__.'/classes/auth/group/simplegroup.php',
+	'Auth\\Auth_Group_StudentGroup'  => __DIR__.'/classes/auth/group/studentgroup.php',
+	'Auth\\Auth_Group_CompanyGroup'  => __DIR__.'/classes/auth/group/companygroup.php',
+		
+	'Auth\\Auth_Login_Driver'          => __DIR__.'/classes/auth/login/driver.php',
+	'Auth\\Auth_Login_SimpleAuth'      => __DIR__.'/classes/auth/login/simpleauth.php',
+	'Auth\\SimpleUserUpdateException'  => __DIR__.'/classes/auth/login/simpleauth.php',
+	'Auth\\SimpleUserWrongPassword'    => __DIR__.'/classes/auth/login/simpleauth.php',
+
+	'Auth\\Auth_Login_StudentAuth'      => __DIR__.'/classes/auth/login/studentauth.php',
+	'Auth\\StudentUserUpdateException'  => __DIR__.'/classes/auth/login/studentauth.php',
+	'Auth\\StudentUserWrongPassword'    => __DIR__.'/classes/auth/login/studentauth.php',
+	'Auth\\Auth_Login_CompanyAuth'      => __DIR__.'/classes/auth/login/companyauth.php',
+	'Auth\\CompanyUserUpdateException'  => __DIR__.'/classes/auth/login/companyauth.php',
+	'Auth\\CompanyUserWrongPassword'    => __DIR__.'/classes/auth/login/companyauth.php',
+));
+</pre>
+<p>　<br />
+authパッケージには、ディレクトリはacl、group、loginの3種類あります。<br />
+aclとgroupのディレクトリは今回の要件には使わないので、必要なloginディレクトリの部分だけ拡張すれば良いと思っていましたが、acl、groupも同じように作らないとうまく機能しませんでした。<br />
+ということで以下のファイルを新規作成することになります。<br />
+　<br />
+<a href="http://offerbox.jp/wp/wp-content/uploads/2012/12/121212-0002.png"><img src="http://offerbox.jp/wp/wp-content/uploads/2012/12/121212-0002-300x309.png" alt="" title="121212-0002" width="300" height="309" class="alignleft size-medium wp-image-443" /></a><br />
+<br />
+　<br />
+　</p>
+<h4>学生ログインロジックの作成</h4>
+<p><strong>studentauth.php</strong>を作ります。simpleauth.phpをコピーしたものをベースに、そこから修正していきます。<br />
+・ simpleauth.phpの中で、&#8221;Simple&#8221;や&#8221;simple&#8221;となっているところをかたっぱしから&#8221;Student&#8221;、&#8221;student&#8221;に置換します。<br />
+　クラス名、設定名などあらゆるもの。<br />
+　大文字、小文字にも気をつけて変換するようにします。<br />
+・Session変数は学生用と企業用で名前が重複しないように考慮する必要があります。<br />
+　例:<br />
+　\Session::set(&#8216;username&#8217;, $this->user['username']);<br />
+　の場合は<br />
+　\Session::set(&#8216;studentusername&#8217;, $this->user['username']);<br />
+　のようにします。<br />
+・<strong>studentgroup.php</strong>を作ります。simplegroup.phpをコピーしたものをベースに、そこから同じように文字列置換します。<br />
+・<strong>studentacl.php</strong>を作ります。simpleacl.phpをコピーしたものをベースに、同じように文字列置換します。<br />
+　<br />
+　</p>
+<h4>企業ログインロジックの作成</h4>
+<p><strong>companyauth.php</strong>を作ります。simpleauth.phpをコピーしたものをベースに、そこから修正していきます。<br />
+・simpleauth.phpの中で、&#8221;Simple&#8221;や&#8221;simple&#8221;となっているところをかたっぱしから&#8221;Company&#8221;、&#8221;company&#8221;に置換する。<br />
+・<strong>companygroup.php</strong>を作ります。simplegroup.phpをコピーしたものをベースにします。<br />
+・<strong>companyacl.php</strong>を作ります。simpleacl.phpをコピーしたものをベースにします。<br />
+　<br />
+　</p>
+<h3>ログイン制御(Contoller)と画面(View)を作る</h3>
+<p>学生ログイン画面を作っていきます。<br />
+　<br />
+　</p>
+<h4>Controllerの作成</h4>
+<p>fuel/app/class/controller/studentlogin.php</p>
+<pre class="brush:php">
+public function action_login()
+{
+    $data = array();
+
+    // submitボタンによるPOST時
+    if (Input::post())
+    {
+        // Authオブジェクトを取得します。引数でStudentAuthを指定します。
+        $auth = Auth::instance('StudentAuth');
+
+        if ($auth->login())
+        {
+            // 認証OKならログイン後のページへリダイレクトします。
+            Response::redirect('studentindex');
+        }
+        else
+        {
+            // ログイン失敗時の処理
+            $data['username']    = Input::post('username');
+            $data['login_error'] = 'Wrong username/password combo. Try again';
+        }
+    }
+
+    // 学生ログインページの表示
+    echo View::forge('studentlogin',$data);
+}
+</pre>
+<p>　</p>
+<h4>Viewの作成</h4>
+<p>fuel/app/views/studentlogin.php</p>
+<pre class="brush:xml">
+&lt;?php echo Form::open( '/studentlogin/login'); ?&gt;
+ユーザ名&lt;?php echo Form::input('username',  Input::post('username') ) ?&gt;
+パスワード&lt;?php echo Form::password('password',  Input::post('password') ) ?&gt;
+&lt;?php echo Form::submit('submit', 'ログイン',); ?&gt;
+&lt;?php echo Form::close(); ?&gt;
+</pre>
+<p>　<br />
+<a href="http://offerbox.jp/wp/wp-content/uploads/2012/12/121212-0004.png"><img src="http://offerbox.jp/wp/wp-content/uploads/2012/12/121212-0004-300x266.png" alt="" title="121212-0004" width="300" height="266" class="alignleft size-medium wp-image-444" /></a><br />
+<br />
+　<br />
+企業ログインは、<strong>companylogin.php</strong>とします。上記ソースコードの&#8217;student&#8217;の部分がcompnayになるだけです。<br />
+　<br />
+　</p>
+<h3>ユーザ登録</h3>
+<p>ユーザ登録のメソッドをstudentlogin.phpに書きます。</p>
+<h4>Controller</h4>
+<p>fuel/app/class/controller/studentlogin.php</p>
+<pre class="brush:php">
+public function action_add_user()
+{
+	if (Input::post())
+	{
+		$username=Input::post('username');
+              $password=Input::post('password');
+              $email=Input::post('email');
+
+              // Authオブジェクトを取得します。引数でStudentAuthを指定します。
+		$auth = Auth::instance('StudentAuth');
+		// ユーザ作成
+		$auth->create_user($username,$password,$email);
+ 	}
+	// 登録フォームの表示
+	echo View::forge('studentadduser_user');
+}
+</pre>
+<p>　<br />
+企業ユーザ登録も同様に、companylogin.phpに同じメソッドを作ります。上記ソースコードの&#8217;student&#8217;の部分をがcompnayになるだけです。<br />
+　</p>
+<h4>View</h4>
+<p>fuel/app/views/studentadduser.php</p>
+<pre class="brush:xml">
+&lt;?php echo Form::open( '/studentlogin/add_user'); ?&gt;
+ユーザ名&lt;?php echo Form::input('username',  Input::post('username') ) ?&gt;
+パスワード&lt;?php echo Form::password('password',  Input::post('password') ) ?&gt;
+Email&lt;?php echo Form::input('email',  Input::post('email') ) ?&gt;
+&lt;?php echo Form::submit('submit', '登録') ?&gt;
+&lt;?php echo Form::close(); ?&gt;
+</pre>
+<p>企業ユーザ用View(companyadduser.php)も同様です。studentの部分をcompanyに置換します。<br />
+　<br />
+<a href="http://offerbox.jp/wp/wp-content/uploads/2012/12/121212-0003.png"><img src="http://offerbox.jp/wp/wp-content/uploads/2012/12/121212-0003-300x317.png" alt="" title="121212-0003" width="300" height="317" class="alignleft size-medium wp-image-445" /></a><br />
+<br />
+　<br />
+　</p>
+<h3>ログアウト</h3>
+<p>学生ログアウトのメソッドをstudentlogin.phpに書きます。</p>
+<h4>Controller</h4>
+<p>fuel/app/class/controller/studentlogin.php</p>
+<pre class="brush:php">
+public function action_logout()
+{
+	//ログアウト
+	Auth::logout();
+	//ログアウト画面の表示
+	echo View::forge('studentlogout');
+}	
+</pre>
+<p>企業ログアウトはcompnaylogin.phpに書きます。<br />
+　<br />
+Viewはこちら<br />
+fuel/app/views/studentlogout.php</p>
+<pre class="brush:xml">
+ログアウトしました
+<a href="/studentlogin">ログイン</a>
+</pre>
+<p>企業ユーザも同様です。studentの部分をcompanyにします。<br />
+　<br />
+<a href="http://offerbox.jp/wp/wp-content/uploads/2012/12/121212-0005.png"><img src="http://offerbox.jp/wp/wp-content/uploads/2012/12/121212-0005-300x166.png" alt="" title="121212-0005" width="300" height="166" class="alignleft size-medium wp-image-446" /></a><br />
+<br />
+　<br />
+　</p>
+<h3>ログイン後の画面</h3>
+<p>ログイン後の画面とは、ログインに成功したら表示する最初の画面のことです。<br />
+ログイン中の状態の場合のみ表示が許される画面ですので、認証が成功しているかどうかをControllerでチェックする必要があります。<br />
+企業ユーザでログイン中にもかかわらず、学生用の画面を開いた場合は、誤動作を防ぐために企業側のログアウト処理をするようにしています。<br />
+実際のユースケースでは企業と学生の両方のアカウントを持つ人はいないのですが、開発の現場ではテスト時にそういう使い方もするので、一応その考慮を入れています。<br />
+<br/><br />
+fuel/app/class/controller/studentlogin.php</p>
+<pre class="brush:php">
+// 事前処理
+public function before()
+{
+	$this->auth	= Auth::instance('StudentAuth');
+	// ここで、企業ログイン中であればログアウトする。
+	if( Session::get('companyusername') ){
+		Auth::logout();
+	}
+
+	// ログインチェック
+	if( !$this->auth->check('StudentAuth') ){
+		// 認証に失敗したらログイン画面にジャンプ
+		Response::redirect('/studentlogin');
+	}
+}
+	
+// ログイン後トップ画面
+public function action_index()
+{
+	// ログイン後トップ画面の表示
+	echo View::forge('studentindex');
+}
+</pre>
+<p>企業用も同様です。studentの部分をcompanyにします。companyの部分はstudentにします。<br />
+　<br />
+　</p>
+<h3>さいごに</h3>
+<p>このように、1つのサイトで複数のログイン機能を実装する場合は、SimpleAuthを単にコピーして&#8221;Simple&#8221;の部分の文字列を置換するだけではダメです。<br />
+追加作業として<br />
+・セッションの名前が重複しないようにする。<br />
+・学生と企業の同時多重ログインをしないようにする。<br />
+などの考慮が必要になります。<br />
+実際の製作段階では、単純に2つのAuthを作っただけではうまくいかず、うまくログアウトされなかったり、無限ループに陥ったりしていろいろ苦労しました。<br />
+結局、SImpleAuth認証のロジック内を細かく精査して、不具合の原因となる部分を潰していったので、SimpleAuthを参考にしたと言っても全然Simpleにはいかなったです。<br />
+このノウハウが参考になれば幸いです。<br />
+　<br />
+　<br />
+次は<a href="https://twitter.com/NEKOGET" target="_blank">@NEKOGET</a>「FuelPHPドキュメント翻訳へのお誘い」です。日本語化の方々お疲れ様です。いつもありがたく使わせていただいております!</p>
+              <br class="clear" />
+                          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /main -->
+                    <div class="span3" id="sub">
+        
+        <div class="sidebar2">
+        <div id="categoryposts-2" class="widget widget_categoryposts"><div class="widget-header"><h3>開発者ブログ</h3></div><ul>
+		<li class="cat-post-item">
+			<a class="post-title" href="http://offerbox.jp/engineer/440/" rel="bookmark" title="Permanent link to 就職活動サイトの構築にFuelPHPを使ったので事例紹介">就職活動サイトの構築にFuelPHPを使ったので事例紹介</a>
+			
+			
+						
+						
+					</li>
+			<li class="cat-post-item">
+			<a class="post-title" href="http://offerbox.jp/engineer/391/" rel="bookmark" title="Permanent link to 開発者ブログを始めます。">開発者ブログを始めます。</a>
+			
+			
+						
+						
+					</li>
+	</ul>
+</div>        </div>
+
+          <div class="widget" id="voice">
+            <div class="widget-header">
+              <h3>ご意見箱</h3>
+            </div>
+            <div class="widget-content">
+                <p class="help-block">OfferBoxについてお気づきの事があれば、下記のフォームでご意見をお寄せください。</p>
+                <div class="wpcf7" id="wpcf7-f26-t1-o1"><form action="/engineer/440/#wpcf7-f26-t1-o1" method="post" class="wpcf7-form">
+<div style="display: none;">
+<input type="hidden" name="_wpcf7" value="26" />
+<input type="hidden" name="_wpcf7_version" value="3.3" />
+<input type="hidden" name="_wpcf7_unit_tag" value="wpcf7-f26-t1-o1" />
+<input type="hidden" name="_wpnonce" value="8061b51698" />
+</div>
+<p><span class="wpcf7-form-control-wrap your-message"><textarea name="your-message" class="wpcf7-form-control  wpcf7-textarea wpcf7-validates-as-required mess" cols="40" rows="10"></textarea></span> </p>
+<div id="message">
+<input type="submit" value="送信" id="b" class="wpcf7-form-control  wpcf7-submit" />
+</div>
+<div class="wpcf7-response-output wpcf7-display-none"></div></form></div>            </div>
+          </div>
+          <!-- /voice -->
+
+        </div>
+    <script src="http://offerbox.jp/wp/wp-content/themes/offerbox/syntaxhighlighter_3.0.83/scripts/shCore.js" type="text/javascript"></script>
+    <script src="http://offerbox.jp/wp/wp-content/themes/offerbox/syntaxhighlighter_3.0.83/scripts/shBrushPhp.js" type="text/javascript"></script>
+    <script src="http://offerbox.jp/wp/wp-content/themes/offerbox/syntaxhighlighter_3.0.83/scripts/shBrushSql.js" type="text/javascript"></script>
+    <script src="http://offerbox.jp/wp/wp-content/themes/offerbox/syntaxhighlighter_3.0.83/scripts/shBrushXml.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="http://offerbox.jp/wp/wp-content/themes/offerbox/syntaxhighlighter_3.0.83/styles/shCore.css" type="text/css">
+    <link rel="stylesheet" href="http://offerbox.jp/wp/wp-content/themes/offerbox/syntaxhighlighter_3.0.83/styles/shThemeDefault.css" type="text/css">
+    <script type="text/javascript">
+	  SyntaxHighlighter.all()
+    </script>
+
+     
+      </div>
+      <!-- /row -->
+      
+      <div class="container clearfix">
+        <a class="btn btn-french-2 pull-right" href="#top">
+          <i class="icon-arrow-up icon-white"></i>
+          ページトップ
+        </a>
+      </div>
+    </div>
+    <!-- /container -->
+    
+    <div id="footer">
+      <div class="container">
+        <ul class="pull-right" id="footerlink">
+          <li>
+            <a href="http://i-plug.co.jp" target="_blank">運営会社</a>
+          </li>
+          <li>
+            <a href="http://i-plug.co.jp/%E3%81%8A%E5%95%8F%E3%81%84%E5%90%88%E3%82%8F%E3%81%9B/" target="_blank">法人のお客様へ</a>
+          </li>
+          <li>
+            <a href="http://i-plug.co.jp/policy/" target="_blank">プライバシーポリシー</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <!-- /footer -->
+    
+
+<!-- Facebook -->
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/ja_JP/all.js#xfbml=1&appId=388403631244300";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script> 
+<!-- Google+ -->
+<script type="text/javascript">
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/plusone.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
+</script>
+<!-- はてなブックマーク -->
+<script type="text/javascript" src="http://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+<!-- Twitter -->
+<script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+<!-- Evernote -->
+<script type="text/javascript" src="http://static.evernote.com/noteit.js"></script>
+
+<script src="http://offerbox.jp/wp/wp-content/themes/offerbox/js/scroll.js" type="text/javascript"></script>
+<? wp_footer();?>
+    
+
+  </body>
+</html>  </div>
+</div>
