@@ -9,7 +9,7 @@
 //}
 
 
-↑関係ないけど、昨日@<href>{http://www.uobaka.com/store_info/store_ika.html,イカセンター新宿総本店}で食べた紋甲イカ。美しい。
+↑関係ないけど、昨日@<href>{http://www.uobaka.com/store_info/store_ika.html,イカセンター新宿総本店}で食べた紋甲イカ。美しい。@<br>{}
 
 
 みなさんこんにちは。7 日目担当の @<href>{https://twitter.com/omoon,omoon} です。

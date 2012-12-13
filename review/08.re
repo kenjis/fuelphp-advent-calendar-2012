@@ -123,14 +123,18 @@ else
 @<tt>{$active = 1} の時NGID、NGワードとして登録されます。デフォルトでは0のため、自動でNGとまではならず、登録されたものを手動でチェックしてNGにしていくことを想定しています(そのため、モジュール化して管理ビューも作ればよかったと後悔)。
 
 
-taskとして作成し、cronで実行させることで、自動的にNGIPやNG投稿内容を追加していくことができます。
+taskとして作成し、cronで実行させることで、自動的にNGIPやNG投稿内容を追加していくことができます。@<br>{}
 
 
-使用例： tasks/spamcheck.php をoilコマンドによって実行するときの例です。@<br>{}
-・commentテーブルのipカラムをチェック@<br>{}
-@<tt>{php oil r spamcheck set_black_ips comment}@<br>{}
-・commentテーブルのtextカラムをチェック@<br>{}
-@<tt>{php oil r spamcheck set_black_ips comment text}
+使用例： tasks/spamcheck.php をoilコマンドによって実行するときの例です。
+
+//cmd[commentテーブルのipカラムをチェック]{
+$ php oil r spamcheck set_black_ips comment
+//}
+
+//cmd[commentテーブルのtextカラムをチェック]{
+$ php oil r spamcheck set_black_ips comment text
+//}
 
 == 終わりに
 

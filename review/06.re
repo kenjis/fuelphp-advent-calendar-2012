@@ -12,15 +12,15 @@ FuelPHPでは、PHPUnitというテスティングフレームワークを利用
 
 PHPUnitは、PEARインストーラを使用してインストールします。まず、pear.phpunit.deからインストールできるようにします。
 
-
-@<tt>{pear config-set auto_discover 1}
-
+//cmd{
+$ pear config-set auto_discover 1
+//}
 
 続いてインストールします。
 
-
-@<tt>{pear install pear.phpunit.de/PHPUnit}
-
+//cmd{
+$ pear install pear.phpunit.de/PHPUnit
+//}
 
 詳しくは@<href>{http://www.phpunit.de/manual/3.7/ja/installation.html,第3章 PHPUnit のインストール}をごらんください。なお、Ubuntuでは、@<tt>{sudo apt-get install phpunit}でインストールできます。
 
