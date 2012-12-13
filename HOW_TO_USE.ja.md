@@ -11,28 +11,28 @@
 
 ### ブログページの取得
 
-	$ php get-blog.php (URL) html (章)
+	$ php get-blog.php <URL> html <章>
 
 	例:
 	$ php get-blog.php http://d.hatena.ne.jp/Kenji_s/20121201/fuelphp_this_year html 01
 
 ### Markdown化
 
-	$ php get-blog.php (URL) md (章)
+	$ php get-blog.php <URL> md <章>
 
 	例:
 	$ php get-blog.php http://d.hatena.ne.jp/Kenji_s/20121201/fuelphp_this_year md 01
 
 ### Markdownファイルの調整
 
-	$ php get-blog.php (URL) adjust (章)
+	$ php get-blog.php <URL> adjust <章>
 
 	例:
 	$ php get-blog.php http://d.hatena.ne.jp/Kenji_s/20121201/fuelphp_this_year adjust 01
 
 ### 画像ファイルの取得
 
-	$ php get-blog.php (URL) image (章)
+	$ php get-blog.php <URL> image <章>
 
 	例:
 	$ php get-blog.php http://d.hatena.ne.jp/Kenji_s/20121201/fuelphp_this_year image 01
@@ -52,3 +52,4 @@ ReVIEWの設定ファイルはあらかじめ用意してください。
 PHP Markdown Extraの形式が使えますが、Pandocが出力するものは少々形式が違うため修正が必要になります。
 
 - http://michelf.ca/projects/php-markdown/extra/#table
+

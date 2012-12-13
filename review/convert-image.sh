@@ -2,7 +2,7 @@
 
 if [ $# -eq 0 ]; then
   echo "Convert PNG image density"
-  echo " usage: $0 (dir)"
+  echo " usage: $0 <dir>"
   echo "    eg: $0 images/01"
   exit
 fi

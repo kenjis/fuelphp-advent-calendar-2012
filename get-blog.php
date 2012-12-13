@@ -15,10 +15,10 @@ require './vendor/autoload.php';
 mb_internal_encoding('UTF-8');
 
 if ( ! isset($argv[1]) || ! isset($argv[2]) || ! isset($argv[3])) {
-    echo $argv[0] . ' (URL) html (chapter)' . PHP_EOL;
-    echo $argv[0] . ' (URL) md (chapter)' . PHP_EOL;
-    echo $argv[0] . ' (URL) image (chapter)' . PHP_EOL;
-    echo $argv[0] . ' (URL) adjust (chapter)' . PHP_EOL;
+    echo $argv[0] . ' <URL> html <chapter>' . PHP_EOL;
+    echo $argv[0] . ' <URL> md <chapter>' . PHP_EOL;
+    echo $argv[0] . ' <URL> adjust <chapter>' . PHP_EOL;
+    echo $argv[0] . ' <URL> image <chapter>' . PHP_EOL;
     exit(1);
 }
 
