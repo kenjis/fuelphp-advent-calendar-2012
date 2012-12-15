@@ -42,7 +42,7 @@
 == インストール方法
 
 
-githubで@<href>{https://github.com/egmc/fuel-dsauth#installation,簡単なドキュメント}を公開しています。@<br>{}
+GitHubで@<href>{https://github.com/egmc/fuel-dsauth#installation,簡単なドキュメント}を公開しています。@<br>{}
  基本的に必要なパッケージを配置してマイグレーションを実施すれば準備OKです。@<br>{}
  ポイントはNinjAuthのAdapterとしてDsAuthを指定することです。
 
