@@ -72,7 +72,7 @@ FuelPHPではログイン処理を作る際のひな形として@<href>{http://f
 SimpleAuthを使ったログイン機能の実装の事例は、いくつか紹介されています。
 
  * @<href>{http://w.builwing.info/2012/02/28/fuelphp%E3%81%A7%E7%B0%A1%E5%8D%98%E8%AA%8D%E8%A8%BC%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0/,FuelPHPで簡単認証システム | WinRoad徒然草}
- * @<href>{http://btt.hatenablog.com/entry/2012/06/16/015506,FuelPHPでログイン機能をサクっと実装 – BTT’s blog}
+ * @<href>{http://btt.hatenablog.com/entry/2012/06/16/015506,FuelPHPでログイン機能をサクっと実装 – BTT's blog}
  * @<href>{http://9ensan.com/blog/programming/php/fuelphp/fuelphp-login-auth/,[FuelPHP] FuelPHPで作るログイン管理 | 9ensanのLifeHack}
 
 
@@ -117,7 +117,7 @@ fuel/packages/auth/config/simpleauth.php をコピーして、fuel/packages/conf
 //}
 
 
-これはテーブル名の定義ですが、’users’となっていたテーブル名を’student’という名前に変えてます。
+これはテーブル名の定義ですが、'users'となっていたテーブル名を'student'という名前に変えてます。
 
 
 同様に、fuel/packages/config/companyauth.php を作成し、以下のように書きます。
@@ -227,16 +227,16 @@ aclとgroupのディレクトリは今回の要件には使わないので、必
 
 @<strong>{studentauth.php}を作ります。simpleauth.phpをコピーしたものをベースに、そこから修正していきます。
 
- * simpleauth.phpの中で、”Simple”や”simple”となっているところをかたっぱしから”Student”、”student”に置換します。
+ * simpleauth.phpの中で、"Simple"や"simple"となっているところをかたっぱしから"Student"、"student"に置換します。
+ ** クラス名、設定名などあらゆるもの。大文字、小文字にも気をつけて変換するようにします。
+ * Session変数は学生用と企業用で名前が重複しないように考慮する必要があります。
 
- * クラス名、設定名などあらゆるもの。
- * 大文字、小文字にも気をつけて変換するようにします。
- * Session変数は学生用と企業用で名前が重複しないように考慮する必要があります。@<br>{}
 例:@<br>{}
-\Session::set(‘username’, $this->user['username']);@<br>{}
+\Session::set('username', $this->user['username']);@<br>{}
 の場合は@<br>{}
-\Session::set(‘studentusername’, $this->user['username']);@<br>{}
+\Session::set('studentusername', $this->user['username']);@<br>{}
 のようにします。
+
  * @<strong>{studentgroup.php}を作ります。simplegroup.phpをコピーしたものをベースに、そこから同じように文字列置換します。
  * @<strong>{studentacl.php}を作ります。simpleacl.phpをコピーしたものをベースに、同じように文字列置換します。
 
@@ -247,9 +247,9 @@ aclとgroupのディレクトリは今回の要件には使わないので、必
 @<strong>{companyauth.php}を作ります。simpleauth.phpをコピーしたものをベースに、そこから修正していきます。
 
 
- ・simpleauth.phpの中で、”Simple”や”simple”となっているところをかたっぱしから”Company”、”company”に置換する。@<br>{}
- ・@<strong>{companygroup.php}を作ります。simplegroup.phpをコピーしたものをベースにします。@<br>{}
- ・@<strong>{companyacl.php}を作ります。simpleacl.phpをコピーしたものをベースにします。  
+ * simpleauth.phpの中で、"Simple"や"simple"となっているところをかたっぱしから"Company"、"company"に置換します。
+ * @<strong>{companygroup.php}を作ります。simplegroup.phpをコピーしたものをベースにします。
+ * @<strong>{companyacl.php}を作ります。simpleacl.phpをコピーしたものをベースにします。
 
 === ログイン制御(Contoller)と画面(View)を作る
 
@@ -258,11 +258,8 @@ aclとgroupのディレクトリは今回の要件には使わないので、必
 
 ==== Controllerの作成
 
-
-fuel/app/class/controller/studentlogin.php
-
 #@# lang: .brush:php
-//emlist{
+//emlist[fuel/app/class/controller/studentlogin.php]{
 public function action_login()
 {
     $data = array();
@@ -293,11 +290,8 @@ public function action_login()
 
 ==== Viewの作成
 
-
-fuel/app/views/studentlogin.php
-
 #@# lang: .brush:xml
-//emlist{
+//emlist[fuel/app/views/studentlogin.php]{
 <?php echo Form::open( '/studentlogin/login'); ?>
 ユーザ名<?php echo Form::input('username',  Input::post('username') ) ?>
 パスワード<?php echo Form::password('password',  Input::post('password') ) ?>
@@ -319,11 +313,8 @@ fuel/app/views/studentlogin.php
 
 ==== Controller
 
-
-fuel/app/class/controller/studentlogin.php
-
 #@# lang: .brush:php
-//emlist{
+//emlist[fuel/app/class/controller/studentlogin.php]{
 public function action_add_user()
 {
     if (Input::post())
@@ -347,11 +338,8 @@ public function action_add_user()
 
 ==== View
 
-
-fuel/app/views/studentadduser.php
-
 #@# lang: .brush:xml
-//emlist{
+//emlist[fuel/app/views/studentadduser.php]{
 <?php echo Form::open( '/studentlogin/add_user'); ?>
 ユーザ名<?php echo Form::input('username',  Input::post('username') ) ?>
 パスワード<?php echo Form::password('password',  Input::post('password') ) ?>
@@ -374,11 +362,8 @@ Email<?php echo Form::input('email',  Input::post('email') ) ?>
 
 ==== Controller
 
-
-fuel/app/class/controller/studentlogin.php
-
 #@# lang: .brush:php
-//emlist{
+//emlist[fuel/app/class/controller/studentlogin.php]{
 public function action_logout()
 {
     //ログアウト
@@ -392,11 +377,10 @@ public function action_logout()
 企業ログアウトはcompnaylogin.phpに書きます。
 
 
-Viewはこちら@<br>{}
-fuel/app/views/studentlogout.php
+Viewはこちら。
 
 #@# lang: .brush:xml
-//emlist{
+//emlist[fuel/app/views/studentlogout.php]{
 ログアウトしました
 ログイン
 //}
@@ -422,11 +406,8 @@ fuel/app/views/studentlogout.php
 
 実際のユースケースでは企業と学生の両方のアカウントを持つ人はいないのですが、開発の現場ではテスト時にそういう使い方もするので、一応その考慮を入れています。
 
-
-fuel/app/class/controller/studentlogin.php
-
 #@# lang: .brush:php
-//emlist{
+//emlist[fuel/app/class/controller/studentlogin.php]{
 // 事前処理
 public function before()
 {
@@ -457,12 +438,14 @@ public function action_index()
 === さいごに
 
 
-このように、1つのサイトで複数のログイン機能を実装する場合は、SimpleAuthを単にコピーして”Simple”の部分の文字列を置換するだけではダメです。
+このように、1つのサイトで複数のログイン機能を実装する場合は、SimpleAuthを単にコピーして"Simple"の部分の文字列を置換するだけではダメです。
 
 
-追加作業として@<br>{}
- ・セッションの名前が重複しないようにする。@<br>{}
- ・学生と企業の同時多重ログインをしないようにする。@<br>{}
+追加作業として
+
+ * セッションの名前が重複しないようにする。
+ * 学生と企業の同時多重ログインをしないようにする。
+
 などの考慮が必要になります。
 
 
@@ -470,7 +453,7 @@ public function action_index()
  結局、SImpleAuth認証のロジック内を細かく精査して、不具合の原因となる部分を潰していったので、SimpleAuthを参考にしたと言っても全然Simpleにはいかなったです。
 
 
-このノウハウが参考になれば幸いです。
+このノウハウが参考になれば幸いです。@<br>{}
 
 
 次は@<href>{https://twitter.com/NEKOGET,@NEKOGET}さんの「FuelPHPドキュメント翻訳へのお誘い」です。日本語化の方々お疲れ様です。いつもありがたく使わせていただいております!
