@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <title>FuelPHPで作るFacebook診断アプリ | OfferBox | オファーボックス</title>
+    <meta charset="utf-8">
+    <meta content="OfferBoxは、新しいカタチの就活サービスです。本サイトで動画や画像を使って自己PRすることで、企業があなたをみつけて「オファー」をしてくれます。" name="description">
+    <meta content="OfferBox, オファーボックス, 就活, オファー" name="keywords">
+    <meta http-equiv="X-UA-Compatible" content="IE=7">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="http://offerbox.jp/wp/wp-content/themes/offerbox/js/bootstrap.min.js" type="text/javascript"></script>
+    <!--[if lt IE 8]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link rel="stylesheet" href="http://offerbox.jp/wp/wp-content/themes/offerbox/style.css" type="text/css">
+    <script src="http://offerbox.jp/wp/wp-content/themes/offerbox/js/jquery.bxSlider.min.js" type="text/javascript"></script>
+    <script>
+      //<![CDATA[
+        $(function(){
+            $("#slide").fadeIn(2000).show();
+            $("#slide").bxSlider({
+                mode:'fade',
+                auto:'true',
+                speed: 1000,
+                pause: 5000
+        　　　　});
+        });
+      //]]>
+    </script>
+    <link href="http://offerbox.jp/wp/wp-content/themes/offerbox/js/bx_styles/bx_styles.css" rel="stylesheet" type="text/css">
+<!-- BEGIN:OGP -->
+<meta property="og:title" content="FuelPHPで作るFacebook診断アプリ｜OfferBox | オファーボックス" />
+<meta property="og:type" content="article" />
+<meta property="og:image" content="http://offerbox.jp/wp/wp-content/uploads/2012/12/a4ad0c2be86b9d98bfe1e2580359c488-100x100.jpg" />
+<meta property="og:url" content="http://offerbox.jp/engineer/473/" />
+<meta property="og:description" content="こんにちは。FuelPHP Advent Calendar 2012に参加します山田と言います。 Advent Calendarの前日記事は@NEKOGETさんでした。 「FuelPHPドキュメント翻訳へのお誘い」 日本 [...]..." />
+<meta property="og:site_name" content="OfferBox | オファーボックス" />
+<meta property="fb:app_id" content="388403631244300" />
+<!-- END:OGP -->
+
+  <!-- Google Analytics -->
+	<script type="text/javascript">
+	  var _gaq = _gaq || [];
+	  _gaq.push(['_setAccount', 'UA-34102673-1']);
+	  _gaq.push(['_trackPageview']);
+
+	  (function() {
+	    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	  })();
+	</script>
+	<!-- Google Analytics -->
+
+  <? wp_header();?>
+  </head>
+  <body class="single single-post postid-473 single-format-standard" >
+    <div class="navbar" id="top">
+      <div class="navbar-inner navbar-color-2">
+        <a class="brand" href="http://offerbox.jp">就活の新しいカタチ　OfferBox</a>
+        <ul class="nav pull-right">
+          <li class="divider-vertical"></li>
+         <li>
+            <a href="http://offerbox.jp">ホーム</a>
+          </li>
+          <li class="divider-vertical"></li>
+          <li>
+            <a href="http://offerbox.jp/about">OfferBoxとは</a>
+          </li>
+          <li class="divider-vertical"></li>
+           <li>
+            <a href="http://offerbox.jp/faq">よくある質問</a>
+          </li>
+          <li class="divider-vertical"></li>
+          <li>
+            <a href="https://offerbox.jp/offerbox/slogin/" target="_blank" >学生ログイン</a>
+          </li>
+          <li class="divider-vertical"></li>
+        </ul>
+      </div>
+    </div>
+    <!-- /global nav -->
+
+    <header>
+    <h1 class="pull-left" id="sitelogo">
+      <a href="http://offerbox.jp">
+        <img height="35" src="http://offerbox.jp/wp/wp-content/themes/offerbox/img/common/logo.png" width="177">
+      </a>
+    </h1>
+   <div id="socialbutton" class="pull-right">
+              <ul>
+                <li>
+                  <a href="http://www.facebook.com/share.php?u=http://offerbox.jp" target="_blank">
+                    <img alt="Facebookでシェア" src="http://offerbox.jp/wp/wp-content/themes/offerbox/img/common/btn_fb.png" />
+                  </a>
+                </li>
+                <li>
+                  <a href="http://twitter.com/home?status=「探す人」から「選ばれる人」へ。新しい就活のカタチ「OfferBox」" target="_blank" title="Twitterに投稿する">
+                    <img class="ml20" src="http://offerbox.jp/wp/wp-content/themes/offerbox/img/common/btn_tw.png" />
+                  </a>
+                </li>
+              </ul>
+            </div>
+    <!-- /social -->
+    <br class="clear">
+    </header>
+
+    <div id="main-image">
+<img src="http://offerbox.jp/wp/wp-content/themes/offerbox/img/under/under_img.jpg" />
+<div class="breadcrumbs">
+    <!-- Breadcrumb NavXT 4.2.0 -->
+<a title="Go to ホーム." href="http://offerbox.jp">ホーム</a> &gt; <a title="Go to the 開発者ブログ category archives." href="http://offerbox.jp/engineer/">開発者ブログ</a> &gt; FuelPHPで作るFacebook診断アプリ</div>
+</div>
+<!-- /header -->
+<div class="container">
+  <div class="row">
+    <div class="span9" id="main">
+      <div class="row">
+        <div class="span9">
+          <div class="widget whatsnew">
+            <div class="widget-header">
+              <h3>開発者ブログ</h3>
+            </div>
+            <div class="widget-content column">
+                            <p class="post_time"> <i class="icon-time"></i>2012/12/16</p>
+              <h1>FuelPHPで作るFacebook診断アプリ</h1>
+              <!-- social btn -->
+              <div id="socialbtn">
+              <table><tr>
+               <td class="hatebuButton pr10"><a href="http://b.hatena.ne.jp/entry/http://offerbox.jp/engineer/473/" class="hatena-bookmark-button" data-hatena-bookmark-title="FuelPHPで作るFacebook診断アプリ" data-hatena-bookmark-layout="vertical" title="このエントリーをはてなブックマークに追加"><img src="http://b.st-hatena.com/images/entry-button/button-only.gif" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a></td>
+              <td class="tweetButton pr10"><a href="https://twitter.com/share" class="twitter-share-button" data-count="vertical" data-url="http://offerbox.jp/engineer/473/" data-text="FuelPHPで作るFacebook診断アプリ" data-via="" data-lang="ja">ツイート</a></td>
+              <td class="likeButton pr10"><div class="fb-like" data-href="http://offerbox.jp/engineer/473/" data-send="false" data-layout="box_count" data-width="72" data-show-faces="false"></div></td>
+              <td class="gplusButton pr10"><g:plusone size="tall" href="http://offerbox.jp/engineer/473/"></g:plusone></td>
+              <td class="EvernoteButton"><a href="#" onclick="Evernote.doClip({}); return false;"><img src="http://static.evernote.com/article-clipper-vert.png" alt="Clip to Evernote" /></a></td>
+              </tr></table>
+              </div>
+              <!-- /social btn -->
+              					                               <p>こんにちは。<a title="FuelPHP Advent Calendar 2012" href="http://atnd.org/events/33753" target="">FuelPHP Advent Calendar 2012</a>に参加します山田と言います。</p>
+<p>Advent Calendarの前日記事は<a href="https://twitter.com/NEKOGET" target="_blank">@NEKOGET</a>さんでした。<br />
+<a href="http://pneskin2.nekoget.com/press/?p=1044">「FuelPHPドキュメント翻訳へのお誘い」</a><br />
+日本語化の方々いつもありがとうございます。毎度お世話になっております。</p>
+<p>さて、私は就職活動に関するマッチングサイトOfferBoxを開発しており、そのシステムでFuelPHPを利用しています。これは、14日目に上村さんに紹介頂いています(<a href="http://offerbox.jp/engineer/440/">就職活動サイトの構築にFuelPHPを使ったので事例紹介</a>)。<br />
+さらに、このOfferBoxのFacebookページで、適性診断アプリを作りまして、ここでもFuelPHPを使いました。</p>
+<p>ここでは、この適性診断アプリをFacebookアプリの作成事例としてご紹介します。<br />
+　</p>
+<h2>1. Facebookの適性診断アプリ概要</h2>
+<p>まずは、作成したアプリケーションの概要を説明します。<br />
+　</p>
+<h3>(1)まず一度、実施してみてください</h3>
+<p>PCのみで実行可能ですが、一度動作をお試しください。<br />
+→<a href="http://www.facebook.com/offerbox/app_105514016282622" target="_blank">こちら</a></p>
+<p><a href="http://offerbox.jp/wp/wp-content/uploads/2012/12/a4ad0c2be86b9d98bfe1e2580359c488.jpg"><img class="aligncenter size-medium wp-image-485" title="FBページ告知用" src="http://offerbox.jp/wp/wp-content/uploads/2012/12/a4ad0c2be86b9d98bfe1e2580359c488-300x360.jpg" alt="" width="300" height="360" /></a></p>
+<p>12月2日に公開いたしましたが、おかげさまで半月足らずで600回以上実施いただいております。現在スマホにも対応していますが、これは別途機会があればご説明します<br />
+　</p>
+<h3>(2)適性診断アプリの特徴</h3>
+<p>適性診断の内容は、二択の質問に12問答えると、就職活動での適性を15パターン分けてどれに当てはまるか結果を表示します。診断の流れは、以下のとおりです。</p>
+<div class="autorArea">
+<ol>
+<li>　いいね！を押すことで診断開始。</li>
+<li>　診断を開始すると、Facebookにログインとウォールへのアクセス許可を取る</li>
+<li>　診断を実施後、診断結果をユーザのウォールに投稿する。</li>
+</ol>
+</div>
+<p>　</p>
+<h2>2. Facebook側での準備</h2>
+<p>Facebookアプリを利用するために、<a href="https://developers.facebook.com/" target="_blank">Facebook開発者ページ</a>で、アプリケーションを登録します。登録手順は、広くWeb上で紹介されています。</p>
+<p><a href="http://socialmediaexperience.jp/2638" target="_blank">Facebookアプリを開発してみよう</a></p>
+<p>大きな枠組みとしては、サーバにFuelPHPでアプリを準備し、Facebookアプリにそのパスを登録する、という流れになります。<br />
+　</p>
+<h2>3. FuelPHPによるアプリの作成（サーバ）</h2>
+<p>ここからが本題になりますが、大きくFuelPHPの「ファイル構成」「コントローラの関数」「コード説明」の順で説明します。<br />
+　</p>
+<h3>(1)ファイル構成</h3>
+<p>今回は、データベース(Model)は使わないシンプルなケースで、コントローラとビューのみで説明いたします。ディレクトリfuel以下のファイルは以下のとおりです。</p>
+<div class="autorArea">
+<table>
+<tbody>
+<tr>
+<td><strong>ファイル名</strong></td>
+<td><strong>ファイルの内容</strong></td>
+</tr>
+<tr>
+<td>fuel/app/classes/controller/diag.php</td>
+<td>適性診断用コントローラ</td>
+</tr>
+<tr>
+<td>fuel/app/views/answer.php</td>
+<td>診断結果ビュー</td>
+</tr>
+<tr>
+<td>fuel/app/views/diag.php</td>
+<td>メイン画面ビュー</td>
+</tr>
+<tr>
+<td>fuel/app/views/fbliked.php</td>
+<td>適性診断開始ビュー（いいね！を押した後）</td>
+</tr>
+<tr>
+<td>fuel/app/views/fbnolike.php</td>
+<td>いいね！催促ビュー（いいね！を押す前）</td>
+</tr>
+<tr>
+<td>fuel/app/views/fbnoaccess.php</td>
+<td>Facebook経由でない場合のアクセス禁止用ビュー</td>
+</tr>
+<tr>
+<td>fuel/app/views/oauth.php</td>
+<td>Facebook認証用ビュー</td>
+</tr>
+<tr>
+<td>fuel/app/views/question.php</td>
+<td>適性診断質問ビュー</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>　</p>
+<h3>(2)コード説明（コントローラ）</h3>
+<p>ここでは、コントローラのコードについて説明していきます。<br />
+　</p>
+<h4>Facebookライブラリの準備</h4>
+<p>まず、Facebookのライブラリを準備します。FacebookのPHP−SDKは、<a href="https://github.com/facebook/facebook-php-sdk" target="_blank">ここから</a>ダウンロードできます。fuel/app/venderに展開ください。<br />
+　<br />
+fuel/app/classes/controller/diag.php</p>
+<pre class="brush:xml">
+require_once APPPATH.'vendor/facebook-php-sdk/src/facebook.php';
+
+class Controller_Diag extends Controller
+{
+    
+     public function before()
+     {
+
+          // Facebook SDK
+          $config = array();
+          $config['appId'] = 'アプリケーションID';
+          $config['secret'] = 'シークレットキー';
+          $config['cookie'] = true;
+          $this->facebook = new Facebook($config);
+     }
+</pre>
+<p>　</p>
+<h4>トップページでの振り分け</h4>
+<p>トップページでは、「Facebookページ経由でのアクセス」「いいね！が押されている状態」「ユーザのログイン状態」により、処理を分岐させます。<br />
+いいね！が押されているかの判定は、このページで紹介されています。</p>
+<p><a href="http://phpjavascriptroom.com/?t=topic&#038;p=facebookpage_liked#a_liked" target="_blank">facebookのiframeアプリでいいねの有無によって表示を分ける方法</a></p>
+<p>この中の、&#8221;parse_signed_request.php&#8221;をコントローラーに取り込み、呼び出します。</p>
+<p>Facebook認証からのcallbackで返ってきた場合は、$user_idにユーザ情報が入ってトップページが呼び出されますので、適性診断の質問用ビュー(question)を表示します。。</p>
+<p>　<br />
+fuel/app/classes/controller/diag.php</p>
+<pre class="brush:xml">
+    public function action_index()
+     {
+          // view定義
+          $view=View::forge('diag');
+
+          if (isset($_POST['signed_request'])){
+
+              $signed_request=$_POST['signed_request'];
+              $data = $this->parse_signed_request($signed_request,"アプリケーションID");
+
+              if ($data["page"]["liked"]){  // 分岐1："いいね済の人に見せるコンテンツ";
+
+                    //ログイン状態を取得
+                    $user_id = $this->facebook->getUser();
+
+                    if($user_id) {     //ログインしている状態
+                         $view->mainview     = View::forge('question'); // 質問を表示
+                    } else {
+                         $view->mainview     = View::forge('fbliked');  // 診断開始を表示
+                    }
+
+              } else {                     // 分岐2: "未いいねの人に見せるコンテンツ";
+
+                    $view->mainview     = View::forge('fbnolike');
+
+              }
+
+              $view->signed_request = $data;
+
+          } else {                        // 分岐3：アプリのURLを直接たたいた場合
+
+               $view->mainview     = View::forge('fbnoaccess');
+          }
+         
+          return $view;
+     }
+</pre>
+<p>　</p>
+<h4>適性診断開始</h4>
+<p>適性診断の開始では、Facebookでのログインと認証を受ける処理をします。ここでは、ビューの中で、Facebook認証を受けるためのURLをコールしています。</p>
+<p>　<br />
+fuel/app/classes/controller/diag.php</p>
+<pre class="brush:xml">
+     public function action_start()
+     {
+          // view定義
+          $view=View::forge('oauth');
+
+          return $view;
+     }
+</pre>
+<p>　</p>
+<h4>結果表示</h4>
+<p>ここでは、適性診断の質問に対する回答がフォームでPOSTされますので、診断結果を判定し、ユーザのウォールに書き込む処理をしています。<br />
+　<br />
+fuel/app/classes/controller/diag.php</p>
+<pre class="brush:xml">
+     public function action_result()
+     {
+          $view=View::forge('diag');
+
+          if (Input::method() == 'POST')
+          {
+               // POST投稿時の処理
+               $val = Validation::forge();
+
+               // バリデーション
+
+               if( $val->run() ){
+
+                    $vars = $val->validated();
+
+                    //                    
+                    //     適性診断の計算実行               
+                    //                    
+
+
+                    //ログイン状態を取得
+                    $user_id = $this->facebook->getUser();
+
+                   try{
+
+                         // リクエスト時のContentTypをmultipart/form-dataとする
+                         $this->facebook->setFileUploadSupport( true );                       
+
+                        //ウォールへ投稿
+                        $result = $this->facebook->api("/me/photos", "post", array(
+                                         'access_token' => $this->facebook->getAccessToken(),
+                                        'source' => '@' . $patternpath,
+                                        'message' => "ウォールに投稿するメッセージ"
+                                        ));
+
+                    } catch (FacebookApiException $e) {
+                       error_log($e->getType());
+                       error_log($e->getMessage());
+                    }
+
+                    $view->mainview     = View::forge('answer', $this->data);
+
+               } else {
+
+                    // バリデーションエラー
+                    Session::set_flash('error', $val->show_errors());
+
+                    // view定義
+                    $view->mainview     = View::forge('question');
+               }
+          } else {
+               $view->mainview     = View::forge('question');
+          }
+
+          return $view;
+     }
+</pre>
+<p>　</p>
+<h3>(3)コード説明（ビュー）</h3>
+<p>ここでは、メイン画面用のビューとFacebook認証用のビューを示します。その他のビューは、Facebookアプリの内容に合わせて作成ください。<br />
+　</p>
+<h4>メイン画面ビュー</h4>
+<p>このビューは、全画面で共通的に使うビューで、Facebookページのiframeのサイズに合わせます。ソース真ん中あたりの、$mainviewに各ページのコンテンツを表示させます。<br />
+　<br />
+fuel/app/views/diag.php</p>
+<pre class="brush:xml">
+<!DOCTYPE html>
+<html lang="ja" xmlns:fb="http://ogp.me/ns/fb#" xmlns:og="http://ogp.me/ns#">
+  <head>
+    <meta charset="utf-8">
+    <meta name="robots" content="noindex" />
+
+</head>
+
+<body>
+     <?php echo $mainview ?>
+
+<!-- Facebook JavaScript SDK -->
+<div id='fb-root'></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/ja_JP/all.js#xfbml=1&#038;appId=アプリケーションID";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<script type='text/javascript'>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId : 'アプリケーションID',
+      status : true,
+      cookie : true,
+      xfbml : true,
+      logging : true
+    });
+    /* キャンバスのサイズ(px) */
+   FB.Canvas.setAutoGrow();
+  }
+</script>
+<!-- Facebook JavaScript SDK // -->
+</body>
+</html>
+</pre>
+<p>　</p>
+<h4>Facebook認証用ビュー</h4>
+<p>このビューは、Facebook認証用のURLを作成し、コールするためだけのビューです。ビューの中で、以下のスクリプトを書いてください。<br />
+　<br />
+fuel/app/views/oauth.php</p>
+<pre class="brush:xml">
+      var oauth_url = 'https://www.facebook.com/dialog/oauth/';
+      oauth_url += '?client_id=アプリケーションID';
+      oauth_url += '&#038;redirect_uri=' + encodeURIComponent('https://www.facebook.com/offerbox/?sk=app_アプリケーションID');
+      oauth_url += '&#038;scope=publish_stream,photo_upload'
+
+      window.top.location = oauth_url;
+</pre>
+<p>　</p>
+<h2>4. Facebookページへの登録</h2>
+<p>Facebookページのページタブに、作成したアプリケーションを登録する方法は、プラウザで以下を撃込んでください。</p>
+<div class="autorArea">
+<p>http://www.facebook.com/dialog/pagetab?app_id=アプリケーションID&#038;next=アプリケーションのURL</p>
+</div>
+<p>　<br />
+<a href="http://weboook.blog22.fc2.com/blog-entry-309.html" target="_blank">ページタブアプリ(iframe)の作成とFacebookページへの追加方法</a><br />
+　</p>
+<h2>5. さいごに</h2>
+<p>このように、Facebookアプリの枠組みとしてFuelPHPを利用することで、アプリのアイデアさえあれば、簡単にFacebookアプロを作成でき、Facebookページへの集客に役立てる事が出来ます。<br />
+このノウハウが参考になれば幸いです。</p>
+<p>次は@<a href="https://twitter.com/ootatter" target="_blank">ootatter</a>で「fuelphpで既存DBをあつかうとか」です。DBまわりの内容でとても興味深いですね。</p>
+              <br class="clear" />
+                          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /main -->
+                    <div class="span3" id="sub">
+        
+        <div class="sidebar2">
+        <div id="categoryposts-2" class="widget widget_categoryposts"><div class="widget-header"><h3>開発者ブログ</h3></div><ul>
+		<li class="cat-post-item">
+			<a class="post-title" href="http://offerbox.jp/engineer/473/" rel="bookmark" title="Permanent link to FuelPHPで作るFacebook診断アプリ">FuelPHPで作るFacebook診断アプリ</a>
+			
+			
+						
+						
+					</li>
+			<li class="cat-post-item">
+			<a class="post-title" href="http://offerbox.jp/engineer/440/" rel="bookmark" title="Permanent link to 就職活動サイトの構築にFuelPHPを使ったので事例紹介">就職活動サイトの構築にFuelPHPを使ったので事例紹介</a>
+			
+			
+						
+						
+					</li>
+			<li class="cat-post-item">
+			<a class="post-title" href="http://offerbox.jp/engineer/391/" rel="bookmark" title="Permanent link to 開発者ブログを始めます。">開発者ブログを始めます。</a>
+			
+			
+						
+						
+					</li>
+	</ul>
+</div>        </div>
+
+          <div class="widget" id="voice">
+            <div class="widget-header">
+              <h3>ご意見箱</h3>
+            </div>
+            <div class="widget-content">
+                <p class="help-block">OfferBoxについてお気づきの事があれば、下記のフォームでご意見をお寄せください。</p>
+                <div class="wpcf7" id="wpcf7-f26-t1-o1"><form action="/engineer/473/#wpcf7-f26-t1-o1" method="post" class="wpcf7-form">
+<div style="display: none;">
+<input type="hidden" name="_wpcf7" value="26" />
+<input type="hidden" name="_wpcf7_version" value="3.3" />
+<input type="hidden" name="_wpcf7_unit_tag" value="wpcf7-f26-t1-o1" />
+<input type="hidden" name="_wpnonce" value="8061b51698" />
+</div>
+<p><span class="wpcf7-form-control-wrap your-message"><textarea name="your-message" class="wpcf7-form-control  wpcf7-textarea wpcf7-validates-as-required mess" cols="40" rows="10"></textarea></span> </p>
+<div id="message">
+<input type="submit" value="送信" id="b" class="wpcf7-form-control  wpcf7-submit" />
+</div>
+<div class="wpcf7-response-output wpcf7-display-none"></div></form></div>            </div>
+          </div>
+          <!-- /voice -->
+
+        </div>
+    <script src="http://offerbox.jp/wp/wp-content/themes/offerbox/syntaxhighlighter_3.0.83/scripts/shCore.js" type="text/javascript"></script>
+    <script src="http://offerbox.jp/wp/wp-content/themes/offerbox/syntaxhighlighter_3.0.83/scripts/shBrushPhp.js" type="text/javascript"></script>
+    <script src="http://offerbox.jp/wp/wp-content/themes/offerbox/syntaxhighlighter_3.0.83/scripts/shBrushSql.js" type="text/javascript"></script>
+    <script src="http://offerbox.jp/wp/wp-content/themes/offerbox/syntaxhighlighter_3.0.83/scripts/shBrushXml.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="http://offerbox.jp/wp/wp-content/themes/offerbox/syntaxhighlighter_3.0.83/styles/shCore.css" type="text/css">
+    <link rel="stylesheet" href="http://offerbox.jp/wp/wp-content/themes/offerbox/syntaxhighlighter_3.0.83/styles/shThemeDefault.css" type="text/css">
+    <script type="text/javascript">
+	  SyntaxHighlighter.all()
+    </script>
+
+     
+      </div>
+      <!-- /row -->
+      
+      <div class="container clearfix">
+        <a class="btn btn-french-2 pull-right" href="#top">
+          <i class="icon-arrow-up icon-white"></i>
+          ページトップ
+        </a>
+      </div>
+    </div>
+    <!-- /container -->
+    
+    <div id="footer">
+      <div class="container">
+        <ul class="pull-right" id="footerlink">
+          <li>
+            <a href="http://i-plug.co.jp" target="_blank">運営会社</a>
+          </li>
+          <li>
+            <a href="http://i-plug.co.jp/%E3%81%8A%E5%95%8F%E3%81%84%E5%90%88%E3%82%8F%E3%81%9B/" target="_blank">法人のお客様へ</a>
+          </li>
+          <li>
+            <a href="http://i-plug.co.jp/policy/" target="_blank">プライバシーポリシー</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <!-- /footer -->
+    
+
+<!-- Facebook -->
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/ja_JP/all.js#xfbml=1&appId=388403631244300";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script> 
+<!-- Google+ -->
+<script type="text/javascript">
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/plusone.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
+</script>
+<!-- はてなブックマーク -->
+<script type="text/javascript" src="http://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+<!-- Twitter -->
+<script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+<!-- Evernote -->
+<script type="text/javascript" src="http://static.evernote.com/noteit.js"></script>
+
+<script src="http://offerbox.jp/wp/wp-content/themes/offerbox/js/scroll.js" type="text/javascript"></script>
+<? wp_footer();?>
+    
+
+  </body>
+</html>  </div>
+</div>
