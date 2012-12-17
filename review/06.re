@@ -2,7 +2,9 @@
 = ユニットテストのすすめ @<href>{https://twitter.com/ounziw,@ounziw}
 
 
-@<href>{http://atnd.org/events/33753,FuelPHP Advent Calendar 2012} 6日目です。昨日は「FuelPHPで日本人にやさしいフォームを作る」(@<href>{https://twitter.com/redsnow_,@redsnow_}さん)でした。今日はユニットテストのすすめです。公式マニュアル@<href>{http://fuelphp.com/docs/general/unit_testing.html,http://fuelphp.com/docs/general/unit_testing.html}を参考にしています。
+@<href>{http://atnd.org/events/33753,FuelPHP Advent Calendar 2012} 6日目です。昨日は「FuelPHPで日本人にやさしいフォームを作る」(@<href>{https://twitter.com/redsnow_,@redsnow_}さん)でした。@<br>{}
+
+今日は「ユニットテストのすすめ」です。公式マニュアル@<href>{http://fuelphp.com/docs/general/unit_testing.html,http://fuelphp.com/docs/general/unit_testing.html}を参考にしています。
 
 == PHPUnitのインストール
 
@@ -56,7 +58,7 @@ class Test_Num extends TestCase
 
         $this->assertEquals($expected, $output);
     }
-...
+…省略…
 //}
 
 
@@ -103,7 +105,7 @@ class Test_Num extends TestCase
 で、グループ化してテスト実行できます。
 
 
-アノテーションは、上の例のTest_numでは、@<tt>{@group Core} となっています。自分のアプリケーションには、@<tt>{@group App} を付けると、自分のアプリケーションのテストだけを実行することができます。App の部分は好きな名前を付けることができます。
+アノテーションは、上の例のTest_numでは、@<tt>{@group Core} となっています。自分のアプリケーションには、@<tt>{@group App} を付けると、自分のアプリケーションのテストだけを実行することができます。App の部分は好きな名前を付けることができます。@<br>{}
 
 
 明日は「FuelPHP の Fieldset クラスをこんな風に拡張してまーす、という話」(@<href>{https://twitter.com/omoon,@omoon}さん)です。お楽しみに。
