@@ -59,7 +59,11 @@ class Controller_Welcome extends Controller
         $fieldset = Myfieldset::forge('sample');
         $fieldset->addTextForNumeric('age', '年齢');
         $fieldset->addRadioWithBr('gender', '性別', array(1 => '男', 2 => '女'));
-        $fieldset->addRadioInline('season', '一番好きな季節', array(1 => '春', 2 => '夏', 3 => '秋', 4 => '冬'));
+        $fieldset->addRadioInline(
+            'season',
+            '一番好きな季節', 
+            array(1 => '春', 2 => '夏', 3 => '秋', 4 => '冬')
+        );
         $view = View::forge('welcome/index');
         $view->set_safe(array('form' => $fieldset->getFormElements('post_url')));
         return Response::forge($view);
@@ -101,13 +105,18 @@ class Controller_Welcome extends Controller
 ビューファイルで↑このように書いて、
 
 //emlist{
-<form action="http://localhost:8080/post_url" method="post" id="form_sample" accept-charset="utf-8">
-<input name="fuel_csrf_token" value="c9313a400c254e58c0d23f7fd599c297" type="hidden" id="form_fuel_csrf_token" />
+<form action="http://localhost:8080/post_url" method="post" id="form_sample" 
+  accept-charset="utf-8">
+<input name="fuel_csrf_token" value="c9313a400c254e58c0d23f7fd599c297" type="hidden" 
+  id="form_fuel_csrf_token" />
 <h2>何歳やねん？</h2>
 <table class="table table-bordered">
 <tr>
 <th class="span2">年齢</th>
-<td><input type="text" class="input-medium" style="ime-mode:disabled" id="form_age" name="age" /> 歳</td>
+<td>
+  <input type="text" class="input-medium" style="ime-mode:disabled" id="form_age" 
+    name="age" /> 歳
+</td>
 </tr>
 </table>
 
@@ -115,13 +124,38 @@ class Controller_Welcome extends Controller
 <table class="table table-bordered">
 <tr>
 <th class="span2">性別</th>
-<td><label class="radio"><input type="radio" id="form_gender_0" name="gender" value="1" /><label for="form_form_gender_0">男</label></label><label class="radio"><input type="radio" id="form_gender_1" name="gender" value="2" /><label for="form_form_gender_1">女</label></label></td>
+<td>
+  <label class="radio">
+    <input type="radio" id="form_gender_0" name="gender" value="1" />
+    <label for="form_form_gender_0">男</label>
+  </label>
+  <label class="radio">
+    <input type="radio" id="form_gender_1" name="gender" value="2" />
+    <label for="form_form_gender_1">女</label>
+  </label>
+</td>
 </tr>
 </table>
 
 <h2>一行のRadio</h2>
 <p>
-<label class="radio inline"><input type="radio" id="form_season_0" name="season" value="1" /><label for="form_form_season_0">春</label></label><label class="radio inline"><input type="radio" id="form_season_1" name="season" value="2" /><label for="form_form_season_1">夏</label></label><label class="radio inline"><input type="radio" id="form_season_2" name="season" value="3" /><label for="form_form_season_2">秋</label></label><label class="radio inline"><input type="radio" id="form_season_3" name="season" value="4" /><label for="form_form_season_3">冬</label></label></p>
+<label class="radio inline">
+  <input type="radio" id="form_season_0" name="season" value="1" />
+  <label for="form_form_season_0">春</label>
+</label>
+<label class="radio inline">
+  <input type="radio" id="form_season_1" name="season" value="2" />
+  <label for="form_form_season_1">夏</label>
+</label>
+<label class="radio inline">
+  <input type="radio" id="form_season_2" name="season" value="3" />
+  <label for="form_form_season_2">秋</label>
+</label>
+<label class="radio inline">
+  <input type="radio" id="form_season_3" name="season" value="4" />
+  <label for="form_form_season_3">冬</label>
+</label>
+</p>
 
 </form>
 //}
@@ -179,8 +213,10 @@ $form['open']
 と呼べば、明示的に追加しなくても、
 
 //emlist{
-<form action="http://localhost:8080/post_url" method="post" id="form_sample" accept-charset="utf-8">
-<input name="fuel_csrf_token" value="c9313a400c254e58c0d23f7fd599c297" type="hidden" id="form_fuel_csrf_token" />
+<form action="http://localhost:8080/post_url" method="post" id="form_sample" 
+  accept-charset="utf-8">
+<input name="fuel_csrf_token" value="c9313a400c254e58c0d23f7fd599c297" type="hidden" 
+  id="form_fuel_csrf_token" />
 //}
 
 
@@ -219,7 +255,7 @@ $fieldset->addTextForNumeric('age', '年齢');
 と書くだけです。スッキリ！スッキリ！
 
 
-このように、自分がよく使う要素を生成するメソッドを、スタイルやバリデーション込みで用意しておけば、コントローラからさっと呼び出せて便利です。
+このように、自分がよく使う要素を生成するメソッドを、スタイルやバリデーション込みで用意しておけば、コントローラからさっと呼び出せて便利です。@<br>{}
 
 
 ちなみに、ぼくのかんがえたさいきょうの拡張は、こんなやつが色々と溜まってきて良い感じになっているのですが、今回は、ラジオボタンで、選択肢を改行するパターンと改行しないパターンを例に上げてみました。
@@ -254,10 +290,10 @@ public function addRadioWithBr($name, $label, $options)
 こんな感じで、@<tt>{set_template}メソッドを使って、要素生成時のタグの出し分けをするようにしています。
 
 
-えーっと、結構長くなってきたので、そろそろ、このあたりで。。
+えーっと、結構長くなってきたので、そろそろ、このあたりで…
 
 
-フォームの作りこみは、システムのユーザビリティに大きく影響しますので、これからもどんどん拡張していって良い感じに育てていきたいと思っています。
+フォームの作りこみは、システムのユーザビリティに大きく影響しますので、これからもどんどん拡張していって良い感じに育てていきたいと思っています。@<br>{}
 
 
 明日は、@<href>{https://twitter.com/web2citizen,@web2citizen} さんの、「FuelPHPのスパムフィルタパッケージ」です。楽しみですね！
