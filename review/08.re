@@ -2,12 +2,14 @@
 = FuelPHPのスパムフィルタパッケージ @<href>{https://twitter.com/web2citizen,@web2citizen}
 
 
-@<href>{http://atnd.org/events/33753,FuelPHP Advent Calendar 2012} 8日目です。昨日は「FuelPHP の Fieldset クラスをこんな風に拡張してまーす、という話」(@<href>{https://twitter.com/@omoon,@omooon}さん)でした。
+@<href>{http://atnd.org/events/33753,FuelPHP Advent Calendar 2012} 8日目です。昨日は「FuelPHP の Fieldset クラスをこんな風に拡張してまーす、という話」(@<href>{https://twitter.com/@omoon,@omooon}さん)でした。@<br>{}
 
 
-以前作成したFuelPHPで作成したWebサイト(ほぼ放置していますが…)にスパムが多々投稿されているので、FuelPHPでのパッケージ作成方法の勉強をかねて、スパム対策のためのフィルタを作成してみました。@<br>{}
-…と作成を開始してから気がついたのですが、このパッケージには、スパム情報の管理画面も含めておいた方が便利なため、Advent Calendarでも@<href>{https://twitter.com/@mikakane_info,@mikakane_info}さんや@<href>{https://twitter.com/@sa2yasu,@sa2yasu}さんが記事にしている、モジュールとして開発した方がよかったかなあと少し後悔しています。@<br>{}
- とはいえ、作成したものについては@<href>{https://github.com/web2citizen/antispam,ここ}で公開しています。 まだドキュメント等が整備されていないので、以下で解説していきます。
+以前作成したFuelPHPで作成したWebサイト(ほぼ放置していますが…)にスパムが多々投稿されているので、FuelPHPでのパッケージ作成方法の勉強をかねて、スパム対策のためのフィルタを作成してみました。
+
+…と作成を開始してから気がついたのですが、このパッケージには、スパム情報の管理画面も含めておいた方が便利なため、Advent Calendarでも@<href>{https://twitter.com/@mikakane_info,@mikakane_info}さんや@<href>{https://twitter.com/@sa2yasu,@sa2yasu}さんが記事にしている、モジュールとして開発した方がよかったかなあと少し後悔しています。
+
+とはいえ、作成したものについては@<href>{https://github.com/web2citizen/antispam,ここ}で公開しています。 まだドキュメント等が整備されていないので、以下で解説していきます。
 
 == 今回作成するパッケージの機能
 
@@ -19,8 +21,9 @@
 
 
 
-また、すでに投稿されているテーブルを検索し、過度な投稿を行うIPや投稿内容を自動的に制限対象に入れる機能も実装しました。ただし、投稿内容について、単語レベルで自動的にブラックリストに追加まではしておらず、投稿内容全体をみてブラックリストに追加しています。@<br>{}
- 例えば、「出会い系サイト”デアエルノ”へご案内！」という投稿が大量になされた場合でも、「デアエルノ」という単語単体が自動的にブラックリストに入るわけではありません。NGIP、NGワードの保存先DBへの接続情報は、WEBアプリの接続先とはとは別途指定することができるので、複数のWEBアプリで共通のNG情報を共有することができます。
+また、すでに投稿されているテーブルを検索し、過度な投稿を行うIPや投稿内容を自動的に制限対象に入れる機能も実装しました。ただし、投稿内容について、単語レベルで自動的にブラックリストに追加まではしておらず、投稿内容全体をみてブラックリストに追加しています。
+
+例えば、「出会い系サイト”デアエルノ”へご案内！」という投稿が大量になされた場合でも、「デアエルノ」という単語単体が自動的にブラックリストに入るわけではありません。NGIP、NGワードの保存先DBへの接続情報は、Webアプリの接続先とはとは別途指定することができるので、複数のWebアプリで共通のNG情報を共有することができます。
 
 == パッケージ構成
 
@@ -59,12 +62,12 @@ FuelPHPにおけるパッケージの基本構成(@<href>{http://fuelphp.com/doc
 
 下記の項目があるので、他のコンフィグファイルと同じ要領で編集し、fuel/app/configディレクトリに格納してください。
 
- * db_connection　DB接続情報。nullの場合、アプリケーション標準の接続情報を使用します。
+ * db_connection　DB接続情報。nullの場合、アプリケーション標準の接続情報を使用
  * black_ip_table_name　NGIPアドレスを格納するテーブル名
- * black_word_table_name NGワードを格納するテーブル名
- * ip_column_name NGIPを集計する際に集計するカラム名
- * post_check_term NGIP、ワード集計時のチェック期間
- * post_limit_count NGIP、ワード集計時のチェックカウント数
+ * black_word_table_name　NGワードを格納するテーブル名
+ * ip_column_name　NGIPを集計する際に集計するカラム名
+ * post_check_term　NGIP、ワード集計時のチェック期間
+ * post_limit_count　NGIP、ワード集計時のチェックカウント数
 
 
 == 初期化・設定読み込み
@@ -84,7 +87,8 @@ Antispam::forge(array('post_check_term' => 3600))
 //}
 
 
-設定していない項目に関しては設定ファイルの内容となります。@<br>{}
+設定していない項目に関しては設定ファイルの内容となります。
+
 NGIP、NGワード格納用のテーブルは create_sample.sql のクエリを実行することで生成できます。
 
 == 使用例　投稿制御
@@ -112,8 +116,9 @@ else
 == 使用例　NGID、NGワード設定
 
 
-コンフィグで指定した期間の間に指定した回数以上の投稿があったIP、投稿内容をチェックして、ブラックリストテーブルに登録します。@<br>{}
- たとえば、コンフィグファイル標準の設定だと、1日に10回以上投稿のあったIPアドレス、投稿内容をNGとして登録します。  
+コンフィグで指定した期間の間に指定した回数以上の投稿があったIP、投稿内容をチェックして、ブラックリストテーブルに登録します。
+
+たとえば、コンフィグファイル標準の設定だと、1日に10回以上投稿のあったIPアドレス、投稿内容をNGとして登録します。  
 
  * @<tt>{set_black_ip($table_name, $active = 0) // NGIP登録}
  * @<tt>{set_black_word($table_name, $column_name, $active = 0) // NG投稿登録}
@@ -139,9 +144,11 @@ $ php oil r spamcheck set_black_ips comment text
 == 終わりに
 
 
-本当はパッケージの作り方のような観点から記事を作りたかったのですが、ほとんど中身の解説だけになってしまいました。@<br>{}
- とはいえ、今後パッケージを作る型の参考になれば幸いです。@<br>{}
- 明日は「FuelPHPで保守性の高いマルチデバイス対応を考える」(@<href>{https://twitter.com/fushiroyama,@fushiroyama}さん)です。お楽しみに！
+本当はパッケージの作り方のような観点から記事を作りたかったのですが、ほとんど中身の解説だけになってしまいました。
+
+とはいえ、今後パッケージを作る方の参考になれば幸いです。@<br>{}
+
+明日は「FuelPHPで保守性の高いマルチデバイス対応を考える」(@<href>{https://twitter.com/fushiroyama,@fushiroyama}さん)です。お楽しみに！
 
 //quote{
 @<strong>{@web2citizen}
