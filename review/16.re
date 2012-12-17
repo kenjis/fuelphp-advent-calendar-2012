@@ -1,44 +1,30 @@
-
-= FuelPHPで作るFacebook診断アプリ
-
+= FuelPHPで作るFacebook診断アプリ @<href>{https://twitter.com/mayama4u,@mayama4u}
 
 こんにちは。@<href>{http://atnd.org/events/33753,FuelPHP Advent Calendar 2012}に参加します山田と言います。
+Advent Calendarの前日記事は@<href>{https://twitter.com/NEKOGET,@NEKOGET}さんの「FuelPHPドキュメント翻訳へのお誘い」でした。
+日本語化の方々いつもありがとうございます。毎度お世話になっております。@<br>{}
 
+さて、私は就職活動に関するマッチングサイトOfferBoxを開発しており、そのシステムでFuelPHPを利用しています。これは、14日目に上村さんに紹介頂いています(@<href>{http://offerbox.jp/engineer/440/,就職活動サイトの構築にFuelPHPを使ったので事例紹介})。
+さらに、このOfferBoxのFacebookページで、適性診断アプリを作りまして、ここでもFuelPHPを使いました。
 
-Advent Calendarの前日記事は@<href>{https://twitter.com/NEKOGET,@NEKOGET}さんでした。@<br>{}
- @<href>{http://pneskin2.nekoget.com/press/?p=1044,「FuelPHPドキュメント翻訳へのお誘い」}@<br>{}
- 日本語化の方々いつもありがとうございます。毎度お世話になっております。
-
-
-さて、私は就職活動に関するマッチングサイトOfferBoxを開発しており、そのシステムでFuelPHPを利用しています。これは、14日目に上村さんに紹介頂いています(@<href>{http://offerbox.jp/engineer/440/,就職活動サイトの構築にFuelPHPを使ったので事例紹介})。@<br>{}
- さらに、このOfferBoxのFacebookページで、適性診断アプリを作りまして、ここでもFuelPHPを使いました。
-
-
-ここでは、この適性診断アプリをFacebookアプリの作成事例としてご紹介します。@<br>{}
- 　
+ここでは、この適性診断アプリをFacebookアプリの作成事例としてご紹介します。
 
 == 1. Facebookの適性診断アプリ概要
 
-
-まずは、作成したアプリケーションの概要を説明します。@<br>{}
- 　
+まずは、作成したアプリケーションの概要を説明します。
 
 === (1)まず一度、実施してみてください
 
+PCのみで実行可能ですが、一度動作をお試しください。
 
-PCのみで実行可能ですが、一度動作をお試しください。@<br>{}
- →@<href>{http://www.facebook.com/offerbox/app_105514016282622,こちら}
-
+ * @<href>{http://www.facebook.com/offerbox/app_105514016282622,http://www.facebook.com/offerbox/app_105514016282622}
 
 //image[a4ad0c2be86b9d98bfe1e2580359c488][]{
 //}
 
-
-12月2日に公開いたしましたが、おかげさまで半月足らずで600回以上実施いただいております。現在スマホにも対応していますが、これは別途機会があればご説明します@<br>{}
- 　
+12月2日に公開いたしましたが、おかげさまで半月足らずで600回以上実施いただいております。現在スマホにも対応していますが、これは別途機会があればご説明します。
 
 === (2)適性診断アプリの特徴
-
 
 適性診断の内容は、二択の質問に12問答えると、就職活動での適性を15パターン分けてどれに当てはまるか結果を表示します。診断の流れは、以下のとおりです。
 
@@ -46,29 +32,22 @@ PCのみで実行可能ですが、一度動作をお試しください。@<br>{
  1. 　診断を開始すると、Facebookにログインとウォールへのアクセス許可を取る
  1. 　診断を実施後、診断結果をユーザのウォールに投稿する。
 
-
 == 2. Facebook側での準備
-
 
 Facebookアプリを利用するために、@<href>{https://developers.facebook.com/,Facebook開発者ページ}で、アプリケーションを登録します。登録手順は、広くWeb上で紹介されています。
 
+ * @<href>{http://socialmediaexperience.jp/2638,Facebookアプリを開発してみよう}
 
-@<href>{http://socialmediaexperience.jp/2638,Facebookアプリを開発してみよう}
-
-
-大きな枠組みとしては、サーバにFuelPHPでアプリを準備し、Facebookアプリにそのパスを登録する、という流れになります。@<br>{}
- 　
+大きな枠組みとしては、サーバにFuelPHPでアプリを準備し、Facebookアプリにそのパスを登録する、という流れになります。
 
 == 3. FuelPHPによるアプリの作成(サーバ)
 
-
-ここからが本題になりますが、大きくFuelPHPの「ファイル構成」「コントローラの関数」「コード説明」の順で説明します。@<br>{}
- 　
+ここからが本題になりますが、大きくFuelPHPの「ファイル構成」「コントローラの関数」「コード説明」の順で説明します。
 
 === (1)ファイル構成
 
-
 今回は、データベース(Model)は使わないシンプルなケースで、コントローラとビューのみで説明いたします。ディレクトリfuel以下のファイルは以下のとおりです。
+
 //table[tbl1][]{
 @<strong>{ファイル名}	@<strong>{ファイルの内容}
 -----------------
@@ -85,19 +64,18 @@ fuel/app/views/question.php	適性診断質問ビュー
 
 === (2)コード説明(コントローラ)
 
-
-ここでは、コントローラのコードについて説明していきます。@<br>{}
- 　
+ここでは、コントローラのコードについて説明していきます。
 
 ==== Facebookライブラリの準備
 
+まず、Facebookのライブラリを準備します。FacebookのPHP−SDKは、以下からダウンロードできます。
 
-まず、Facebookのライブラリを準備します。FacebookのPHP−SDKは、@<href>{https://github.com/facebook/facebook-php-sdk,ここから}ダウンロードできます。fuel/app/venderに展開ください。@<br>{}
- 　@<br>{}
- fuel/app/classes/controller/diag.php
+ * @<href>{https://github.com/facebook/facebook-php-sdk,https://github.com/facebook/facebook-php-sdk}
+
+fuel/app/venderに展開ください。
 
 #@# lang: .brush:xml
-//emlist{
+//emlist[fuel/app/classes/controller/diag.php]{
 require_once APPPATH.'vendor/facebook-php-sdk/src/facebook.php';
 
 class Controller_Diag extends Controller
@@ -117,24 +95,18 @@ class Controller_Diag extends Controller
 
 ==== トップページでの振り分け
 
+トップページでは、「Facebookページ経由でのアクセス」「いいね！が押されている状態」「ユーザのログイン状態」により、処理を分岐させます。
 
-トップページでは、「Facebookページ経由でのアクセス」「いいね！が押されている状態」「ユーザのログイン状態」により、処理を分岐させます。@<br>{}
- いいね！が押されているかの判定は、このページで紹介されています。
+いいね！が押されているかの判定は、このページで紹介されています。
 
+ * @<href>{http://phpjavascriptroom.com/?t=topic&p=facebookpage_liked#a_liked,facebookのiframeアプリでいいねの有無によって表示を分ける方法}
 
-@<href>{http://phpjavascriptroom.com/?t=topic&p=facebookpage_liked#a_liked,facebookのiframeアプリでいいねの有無によって表示を分ける方法}
+この中の、"parse_signed_request.php" をコントローラーに取り込み、呼び出します。
 
-
-この中の、”parse_signed_request.php”をコントローラーに取り込み、呼び出します。
-
-
-Facebook認証からのcallbackで返ってきた場合は、$user_idにユーザ情報が入ってトップページが呼び出されますので、適性診断の質問用ビュー(question)を表示します。。
-
-
- fuel/app/classes/controller/diag.php
+Facebook認証からのcallbackで返ってきた場合は、$user_idにユーザ情報が入ってトップページが呼び出されますので、適性診断の質問用ビュー(question)を表示します。
 
 #@# lang: .brush:xml
-//emlist{
+//emlist[fuel/app/classes/controller/diag.php]{
     public function action_index()
      {
           // view定義
@@ -175,14 +147,10 @@ Facebook認証からのcallbackで返ってきた場合は、$user_idにユー�
 
 ==== 適性診断開始
 
-
 適性診断の開始では、Facebookでのログインと認証を受ける処理をします。ここでは、ビューの中で、Facebook認証を受けるためのURLをコールしています。
 
-
- fuel/app/classes/controller/diag.php
-
 #@# lang: .brush:xml
-//emlist{
+//emlist[fuel/app/classes/controller/diag.php]{
      public function action_start()
      {
           // view定義
@@ -194,13 +162,10 @@ Facebook認証からのcallbackで返ってきた場合は、$user_idにユー�
 
 ==== 結果表示
 
-
-ここでは、適性診断の質問に対する回答がフォームでPOSTされますので、診断結果を判定し、ユーザのウォールに書き込む処理をしています。@<br>{}
- 　@<br>{}
- fuel/app/classes/controller/diag.php
+ここでは、適性診断の質問に対する回答がフォームでPOSTされますので、診断結果を判定し、ユーザのウォールに書き込む処理をしています。
 
 #@# lang: .brush:xml
-//emlist{
+//emlist[fuel/app/classes/controller/diag.php]{
      public function action_result()
      {
           $view=View::forge('diag');
@@ -261,19 +226,14 @@ Facebook認証からのcallbackで返ってきた場合は、$user_idにユー�
 
 === (3)コード説明(ビュー)
 
-
-ここでは、メイン画面用のビューとFacebook認証用のビューを示します。その他のビューは、Facebookアプリの内容に合わせて作成ください。@<br>{}
- 　
+ここでは、メイン画面用のビューとFacebook認証用のビューを示します。その他のビューは、Facebookアプリの内容に合わせて作成ください。
 
 ==== メイン画面ビュー
 
-
-このビューは、全画面で共通的に使うビューで、Facebookページのiframeのサイズに合わせます。ソース真ん中あたりの、$mainviewに各ページのコンテンツを表示させます。@<br>{}
- 　@<br>{}
- fuel/app/views/diag.php
+このビューは、全画面で共通的に使うビューで、Facebookページのiframeのサイズに合わせます。ソース真ん中あたりの、$mainviewに各ページのコンテンツを表示させます。
 
 #@# lang: .brush:xml
-//emlist{
+//emlist[fuel/app/views/diag.php]{
 <!DOCTYPE html>
 <html lang="ja" xmlns:fb="http://ogp.me/ns/fb#" xmlns:og="http://ogp.me/ns#">
   <head>
@@ -314,13 +274,10 @@ Facebook認証からのcallbackで返ってきた場合は、$user_idにユー�
 
 ==== Facebook認証用ビュー
 
-
-このビューは、Facebook認証用のURLを作成し、コールするためだけのビューです。ビューの中で、以下のスクリプトを書いてください。@<br>{}
- 　@<br>{}
- fuel/app/views/oauth.php
+このビューは、Facebook認証用のURLを作成し、コールするためだけのビューです。ビューの中で、以下のスクリプトを書いてください。
 
 #@# lang: .brush:xml
-//emlist{
+//emlist[fuel/app/views/oauth.php]{
       var oauth_url = 'https://www.facebook.com/dialog/oauth/';
       oauth_url += '?client_id=アプリケーションID';
       oauth_url += '&redirect_uri=' + encodeURIComponent('https://www.facebook.com/offerbox/?sk=app_アプリケーションID');
@@ -331,21 +288,26 @@ Facebook認証からのcallbackで返ってきた場合は、$user_idにユー�
 
 == 4. Facebookページへの登録
 
-
 Facebookページのページタブに、作成したアプリケーションを登録する方法は、プラウザで以下を撃込んでください。
 
+ * http://www.facebook.com/dialog/pagetab?app_id=アプリケーションID&next=アプリケーションのURL
 
-http://www.facebook.com/dialog/pagetab?app_id=アプリケーションID&next=アプリケーションのURL
+Facebookページへの追加方法は、このページで紹介されています。
 
-
- @<href>{http://weboook.blog22.fc2.com/blog-entry-309.html,ページタブアプリ(iframe)の作成とFacebookページへの追加方法}@<br>{}
- 　
+ * @<href>{http://weboook.blog22.fc2.com/blog-entry-309.html,ページタブアプリ(iframe)の作成とFacebookページへの追加方法}
 
 == 5. さいごに
 
-
 このように、Facebookアプリの枠組みとしてFuelPHPを利用することで、アプリのアイデアさえあれば、簡単にFacebookアプロを作成でき、Facebookページへの集客に役立てる事が出来ます。@<br>{}
- このノウハウが参考になれば幸いです。
+ このノウハウが参考になれば幸いです。@<br>{}
 
+次は@@<href>{https://twitter.com/ootatter,ootatter}さんで「fuelphpで既存DBをあつかうとか」です。DBまわりの内容でとても興味深いですね。
 
-次は@@<href>{https://twitter.com/ootatter,ootatter}で「fuelphpで既存DBをあつかうとか」です。DBまわりの内容でとても興味深いですね。
+//quote{
+@<strong>{@mayama4u}
+
+Twitter: @<href>{https://twitter.com/mayama4u,@mayama4u}
+
+Blog: @<href>{http://offerbox.jp/engineer/,http://offerbox.jp/engineer/}
+//}
+
