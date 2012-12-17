@@ -2,8 +2,8 @@
 = FuelPHPで日本人にやさしいフォームを作る @<href>{https://twitter.com/redsnow_,@redsnow_}
 
 
-@<href>{http://atnd.org/events/33753,FuelPHP Advent Calendar 2012} 5日目の@redsnow_です。@<br>{}
- 昨日は@sa2yasuさんの「モジュール分割の利点とスケルトンのリファクタリング」でした。
+@<href>{http://atnd.org/events/33753,FuelPHP Advent Calendar 2012} 5日目の@redsnow_です。
+昨日は@sa2yasuさんの「モジュール分割の利点とスケルトンのリファクタリング」でした。@<br>{}
 
 
 自分はValidationの小ネタについて書こうと思います。
@@ -22,7 +22,7 @@ $form->add('hoge', 'フィールド名')
 
 
 FuelPHPのValidationに使えるvalid_string numericは@<strong>{半角数字のみ}許可するバリデーションです。@<br>{}
- でも全角数字を入力された人に、「有効な文字列ではありません。半角数字 で入力して下さい。」というエラーメッセージを出したくない。。。
+ でも全角数字を入力された人に、「有効な文字列ではありません。半角数字 で入力して下さい。」というエラーメッセージを出したくない…
 
 
 そんな時にadd_ruleにPHPのネイティブの関数か無名関数を突っ込むと解決できます。
