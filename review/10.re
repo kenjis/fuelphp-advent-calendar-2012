@@ -2,13 +2,13 @@
 = FuelPHP用ソーシャルログイン専用認証パッケージDsAuthでNinjAuthをもっと簡単に利用する @<href>{https://twitter.com/EGMC,@EGMC}
 
 
-@<href>{http://atnd.org/events/33753,FuelPHP Advent Calendar 2012}参加記事です。@<br>{}
- 昨日は@<href>{https://twitter.com/fushiroyama,@fushiroyama}さんの「FuelPHPで保守性の高いマルチデバイス対応を考える」でした。@<br>{}
- Fuelはコアクラスを拡張してアレコレするのがやりやすいですね。
+@<href>{http://atnd.org/events/33753,FuelPHP Advent Calendar 2012}参加記事です。
+昨日は@<href>{https://twitter.com/fushiroyama,@fushiroyama}さんの「FuelPHPで保守性の高いマルチデバイス対応を考える」でした。
+Fuelはコアクラスを拡張してアレコレするのがやりやすいですね。@<br>{}
 
 
-10日担当の私(@@<href>{https://twitter.com/EGMC,EGMC})は自作の認証パッケージの紹介です。@<br>{}
- 「@<href>{http://dasalog.eg2mix.com/fuelphp-%e5%8b%89%e5%bc%b7%e4%bc%9a-%e6%9d%b1%e4%ba%ac-vol-2%e3%81%a7oauth%e3%83%ad%e3%82%b0%e3%82%a4%e3%83%b3%e3%81%ae%e7%99%ba%e8%a1%a8%e3%82%92%e3%81%97%e3%81%a6%e3%81%8d%e3%81%9f/,FuelPHP 勉強会 東京 vol.2でOAuthログインの発表をしてきた}」の続きでもあります。
+10日担当の私(@@<href>{https://twitter.com/EGMC,EGMC})は自作の認証パッケージの紹介です。
+「@<href>{http://dasalog.eg2mix.com/fuelphp-%e5%8b%89%e5%bc%b7%e4%bc%9a-%e6%9d%b1%e4%ba%ac-vol-2%e3%81%a7oauth%e3%83%ad%e3%82%b0%e3%82%a4%e3%83%b3%e3%81%ae%e7%99%ba%e8%a1%a8%e3%82%92%e3%81%97%e3%81%a6%e3%81%8d%e3%81%9f/,FuelPHP 勉強会 東京 vol.2でOAuthログインの発表をしてきた}」の続きでもあります。
 
 == ソーシャル連携のログイン機能
 
@@ -41,10 +41,9 @@
 
 == インストール方法
 
-
-GitHubで@<href>{https://github.com/egmc/fuel-dsauth#installation,簡単なドキュメント}を公開しています。@<br>{}
- 基本的に必要なパッケージを配置してマイグレーションを実施すれば準備OKです。@<br>{}
- ポイントはNinjAuthのAdapterとしてDsAuthを指定することです。
+GitHubで@<href>{https://github.com/egmc/fuel-dsauth#installation,簡単なドキュメント}を公開しています。
+基本的に必要なパッケージを配置してマイグレーションを実施すれば準備OKです。
+ポイントはNinjAuthのAdapterとしてDsAuthを指定することです。@<br>{}
 
 
 コントローラーは例えば下記のように実装して、fuel/app/classes/controller/auth.phpとして配置します。
@@ -71,23 +70,23 @@ class Controller_Auth extends \DsAuth\Controller {
 == 認証情報の取得
 
 
-ログインに成功するとセッションに取得したユーザー情報が保持されます。@<br>{}
- ログイン情報へのアクセスはDsAuthクラスの各静的メソッドを経由して行います。
+ログインに成功するとセッションに取得したユーザー情報が保持されます。
+ログイン情報へのアクセスはDsAuthクラスの各静的メソッドを経由して行います。
 
 
-ログイン状態の確認
+
 
 #@# lang: .brush: .php; .title: .; .notranslate title=""
-//emlist{
+//emlist[ログイン状態の確認]{
 // ログインの有無を取得
 DsAuth::is_logged_in()
 //}
 
 
-ログインユーザー情報の取得
+
 
 #@# lang: .brush: .php; .title: .; .notranslate title=""
-//emlist{
+//emlist[ログインユーザー情報の取得]{
 // ログインユーザーレコードを配列で取得
 DsAuth::get_user_info()
 //}
@@ -97,13 +96,13 @@ DsAuth::get_user_info()
 
 == 指定可能なオプション
 
- * db_connection dbコネクション
- * login_hash_salt ログインチェック用ハッシュソルト
- * table_columns ログイン時に取得するカラムリスト
- * table_name ユーザーテーブル名
- * always_confirm_username 新規登録時に常にユーザー名を入力させる
- * allow_duplicated_username ユーザー名の重複を許可する
- * auto_modify_userinfo 外部サービスから取得した情報を自動で修正する
+ * db_connection　dbコネクション
+ * login_hash_salt　ログインチェック用ハッシュソルト
+ * table_columns　ログイン時に取得するカラムリスト
+ * table_name　ユーザーテーブル名
+ * always_confirm_username　新規登録時に常にユーザー名を入力させる
+ * allow_duplicated_username　ユーザー名の重複を許可する
+ * auto_modify_userinfo　外部サービスから取得した情報を自動で修正する
 
 
 == 今後の予定
