@@ -2,13 +2,10 @@
 = FuelPHP を使ったモジュール開発入門 @<href>{https://twitter.com/mkkn_info,@mkkn_info}
 
 
-@<href>{http://atnd.org/events/33753,FuelPHPアドベントカレンダー企画}です。
+@<href>{http://atnd.org/events/33753,FuelPHPアドベントカレンダー企画}です。昨日は@<href>{https://twitter.com/madmamor,@madmamor}さんの「FuelPHPで画像をプログラムから出力する方法。切り取る方法。応用する方法。」でした。@<br>{}
 
 
- 昨日は@<href>{https://twitter.com/madmamor,@madmamor}さんの「FuelPHPで画像をプログラムから出力する方法。切り取る方法。応用する方法。」でした。
-
-
-3回めの私の方では、FuelPHPのモジュール開発機能について少々。
+3回目の私の方では、FuelPHPのモジュール開発機能について少々。
 
 == FuelPHPのmodule機能について
 
@@ -28,7 +25,7 @@ FuelPHPにはモジュールと言う機能がありまして、これが中々�
 fuelの公式ドキュメントにも堂々と「tasks」の文字が追加されています。まぁmoduelの基本的な使い方は@<href>{http://fuelphp.com/docs/general/modules.html,公式ドキュメント}、や@<href>{http://mkkn.info/blog/blog/archives/1451.html,私が以前書いたもの}がありますのでそちらを見ていただけるといいと思います。
 
 
-今回v1.3でのtasks対応で、単純なMVCとしてだけでなく、module管理ツールとしてのoilコマンドまで用意できるようになりmoduleの有用性が更に上がったように思います(というかもうpackageいらないんじゃない?)
+今回v1.3でのtasks対応で、単純なMVCとしてだけでなく、module管理ツールとしてのoilコマンドまで用意できるようになりmoduleの有用性が更に上がったように思います(というかもうpackageいらないんじゃない?)。
 
 == module内でのtaskの使い方
 
@@ -62,10 +59,10 @@ WPでのブログ管理が面倒になってきてjekyllに手を出しだして
 == 余談
 
 
-似たような機能としてpackageってやつもあるんですが、こいつはpackage内のviewファイル参照できなかったり、Controllerルーティングするのが面倒だったり、task使えなかったり(ですよね?)なんで、個人的にはあんまり好きじゃない感じ。oilでインストールできるって話もgitでよくね?みたいに感じたりとか…packageの意味ってなんですかね?そのへん誰か教えて下さい。
+似たような機能としてpackageってやつもあるんですが、こいつはpackage内のviewファイル参照できなかったり、Controllerルーティングするのが面倒だったり、task使えなかったり(ですよね?)なんで、個人的にはあんまり好きじゃない感じ。oilでインストールできるって話もgitでよくね?みたいに感じたりとか…packageの意味ってなんですかね?そのへん誰か教えて下さい。@<br>{}
 
 
-四回目は@sa2yasuさんの「モジュール分割の利点とスケルトンのリファクタリング」です。お楽しみに。
+4回目は@sa2yasuさんの「モジュール分割の利点とスケルトンのリファクタリング」です。お楽しみに。
 
 //quote{
 @<strong>{@mkkn_info}
