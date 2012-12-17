@@ -2,10 +2,7 @@
 = モジュール分割の利点とスケルトンのリファクタリング @<href>{https://twitter.com/sa2yasu,@sa2yasu}
 
 
-@<href>{http://atnd.org/events/33753,FuelPHP Advent Calendar 2012} ４日目担当の@<href>{https://twitter.com/sa2yasu,@sa2yasu}です。
-
-
-昨日は@<href>{https://twitter.com/mkkn_info,@mkkn_info}さんの「FuelPHP を使ったモジュール開発入門」でした。
+@<href>{http://atnd.org/events/33753,FuelPHP Advent Calendar 2012} ４日目担当の@<href>{https://twitter.com/sa2yasu,@sa2yasu}です。昨日は@<href>{https://twitter.com/mkkn_info,@mkkn_info}さんの「FuelPHP を使ったモジュール開発入門」でした。@<br>{}
 
 
 今日はモジュール分割の話と
@@ -55,7 +52,7 @@ oilコマンドでひたすらコードスケルトンを生成、設計通り�
 ちなみにバージョン2.0ではmodule指定に対応するようです。
 
 
-@<href>{https://github.com/fuel/oil/issues/86,Make Scaffold support Modules ［Feature］}
+ * @<href>{https://github.com/fuel/oil/issues/86,Make Scaffold support Modules ［Feature］}
 
 == スケルトンコードをmodules下にリファクタリングするTask
 
@@ -66,10 +63,10 @@ oilコマンドでひたすらコードスケルトンを生成、設計通り�
 === インストール
 
 
-@<href>{https://github.com/ya-sasaki/fuel-module-refactor,https://github.com/ya-sasaki/fuel-module-refactor}
+ * @<href>{https://github.com/ya-sasaki/fuel-module-refactor,https://github.com/ya-sasaki/fuel-module-refactor}
 
 
-git cloneでもzip展開でも良いのですが、使うのはmodule_refactor.phpのみですので、これをfuel/app/tasksに置いてください。
+git cloneでもZip展開でも良いのですが、使うのはmodule_refactor.phpのみですので、これをfuel/app/tasksに置いてください。
 
 === Scaffold生成
 
@@ -82,7 +79,7 @@ $ oil r migrate
 //}
 
 
-@<href>{http://localhost/sample/user,http://localhost/sample/user}にアクセスしてScaffoldが成功していることを確認
+@<href>{http://localhost/sample/user,http://localhost/sample/user}にアクセスしてScaffoldが成功していることを確認。
 
 === リファクタリングタスクの実行
 
@@ -94,10 +91,10 @@ $ oil r module_refactor <module_name> <type> <name> <delete>
 //}
 
 
-第1引数はfuel/app/modules/<module_name>です。
-第2引数は"controller" or "model"です。指定した方をリファクタリングします。controllerを指定した場合は、あればですが、対象のapp/views, app/classes/viewもリファクタリングします。
-第3引数はoil g したときのクラス名です。上記Scaffoldの例だと"sample_user"ですね。
-第4引数はリファクタリング後にスケルトンコードを削除するかどうかを指定します。デフォルトはfalseです。
+第1引数はfuel/app/modules/<@<code>{module_name}>です。
+第2引数は"@<code>{controller}" or "@<code>{model}"です。指定した方をリファクタリングします。controllerを指定した場合は、あればですが、対象のapp/views、app/classes/viewもリファクタリングします。
+第3引数はoil g したときのクラス名です。上記Scaffoldの例だと"@<code>{sample_user}"ですね。
+第4引数はリファクタリング後にスケルトンコードを削除するかどうかを指定します。デフォルトは@<code>{false}です。
 
 
 ScaffoldはMVC全部あるので以下のようにタスクを実行します。
@@ -112,13 +109,13 @@ $ oil r module_refactor test model sample_user true
 
 
 がっつりコード書いた後のTask実行は試してないですけど多分失敗します(笑)
-一応READMEでは「oil g・・・」直後のTask実行を推奨していますのであしからず。
-(module_refactor.phpの$replacesで置換文字列を定義しているので、ココを上手く設定してあげれば綺麗にリファクタリングできるかも)
+
+一応READMEでは「oil g…」直後のTask実行を推奨していますのであしからず(module_refactor.phpの$replacesで置換文字列を定義しているので、ココを上手く設定してあげれば綺麗にリファクタリングできるかも)。
 
 #@# lang: .syntax-highlight
 //emlist{
 <?php
-・・・・省略・・・
+…省略…
     private static $replaces = array(
         'controller' => array(
             'Controller_Template' => '\Controller_Template',
