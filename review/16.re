@@ -80,10 +80,8 @@ require_once APPPATH.'vendor/facebook-php-sdk/src/facebook.php';
 
 class Controller_Diag extends Controller
 {
-
      public function before()
      {
-
           // Facebook SDK
           $config = array();
           $config['appId'] = 'アプリケーションID';
@@ -113,12 +111,10 @@ Facebook認証からのcallbackで返ってきた場合は、$user_idにユー�
           $view=View::forge('diag');
 
           if (isset($_POST['signed_request'])){
-
               $signed_request=$_POST['signed_request'];
               $data = $this->parse_signed_request($signed_request,"アプリケーションID");
 
               if ($data["page"]["liked"]){  // 分岐1："いいね済の人に見せるコンテンツ";
-
                     //ログイン状態を取得
                     $user_id = $this->facebook->getUser();
 
@@ -127,17 +123,12 @@ Facebook認証からのcallbackで返ってきた場合は、$user_idにユー�
                     } else {
                          $view->mainview     = View::forge('fbliked');  // 診断開始を表示
                     }
-
               } else {                     // 分岐2: "未いいねの人に見せるコンテンツ";
-
                     $view->mainview     = View::forge('fbnolike');
-
               }
 
               $view->signed_request = $data;
-
           } else {                        // 分岐3：アプリのURLを直接たたいた場合
-
                $view->mainview     = View::forge('fbnoaccess');
           }
 
@@ -176,40 +167,33 @@ Facebook認証からのcallbackで返ってきた場合は、$user_idにユー�
                $val = Validation::forge();
 
                // バリデーション
-
                if( $val->run() ){
-
                     $vars = $val->validated();
 
                     //                    
                     //     適性診断の計算実行               
                     //                    
 
-
                     //ログイン状態を取得
                     $user_id = $this->facebook->getUser();
 
                    try{
-
                          // リクエスト時のContentTypをmultipart/form-dataとする
                          $this->facebook->setFileUploadSupport( true );                       
 
                         //ウォールへ投稿
                         $result = $this->facebook->api("/me/photos", "post", array(
-                                         'access_token' => $this->facebook->getAccessToken(),
-                                        'source' => '@' . $patternpath,
-                                        'message' => "ウォールに投稿するメッセージ"
-                                        ));
-
+                                    'access_token' => $this->facebook->getAccessToken(),
+                                    'source' => '@' . $patternpath,
+                                    'message' => "ウォールに投稿するメッセージ"
+                                    ));
                     } catch (FacebookApiException $e) {
                        error_log($e->getType());
                        error_log($e->getMessage());
                     }
 
                     $view->mainview     = View::forge('answer', $this->data);
-
                } else {
-
                     // バリデーションエラー
                     Session::set_flash('error', $val->show_errors());
 
@@ -280,7 +264,8 @@ Facebook認証からのcallbackで返ってきた場合は、$user_idにユー�
 //emlist[fuel/app/views/oauth.php]{
       var oauth_url = 'https://www.facebook.com/dialog/oauth/';
       oauth_url += '?client_id=アプリケーションID';
-      oauth_url += '&redirect_uri=' + encodeURIComponent('https://www.facebook.com/offerbox/?sk=app_アプリケーションID');
+      oauth_url += '&redirect_uri=' + encodeURIComponent(
+          'https://www.facebook.com/offerbox/?sk=app_アプリケーションID');
       oauth_url += '&scope=publish_stream,photo_upload'
 
       window.top.location = oauth_url;
