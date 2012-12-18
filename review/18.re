@@ -131,7 +131,7 @@ return array(
 //emlist[ファイル：~/hhblog/index.php]{
 <?php
 /**
- * Set error reporting and display errors settings.  You will want to change these when in production.
+ * Set error reporting and display errors settings.  You will want to change these when @<raw>{|latex|\n}in production.
  */
 error_reporting(-1);
 ini_set('display_errors', 1);    // この引数を 0 にする。
@@ -237,12 +237,12 @@ class Model_Api_Hatena_Haiku extends Model
     * AUTHORIZATION : no
     * HTTP METHOD   : GET
     * 
-    * @link http://developer.hatena.ne.jp/ja/documents/haiku/apis/rest/timelines#public_timeline
+    * @link http://developer.hatena.ne.jp/ja/documents/haiku/apis/rest/timelines#public_@<raw>{|latex|\n}timeline
     * 
     * @param string  $body_formats reaponse text format, see default value
     * @param integer $count        getting entries number, API default 20 max 200
     * @param integer $page         getting page number, API default 1 max 100
-    * @param string  $since        no getting older than rfc1123-date("Mon, 26 Nov 2012 15:53:43 GMT")
+    * @param string  $since        no getting older than rfc1123-date("Mon, 26 Nov 2012 @<raw>{|latex|\n}15:53:43 GMT")
     * 
     * @return string JSON
     */
@@ -295,14 +295,14 @@ class Model_Api_Hatena_Haiku extends Model
     * AUTHORIZATION : no
     * HTTP METHOD   : GET
     * 
-    * @link http://developer.hatena.ne.jp/ja/documents/haiku/apis/rest/timelines#keyword_timeline
+    * @link http://developer.hatena.ne.jp/ja/documents/haiku/apis/rest/timelines#keyword@<raw>{|latex|\n}_timeline
     *
     * @param string  $keyword      seatch keyword [required]
     * @param string  $body_formats reaponse text format, see default value
     * @param integer $count        getting entries number, API default 20 max 200
     * @param integer $page         getting page number, API default 1 max 100
-    * @param string  $sort         getting entries sort, API default "new" is newer, "hot" is populer
-    * @param string  $since        no getting older than rfc1123-date("Mon, 26 Nov 2012 15:53:43 GMT")
+    * @param string  $sort         getting entries sort, API default "new" is newer, @<raw>{|latex|\n}"hot" is populer
+    * @param string  $since        no getting older than rfc1123-date("Mon, 26 Nov 2012 @<raw>{|latex|\n}15:53:43 GMT")
     * 
     * @return string JSON
     */
