@@ -1,0 +1,1657 @@
+ <!DOCTYPE html>
+<html
+  lang="ja"
+  data-avail-langs="ja en"
+
+  data-page="entry"
+  data-admin-domain="http://blog.hatena.ne.jp"
+  data-blog="tmd46.hatenablog.com"
+  data-globalheader-color="b"
+  data-author="tmd45"
+  data-version="280c049171b3c27b6e6bc0ff0982be84"
+
+  
+
+  itemscope
+   itemtype="http://schema.org/Article"
+  >
+  <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/fb# article: http://ogp.me/fb/article#">
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=7; IE=9; IE=10" />
+    <title>さくらのレンタルサーバで FuelPHP を使ってはてなハイクブログを作る－ViewModel を使ってみる編 #FuelPHPAdvent2012 - TMD45INC!!!</title>
+
+    
+
+    
+    <link rel="canonical" href="http://tech.tmd45.in/entry/2012/12/18/101053"/>
+    
+
+    <meta itemprop="name" content="さくらのレンタルサーバで FuelPHP を使ってはてなハイクブログを作る－ViewModel を使ってみる編 #FuelPHPAdvent2012 - TMD45INC!!!"/>
+    
+    <meta itemprop="image" content="http://cdn-ak.f.st-hatena.com/images/fotolife/t/tmd45/20121212/20121212110543.png"/>
+    
+
+    <meta property="og:title" content="さくらのレンタルサーバで FuelPHP を使ってはてなハイクブログを作る－ViewModel を使ってみる編 #FuelPHPAdvent2012 - TMD45INC!!!"/>
+    <meta property="og:type" content="article"/>
+    <meta property="og:url" content="http://tech.tmd45.in/entry/2012/12/18/101053"/>
+    
+    <meta property="og:image" content="http://cdn-ak.f.st-hatena.com/images/fotolife/t/tmd45/20121212/20121212110543.png"/>
+    
+    <meta property="og:site_name" content="http://tech.tmd45.in/"/>
+    <meta property="og:description" content="この記事は FuelPHP Advent Calendar 2012 の 18 日目の記事です。昨日は @ootatter さんによる『fuelphpで既存DBをあつかうとか』でした。本日の担当は、毎年クリスマスには仕事で問題が起こりクルシミマス恒例になりつつあります、@tmd45 です。FuelPHP 標準のサーバキャッシュと「はてなハイクAPI」、ViewModel を利用したブログのようなものを作ってみましたので、その全貌を公開したいと思います。 さくらのレンタルサーバーで FuelPHP を動かす ViewModel を含めて MVC をひととおり使ってみる はてなの API を使って" />
+    <meta property="article:published_time" content="1355793053" />
+    <meta property="article:author" content="100000368915919" />
+    <meta property="article:tag" content="Advent Calendar" />
+    <meta property="article:tag" content="FuelPHP" />
+    <meta property="article:tag" content="さくらのレンタルサーバ" />
+    <meta property="article:tag" content="はてなハイク" />
+        <meta name="google-site-verification" content="IWXHoGZPYnCcfkfXF_CNpC9WVEX9ltPl-teQ_m5EJLA">        <meta name="keywords" content="Java,PHP,HTML,CSS,JavaScript,Eclipse,FuelPHP">      <meta name="description" content="この記事は FuelPHP Advent Calendar 2012 の 18 日目の記事です。昨日は @ootatter さんによる『fuelphpで既存DBをあつかうとか』でした。本日の担当は、毎年クリスマスには仕事で問題が起こりクルシミマス恒例になりつつあります、@tmd45 です。FuelPHP 標準のサーバキ">
+    
+<script type="text/javascript">
+// <!--
+
+if (~navigator.userAgent.indexOf('Mac OS X')) {
+  document.write('<style type="text/css">html, body { font-family: \x27Helvetica\x27, \x27Arial\x27, \x27ヒラギノ角ゴ Pro W3\x27, \x27Hiragino Kaku Gothic Pro\x27, sans-serif; } </style>');
+} else {
+  document.write('<style type="text/css">html, body { font-family: \x27Helvetica\x27, \x27Arial\x27, \x27メイリオ\x27, \x27Meiryo\x27, \x27MS PGothic\x27, sans-serif; } </style>');
+}
+
+// -->
+</script>
+
+
+    <link rel="shortcut icon" href="http://cdn.image.st-hatena.com/image/favicon/bccf358b2cfe399ca2e2e5b5e20ddf625b118644/version=1/http%3A%2F%2Fcdn.mogile.archive.st-hatena.com%2Fv1%2Fimage%2Ftmd45%2F171675569871696403.ico">
+    <link rel="alternate" type="application/atom+xml" title="Atom" href="/feed"/>
+    <link rel="author" href="http://www.hatena.ne.jp/tmd45/">
+        <link rel="stylesheet" type="text/css" href="http://hatenablog.com/.shared.css:280c049171b3c27b6e6bc0ff0982be84:/css/theme/base.css,/css/prettify.css,/css/globalheader.css"/>
+    
+    <link rel="stylesheet" type="text/css" href="/style/bc59ea749feae9f4bc721b37fa850d81af43a3c4"/>
+    
+
+    
+    <script src="http://s.hatena.ne.jp/js/HatenaStar.js"></script>
+    
+
+    <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+<script type="text/javascript" src="http://apis.google.com/js/plusone.js"></script>
+<script type="text/javascript" src="http://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+
+<script type="text/javascript" src="http://hatenablog.com/.shared.js:280c049171b3c27b6e6bc0ff0982be84:/js/jquery-1.7.2.min.js,/js/jquery-ui-1.8.16.custom.min.js,/js/jquery.cookie.js,/js/jquery.hashchange.js,/js/jquery.mousewheel.js,/js/jquery.colorbox-min.js,/js/jquery.flot.js,/js/jquery.ui.datepicker-ja.js,/js/jquery.tipsy.js,/js/jquery.Jcrop.min.js,/js/json2.js,/js/postMessage.js,/js/keyString.js,/js/jsdeferred.js,/js/EditDesign.js,/js/underscore-min.js,/js/fullscreen.js,/js/base.js,/js/backup.js,/js/admin.js,/js/blogs.js,/js/locale-all.js"></script>
+<script type="text/javascript" src="http://hatenablog.com/js/texts-ja.js?280c049171b3c27b6e6bc0ff0982be84"></script>
+
+<!--[if lt IE 9]>
+<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<!--[if IE]>
+<script type="text/javascript" src="/js/excanvas.min.js"></script>
+<![endif]-->
+
+
+    
+        <script id="google-analytics-script" type="text/javascript">
+var _gaq = _gaq || [];
+
+(function($){
+
+  // 現在のドメイン
+  
+    var current_domain = "hatenablog.com".split(":")[0];
+  
+
+  
+
+  
+    _gaq.push(['a._setAccount', 'UA-29716941-5']);
+    _gaq.push(['a._setDomainName', current_domain]);
+    _gaq.push(['a._setCustomVar', 1, 'PageId', document.documentElement.getAttribute('data-page'), 3 /* page-level */]);
+
+      _gaq.push(['a._trackPageview']);
+  
+    _gaq.push(['b._setAccount', 'UA-29716941-2']);
+    _gaq.push(['b._setDomainName', current_domain]);
+    _gaq.push(['b._setCustomVar', 1, 'PageId', document.documentElement.getAttribute('data-page'), 3 /* page-level */]);
+
+      _gaq.push(['b._trackPageview']);
+  
+
+  $(function () {
+      $(document).delegate('[data-track-event="click"]', 'click', function () {
+          
+          _gaq.push([ 'a._trackEvent', 'Blogs', 'Click', this.getAttribute('data-track-key') ]);
+          
+          _gaq.push([ 'b._trackEvent', 'Blogs', 'Click', this.getAttribute('data-track-key') ]);
+          
+      });
+  });
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+  var available_domains = ["blog.hatena.ne.jp"];
+  
+    available_domains.push("hatenablog.com".split(":")[0]);
+  
+    available_domains.push("hatenablog.jp".split(":")[0]);
+  
+    available_domains.push("hateblo.jp".split(":")[0]);
+  
+    available_domains.push("hatenadiary.com".split(":")[0]);
+  
+    available_domains.push("hatenadiary.jp".split(":")[0]);
+  
+  $('a').on('click', function() {
+    // 同じドメインならスキップ
+    if ( !this.hostname || this.hostname.indexOf(current_domain) != -1 ) return;
+
+    var cross_domain = false;
+    for (var i = 0, len = available_domains.length; i < len; i++) {
+      if (this.hostname.indexOf(available_domains[i]) != -1) cross_domain = true;
+    }
+    if ( cross_domain ) {
+      
+      _gaq.push(['a._link', this.href]);
+      
+      _gaq.push(['b._link', this.href]);
+      
+    }
+  });
+
+})(jQuery);
+</script>
+
+    
+  </head>
+
+  <body class="page-entry header-image-only">
+    <script type="text/javascript">
+    // <!--
+      if (Hatena.Diary.Devices.userAgent() == 'touch') {
+        document.write('<div id="header-container"><div id="sp-suggest"><a href="javascript:Hatena.Diary.Devices.use(\'touch\')">スマートフォン用の表示で見る</a></div></div>');
+      }
+    // -->
+    </script>
+
+    <div class="select_star_button_container" style="display: none;">
+      <img src="/images/theme/hatena-star-quote-box.png" title="引用スターをつける" class="select_star_button" />
+      <img src="/images/theme/hatena-star-quote-star.png" title="引用スターをつける" class="select_star_button select_star_star">
+    </div>
+
+    <div class="message-box" id="select-star-message-box" style="display: none;">
+      スターをつけました
+    </div>
+
+    <div id="globalheader-container">
+      <iframe id="globalheader" height="37" frameborder="0" allowTransparency="true"></iframe>
+      <script type="text/javascript">Hatena.Diary.Pages.Blogs['*'].loadGlobalHeader()</script>
+    </div>
+
+    <div id="container">
+      <div id="container-inner">
+        <header id="blog-title">
+          <div id="blog-title-inner" style="background-image: url('http://cdn-ak.f.st-hatena.com/images/fotolife/t/tmd45/20121017/20121017181039.png'); background-position: center -20px;">
+            <h1 id="title"><a href="/">TMD45INC!!!</a></h1>
+            
+              <h2 id="blog-description">tmd45++; // TechLog</h2>
+            
+          </div>
+        </header>
+        <div id="top-editarea">
+          
+        </div>
+        
+
+<div id="top-box">
+
+</div>
+
+
+<div id="content" class="hfeed"
+  
+  >
+  <div id="content-inner">
+    <div id="wrapper">
+      <div id="main">
+        <div id="main-inner">
+          
+            
+            <!-- google_ad_section_start -->
+            
+              
+                <article class="hentry entry date-first autopagerize_page_element chars-14000 words-1400 hatena" id="entry-12704830469095974131" data-uuid="12704830469095974131">
+  <div class="entry-inner">
+    <header class="entry-header">
+      <div class="date first">
+        <a href="/entries/2012/12/18" rel="nofollow">
+          <time pubdate datetime="2012-12-18T01:10:53Z" title="2012-12-18T01:10:53Z">
+            <span class="date-year">2012</span><span class="hyphen">-</span><span class="date-month">12</span><span class="hyphen">-</span><span class="date-day">18</span>
+          </time>
+        </a>
+      </div>
+      <h1 class="entry-title">
+        <a href="/entry/2012/12/18/101053" class="entry-title-link bookmark">さくらのレンタルサーバで FuelPHP を使ってはてなハイクブログを作る－ViewModel を使ってみる編 #FuelPHPAdvent2012</a>
+      </h1>
+      
+      <div class="categories ">
+        
+        <a href="/category/Advent%20Calendar">Advent Calendar</a>
+        
+        <a href="/category/FuelPHP">FuelPHP</a>
+        
+        <a href="/category/%E3%81%95%E3%81%8F%E3%82%89%E3%81%AE%E3%83%AC%E3%83%B3%E3%82%BF%E3%83%AB%E3%82%B5%E3%83%BC%E3%83%90">さくらのレンタルサーバ</a>
+        
+        <a href="/category/%E3%81%AF%E3%81%A6%E3%81%AA%E3%83%8F%E3%82%A4%E3%82%AF">はてなハイク</a>
+        
+      </div>
+    </header>
+    <div class="entry-content">
+      <p>この記事は <a href="http://atnd.org/events/33753">FuelPHP Advent Calendar 2012</a> の 18 日目の記事です。昨日は @<a class="twitter-user-screen-name" href="http://twitter.com/ootatter">ootatter</a> さんによる『<a href="http://blog.milds.net/2012/12/fuelphpdb.html">fuelphp&#x3067;&#x65E2;&#x5B58;DB&#x3092;&#x3042;&#x3064;&#x304B;&#x3046;&#x3068;&#x304B;</a>』でした。</p><p>本日の担当は、毎年クリスマスには仕事で問題が起こりクルシミマス恒例になりつつあります、@<a class="twitter-user-screen-name" href="http://twitter.com/tmd45">tmd45</a> です。</p><p>FuelPHP 標準のサーバキャッシュと「<a href="http://developer.hatena.ne.jp/ja/documents/haiku/apis/rest">&#x306F;&#x3066;&#x306A;&#x30CF;&#x30A4;&#x30AF;API</a>」、ViewModel を利用したブログのようなものを作ってみましたので、その全貌を公開したいと思います。</p>
+
+<ul>
+<li>さくらのレンタルサーバーで FuelPHP を動かす</li>
+<li>ViewModel を含めて MVC をひととおり使ってみる</li>
+<li>はてなの API を使ってみる</li>
+</ul><p>などを行っています。</p><p>長いですが、マイナーな組み合わせすぎて需要が無いことをひそかに期待してます（笑）。<br />
+なお、使う人がいらっしゃるか分かりませんが記事中のソースコードは MIT ライセンスです。</p><p>では、よろしくお願いします。</p><p></p>
+
+<div class="section">
+    <h3>1. さくらのレンタルサーバで FuelPHP を準備する</h3>
+    <p>利用しているのは<em>スタンダードプラン</em>です。なおスタンダードより下のライトプランだと SFTP や SCP が使えなくてちょっと不便なので、動的なサイトを作りたい場合はスタンダードプラン以上で契約されるのがオススメです。さらに言えば、レンサバより VPS や Cloud なんちゃら系のホスティングサービスを使ったほうが利便性は良いです。</p><p>さくらのレンサバを使った理由は「そこに放置中のレンサバがあったから」以外のなにものでもないのであしからず。</p>
+
+<div class="section">
+    <h4>PHP のバージョンを確認する</h4>
+    <p>お使いのレンサバで動く PHP のバージョンを確認します。FuelPHP を動作させるために PHP 5.3 以上を利用しましょう。必要であれば下記の画面で設定を変更してください。</p><p><span itemscope itemtype="http://schema.org/Photograph"><img src="http://cdn-ak.f.st-hatena.com/images/fotolife/t/tmd45/20121212/20121212110543.png" alt="f:id:tmd45:20121212110543p:plain" title="f:id:tmd45:20121212110543p:plain" class="hatena-fotolife" itemprop="image"></span></p>
+
+</div>
+<div class="section">
+    <h4>php.ini の編集</h4>
+    <p>さくらのレンサバはコントロールパネルから php.ini の編集が可能です。<br />
+FuelPHP を正常に動作させるには <code>cgi.fix_pathinfo = 1</code> の記述が必要です。リクエスト URL の取得に、cgi 版 PHP ではこの設定を行って <code>$_SERVER["ORIG_PATH_INFO"]</code> の利用を有効にする必要があるためです。</p><p><span itemscope itemtype="http://schema.org/Photograph"><img src="http://cdn-ak.f.st-hatena.com/images/fotolife/t/tmd45/20121212/20121212113953.png" alt="f:id:tmd45:20121212113953p:plain" title="f:id:tmd45:20121212113953p:plain" class="hatena-fotolife" itemprop="image"></span></p><p>と、説明しておきますが、FuelPHP Core 内で <code>$_SERVER["ORIG_PATH_INFO"]</code> を利用しているのは私が見た限りでは <a href="https://github.com/fuel/core/blob/1.4/master/classes/input.php#L128">Input &#x30AF;&#x30E9;&#x30B9;&#x3060;&#x3051;&#x307F;&#x305F;&#x3044;</a>です。とりあえずこの設定はやっておきましょう。</p><p>以下の記事を参考にさせていただきました。</p>
+
+<ul>
+<li><a href="http://d.hatena.ne.jp/good-speed/20121002/1349148273">&#x3055;&#x304F;&#x3089;&#x30EC;&#x30F3;&#x30BF;&#x30EB;&#x30B5;&#x30FC;&#x30D0;&#x30FC;&#x306B;FuelPHP&#x3092;&#x30A4;&#x30F3;&#x30B9;&#x30C8;&#x30FC;&#x30EB; - 2hours</a></li>
+<li><a href="http://d.hatena.ne.jp/localdisk/20090524/1243149438">PHP&#x30D5;&#x30EC;&#x30FC;&#x30E0;&#x30EF;&#x30FC;&#x30AF;&#x306F;&#x3069;&#x306E;&#x3088;&#x3046;&#x306B;&#x30EA;&#x30AF;&#x30A8;&#x30B9;&#x30C8;&#x3055;&#x308C;&#x305F;URL&#x3092;&#x53D6;&#x5F97;&#x3057;&#x3066;&#x3044;&#x308B;&#x304B;? - localdisk</a></li>
+</ul>
+</div>
+<div class="section">
+    <h4>FuelPHP を用意する</h4>
+    <p><a href="http://fuelphp.com/">FuelPHP &#x516C;&#x5F0F;&#x30B5;&#x30A4;&#x30C8;</a>から最新版（執筆時点でv1.4）の FuelPHP アーカイブ（zip）をダウンロードします。アーカイブを展開して、ドキュメントルート内の構成を以下のようにしました。</p>
+
+<pre>アーカイブ内（変更前）のディレクトリ構成
+/fuelphp-1.4
+  |-- /docs
+  |-- /fuel
+  |-- /public
+  |  |-- /assets
+  |  |-- .htaccess
+  |  `-- index.php
+  |-- oil
+  |-- README.md
+  `-- ...
+</pre><p>ドキュメントや README、使わない oil などを削除します。また、public ディレクトリの中身をドキュメントルートに持ってきます。</p>
+
+<pre>変更後のディレクトリ構成
+/hhblog
+  |-- /fuel
+  |-- /assets
+  |-- .htaccess
+  `-- index.php
+</pre><p>ディレクトリ構成を変更したので、index.php に記述されているパスも修正します。diff だとわかりにくいですが、<code>/../fuel</code> から始まるパスが <code>/fuel</code> になります。</p>
+<pre class="code lang-diff" data-lang="diff" data-unlink>$ diff fuelphp-1.4/public/index.php hhblog/index.php
+<span class="synStatement">16c16</span>
+<span class="synSpecial">&lt; define('APPPATH', realpath(__DIR__.'/../fuel/app/').DIRECTORY_SEPARATOR);</span>
+<span class="synSpecial">---</span>
+<span class="synIdentifier">&gt; define('APPPATH', realpath(__DIR__.'/fuel/app/').DIRECTORY_SEPARATOR);</span>
+<span class="synStatement">21c21</span>
+<span class="synSpecial">&lt; define('PKGPATH', realpath(__DIR__.'/../fuel/packages/').DIRECTORY_SEPARATOR);</span>
+<span class="synSpecial">---</span>
+<span class="synIdentifier">&gt; define('PKGPATH', realpath(__DIR__.'/fuel/packages/').DIRECTORY_SEPARATOR);</span>
+<span class="synStatement">26c26</span>
+<span class="synSpecial">&lt; define('COREPATH', realpath(__DIR__.'/../fuel/core/').DIRECTORY_SEPARATOR);</span>
+<span class="synSpecial">---</span>
+<span class="synIdentifier">&gt; define('COREPATH', realpath(__DIR__.'/fuel/core/').DIRECTORY_SEPARATOR);</span>
+</pre><p><br />
+Web API を使用する際にはタイムスタンプなどが重要になってくる場合もあるので、タイムゾーンの設定もしておきました。役に立っているのかはいまいち分かりませんが･･･</p>
+<pre class="code lang-php" data-lang="php" data-unlink>ファイル：~/hhblog/fuel/app/config/config.php
+<span class="synSpecial">&lt;?php</span>
+<span class="synComment">/* 中略 */</span>
+
+<span class="synStatement">return</span> <span class="synType">array</span><span class="synSpecial">(</span>
+  '<span class="synConstant">default_timezone</span>' <span class="synStatement">=&gt;</span> '<span class="synConstant">Asia/Tokyo</span>'    <span class="synComment">// タイムゾーンを設定</span>
+<span class="synSpecial">)</span>;
+</pre><p><br />
+またセキュリティの観点から、Web から見えてしまう FuelPHP のエラー表示は OFF にしておくほうが良いです（参考：<a href="http://d.hatena.ne.jp/Kenji_s/20111224/1324731427">FuelPHP &#x3067;&#x306E;&#x30BB;&#x30AD;&#x30E5;&#x30EA;&#x30C6;&#x30A3;&#x5BFE;&#x7B56;(3) - A Day in Serenity @ kenjis</a>）。自分の場合は開発環境と公開環境を一緒くたにするという危険極まりない遊びをしていたのでエラーは出しっぱなしです･･･(;^_^)</p>
+<pre class="code lang-php" data-lang="php" data-unlink>ファイル：~/hhblog/index.php
+<span class="synSpecial">&lt;?php</span>
+<span class="synComment">/**</span>
+<span class="synComment"> * Set error reporting and display errors settings.  You will want to change these when in production.</span>
+<span class="synComment"> */</span>
+<span class="synIdentifier">error_reporting</span><span class="synSpecial">(</span><span class="synConstant">-1</span><span class="synSpecial">)</span>;
+<span class="synIdentifier">ini_set</span><span class="synSpecial">(</span>'<span class="synConstant">display_errors</span>', <span class="synConstant">1</span><span class="synSpecial">)</span>;    <span class="synComment">// この引数を 0 にする。</span>
+</pre><p><br />
+レンタルサーバへの配置ですが、今回はレンサバのドキュメントルート <code>$HOME/www</code> 配下に、上記の <code>hhblog</code> ディレクトリを配置することにします。アクセス時の URL は <code><span data-unlink>http://{user-id}.sakura.ne.jp/hhblog/</span></code> になります。</p><p>この配置であれば、.htaccess ファイルを修正する必要はありません。アーカイブに在ったものをそのまま使用すれば Mod_Rewrite が仕事してくれます。</p><p>私は動作環境を本番（production）にするため、以下の部分だけ変更（コメント化を解除）しました。</p>
+<pre class="code lang-diff" data-lang="diff" data-unlink>$ diff fuelphp-1.4/public/.htaccess hhblog/.htaccess
+<span class="synStatement">2c2</span>
+<span class="synSpecial">&lt; # SetEnv FUEL_ENV production</span>
+<span class="synSpecial">---</span>
+<span class="synIdentifier">&gt; SetEnv FUEL_ENV production</span>
+</pre>
+</div>
+<div class="section">
+    <h4>FuelPHP を放り込む</h4>
+    <p>準備した <code>hhblog</code> ディレクトリの FuelPHP 一式を、SFTP でも SCP でも好きな方法で、レンタルサーバのドキュメントルートに放り込みましょう。<code>$HOME/www/hhblog</code> となるように配置します。</p><p>手動インストール（oil を使わないで配置する）を行ったので、ディレクトリのパーミッションの変更も自分で行います（参考：<a href="http://fuelphp.com/docs/installation/instructions.html">Instruction - Installation - FuelPHP Documentation</a>）。</p><p>以下の４つのディレクトリのパーミッションを 777（rwxrwxrwx）にします。FTP/SCP ツールで変更しても良いですし、さくらのコントロールパネルからファイルマネージャーを使用して変更することも可能です（ディレクトリを 右クリック → プロパティ で属性の変更が可能）。</p>
+
+<pre>以下の４つのディレクトリを書込み可にする
+$HOME/www/hhblog
+    |-- /fuel
+    |    |-- /app
+    |    |    |-- /cache
+    |    |    |-- /config
+    |    |    |-- /logs
+    |    |    |-- /tmp
+    ...
+</pre><p>これでインストールは完了です。<code><span data-unlink>http://{user-id}.sakura.ne.jp/hhblog/</span></code> にアクセスすれば、おなじみの Welcome ページが表示されます。おめでとうありがとう。</p><p><span itemscope itemtype="http://schema.org/Photograph"><img src="http://cdn-ak.f.st-hatena.com/images/fotolife/t/tmd45/20121214/20121214170600.png" alt="f:id:tmd45:20121214170600p:plain" title="f:id:tmd45:20121214170600p:plain" class="hatena-fotolife" itemprop="image"></span></p><p>やることが多く見えますが、結構単純です。さくらのレンタルサーバでも FuelPHP は（とりあえず）簡単に動作します。</p><p></p>
+
+</div>
+</div>
+<div class="section">
+    <h3>2. はてなハイク API の利用</h3>
+    <p>フレームワークの準備が出来ましたので、ここから実装に入ります。コードはとくに省略せずに貼り付けてますので、長いです。</p>
+
+    <blockquote>
+        <p>補足：<br />
+本来は開発環境で作って、テストして、完成したものを公開環境へアップロードしますよね（苦笑）<br />
+今回ちょっと不便な場所で開発を行っていたため、公開環境で動作確認などを行っていました･･･<br />
+この辺りはツッコミ無用でございます／(^o^)＼</p><p>また、筆者は Java 屋なので、PHP 的におかしな書き方をしているところがあったらごめんなさい。<br />
+そちらはツッコミいただけたら嬉しいです＼(^o^)／</p>
+
+    </blockquote>
+<p>はてなハイクの API を利用して記事を取得する処理を Model に作成します。<br />
+ちなみに今回利用した API では、認証を必要としません。なので認証部分の実装も考えません。</p><p>API は以下の２種類を使うことにしました。詳しくは API のドキュメントをご確認ください。</p>
+
+<ol>
+<li><a href="http://developer.hatena.ne.jp/ja/documents/haiku/apis/rest/timelines#public_timeline">&#x306F;&#x3066;&#x306A;&#x30CF;&#x30A4;&#x30AF;&#x306E;&#x30C8;&#x30C3;&#x30D7;&#x30DA;&#x30FC;&#x30B8;&#xFF08;&#x30D1;&#x30D6;&#x30EA;&#x30C3;&#x30AF;&#x30FB;&#x30BF;&#x30A4;&#x30E0;&#x30E9;&#x30A4;&#x30F3;&#xFF09;</a>
+<ul>
+<li>引数はとくに無く、はてなハイクのトップページに表示されるタイムラインを取得します。</li>
+</ul></li>
+<li><a href="http://developer.hatena.ne.jp/ja/documents/haiku/apis/rest/timelines#keyword_timeline">&#x30AD;&#x30FC;&#x30EF;&#x30FC;&#x30C9;&#x306E;&#x30A8;&#x30F3;&#x30C8;&#x30EA;&#x30FC;&#x30DA;&#x30FC;&#x30B8;&#xFF08;&#x30AD;&#x30FC;&#x30EF;&#x30FC;&#x30C9;&#x30FB;&#x30BF;&#x30A4;&#x30E0;&#x30E9;&#x30A4;&#x30F3;&#xFF09;</a>
+<ul>
+<li>引数にキーワードを指定（必須）し、そのキーワードのタイムラインを取得します。</li>
+</ul></li>
+</ol><p><br />
+以下が実装です。<b>ちなみにテストはありません（!!?）。</b>また、一部の引数は API に合わせて定義しているだけで、利用していないです（汗）</p>
+<pre class="code lang-php" data-lang="php" data-unlink>ファイル：~/hhblog/fuel/app/classes/model/api/hatena/haiku.php
+<span class="synSpecial">&lt;?php</span>
+
+<span class="synType">class</span> Model_Api_Hatena_Haiku <span class="synType">extends</span> Model
+<span class="synSpecial">{</span>
+
+	<span class="synComment">/**</span>
+<span class="synComment">	 * Using statuses/public_timeline (Japanese Domain).</span>
+<span class="synComment">	 * </span>
+<span class="synComment">	 * AUTHORIZATION : no</span>
+<span class="synComment">	 * HTTP METHOD   : GET</span>
+<span class="synComment">	 * </span>
+<span class="synComment">	 * @link http://developer.hatena.ne.jp/ja/documents/haiku/apis/rest/timelines#public_timeline</span>
+<span class="synComment">	 * </span>
+<span class="synComment">	 * @param string  $body_formats reaponse text format, see default value</span>
+<span class="synComment">	 * @param integer $count        getting entries number, API default 20 max 200</span>
+<span class="synComment">	 * @param integer $page         getting page number, API default 1 max 100</span>
+<span class="synComment">	 * @param string  $since        no getting older than rfc1123-date(&quot;Mon, 26 Nov 2012 15:53:43 GMT&quot;)</span>
+<span class="synComment">	 * </span>
+<span class="synComment">	 * @return string JSON</span>
+<span class="synComment">	 */</span>
+	<span class="synType">public</span> <span class="synType">static</span> <span class="synPreProc">function</span> getPublicTimeLine<span class="synSpecial">(</span>
+		<span class="synStatement">$</span><span class="synIdentifier">body_formats</span> <span class="synStatement">=</span> &quot;<span class="synConstant">api,haiku,html,html_mobile,html_touch</span>&quot;
+		, <span class="synStatement">$</span><span class="synIdentifier">count</span>        <span class="synStatement">=</span> &quot;<span class="synConstant">20</span>&quot;
+		, <span class="synStatement">$</span><span class="synIdentifier">page</span>         <span class="synStatement">=</span> &quot;<span class="synConstant">1</span>&quot;
+		, <span class="synStatement">$</span><span class="synIdentifier">since</span>        <span class="synStatement">=</span> &quot;<span class="synConstant">Mon, 26 Nov 2012 15:53:43 GMT</span>&quot;
+	<span class="synSpecial">)</span> <span class="synSpecial">{</span>
+
+		<span class="synComment">// リクエストURL</span>
+		<span class="synStatement">$</span><span class="synIdentifier">url</span> <span class="synStatement">=</span> &quot;<span class="synConstant">http://h.hatena.ne.jp/api/statuses/public_timeline.json</span>&quot;;
+
+		<span class="synComment">// Option（UTF-8で符号化必要）</span>
+		<span class="synStatement">$</span><span class="synIdentifier">body_formats</span> <span class="synStatement">=</span> <span class="synIdentifier">urlencode</span><span class="synSpecial">(</span><span class="synStatement">$</span><span class="synIdentifier">body_formats</span><span class="synSpecial">)</span>;
+
+		<span class="synComment">// URL 組み立て</span>
+		<span class="synStatement">$</span><span class="synIdentifier">filename</span> <span class="synStatement">=</span> <span class="synStatement">$</span><span class="synIdentifier">url</span> <span class="synStatement">.</span> '<span class="synConstant">?body_formats=</span>' <span class="synStatement">.</span> <span class="synStatement">$</span><span class="synIdentifier">body_formats</span>;
+
+		<span class="synComment">// file_getコンテキストのオプション</span>
+		<span class="synStatement">$</span><span class="synIdentifier">opts</span> <span class="synStatement">=</span> <span class="synType">array</span><span class="synSpecial">(</span>
+			'<span class="synConstant">http</span>' <span class="synStatement">=&gt;</span> <span class="synType">array</span><span class="synSpecial">(</span>
+				'<span class="synConstant">method</span>' <span class="synStatement">=&gt;</span> &quot;<span class="synConstant">GET</span>&quot;,
+				'<span class="synConstant">header</span>' <span class="synStatement">=&gt;</span> &quot;<span class="synConstant">Host: hoge.sakura.ne.jp</span><span class="synSpecial">\r\n</span>&quot; <span class="synStatement">.</span>
+							&quot;<span class="synConstant">Accept-language: ja</span><span class="synSpecial">\r\n</span>&quot; <span class="synStatement">.</span>
+							&quot;<span class="synConstant">User-Agent: </span>&quot; <span class="synStatement">.</span> Input<span class="synStatement">::</span>user_agent<span class="synSpecial">()</span> <span class="synStatement">.</span> &quot;<span class="synSpecial">\r\n</span>&quot;
+			<span class="synSpecial">)</span>
+		<span class="synSpecial">)</span>;
+		<span class="synStatement">$</span><span class="synIdentifier">context</span> <span class="synStatement">=</span> <span class="synIdentifier">stream_context_create</span><span class="synSpecial">(</span><span class="synStatement">$</span><span class="synIdentifier">opts</span><span class="synSpecial">)</span>;
+
+		<span class="synComment">// API の結果を json で取得</span>
+		<span class="synStatement">$</span><span class="synIdentifier">json</span> <span class="synStatement">=</span> <span class="synIdentifier">file_get_contents</span><span class="synSpecial">(</span><span class="synStatement">$</span><span class="synIdentifier">filename</span>, <span class="synConstant">false</span>, <span class="synStatement">$</span><span class="synIdentifier">context</span><span class="synSpecial">)</span>;
+
+		<span class="synComment">// 取得した json 文字列をそのまま返却</span>
+		<span class="synStatement">if</span><span class="synSpecial">(</span><span class="synStatement">$</span><span class="synIdentifier">json</span> <span class="synStatement">!=</span> <span class="synConstant">false</span><span class="synSpecial">)</span>
+		<span class="synSpecial">{</span>
+			<span class="synStatement">return</span> <span class="synStatement">$</span><span class="synIdentifier">json</span>;
+		<span class="synSpecial">}</span>
+		<span class="synComment">// 取得失敗したら空文字を返却</span>
+		<span class="synStatement">else</span>
+		<span class="synSpecial">{</span>
+			<span class="synStatement">return</span> '';
+		<span class="synSpecial">}</span>
+
+	<span class="synSpecial">}</span>
+
+	<span class="synComment">/**</span>
+<span class="synComment">	 * Using statuses/keyword_timeline.</span>
+<span class="synComment">	 * </span>
+<span class="synComment">	 * AUTHORIZATION : no</span>
+<span class="synComment">	 * HTTP METHOD   : GET</span>
+<span class="synComment">	 * </span>
+<span class="synComment">	 * @link http://developer.hatena.ne.jp/ja/documents/haiku/apis/rest/timelines#keyword_timeline</span>
+<span class="synComment">	 *</span>
+<span class="synComment">	 * @param string  $keyword      seatch keyword [required]</span>
+<span class="synComment">	 * @param string  $body_formats reaponse text format, see default value</span>
+<span class="synComment">	 * @param integer $count        getting entries number, API default 20 max 200</span>
+<span class="synComment">	 * @param integer $page         getting page number, API default 1 max 100</span>
+<span class="synComment">	 * @param string  $sort         getting entries sort, API default &quot;new&quot; is newer, &quot;hot&quot; is populer</span>
+<span class="synComment">	 * @param string  $since        no getting older than rfc1123-date(&quot;Mon, 26 Nov 2012 15:53:43 GMT&quot;)</span>
+<span class="synComment">	 * </span>
+<span class="synComment">	 * @return string JSON</span>
+<span class="synComment">	 */</span>
+	<span class="synType">public</span> <span class="synType">static</span> <span class="synPreProc">function</span> getKeywordTimeLine<span class="synSpecial">(</span>
+		<span class="synStatement">$</span><span class="synIdentifier">keyword</span>
+		, <span class="synStatement">$</span><span class="synIdentifier">body_formats</span> <span class="synStatement">=</span> &quot;<span class="synConstant">api,haiku,html,html_mobile,html_touch</span>&quot;
+		, <span class="synStatement">$</span><span class="synIdentifier">count</span>        <span class="synStatement">=</span> &quot;<span class="synConstant">20</span>&quot;
+		, <span class="synStatement">$</span><span class="synIdentifier">page</span>         <span class="synStatement">=</span> &quot;<span class="synConstant">1</span>&quot;
+		, <span class="synStatement">$</span><span class="synIdentifier">sort</span>         <span class="synStatement">=</span> &quot;<span class="synConstant">new</span>&quot;
+		, <span class="synStatement">$</span><span class="synIdentifier">since</span>        <span class="synStatement">=</span> &quot;<span class="synConstant">Mon, 26 Nov 2012 15:53:43 GMT</span>&quot;
+	<span class="synSpecial">)</span> <span class="synSpecial">{</span>
+
+		<span class="synComment">// リクエストURL</span>
+		<span class="synStatement">$</span><span class="synIdentifier">url</span> <span class="synStatement">=</span> &quot;<span class="synConstant">http://h.hatena.ne.jp/api/statuses/keyword_timeline.json</span>&quot;;
+
+		<span class="synComment">// Option（UTF-8で符号化必要）</span>
+		<span class="synStatement">$</span><span class="synIdentifier">word</span>         <span class="synStatement">=</span> <span class="synIdentifier">urlencode</span><span class="synSpecial">(</span><span class="synStatement">$</span><span class="synIdentifier">keyword</span><span class="synSpecial">)</span>;
+		<span class="synStatement">$</span><span class="synIdentifier">body_formats</span> <span class="synStatement">=</span> <span class="synIdentifier">urlencode</span><span class="synSpecial">(</span><span class="synStatement">$</span><span class="synIdentifier">body_formats</span><span class="synSpecial">)</span>;
+
+		<span class="synComment">// URL 組み立て</span>
+		<span class="synStatement">$</span><span class="synIdentifier">filename</span> <span class="synStatement">=</span> <span class="synStatement">$</span><span class="synIdentifier">url</span> <span class="synStatement">.</span> '<span class="synConstant">?word=</span>' <span class="synStatement">.</span> <span class="synStatement">$</span><span class="synIdentifier">word</span> <span class="synStatement">.</span> '<span class="synConstant">&amp;body_formats=</span>' <span class="synStatement">.</span> <span class="synStatement">$</span><span class="synIdentifier">body_formats</span>;
+
+		<span class="synComment">// file_getコンテキストのオプション</span>
+		<span class="synStatement">$</span><span class="synIdentifier">opts</span> <span class="synStatement">=</span> <span class="synType">array</span><span class="synSpecial">(</span>
+			'<span class="synConstant">http</span>' <span class="synStatement">=&gt;</span> <span class="synType">array</span><span class="synSpecial">(</span>
+				'<span class="synConstant">method</span>' <span class="synStatement">=&gt;</span> &quot;<span class="synConstant">GET</span>&quot;,
+				'<span class="synConstant">header</span>' <span class="synStatement">=&gt;</span> &quot;<span class="synConstant">Host: hoge.sakura.ne.jp</span><span class="synSpecial">\r\n</span>&quot; <span class="synStatement">.</span>
+							&quot;<span class="synConstant">Accept-language: ja</span><span class="synSpecial">\r\n</span>&quot; <span class="synStatement">.</span>
+							&quot;<span class="synConstant">User-Agent: </span>&quot; <span class="synStatement">.</span> Input<span class="synStatement">::</span>user_agent<span class="synSpecial">()</span> <span class="synStatement">.</span> &quot;<span class="synSpecial">\r\n</span>&quot;
+			<span class="synSpecial">)</span>
+		<span class="synSpecial">)</span>;
+		<span class="synStatement">$</span><span class="synIdentifier">context</span> <span class="synStatement">=</span> <span class="synIdentifier">stream_context_create</span><span class="synSpecial">(</span><span class="synStatement">$</span><span class="synIdentifier">opts</span><span class="synSpecial">)</span>;
+
+		<span class="synComment">// API の結果を json で取得</span>
+		<span class="synStatement">$</span><span class="synIdentifier">json</span> <span class="synStatement">=</span> <span class="synIdentifier">file_get_contents</span><span class="synSpecial">(</span><span class="synStatement">$</span><span class="synIdentifier">filename</span>, <span class="synConstant">false</span>, <span class="synStatement">$</span><span class="synIdentifier">context</span><span class="synSpecial">)</span>;
+
+		<span class="synComment">// 取得した json 文字列をそのまま返却</span>
+		<span class="synStatement">if</span><span class="synSpecial">(</span><span class="synStatement">$</span><span class="synIdentifier">json</span> <span class="synStatement">!=</span> <span class="synConstant">false</span><span class="synSpecial">)</span>
+		<span class="synSpecial">{</span>
+			<span class="synStatement">return</span> <span class="synStatement">$</span><span class="synIdentifier">json</span>;
+		<span class="synSpecial">}</span>
+		<span class="synComment">// 取得失敗したら空文字を返却</span>
+		<span class="synStatement">else</span>
+		<span class="synSpecial">{</span>
+			<span class="synStatement">return</span> '';
+		<span class="synSpecial">}</span>
+
+	<span class="synSpecial">}</span>
+
+<span class="synSpecial">}</span>
+
+<span class="synComment">/* End of file haiku.php */</span>
+<span class="synComment">/* Location: app/classes/model/api/hatena/haiku.php */</span>
+</pre><p>file_getコンテキストのオプションに指定する Host 名は、ご自分の環境にあわせて修正してください。</p><p></p>
+
+</div>
+<div class="section">
+    <h3>3. ViewModel を使ってブログ（表示部分のみ）を作る</h3>
+    <p>ここからやっとブログ（っぽく）表示する実装を行っていきます。</p><p>View は贅沢（？）に Template を使ってみます。</p><p><span itemscope itemtype="http://schema.org/Photograph"><img src="http://cdn-ak.f.st-hatena.com/images/fotolife/t/tmd45/20121214/20121214175736.png" alt="f:id:tmd45:20121214175736p:plain" title="f:id:tmd45:20121214175736p:plain" class="hatena-fotolife" itemprop="image"></span></p><p>さきに書いてしまいますが、最終的なディレクトリ構成は以下のようになりました。</p>
+
+<pre>実装のディレクトリ構成
+$HOME/www/hhblog
+    |-- /fuel
+    |    |-- /app
+    |    |    |-- /classes
+    |    |    |    |-- /controller
+    |    |    |    |    `-- hhblog.php
+    |    |    |    |-- /model
+    |    |    |    |    `-- ･･･
+    |    |    |    `-- /view
+    |    |    |         `-- /hhblog
+    |    |    |              `-- /article
+    |    |    |                   |-- keyword.php    (1)'
+    |    |    |                   `-- public.php     (2)'
+    |    |    |-- /views
+    |    |    |    |-- /hhblog
+    |    |    |    |    |-- /article
+    |    |    |    |    |    |-- keyword.php    (1)
+    |    |    |    |    |    `-- public.php     (2)
+    |    |    |    |    `-- template.php
+    ･･･
+</pre><p>うーん、機能名失敗したな･･･（hhblog の hhblog コントローラ･･･orz）。</p>
+
+<div class="section">
+    <h4>View と Controller</h4>
+    <p>では、どんどんコードを晒していきます。<br />
+まずはコントローラー。</p>
+<pre class="code lang-php" data-lang="php" data-unlink>ファイル：~/hhblog/fuel/app/classes/controller/hhblog.php
+<span class="synSpecial">&lt;?php</span>
+
+<span class="synComment">/**</span>
+<span class="synComment"> * Hatena-Haiku Blog Controller.</span>
+<span class="synComment"> * </span>
+<span class="synComment"> * hhblog's root controller.</span>
+<span class="synComment"> * </span>
+<span class="synComment"> * @package app</span>
+<span class="synComment"> * @extends Controller</span>
+<span class="synComment"> */</span>
+<span class="synType">class</span> Controller_Hhblog <span class="synType">extends</span> Controller_Template
+<span class="synSpecial">{</span>
+
+	<span class="synType">public</span> <span class="synStatement">$</span><span class="synIdentifier">template</span> <span class="synStatement">=</span> '<span class="synConstant">hhblog/template</span>';
+	
+	<span class="synComment">/**</span>
+<span class="synComment">	 * Get Hatena-Haiku Public Timeline in ViewModel</span>
+<span class="synComment">	 * and show blog style page.</span>
+<span class="synComment">	 */</span>
+	<span class="synType">public</span> <span class="synPreProc">function</span> action_public_timeline<span class="synSpecial">()</span>
+	<span class="synSpecial">{</span>
+		<span class="synStatement">$</span><span class="synIdentifier">this</span><span class="synType">-&gt;</span>template<span class="synType">-&gt;</span>set<span class="synSpecial">(</span>'<span class="synConstant">title</span>',       '<span class="synConstant">Hatena-Haiku Public Timeline</span>'<span class="synSpecial">)</span>;
+		<span class="synStatement">$</span><span class="synIdentifier">this</span><span class="synType">-&gt;</span>template<span class="synType">-&gt;</span>set<span class="synSpecial">(</span>'<span class="synConstant">description</span>', '<span class="synConstant">はてなハイク Public Timeline を取得してブログっぽく表示させます。</span>'<span class="synSpecial">)</span>;
+		<span class="synStatement">$</span><span class="synIdentifier">this</span><span class="synType">-&gt;</span>template<span class="synType">-&gt;</span>set<span class="synSpecial">(</span>'<span class="synConstant">active_api</span>',  <span class="synConstant">1</span><span class="synSpecial">)</span>;
+		
+		<span class="synComment">// 本文部分に ViewModel を利用</span>
+		<span class="synStatement">$</span><span class="synIdentifier">this</span><span class="synType">-&gt;</span>template<span class="synType">-&gt;</span>article <span class="synStatement">=</span> ViewModel<span class="synStatement">::</span>forge<span class="synSpecial">(</span>'<span class="synConstant">hhblog/article/public</span>'<span class="synSpecial">)</span>;
+		
+	<span class="synSpecial">}</span>
+	
+	<span class="synComment">/**</span>
+<span class="synComment">	 * Get Hatena-Haiku Keyword Timeline in ViewModel</span>
+<span class="synComment">	 * and show blog style page.</span>
+<span class="synComment">	 * Now 'keyword' is Hatena user id 'id:hoge' style.</span>
+<span class="synComment">	 */</span>
+	<span class="synType">public</span> <span class="synPreProc">function</span> action_keyword_timeline<span class="synSpecial">()</span>
+	<span class="synSpecial">{</span>
+		<span class="synStatement">$</span><span class="synIdentifier">keyword</span> <span class="synStatement">=</span> '<span class="synConstant">id:tmd45</span>';
+		
+		<span class="synStatement">$</span><span class="synIdentifier">this</span><span class="synType">-&gt;</span>template<span class="synType">-&gt;</span>set<span class="synSpecial">(</span>'<span class="synConstant">title</span>',       '<span class="synConstant">Hatena-Haiku Keyword Timeline</span>'<span class="synSpecial">)</span>;
+		<span class="synStatement">$</span><span class="synIdentifier">this</span><span class="synType">-&gt;</span>template<span class="synType">-&gt;</span>set<span class="synSpecial">(</span>'<span class="synConstant">description</span>', '<span class="synConstant">はてなハイク Keyword Timeline からキーワード「</span>' <span class="synStatement">.</span> <span class="synStatement">$</span><span class="synIdentifier">keyword</span> <span class="synStatement">.</span> '<span class="synConstant">」の結果を取得してブログっぽく表示させます。</span>'<span class="synSpecial">)</span>;
+		<span class="synStatement">$</span><span class="synIdentifier">this</span><span class="synType">-&gt;</span>template<span class="synType">-&gt;</span>set<span class="synSpecial">(</span>'<span class="synConstant">keyword</span>', <span class="synStatement">$</span><span class="synIdentifier">keyword</span><span class="synSpecial">)</span>;
+		<span class="synStatement">$</span><span class="synIdentifier">this</span><span class="synType">-&gt;</span>template<span class="synType">-&gt;</span>set<span class="synSpecial">(</span>'<span class="synConstant">active_api</span>',  <span class="synConstant">2</span><span class="synSpecial">)</span>;
+		
+		<span class="synComment">// 本文部分に ViewModel を利用</span>
+		<span class="synStatement">$</span><span class="synIdentifier">this</span><span class="synType">-&gt;</span>template<span class="synType">-&gt;</span>article <span class="synStatement">=</span> ViewModel<span class="synStatement">::</span>forge<span class="synSpecial">(</span>'<span class="synConstant">hhblog/article/keyword</span>'<span class="synSpecial">)</span>;
+		<span class="synStatement">$</span><span class="synIdentifier">this</span><span class="synType">-&gt;</span>template<span class="synType">-&gt;</span>article<span class="synType">-&gt;</span>set<span class="synSpecial">(</span>'<span class="synConstant">keyword</span>', <span class="synStatement">$</span><span class="synIdentifier">keyword</span><span class="synSpecial">)</span>;
+		
+	<span class="synSpecial">}</span>
+<span class="synSpecial">}</span>
+
+<span class="synComment">/* End of file hhblog.php */</span>
+<span class="synComment">/* Location: app/classes/controller/hhblog.php */</span>
+</pre><p>キーワード・タイムラインで指定するキーワードは、コントローラーに直書きしています。</p>
+
+<ul>
+<li><code>$keyword = 'id:tmd45';</code></li>
+</ul><p>この文字列を変更すれば好きなキーワードを指定することができます。</p><p>指定したキーワードはビューモデルでも利用したいので、以下のように値を渡しています。</p>
+
+<ul>
+<li><code>$this->template->article->set('keyword', $keyword);</code></li>
+</ul><p><br />
+そして View 側のコードですが、全部載せると大変なので Gist に置いておきます。</p>
+
+<ul>
+<li><a href="https://gist.github.com/4283992#file-template-php">template.php on Gist</a></li>
+<li><a href="https://gist.github.com/4283992#file-public-php">public.php on Gist</a></li>
+<li><a href="https://gist.github.com/4283992#file-keyword-php">keyword.php on Gist</a></li>
+</ul><p>テンプレートのソースコード（template.php）の中で、コントローラーで ViewModel を forge した <code>$article</code> 変数を利用して記事を埋め込みます。</p>
+<pre class="code lang-php" data-lang="php" data-unlink>ファイル：~/hhblog/fuel/app/views/hhblog/template.php の一部
+<span class="synComment">&lt;!-- CONTENT --&gt;</span>
+<span class="synIdentifier">&lt;</span><span class="synStatement">div</span><span class="synIdentifier"> </span><span class="synType">class</span><span class="synIdentifier">=</span><span class="synConstant">&quot;span9&quot;</span><span class="synIdentifier">&gt;</span>
+			
+<span class="synSpecial">&lt;?php</span> <span class="synPreProc">echo</span> <span class="synStatement">$</span><span class="synIdentifier">article</span>; <span class="synSpecial">?&gt;</span>
+			
+<span class="synIdentifier">&lt;/</span><span class="synStatement">div</span><span class="synIdentifier">&gt;</span><span class="synComment">&lt;!-- /span9 --&gt;</span>
+<span class="synComment">&lt;!-- /CONTENT --&gt;</span>
+</pre><p>記事側のソースコード（public.php, keyword.php）では、API で取得した記事の配列を繰り返し表示させています。これがテンプレートの <code>$article</code> 部分に展開されます。</p>
+<pre class="code lang-php" data-lang="php" data-unlink>ファイル：~/hhblog/fuel/app/views/hhblog/article/public.php の一部
+<span class="synSpecial">&lt;?php</span>
+	<span class="synStatement">foreach</span> <span class="synSpecial">(</span><span class="synStatement">$</span><span class="synIdentifier">articles</span> <span class="synStatement">as</span> <span class="synStatement">$</span><span class="synIdentifier">a</span><span class="synSpecial">)</span>
+	<span class="synSpecial">{</span>
+<span class="synSpecial">?&gt;</span>
+		<span class="synIdentifier">&lt;</span>section<span class="synIdentifier"> </span><span class="synType">class</span><span class="synIdentifier">=</span><span class="synConstant">&quot;hhblog-section&quot;</span><span class="synIdentifier">&gt;</span>
+			<span class="synIdentifier">&lt;</span><span class="synStatement">div</span><span class="synIdentifier"> </span><span class="synType">class</span><span class="synIdentifier">=</span><span class="synConstant">&quot;page-main&quot;</span><span class="synIdentifier">&gt;</span>
+				<span class="synIdentifier">&lt;</span><span class="synStatement">p</span><span class="synIdentifier">&gt;</span><span class="synSpecial">&lt;?php</span> <span class="synPreProc">echo</span> <span class="synStatement">$</span><span class="synIdentifier">a</span><span class="synSpecial">[</span>&quot;<span class="synConstant">html</span>&quot;<span class="synSpecial">]</span>; <span class="synSpecial">?&gt;</span><span class="synIdentifier">&lt;/</span><span class="synStatement">p</span><span class="synIdentifier">&gt;</span>
+			<span class="synIdentifier">&lt;/</span><span class="synStatement">div</span><span class="synIdentifier">&gt;</span>
+		<span class="synIdentifier">&lt;/</span>section<span class="synIdentifier">&gt;</span>
+<span class="synSpecial">&lt;?php</span>
+	<span class="synSpecial">}</span> <span class="synComment">/* end foreach($articles) */</span>
+	<span class="synStatement">unset</span><span class="synSpecial">(</span><span class="synStatement">$</span><span class="synIdentifier">articles</span><span class="synSpecial">)</span>;
+<span class="synSpecial">?&gt;</span>
+</pre><p>これらをサイトのトップページに表示させるために、ルーティングの設定も修正します。<br />
+サイトのトップにアクセスすると、キーワード・タイムラインが表示されます(1)。また <code><span data-unlink>http://{user-id}.sakura.ne.jp/hhblog/public_timeline</span></code> にアクセスするとパブリック・タイムラインが、<code><span data-unlink>http://{user-id}.sakura.ne.jp/hhblog/keyword_timeline</span></code> にアクセスするとキーワード・タイムラインが表示されるようにしました(2)。</p>
+<pre class="code lang-php" data-lang="php" data-unlink>ファイル：~/hhblog/fuel/app/config/routes.php
+<span class="synSpecial">&lt;?php</span>
+<span class="synStatement">return</span> <span class="synType">array</span><span class="synSpecial">(</span>
+<span class="synComment">//	'_root_'  =&gt; 'welcome/index',              // コメント化</span>
+	'<span class="synConstant">_root_</span>'  <span class="synStatement">=&gt;</span> '<span class="synConstant">hhblog/keyword_timeline</span>',    <span class="synComment">// 追加(1)</span>
+	'<span class="synConstant">_404_</span>'   <span class="synStatement">=&gt;</span> '<span class="synConstant">welcome/404</span>',
+	
+	'<span class="synConstant">(:segment)</span>' <span class="synStatement">=&gt;</span> '<span class="synConstant">hhblog/$1</span>',               <span class="synComment">// 追加(2)</span>
+	
+	'<span class="synConstant">hello(/:name)?</span>' <span class="synStatement">=&gt;</span> <span class="synType">array</span><span class="synSpecial">(</span>'<span class="synConstant">welcome/hello</span>', '<span class="synConstant">name</span>' <span class="synStatement">=&gt;</span> '<span class="synConstant">hello</span>'<span class="synSpecial">)</span>,
+<span class="synSpecial">)</span>;
+</pre>
+</div>
+<div class="section">
+    <h4>ViewModel！ViewModel！！</h4>
+    <p>では、最後にお待ちかねのビューモデルです。</p><p>まずはパブリック・タイムライン用のビューモデル。API 制限を考慮して、新しいデータは 30 分に 1 回だけ取得するようにして、それ以外はキャッシュからデータを取得します。API の実行は Model を呼び出すだけです。</p>
+<pre class="code lang-php" data-lang="php" data-unlink>ファイル：~/hhblog/fuel/app/classes/view/hhblog/article/public.php
+<span class="synSpecial">&lt;?php</span>
+
+<span class="synComment">/**</span>
+<span class="synComment"> * Hatena-Haiku Blog Public Timeline ViewModel.</span>
+<span class="synComment"> * </span>
+<span class="synComment"> * @package app</span>
+<span class="synComment"> * @extends ViewModel</span>
+<span class="synComment"> */</span>
+<span class="synType">class</span> View_Hhblog_Article_Public <span class="synType">extends</span> ViewModel
+<span class="synSpecial">{</span>
+
+	<span class="synComment">/**</span>
+<span class="synComment">	 * Get Hatena-Haiku Public Timeline.</span>
+<span class="synComment">	 * </span>
+<span class="synComment">	 * Data cache to make Access-control, </span>
+<span class="synComment">	 * and get data from cache in a time.</span>
+<span class="synComment">	 */</span>
+	<span class="synType">public</span> <span class="synPreProc">function</span> view<span class="synSpecial">()</span>
+	<span class="synSpecial">{</span>
+		<span class="synStatement">$</span><span class="synIdentifier">cache_id</span> <span class="synStatement">=</span> '<span class="synConstant">hhblog_public_timeline_json</span>';
+		
+		<span class="synStatement">try</span>
+		<span class="synSpecial">{</span>
+			<span class="synComment">// キャッシュにあればキャッシュから取得</span>
+			<span class="synStatement">$</span><span class="synIdentifier">json</span> <span class="synStatement">=</span> Cache<span class="synStatement">::</span>get<span class="synSpecial">(</span><span class="synStatement">$</span><span class="synIdentifier">cache_id</span><span class="synSpecial">)</span>;
+		<span class="synSpecial">}</span>
+		<span class="synStatement">catch</span> <span class="synSpecial">(</span>\CacheNotFoundException <span class="synStatement">$</span><span class="synIdentifier">e</span><span class="synSpecial">)</span>
+		<span class="synSpecial">{</span>
+			<span class="synComment">// タイムライン取得(json)</span>
+			<span class="synStatement">$</span><span class="synIdentifier">json</span> <span class="synStatement">=</span> Model_Api_Hatena_Haiku<span class="synStatement">::</span>getPublicTimeline<span class="synSpecial">()</span>;
+			
+			<span class="synComment">// キャッシュに保存（0.5時間）</span>
+			Cache<span class="synStatement">::</span>set<span class="synSpecial">(</span><span class="synStatement">$</span><span class="synIdentifier">cache_id</span>, <span class="synStatement">$</span><span class="synIdentifier">json</span>, <span class="synConstant">3600</span> <span class="synStatement">*</span> <span class="synConstant">0.5</span><span class="synSpecial">)</span>;
+		<span class="synSpecial">}</span>
+		
+		<span class="synComment">// jsonデータの配列化</span>
+		<span class="synStatement">$</span><span class="synIdentifier">articles</span> <span class="synStatement">=</span> Format<span class="synStatement">::</span>forge<span class="synSpecial">(</span><span class="synStatement">$</span><span class="synIdentifier">json</span>, '<span class="synConstant">json</span>'<span class="synSpecial">)</span><span class="synType">-&gt;</span>to_array<span class="synSpecial">()</span>;
+		
+		<span class="synComment">// Viewにセット</span>
+		<span class="synStatement">$</span><span class="synIdentifier">this</span><span class="synType">-&gt;</span>set<span class="synSpecial">(</span>'<span class="synConstant">articles</span>', <span class="synStatement">$</span><span class="synIdentifier">articles</span>, <span class="synConstant">false</span><span class="synSpecial">)</span>;
+
+	<span class="synSpecial">}</span>
+<span class="synSpecial">}</span>
+
+<span class="synComment">/* End of file public.php */</span>
+<span class="synComment">/* Location: app/classes/view/hhblog/article/public.php */</span>
+</pre><p>次にキーワード・タイムライン用のビューモデルです。パブリック・タイムラインと同じです。Model の実行時に引数にキーワードを渡しています。</p>
+<pre class="code lang-php" data-lang="php" data-unlink>ファイル：~/hhblog/fuel/app/classes/view/hhblog/article/keyword.php
+<span class="synSpecial">&lt;?php</span>
+
+<span class="synComment">/**</span>
+<span class="synComment"> * Hatena-Haiku Blog Keyword Timeline ViewModel.</span>
+<span class="synComment"> * </span>
+<span class="synComment"> * @package app</span>
+<span class="synComment"> * @extends ViewModel</span>
+<span class="synComment"> */</span>
+<span class="synType">class</span> View_Hhblog_Article_Keyword <span class="synType">extends</span> ViewModel
+<span class="synSpecial">{</span>
+
+	<span class="synComment">/**</span>
+<span class="synComment">	 * Get Hatena-Haiku keyword timeline.</span>
+<span class="synComment">	 * </span>
+<span class="synComment">	 * Data cache to make Access-control, </span>
+<span class="synComment">	 * and get data from cache in a time.</span>
+<span class="synComment">	 */</span>
+	<span class="synType">public</span> <span class="synPreProc">function</span> view<span class="synSpecial">()</span>
+	<span class="synSpecial">{</span>
+		<span class="synStatement">$</span><span class="synIdentifier">cache_id</span> <span class="synStatement">=</span> '<span class="synConstant">hhblog_keyword_timeline_json</span>';
+		
+		<span class="synStatement">try</span>
+		<span class="synSpecial">{</span>
+			<span class="synComment">// キャッシュにあればキャッシュから取得</span>
+			<span class="synStatement">$</span><span class="synIdentifier">json</span> <span class="synStatement">=</span> Cache<span class="synStatement">::</span>get<span class="synSpecial">(</span><span class="synStatement">$</span><span class="synIdentifier">cache_id</span><span class="synSpecial">)</span>;
+		<span class="synSpecial">}</span>
+		<span class="synStatement">catch</span> <span class="synSpecial">(</span>\CacheNotFoundException <span class="synStatement">$</span><span class="synIdentifier">e</span><span class="synSpecial">)</span>
+		<span class="synSpecial">{</span>
+			<span class="synComment">// タイムライン取得(json)</span>
+			<span class="synStatement">$</span><span class="synIdentifier">json</span> <span class="synStatement">=</span> Model_Api_Hatena_Haiku<span class="synStatement">::</span>getKeywordTimeline<span class="synSpecial">(</span><span class="synStatement">$</span><span class="synIdentifier">this</span><span class="synType">-&gt;</span>keyword<span class="synSpecial">)</span>;
+			
+			<span class="synComment">// キャッシュに保存（0.5時間）</span>
+			Cache<span class="synStatement">::</span>set<span class="synSpecial">(</span><span class="synStatement">$</span><span class="synIdentifier">cache_id</span>, <span class="synStatement">$</span><span class="synIdentifier">json</span>, <span class="synConstant">3600</span> <span class="synStatement">*</span> <span class="synConstant">0.5</span><span class="synSpecial">)</span>;
+		<span class="synSpecial">}</span>
+		
+		<span class="synComment">// jsonデータの配列化</span>
+		<span class="synStatement">$</span><span class="synIdentifier">articles</span> <span class="synStatement">=</span> Format<span class="synStatement">::</span>forge<span class="synSpecial">(</span><span class="synStatement">$</span><span class="synIdentifier">json</span>, '<span class="synConstant">json</span>'<span class="synSpecial">)</span><span class="synType">-&gt;</span>to_array<span class="synSpecial">()</span>;
+		
+		<span class="synComment">// Viewにセット</span>
+		<span class="synStatement">$</span><span class="synIdentifier">this</span><span class="synType">-&gt;</span>set<span class="synSpecial">(</span>'<span class="synConstant">articles</span>', <span class="synStatement">$</span><span class="synIdentifier">articles</span>, <span class="synConstant">false</span><span class="synSpecial">)</span>;
+
+	<span class="synSpecial">}</span>
+<span class="synSpecial">}</span>
+
+<span class="synComment">/* End of file keyword.php */</span>
+<span class="synComment">/* Location: app/classes/view/hhblog/article/keyword.php */</span>
+</pre><p>ここまで内容が一緒だと、あまり分けた意味がなさそうですが、応用編では表示内容を整形するという ViewModel 本来の処理を組み込んでいくのでこんな感じかな、と思います。</p><p>ちなみに応用編の記事はありません（笑）</p><p>取得したタイムラインのデータを View にセットする際に false を指定しています。</p>
+
+<ul>
+<li><code>$this->set('articles', $articles, false);</code></li>
+</ul><p>これは API の応答結果より HTML でマークアップ済みのハイク記事本文（key='html'）を、そのまま表示に利用しているためです。</p><p></p>
+
+</div>
+</div>
+<div class="section">
+    <h3>4. 公開環境で動かそう</h3>
+    <p>実装が完了して、テストが出来たら（苦笑）、用意してあったレンサバのフレームワーク上に変更分をアップロードします。<br />
+<code><span data-unlink>http://{user-id}.sakura.ne.jp/hhblog</span></code> や <code><span data-unlink>http://{user-id}.sakura.ne.jp/hhblog/public_timeline</span></code> にアクセスして、はてなハイクブログを表示してみましょう！</p><p>ちなみに自分で作成したものは以下で動いています。</p>
+
+<ul>
+<li><a href="http://ytmd.sakura.ne.jp/hhblog/">tmd45 &#x306E;&#x306F;&#x3066;&#x306A;&#x30CF;&#x30A4;&#x30AF;&#x30D6;&#x30ED;&#x30B0;</a></li>
+</ul><p><span itemscope itemtype="http://schema.org/Photograph"><img src="http://cdn-ak.f.st-hatena.com/images/fotolife/t/tmd45/20121214/20121214190855.png" alt="f:id:tmd45:20121214190855p:plain" title="f:id:tmd45:20121214190855p:plain" class="hatena-fotolife" itemprop="image"></span></p><p>見た目は <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap</a> と <a href="http://bootswatch.com/">Bootswatch</a> 様様です。タイムライン部分以外は、ブログっぽ～く見えるように適当に捏造しています。</p>
+
+</div>
+<div class="section">
+    <h3>まとめ</h3>
+    <p>いかがでしたでしょうか。コードを載せているのでだいぶ記事が長くなってしまいました。準備から実装まで通して記事にできたので自分の復習用には良かったと思うのですが、Advent Calendar としてどうなんでしょう（苦笑）</p><br />
+<p>明日は @<a class="twitter-user-screen-name" href="http://twitter.com/ttikitt">ttikitt</a> さんの『(仮)FuelPHPへのDoctrine2組み込み』です！('ω`)ｼ</p>
+
+</div>
+    </div>
+    <footer class="entry-footer">
+      <p class="entry-footer-section">
+        
+        <span class="author vcard"><span class="fn">tmd45</span></span>
+        <span class="entry-footer-time"><a href="/entry/2012/12/18/101053"><time data-relative datetime="2012-12-18T01:10:53Z" title="2012-12-18T01:10:53Z" pubdate class="updated">2012-12-18 10:10</time></a></span>
+        <div class="hatena-star-container">
+        </div>
+      </p>
+
+      
+
+      
+      <div class="social-buttons">
+        
+        
+        <a href="http://b.hatena.ne.jp/entry/http://tech.tmd45.in/entry/2012/12/18/101053" class="hatena-bookmark-button" data-hatena-bookmark-layout="standard" title="この記事をはてなブックマークに追加"><img src="http://b.st-hatena.com/images/entry-button/button-only.gif" alt="この記事をはてなブックマークに追加" width="20" height="20" style="border: none;" /></a>
+        
+        
+        <iframe src="http://www.facebook.com/plugins/like.php?href=http%3A%2F%2Ftech.tmd45.in%2Fentry%2F2012%2F12%2F18%2F101053&amp;layout=button_count&amp;show_faces=false&amp;width=100&amp;action=like&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:100px; height:21px;" allowTransparency="true"></iframe>
+        
+        
+        <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://tech.tmd45.in/entry/2012/12/18/101053" data-count="horizontal">Tweet</a>
+        
+        
+        <g:plusone size="medium" href="http://tech.tmd45.in/entry/2012/12/18/101053"></g:plusone>
+        
+      </div>
+      
+      
+
+      
+      <div class="entry-footer-html"></div>
+      
+
+      <div class="comment-box">
+        <ul class="comment">
+        </ul>
+        <a class="leave-comment-title">コメントを書く</a>
+      </div>
+    </footer>
+  </div>
+</article>
+
+                
+
+                
+                  <div class="permalink pager">
+                    
+                    
+                      <span class="pager-prev">
+                        <a href="/entry/2012/11/16/141937">前の記事</a>
+                      </span>
+                    
+                  </div>
+                
+
+              
+            
+            <!-- google_ad_section_end -->
+
+            
+          
+        </div>
+      </div>
+
+      
+      <aside id="box1">
+        <div id="box1-inner">
+        </div>
+      </aside>
+
+    </div><!-- #wrapper -->
+
+    <aside id="box2">
+      <div id="box2-inner">
+        
+          
+
+<div class="hatena-module hatena-module-profile">
+  <div class="hatena-module-title">
+    プロフィール
+  </div>
+  <div class="hatena-module-body">
+    
+    <img src="http://cdn1.www.st-hatena.com/users/tm/tmd45/profile.gif"
+      alt="id:tmd45" class="profile-icon" />
+    
+
+    
+    <span class="id">
+      <a href="/about">id:tmd45</a>
+      
+  
+    
+    <a href="http://blog.hatena.ne.jp/guide/pro" title="はてなブログPro"><i class="icon-pro" /></i></a>
+  
+
+
+    </span>
+    
+
+    
+    <div class="profile-description">
+      <p><ul><br />
+<li><strong>Yoko TAMADA</strong></li></p><p><li><a href="http://tmd45.in">tmd45.in</a>｜<a href="https://github.com/tmd45">github</a>｜<a href="http://coderwall.com/tmd45">coderwall</a></li></p><p><li>お仕事は Java エンジニア、名刺の肩書きは一応 SE ってことになってます。職場の効果音役ですよ。</li></p><p><li>I<span style="color:deeppink;">★</span></span>Love はてなスター</li></p><p><li><a href="http://coderwall.com/tmd45"><img alt="Endorse tmd45 on Coderwall" src="http://api.coderwall.com/tmd45/endorsecount.png" /></a></li><br />
+</ul></p>
+
+    </div>
+    
+    
+    
+    <div class="hatena-follow-button-box btn-subscribe">
+      <a href="#" class="hatena-follow-button">
+        <span class="subscribing">
+          <span class="foreground">購読中です</span>
+          <span class="background">読者をやめる</span>
+        </span>
+        <span class="unsubscribing">
+          <span class="foreground">読者になる</span>
+          <span class="background">読者になる</span>
+        </span>
+      </a>
+      <div class="subscription-count-box">
+        <span class="subscription-balloon">
+        </span>
+        <span class="subscription-count">
+        </span>
+      </div>
+    </div>
+    
+
+    
+
+    
+
+    
+  </div>
+</div>
+
+        
+          
+
+<div class="hatena-module hatena-module-recent-entries">
+  <div class="hatena-module-title">
+    <a href="http://tech.tmd45.in/archive">
+      最新記事
+    </a>
+  </div>
+  <div class="hatena-module-body">
+    <ul>
+      
+        <li>
+          <a href="/entry/2012/12/18/101053">さくらのレンタルサーバで FuelPHP を使ってはてなハイクブログを作る－ViewModel を使ってみる編 #FuelPHPAdvent2012</a>
+        </li>
+      
+        <li>
+          <a href="/entry/2012/11/16/141937">2012 Advent Calendar はじまりますね！</a>
+        </li>
+      
+        <li>
+          <a href="/entry/2012/11/07/191205">Eclipse（Preiades） 3.7 で Android Develper Tools（ADT） Plugin が読み込まれない問題</a>
+        </li>
+      
+        <li>
+          <a href="/entry/2012/11/06/175428">Android SDK Manager の proxy 設定</a>
+        </li>
+      
+        <li>
+          <a href="/entry/2012/11/06/152554">スマフォアプリ作成メモ</a>
+        </li>
+      
+        <li>
+          <a href="/entry/2012/11/02/100900">Microsoft Outlook 2007 が入っている PC に後から Outlook 2003 を入れるのは NG</a>
+        </li>
+      
+        <li>
+          <a href="/entry/2012/10/18/210941">小規模開発には git-flow よりも GitHub Flow で捗る</a>
+        </li>
+      
+        <li>
+          <a href="/entry/2012/10/03/140219">.gitconfig に include で設定を読み込めるようになった</a>
+        </li>
+      
+        <li>
+          <a href="/entry/2012/09/26/125833">［勉強会PAPER］FuelPHP勉強会 東京 Vol.2 で発表してきますた #FuelPHPTokyo</a>
+        </li>
+      
+        <li>
+          <a href="/entry/2012/08/10/190341">Windows 標準コマンドを使ってファイルサイズを指定してテキストファイルを分割する（不完全版）</a>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+        
+          
+
+<div class="hatena-module hatena-module-category">
+  <div class="hatena-module-title">
+    カテゴリークラウド
+  </div>
+  <div class="hatena-module-body">
+    <ul>
+      
+        <li>
+          <a href="http://tech.tmd45.in/archive/category/%E3%81%AF%E3%81%A6%E3%81%AA%E3%83%8F%E3%82%A4%E3%82%AF">
+            はてなハイク (1)
+          </a>
+        </li>
+      
+        <li>
+          <a href="http://tech.tmd45.in/archive/category/Advent%20Calendar">
+            Advent Calendar (1)
+          </a>
+        </li>
+      
+        <li>
+          <a href="http://tech.tmd45.in/archive/category/FuelPHP">
+            FuelPHP (3)
+          </a>
+        </li>
+      
+        <li>
+          <a href="http://tech.tmd45.in/archive/category/%E3%81%95%E3%81%8F%E3%82%89%E3%81%AE%E3%83%AC%E3%83%B3%E3%82%BF%E3%83%AB%E3%82%B5%E3%83%BC%E3%83%90">
+            さくらのレンタルサーバ (2)
+          </a>
+        </li>
+      
+        <li>
+          <a href="http://tech.tmd45.in/archive/category/Tips">
+            Tips (4)
+          </a>
+        </li>
+      
+        <li>
+          <a href="http://tech.tmd45.in/archive/category/ini">
+            ini (1)
+          </a>
+        </li>
+      
+        <li>
+          <a href="http://tech.tmd45.in/archive/category/Pleiades">
+            Pleiades (2)
+          </a>
+        </li>
+      
+        <li>
+          <a href="http://tech.tmd45.in/archive/category/Android">
+            Android (3)
+          </a>
+        </li>
+      
+        <li>
+          <a href="http://tech.tmd45.in/archive/category/ADT">
+            ADT (1)
+          </a>
+        </li>
+      
+        <li>
+          <a href="http://tech.tmd45.in/archive/category/Eclipse">
+            Eclipse (4)
+          </a>
+        </li>
+      
+        <li>
+          <a href="http://tech.tmd45.in/archive/category/Android%20SDK">
+            Android SDK (1)
+          </a>
+        </li>
+      
+        <li>
+          <a href="http://tech.tmd45.in/archive/category/%E3%83%A1%E3%83%A2">
+            メモ (1)
+          </a>
+        </li>
+      
+        <li>
+          <a href="http://tech.tmd45.in/archive/category/SmartPhone">
+            SmartPhone (1)
+          </a>
+        </li>
+      
+        <li>
+          <a href="http://tech.tmd45.in/archive/category/iPhone">
+            iPhone (1)
+          </a>
+        </li>
+      
+        <li>
+          <a href="http://tech.tmd45.in/archive/category/%E9%96%8B%E7%99%BA%E7%92%B0%E5%A2%83">
+            開発環境 (8)
+          </a>
+        </li>
+      
+        <li>
+          <a href="http://tech.tmd45.in/archive/category/Outlook">
+            Outlook (1)
+          </a>
+        </li>
+      
+        <li>
+          <a href="http://tech.tmd45.in/archive/category/office">
+            office (1)
+          </a>
+        </li>
+      
+        <li>
+          <a href="http://tech.tmd45.in/archive/category/Microsoft">
+            Microsoft (1)
+          </a>
+        </li>
+      
+        <li>
+          <a href="http://tech.tmd45.in/archive/category/%E3%82%BD%E3%83%95%E3%83%88%E3%82%A6%E3%82%A7%E3%82%A2%E9%96%8B%E7%99%BA">
+            ソフトウェア開発 (1)
+          </a>
+        </li>
+      
+        <li>
+          <a href="http://tech.tmd45.in/archive/category/%E3%83%AF%E3%83%BC%E3%82%AF%E3%83%95%E3%83%AD%E3%83%BC">
+            ワークフロー (1)
+          </a>
+        </li>
+      
+        <li>
+          <a href="http://tech.tmd45.in/archive/category/GitHub%20Flow">
+            GitHub Flow (1)
+          </a>
+        </li>
+      
+        <li>
+          <a href="http://tech.tmd45.in/archive/category/github">
+            github (1)
+          </a>
+        </li>
+      
+        <li>
+          <a href="http://tech.tmd45.in/archive/category/git">
+            git (2)
+          </a>
+        </li>
+      
+        <li>
+          <a href="http://tech.tmd45.in/archive/category/gitconfig">
+            gitconfig (1)
+          </a>
+        </li>
+      
+        <li>
+          <a href="http://tech.tmd45.in/archive/category/PHP">
+            PHP (4)
+          </a>
+        </li>
+      
+        <li>
+          <a href="http://tech.tmd45.in/archive/category/%E3%83%95%E3%83%AC%E3%83%BC%E3%83%A0%E3%83%AF%E3%83%BC%E3%82%AF">
+            フレームワーク (2)
+          </a>
+        </li>
+      
+        <li>
+          <a href="http://tech.tmd45.in/archive/category/%E5%8B%89%E5%BC%B7%E4%BC%9A">
+            勉強会 (2)
+          </a>
+        </li>
+      
+        <li>
+          <a href="http://tech.tmd45.in/archive/category/%E3%83%AC%E3%83%9D%E3%83%BC%E3%83%88">
+            レポート (3)
+          </a>
+        </li>
+      
+        <li>
+          <a href="http://tech.tmd45.in/archive/category/%E3%81%AF%E3%81%A6%E3%81%AA%E3%83%96%E3%83%AD%E3%82%B0">
+            はてなブログ (3)
+          </a>
+        </li>
+      
+        <li>
+          <a href="http://tech.tmd45.in/archive/category/Java">
+            Java (5)
+          </a>
+        </li>
+      
+        <li>
+          <a href="http://tech.tmd45.in/archive/category/command">
+            command (1)
+          </a>
+        </li>
+      
+        <li>
+          <a href="http://tech.tmd45.in/archive/category/Windows">
+            Windows (1)
+          </a>
+        </li>
+      
+        <li>
+          <a href="http://tech.tmd45.in/archive/category/%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E6%93%8D%E4%BD%9C">
+            ファイル操作 (1)
+          </a>
+        </li>
+      
+        <li>
+          <a href="http://tech.tmd45.in/archive/category/%E3%82%AB%E3%83%B3%E3%83%95%E3%82%A1%E3%83%AC%E3%83%B3%E3%82%B9">
+            カンファレンス (1)
+          </a>
+        </li>
+      
+        <li>
+          <a href="http://tech.tmd45.in/archive/category/lldecade">
+            lldecade (1)
+          </a>
+        </li>
+      
+        <li>
+          <a href="http://tech.tmd45.in/archive/category/LightweightLanguage">
+            LightweightLanguage (1)
+          </a>
+        </li>
+      
+        <li>
+          <a href="http://tech.tmd45.in/archive/category/PDT">
+            PDT (1)
+          </a>
+        </li>
+      
+        <li>
+          <a href="http://tech.tmd45.in/archive/category/%E7%A7%BB%E8%A1%8C">
+            移行 (1)
+          </a>
+        </li>
+      
+        <li>
+          <a href="http://tech.tmd45.in/archive/category/Homebrew">
+            Homebrew (1)
+          </a>
+        </li>
+      
+        <li>
+          <a href="http://tech.tmd45.in/archive/category/MacBook%20Air">
+            MacBook Air (2)
+          </a>
+        </li>
+      
+        <li>
+          <a href="http://tech.tmd45.in/archive/category/Mac">
+            Mac (2)
+          </a>
+        </li>
+      
+        <li>
+          <a href="http://tech.tmd45.in/archive/category/Mac%20OS%20X%20Lion">
+            Mac OS X Lion (2)
+          </a>
+        </li>
+      
+        <li>
+          <a href="http://tech.tmd45.in/archive/category/MacPorts">
+            MacPorts (1)
+          </a>
+        </li>
+      
+        <li>
+          <a href="http://tech.tmd45.in/archive/category/IDE">
+            IDE (3)
+          </a>
+        </li>
+      
+        <li>
+          <a href="http://tech.tmd45.in/archive/category/Tomcat">
+            Tomcat (2)
+          </a>
+        </li>
+      
+        <li>
+          <a href="http://tech.tmd45.in/archive/category/proxy">
+            proxy (1)
+          </a>
+        </li>
+      
+        <li>
+          <a href="http://tech.tmd45.in/archive/category/Servlet">
+            Servlet (1)
+          </a>
+        </li>
+      
+        <li>
+          <a href="http://tech.tmd45.in/archive/category/Illustrator">
+            Illustrator (1)
+          </a>
+        </li>
+      
+        <li>
+          <a href="http://tech.tmd45.in/archive/category/Adobe">
+            Adobe (1)
+          </a>
+        </li>
+      
+        <li>
+          <a href="http://tech.tmd45.in/archive/category/%E6%96%87%E5%AD%97%E5%88%97%E5%88%86%E5%89%B2">
+            文字列分割 (1)
+          </a>
+        </li>
+      
+        <li>
+          <a href="http://tech.tmd45.in/archive/category/HTML">
+            HTML (2)
+          </a>
+        </li>
+      
+        <li>
+          <a href="http://tech.tmd45.in/archive/category/%E3%82%AC%E3%83%A9%E3%82%B1%E3%83%BC">
+            ガラケー (1)
+          </a>
+        </li>
+      
+        <li>
+          <a href="http://tech.tmd45.in/archive/category/%E6%90%BA%E5%B8%AF%E9%9B%BB%E8%A9%B1">
+            携帯電話 (1)
+          </a>
+        </li>
+      
+        <li>
+          <a href="http://tech.tmd45.in/archive/category/%E6%90%BA%E5%B8%AF%E4%BB%95%E6%A7%98">
+            携帯仕様 (1)
+          </a>
+        </li>
+      
+        <li>
+          <a href="http://tech.tmd45.in/archive/category/mongolab">
+            mongolab (1)
+          </a>
+        </li>
+      
+        <li>
+          <a href="http://tech.tmd45.in/archive/category/MongoDB">
+            MongoDB (1)
+          </a>
+        </li>
+      
+        <li>
+          <a href="http://tech.tmd45.in/archive/category/phpfog">
+            phpfog (1)
+          </a>
+        </li>
+      
+        <li>
+          <a href="http://tech.tmd45.in/archive/category/jQuery">
+            jQuery (1)
+          </a>
+        </li>
+      
+        <li>
+          <a href="http://tech.tmd45.in/archive/category/JavaScript">
+            JavaScript (1)
+          </a>
+        </li>
+      
+        <li>
+          <a href="http://tech.tmd45.in/archive/category/Apache">
+            Apache (1)
+          </a>
+        </li>
+      
+        <li>
+          <a href="http://tech.tmd45.in/archive/category/VirtualHost">
+            VirtualHost (1)
+          </a>
+        </li>
+      
+        <li>
+          <a href="http://tech.tmd45.in/archive/category/XAMPP">
+            XAMPP (1)
+          </a>
+        </li>
+      
+        <li>
+          <a href="http://tech.tmd45.in/archive/category/checkbox">
+            checkbox (1)
+          </a>
+        </li>
+      
+        <li>
+          <a href="http://tech.tmd45.in/archive/category/Struts">
+            Struts (1)
+          </a>
+        </li>
+      
+        <li>
+          <a href="http://tech.tmd45.in/archive/category/form">
+            form (1)
+          </a>
+        </li>
+      
+        <li>
+          <a href="http://tech.tmd45.in/archive/category/%E6%AD%A3%E8%A6%8F%E8%A1%A8%E7%8F%BE">
+            正規表現 (1)
+          </a>
+        </li>
+      
+        <li>
+          <a href="http://tech.tmd45.in/archive/category/%E6%96%87%E5%AD%97%E5%88%97%E7%BD%AE%E6%8F%9B">
+            文字列置換 (1)
+          </a>
+        </li>
+      
+        <li>
+          <a href="http://tech.tmd45.in/archive/category/CSS">
+            CSS (1)
+          </a>
+        </li>
+      
+        <li>
+          <a href="http://tech.tmd45.in/archive/category/logrotate">
+            logrotate (1)
+          </a>
+        </li>
+      
+        <li>
+          <a href="http://tech.tmd45.in/archive/category/NUL%E6%96%87%E5%AD%97">
+            NUL文字 (1)
+          </a>
+        </li>
+      
+        <li>
+          <a href="http://tech.tmd45.in/archive/category/copytruncate">
+            copytruncate (1)
+          </a>
+        </li>
+      
+        <li>
+          <a href="http://tech.tmd45.in/archive/category/logadm">
+            logadm (1)
+          </a>
+        </li>
+      
+        <li>
+          <a href="http://tech.tmd45.in/archive/category/%E3%83%95%E3%82%A9%E3%83%B3%E3%83%88">
+            フォント (1)
+          </a>
+        </li>
+      
+        <li>
+          <a href="http://tech.tmd45.in/archive/category/%E3%81%8A%E5%90%8D%E5%89%8D.com">
+            お名前.com (1)
+          </a>
+        </li>
+      
+        <li>
+          <a href="http://tech.tmd45.in/archive/category/%E3%83%89%E3%83%A1%E3%82%A4%E3%83%B3">
+            ドメイン (1)
+          </a>
+        </li>
+      
+        <li>
+          <a href="http://tech.tmd45.in/archive/category/Chrome">
+            Chrome (1)
+          </a>
+        </li>
+      
+        <li>
+          <a href="http://tech.tmd45.in/archive/category/%E3%83%96%E3%83%A9%E3%82%A6%E3%82%B6">
+            ブラウザ (1)
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+        
+          
+
+<div class="hatena-module hatena-module-html">
+  
+  <div class="hatena-module-body">
+    <p style="line-height:1.3em;">※上記のような<a href="http://tech.tmd45.in/entry/2012/04/03/170348">はてなブログでのタグクラウド表示</a>の方法を紹介しています。</p>
+<p style="line-height:1.3em;">※上記のカテゴリークラウドは、新しい記事を含むほど上部に、記事数が多いほど大きな文字で表示されます。</p>
+  </div>
+</div>
+
+        
+          
+
+<div class="hatena-module hatena-module-archive">
+  <div class="hatena-module-title">
+    アーカイブ
+  </div>
+  <div class="hatena-module-body">
+  </div>
+</div>
+
+        
+          <div class="hatena-module hatena-module-search-box">
+  <div class="hatena-module-title">
+    検索
+  </div>
+  <div class="hatena-module-body">
+    <form class="search-form" role="search" action="/search" method="get">
+      <input type="text" name="q" class="search-module-input" value="" placeholder="Search">
+      <input type="submit" alt="検索" class="search-module-button" />
+    </form>
+  </div>
+</div>
+
+        
+          
+
+<div class="hatena-module hatena-module-html">
+  
+    <div class="hatena-module-title">旧ブログエントリー</div>
+  
+  <div class="hatena-module-body">
+    <script language="javascript" type="text/javascript" src="http://b.hatena.ne.jp/js/widget.js" charset="utf-8"></script>
+<script language="javascript" type="text/javascript">
+Hatena.BookmarkWidget.url   = "http://d.hatena.ne.jp/tmd45/";
+Hatena.BookmarkWidget.title = "";
+Hatena.BookmarkWidget.sort  = "count";
+Hatena.BookmarkWidget.width = 0;
+Hatena.BookmarkWidget.num   = 10;
+Hatena.BookmarkWidget.theme = "hatenadiary";
+Hatena.BookmarkWidget.load();
+</script>
+  </div>
+</div>
+
+        
+          <div class="hatena-module hatena-module-links">
+  <div class="hatena-module-title">
+    リンク
+  </div>
+  <div class="hatena-module-body">
+    <ul class="hatena-urllist">
+      
+        
+          <li>
+            <a href="http://github.com/">github</a>
+          </li>
+        
+          <li>
+            <a href="http://bitbucket.org/">bitbucket</a>
+          </li>
+        
+          <li>
+            <a href="http://rackhub.net/">rackhub</a>
+          </li>
+        
+          <li>
+            <a href="http://wiki.fuelphp1st.com/wiki/">FuelPHP まとめ Wiki</a>
+          </li>
+        
+          <li>
+            <a href="http://qiita.com/">Qiita</a>
+          </li>
+        
+      
+    </ul>
+  </div>
+</div>
+
+        
+          
+
+<div class="hatena-module hatena-module-html">
+  
+    <div class="hatena-module-title">イベント</div>
+  
+  <div class="hatena-module-body">
+    <a href='http://ll.jus.or.jp/2012/' title='Lightweight Language Decade'><img src='http://ll.jus.or.jp/2012/wp-content/themes/skeleton/images/logobar-l1.gif' alt='Lightweight Language Decade' /></a><br />
+<a href='http://www.ospn.jp/osc2012-fall/' title='2012/09/07-08 オープンソースカンファレンス2012 Tokyo/Fall'><img src='http://www.ospn.jp/bn/OSC2012.gif' alt='2012/09/07-08 オープンソースカンファレンス2012' /></a><br />
+<a href='http://phpcon.php.gr.jp/w/2012/' title='2012/09/15 PHPカンファレンス2012'><img src='http://phpcon.php.gr.jp/w/2012/files/2012/07/ele1-960x360.jpg' alt='2012/09/15 PHPカンファレンス2012' /></a><br />
+  </div>
+</div>
+
+        
+          
+
+<div class="hatena-module hatena-module-html">
+  
+  <div class="hatena-module-body">
+    <!--Social Icon ブログパーツ//-->
+<div style="text-align: center; position: fixed; top: 90px; z-index: 6000; cursor: pointer; left: 0px; width: 38px; display: inline-block; line-height: 0; border: 1px solid #660000;"><div style="display: inline-block; padding: 4px 3px; ; background: #990000 url(http://crmll.com/ui/images/design02.png) repeat; text-align: center;"><a href="http://www.facebook.com/tmd45" target="_blank"><img src="http://crmll.com/i/32px/facebook.png" alt="facebook" border="0" style="display:block; padding: 1px 0" width="32px" height="32px" /></a><br /><a href="http://twitter.com/#!/tmd45" target="_blank"><img src="http://crmll.com/i/32px/twitter.png" alt="twitter" border="0" style="display:block; padding: 1px 0" width="32px" height="32px" /></a><br /><a href="http://tech.tmd45.in/feed" target="_blank"><img src="http://crmll.com/i/32px/rss.png" alt="rss" border="0" style="display:block; padding: 1px 0" width="32px" height="32px" /></a><br /><div style="text-align: center"><a href="http://crmll.com" target="_blank"><img src="http://crmll.com/ui/images/credit.png" border="0" alt="Social Icon ブログパーツ" width="15" height="15" /></a></div></div></div>
+<!--//Social Icon ブログパーツ-->
+  </div>
+</div>
+
+        
+          
+
+<div class="hatena-module hatena-module-html">
+  
+  <div class="hatena-module-body">
+    <div class="pagetop"><a href="javascript:scrollTo(0,0)" style="text-decoration:none;">↑ページトップへ移動</a></div>
+  </div>
+</div>
+
+        
+          
+
+<div class="hatena-module hatena-module-html">
+  
+  <div class="hatena-module-body">
+    <script>
+// タグクラウドもどき
+$(function() {
+	var categories = $(".hatena-module-category ul li a");
+	$.each(
+		categories,
+		function(index, domEle) {
+			var ele = $(domEle);
+			var texts = $.trim(ele.text());
+			// リンクテキストから記事件数を取得
+			var count1 = texts.match(/\([^\(\s +]+\)/);
+			var count2 = count1[0].match(/\d+/);
+			// 大きさ指定 Start
+			if(count2 >= 10) ele.css("font-size", "250%");
+			else if(count2 >= 5) ele.css("font-size", "200%");
+			else if(count2 >= 3) ele.css("font-size", "150%");
+			else if(count2 >= 2) ele.css("font-size", "120%");
+			else ele.css("font-size", "90%");
+			// 大きさ指定 End
+			// リンクテキストから記事件数を除去
+			ele.text(texts.replace(/\([^\(\s +]+\)/, ''));
+			// ツールチップに記事件数含めて表示する（title要素）
+			ele.attr("title", texts);
+		}
+	);
+});
+</script>
+  </div>
+</div>
+
+        
+      </div>
+    </aside>
+
+  </div>
+</div>
+
+
+
+
+
+
+        <div id="bottom-editarea">
+          
+        </div>
+      </div>
+    </div>
+
+    <footer id="footer">
+      <div id="footer-inner">
+        <address>
+          
+          <a href="/about"><img src="http://cdn1.www.st-hatena.com/users/tm/tmd45/profile.gif" width="16" height="16" alt=""/> tmd45</a>
+        </address>
+        <p class="services"><a href="http://hatenablog.com/">Hatena Blog</a> / <a href="http://d.hatena.ne.jp/">Hatena::Diary</a></p>
+      </div>
+    </footer>
+
+    
+  <script id="hatena-counter-script" type="text/javascript"><!--
+      hatena_counter_name = "tmd45";
+      hatena_counter_id = "103";
+      hatena_counter_ref = document.referrer+"";
+      hatena_counter_screen = screen.width + "x" + screen.height+","+screen.colorDepth;
+  //--></script>
+  <script type="text/javascript" src="http://counter.hatena.ne.jp/js/counter.js"></script>
+  <noscript><img src="http://counter.hatena.ne.jp/tmd45/103" border="0" alt="counter"></noscript>
+
+
+  </body>
+</html>
+
+
