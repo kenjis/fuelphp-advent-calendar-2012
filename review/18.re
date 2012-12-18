@@ -5,7 +5,7 @@
 この記事は @<href>{http://atnd.org/events/33753,FuelPHP Advent Calendar 2012} の 18 日目の記事です。昨日は @@<href>{http://twitter.com/ootatter,ootatter} さんによる「FuelPHPで既存DBをあつかうとか」でした。@<br>{}
 
 
-本日の担当は、毎年クリスマスには仕事で問題が起こりクルシミマス恒例になりつつあります、@@<href>{http://twitter.com/tmd45,tmd45} です。
+本日の担当は、毎年クリスマスには仕事で問題が起こりクルシミマス恒例になりつつあります、@@<href>{https://twitter.com/tmd45,tmd45} です。
 
 
 FuelPHP 標準のサーバキャッシュと「@<href>{http://developer.hatena.ne.jp/ja/documents/haiku/apis/rest,はてなハイクAPI}」、ViewModel を利用したブログのようなものを作ってみましたので、その全貌を公開したいと思います。
@@ -77,7 +77,7 @@ FuelPHP 標準のサーバキャッシュと「@<href>{http://developer.hatena.n
   |  `-- index.php
   |-- oil
   |-- README.md
-  `-- ...
+  `-- …
 //}
 
 
@@ -175,7 +175,7 @@ $HOME/www/hhblog
     |    |    |-- /config
     |    |    |-- /logs
     |    |    |-- /tmp
-    ...
+    …
 //}
 
 
@@ -396,7 +396,7 @@ $HOME/www/hhblog
     |    |    |    |    |    |-- keyword.php    (1)
     |    |    |    |    |    `-- public.php     (2)
     |    |    |    |    `-- template.php
-    ・・・
+    …
 //}
 
 
@@ -691,7 +691,7 @@ class View_Hhblog_Article_Keyword extends ViewModel
 いかがでしたでしょうか。コードを載せているのでだいぶ記事が長くなってしまいました。準備から実装まで通して記事にできたので自分の復習用には良かったと思うのですが、Advent Calendar としてどうなんでしょう(苦笑)@<br>{}
 
 
-明日は @@<href>{http://twitter.com/ttikitt,ttikitt} さんの『(仮)FuelPHPへのDoctrine2組み込み』です！('ω`)シ
+明日は @@<href>{https://twitter.com/ttikitt,ttikitt} さんの『(仮)FuelPHPへのDoctrine2組み込み』です！('ω`)シ
 
 //quote{
 @<strong>{@tmd45}
