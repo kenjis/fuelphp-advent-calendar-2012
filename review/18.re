@@ -1,8 +1,8 @@
 
-= さくらのレンタルサーバで FuelPHP を使ってはてなハイクブログを作る－ViewModel を使ってみる編
+= さくらのレンタルサーバでFuelPHPを使ってはてなハイクブログを作る－ViewModelを使ってみる編 @<href>{https://twitter.com/tmd45,@tmd45}
 
 
-この記事は @<href>{http://atnd.org/events/33753,FuelPHP Advent Calendar 2012} の 18 日目の記事です。昨日は @@<href>{http://twitter.com/ootatter,ootatter} さんによる『@<href>{http://blog.milds.net/2012/12/fuelphpdb.html,fuelphpで既存DBをあつかうとか}』でした。
+この記事は @<href>{http://atnd.org/events/33753,FuelPHP Advent Calendar 2012} の 18 日目の記事です。昨日は @@<href>{http://twitter.com/ootatter,ootatter} さんによる「FuelPHPで既存DBをあつかうとか」でした。@<br>{}
 
 
 本日の担当は、毎年クリスマスには仕事で問題が起こりクルシミマス恒例になりつつあります、@@<href>{http://twitter.com/tmd45,tmd45} です。
@@ -19,7 +19,7 @@ FuelPHP 標準のサーバキャッシュと「@<href>{http://developer.hatena.n
 などを行っています。
 
 
-長いですが、マイナーな組み合わせすぎて需要が無いことをひそかに期待してます(笑)。@<br>{}
+長いですが、マイナーな組み合わせすぎて需要が無いことをひそかに期待してます(笑)@<br>{}
  なお、使う人がいらっしゃるか分かりませんが記事中のソースコードは MIT ライセンスです。
 
 
@@ -39,7 +39,7 @@ FuelPHP 標準のサーバキャッシュと「@<href>{http://developer.hatena.n
 お使いのレンサバで動く PHP のバージョンを確認します。FuelPHP を動作させるために PHP 5.3 以上を利用しましょう。必要であれば下記の画面で設定を変更してください。
 
 
-//image[20121212110543][f:id:tmd45:20121212110543p:plain]{
+//image[20121212110543][]{
 //}
 
 === php.ini の編集
@@ -49,7 +49,7 @@ FuelPHP 標準のサーバキャッシュと「@<href>{http://developer.hatena.n
  FuelPHP を正常に動作させるには @<tt>{cgi.fix_pathinfo = 1} の記述が必要です。リクエスト URL の取得に、cgi 版 PHP ではこの設定を行って @<tt>{$_SERVER["ORIG_PATH_INFO"]} の利用を有効にする必要があるためです。
 
 
-//image[20121212113953][f:id:tmd45:20121212113953p:plain]{
+//image[20121212113953][]{
 //}
 
 
@@ -67,8 +67,7 @@ FuelPHP 標準のサーバキャッシュと「@<href>{http://developer.hatena.n
 
 @<href>{http://fuelphp.com/,FuelPHP 公式サイト}から最新版(執筆時点でv1.4)の FuelPHP アーカイブ(zip)をダウンロードします。アーカイブを展開して、ドキュメントルート内の構成を以下のようにしました。
 
-//emlist{
-アーカイブ内(変更前)のディレクトリ構成
+//emlist[アーカイブ内(変更前)のディレクトリ構成]{
 /fuelphp-1.4
   |-- /docs
   |-- /fuel
@@ -84,8 +83,7 @@ FuelPHP 標準のサーバキャッシュと「@<href>{http://developer.hatena.n
 
 ドキュメントや README、使わない oil などを削除します。また、public ディレクトリの中身をドキュメントルートに持ってきます。
 
-//emlist{
-変更後のディレクトリ構成
+//emlist[変更後のディレクトリ構成]{
 /hhblog
   |-- /fuel
   |-- /assets
@@ -114,11 +112,10 @@ $ diff fuelphp-1.4/public/index.php hhblog/index.php
 //}
 
 
- Web API を使用する際にはタイムスタンプなどが重要になってくる場合もあるので、タイムゾーンの設定もしておきました。役に立っているのかはいまいち分かりませんが・・・
+ Web API を使用する際にはタイムスタンプなどが重要になってくる場合もあるので、タイムゾーンの設定もしておきました。役に立っているのかはいまいち分かりませんが…
 
 #@# lang: .code .lang-php data-lang="php" data-unlink=""
-//emlist{
-ファイル：~/hhblog/fuel/app/config/config.php
+//emlist[ファイル：~/hhblog/fuel/app/config/config.php]{
 <?php
 /* 中略 */
 
@@ -128,11 +125,10 @@ return array(
 //}
 
 
- またセキュリティの観点から、Web から見えてしまう FuelPHP のエラー表示は OFF にしておくほうが良いです(参考：@<href>{http://d.hatena.ne.jp/Kenji_s/20111224/1324731427,FuelPHP でのセキュリティ対策(3) - A Day in Serenity @ kenjis})。自分の場合は開発環境と公開環境を一緒くたにするという危険極まりない遊びをしていたのでエラーは出しっぱなしです・・・(;^_^)
+ またセキュリティの観点から、Web から見えてしまう FuelPHP のエラー表示は OFF にしておくほうが良いです(参考：@<href>{http://d.hatena.ne.jp/Kenji_s/20111224/1324731427,FuelPHP でのセキュリティ対策(3) - A Day in Serenity @ kenjis})。自分の場合は開発環境と公開環境を一緒くたにするという危険極まりない遊びをしていたのでエラーは出しっぱなしです… (;^_^)
 
 #@# lang: .code .lang-php data-lang="php" data-unlink=""
-//emlist{
-ファイル：~/hhblog/index.php
+//emlist[ファイル：~/hhblog/index.php]{
 <?php
 /**
  * Set error reporting and display errors settings.  You will want to change these when in production.
@@ -142,10 +138,10 @@ ini_set('display_errors', 1);    // この引数を 0 にする。
 //}
 
 
- レンタルサーバへの配置ですが、今回はレンサバのドキュメントルート @<tt>{$HOME/www} 配下に、上記の @<tt>{hhblog} ディレクトリを配置することにします。アクセス時の URL は @<tt>{http://{user-id}.sakura.ne.jp/hhblog/} になります。
+ レンタルサーバへの配置ですが、今回はレンサバのドキュメントルート @<tt>{$HOME/www} 配下に、上記の @<tt>{hhblog} ディレクトリを配置することにします。アクセス時の URL は @<tt>{http://{user-id\}.sakura.ne.jp/hhblog/} になります。
 
 
-この配置であれば、.htaccess ファイルを修正する必要はありません。アーカイブに在ったものをそのまま使用すれば Mod_Rewrite が仕事してくれます。
+この配置であれば、.htaccess ファイルを修正する必要はありません。アーカイブに在ったものをそのまま使用すれば mod_rewrite が仕事してくれます。
 
 
 私は動作環境を本番(production)にするため、以下の部分だけ変更(コメント化を解除)しました。
@@ -168,7 +164,7 @@ $ diff fuelphp-1.4/public/.htaccess hhblog/.htaccess
 手動インストール(oil を使わないで配置する)を行ったので、ディレクトリのパーミッションの変更も自分で行います(参考：@<href>{http://fuelphp.com/docs/installation/instructions.html,Instruction - Installation - FuelPHP Documentation})。
 
 
-以下の４つのディレクトリのパーミッションを 777(rwxrwxrwx)にします。FTP/SCP ツールで変更しても良いですし、さくらのコントロールパネルからファイルマネージャーを使用して変更することも可能です(ディレクトリを 右クリック → プロパティ で属性の変更が可能)。
+以下の4つのディレクトリのパーミッションを 777(rwxrwxrwx)にします。FTP/SCP ツールで変更しても良いですし、さくらのコントロールパネルからファイルマネージャーを使用して変更することも可能です(ディレクトリを 右クリック → プロパティ で属性の変更が可能)。
 
 //emlist{
 以下の４つのディレクトリを書込み可にする
@@ -183,10 +179,10 @@ $HOME/www/hhblog
 //}
 
 
-これでインストールは完了です。@<tt>{http://{user-id}.sakura.ne.jp/hhblog/} にアクセスすれば、おなじみの Welcome ページが表示されます。おめでとうありがとう。
+これでインストールは完了です。@<tt>{http://{user-id\}.sakura.ne.jp/hhblog/} にアクセスすれば、おなじみの Welcome ページが表示されます。おめでとうありがとう。
 
 
-//image[20121214170600][f:id:tmd45:20121214170600p:plain]{
+//image[20121214170600][Welcomeページ]{
 //}
 
 
@@ -200,11 +196,11 @@ $HOME/www/hhblog
 //quote{
 補足：@<br>{}
  本来は開発環境で作って、テストして、完成したものを公開環境へアップロードしますよね(苦笑)@<br>{}
- 今回ちょっと不便な場所で開発を行っていたため、公開環境で動作確認などを行っていました・・・@<br>{}
+ 今回ちょっと不便な場所で開発を行っていたため、公開環境で動作確認などを行っていました…
  この辺りはツッコミ無用でございます／(^o^)＼
 
 
-また、筆者は Java 屋なので、PHP 的におかしな書き方をしているところがあったらごめんなさい。@<br>{}
+また、筆者は Java 屋なので、PHP 的におかしな書き方をしているところがあったらごめんなさい。
  そちらはツッコミいただけたら嬉しいです＼(^o^)／
 //}
 
@@ -213,12 +209,13 @@ $HOME/www/hhblog
  ちなみに今回利用した API では、認証を必要としません。なので認証部分の実装も考えません。
 
 
-API は以下の２種類を使うことにしました。詳しくは API のドキュメントをご確認ください。
+API は以下の2種類を使うことにしました。詳しくは API のドキュメントをご確認ください。@<br>{}
 
- 1. @<href>{http://developer.hatena.ne.jp/ja/documents/haiku/apis/rest/timelines#public_timeline,はてなハイクのトップページ(パブリック・タイムライン)}
+1. @<href>{http://developer.hatena.ne.jp/ja/documents/haiku/apis/rest/timelines#public_timeline,はてなハイクのトップページ(パブリック・タイムライン)}
 
  * 引数はとくに無く、はてなハイクのトップページに表示されるタイムラインを取得します。
- 1. @<href>{http://developer.hatena.ne.jp/ja/documents/haiku/apis/rest/timelines#keyword_timeline,キーワードのエントリーページ(キーワード・タイムライン)}
+
+2. @<href>{http://developer.hatena.ne.jp/ja/documents/haiku/apis/rest/timelines#keyword_timeline,キーワードのエントリーページ(キーワード・タイムライン)}
 
  * 引数にキーワードを指定(必須)し、そのキーワードのタイムラインを取得します。
 
@@ -228,8 +225,7 @@ API は以下の２種類を使うことにしました。詳しくは API の�
 
 
 #@# lang: .code .lang-php data-lang="php" data-unlink=""
-//emlist{
-ファイル：~/hhblog/fuel/app/classes/model/api/hatena/haiku.php
+//emlist[ファイル：~/hhblog/fuel/app/classes/model/api/hatena/haiku.php]{
 <?php
 
 class Model_Api_Hatena_Haiku extends Model
@@ -374,14 +370,13 @@ file_getコンテキストのオプションに指定する Host 名は、ご自
 View は贅沢(？)に Template を使ってみます。
 
 
-//image[20121214175736][f:id:tmd45:20121214175736p:plain]{
+//image[20121214175736][]{
 //}
 
 
 さきに書いてしまいますが、最終的なディレクトリ構成は以下のようになりました。
 
-//emlist{
-実装のディレクトリ構成
+//emlist[実装のディレクトリ構成]{
 $HOME/www/hhblog
     |-- /fuel
     |    |-- /app
@@ -405,7 +400,7 @@ $HOME/www/hhblog
 //}
 
 
-うーん、機能名失敗したな・・・(hhblog の hhblog コントローラ・・・orz)。
+うーん、機能名失敗したな… (hhblog の hhblog コントローラ… orz)。
 
 === View と Controller
 
@@ -414,8 +409,7 @@ $HOME/www/hhblog
  まずはコントローラー。
 
 #@# lang: .code .lang-php data-lang="php" data-unlink=""
-//emlist{
-ファイル：~/hhblog/fuel/app/classes/controller/hhblog.php
+//emlist[ファイル：~/hhblog/fuel/app/classes/controller/hhblog.php]{
 <?php
 
 /**
@@ -487,6 +481,7 @@ class Controller_Hhblog extends Controller_Template
 
 
 そして View 側のコードですが、全部載せると大変なので Gist に置いておきます。
+
  * @<href>{https://gist.github.com/4283992#file-template-php,template.php on Gist}
  * @<href>{https://gist.github.com/4283992#file-public-php,public.php on Gist}
  * @<href>{https://gist.github.com/4283992#file-keyword-php,keyword.php on Gist}
@@ -496,8 +491,7 @@ class Controller_Hhblog extends Controller_Template
 テンプレートのソースコード(template.php)の中で、コントローラーで ViewModel を forge した @<tt>{$article} 変数を利用して記事を埋め込みます。
 
 #@# lang: .code .lang-php data-lang="php" data-unlink=""
-//emlist{
-ファイル：~/hhblog/fuel/app/views/hhblog/template.php の一部
+//emlist[ファイル：~/hhblog/fuel/app/views/hhblog/template.php の一部]{
 <!-- CONTENT -->
 <div class="span9">
 
@@ -508,11 +502,10 @@ class Controller_Hhblog extends Controller_Template
 //}
 
 
-記事側のソースコード(public.php, keyword.php)では、API で取得した記事の配列を繰り返し表示させています。これがテンプレートの @<tt>{$article} 部分に展開されます。
+記事側のソースコード(public.php、keyword.php)では、API で取得した記事の配列を繰り返し表示させています。これがテンプレートの @<tt>{$article} 部分に展開されます。
 
 #@# lang: .code .lang-php data-lang="php" data-unlink=""
-//emlist{
-ファイル：~/hhblog/fuel/app/views/hhblog/article/public.php の一部
+//emlist[ファイル：~/hhblog/fuel/app/views/hhblog/article/public.php の一部]{
 <?php
     foreach ($articles as $a)
     {
@@ -530,7 +523,7 @@ class Controller_Hhblog extends Controller_Template
 
 
 これらをサイトのトップページに表示させるために、ルーティングの設定も修正します。@<br>{}
- サイトのトップにアクセスすると、キーワード・タイムラインが表示されます(1)。また @<tt>{http://{user-id}.sakura.ne.jp/hhblog/public_timeline} にアクセスするとパブリック・タイムラインが、@<tt>{http://{user-id}.sakura.ne.jp/hhblog/keyword_timeline} にアクセスするとキーワード・タイムラインが表示されるようにしました(2)。
+ サイトのトップにアクセスすると、キーワード・タイムラインが表示されます(1)。また @<tt>{http://{user-id\}.sakura.ne.jp/hhblog/public_timeline} にアクセスするとパブリック・タイムラインが、@<tt>{http://{user-id\}.sakura.ne.jp/hhblog/keyword_timeline} にアクセスするとキーワード・タイムラインが表示されるようにしました(2)。
 
 #@# lang: .code .lang-php data-lang="php" data-unlink=""
 //emlist{
@@ -553,11 +546,10 @@ return array(
 では、最後にお待ちかねのビューモデルです。
 
 
-まずはパブリック・タイムライン用のビューモデル。API 制限を考慮して、新しいデータは 30 分に 1 回だけ取得するようにして、それ以外はキャッシュからデータを取得します。API の実行は Model を呼び出すだけです。
+まずはパブリック・タイムライン用のビューモデル。API 制限を考慮して、新しいデータは 30 分に 1回だけ取得するようにして、それ以外はキャッシュからデータを取得します。API の実行は Model を呼び出すだけです。
 
 #@# lang: .code .lang-php data-lang="php" data-unlink=""
-//emlist{
-ファイル：~/hhblog/fuel/app/classes/view/hhblog/article/public.php
+//emlist[ファイル：~/hhblog/fuel/app/classes/view/hhblog/article/public.php]{
 <?php
 
 /**
@@ -610,8 +602,7 @@ class View_Hhblog_Article_Public extends ViewModel
 次にキーワード・タイムライン用のビューモデルです。パブリック・タイムラインと同じです。Model の実行時に引数にキーワードを渡しています。
 
 #@# lang: .code .lang-php data-lang="php" data-unlink=""
-//emlist{
-ファイル：~/hhblog/fuel/app/classes/view/hhblog/article/keyword.php
+//emlist[ファイル：~/hhblog/fuel/app/classes/view/hhblog/article/keyword.php]{
 <?php
 
 /**
@@ -678,8 +669,8 @@ class View_Hhblog_Article_Keyword extends ViewModel
 == 4. 公開環境で動かそう
 
 
-実装が完了して、テストが出来たら(苦笑)、用意してあったレンサバのフレームワーク上に変更分をアップロードします。@<br>{}
- @<tt>{http://{user-id}.sakura.ne.jp/hhblog} や @<tt>{http://{user-id}.sakura.ne.jp/hhblog/public_timeline} にアクセスして、はてなハイクブログを表示してみましょう！
+実装が完了して、テストが出来たら(苦笑)、用意してあったレンサバのフレームワーク上に変更分をアップロードします。
+ @<tt>{http://{user-id\}.sakura.ne.jp/hhblog} や @<tt>{http://{user-id\}.sakura.ne.jp/hhblog/public_timeline} にアクセスして、はてなハイクブログを表示してみましょう！@<br>{}
 
 
 ちなみに自分で作成したものは以下で動いています。
@@ -688,7 +679,7 @@ class View_Hhblog_Article_Keyword extends ViewModel
 
 
 
-//image[20121214190855][f:id:tmd45:20121214190855p:plain]{
+//image[20121214190855][tmd45のはてなハイクブログ]{
 //}
 
 
@@ -697,7 +688,16 @@ class View_Hhblog_Article_Keyword extends ViewModel
 == まとめ
 
 
-いかがでしたでしょうか。コードを載せているのでだいぶ記事が長くなってしまいました。準備から実装まで通して記事にできたので自分の復習用には良かったと思うのですが、Advent Calendar としてどうなんでしょう(苦笑)
+いかがでしたでしょうか。コードを載せているのでだいぶ記事が長くなってしまいました。準備から実装まで通して記事にできたので自分の復習用には良かったと思うのですが、Advent Calendar としてどうなんでしょう(苦笑)@<br>{}
 
 
 明日は @@<href>{http://twitter.com/ttikitt,ttikitt} さんの『(仮)FuelPHPへのDoctrine2組み込み』です！('ω`)シ
+
+//quote{
+@<strong>{@tmd45}
+
+Twitter: @<href>{https://twitter.com/tmd45,@tmd45}
+
+Blog: @<href>{http://tech.tmd45.in/,http://tech.tmd45.in/}
+//}
+
