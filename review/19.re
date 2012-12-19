@@ -1,54 +1,69 @@
-[[FuelPHP Advent Calendar 2012]FuelPHPへのDoctrine2組み込み](http://www.cry-kit.com/?p=53 "[FuelPHP Advent Calendar 2012]FuelPHPへのDoctrine2組み込み")
-=======================================================================================================================================================
 
-[FuelPHP Advent Calendar 2012](http://atnd.org/events/33753)の19日目担当の[@ttikitt](https://twitter.com/ttikitt)です。
+= @<href>{http://www.cry-kit.com/?p=53,[FuelPHP Advent Calendar 2012]FuelPHPへのDoctrine2組み込み}
 
-昨日は[@tmd45](https://twitter.com/tmd45)さんの『[さくらのレンタルサーバで FuelPHP を使ってはてなハイクブログを作る－ViewModel を使ってみる編 \#FuelPHPAdvent2012](http://tech.tmd45.in/entry/2012/12/18/101053)』でした。
 
-本日のテーマは『外部ライブラリの組み込み』です。  
- fuelphpは拡張性に富んだフレームワークで、外部ライブラリを取り込んで、容易に拡張する事ができます。  
+@<href>{http://atnd.org/events/33753,FuelPHP Advent Calendar 2012}の19日目担当の@<href>{https://twitter.com/ttikitt,@ttikitt}です。
+
+
+昨日は@<href>{https://twitter.com/tmd45,@tmd45}さんの『@<href>{http://tech.tmd45.in/entry/2012/12/18/101053,さくらのレンタルサーバで FuelPHP を使ってはてなハイクブログを作る－ViewModel を使ってみる編 #FuelPHPAdvent2012}』でした。
+
+
+本日のテーマは『外部ライブラリの組み込み』です。@<br>{}
+ fuelphpは拡張性に富んだフレームワークで、外部ライブラリを取り込んで、容易に拡張する事ができます。@<br>{}
  とはいうものの具体的に触れられている機会があまりないので、ORMライブラリの組み込みについて紹介します。
 
-先人が居りましたため、こちらのリポジトリを元に解説・調整します。  
- [aspendigital/fuel-doctrine2](https://github.com/aspendigital/fuel-doctrine2)
 
-組み込むライブラリについてはこちら。  
- Doctrine2 ORM([doctrine project](http://www.doctrine-project.org/))
+先人が居りましたため、こちらのリポジトリを元に解説・調整します。@<br>{}
+ @<href>{https://github.com/aspendigital/fuel-doctrine2,aspendigital/fuel-doctrine2}
 
-なお、fuelphpのormパッケージも色々な機能を持っています。  
+
+組み込むライブラリについてはこちら。@<br>{}
+ Doctrine2 ORM(@<href>{http://www.doctrine-project.org/,doctrine project})
+
+
+なお、fuelphpのormパッケージも色々な機能を持っています。@<br>{}
  どちらが優れているという事もないのですが、主に以下の3点の理由で採用しました。
 
-・スキーマ定義ファイルからのModelクラス生成  
- ・Modelの役割のEntity(Rowデータ管理)とRepository(クエリ関連)への分割  
+
+・スキーマ定義ファイルからのModelクラス生成@<br>{}
+ ・Modelの役割のEntity(Rowデータ管理)とRepository(クエリ関連)への分割@<br>{}
  ・簡易な読み出しをクエリ不要で取得する機能(magic finder ※fuelphpのormにも付いています。)
 
-Symfony2に組み込まれている高機能なライブラリで、  
+
+Symfony2に組み込まれている高機能なライブラリで、@<br>{}
  他にも色々な機能があるのですが、細かい紹介は省きます。
 
-1.fuelphpへの配置  
+
+1.fuelphpへの配置@<br>{}
  まずはfuelphp内にファイルを取り込みましょう。
 
-・Doctrine2 Object Relational Mapperのダウンロード  
+
+・Doctrine2 Object Relational Mapperのダウンロード@<br>{}
  最新版の2.3.1をダウンロードします。
 
-・fuelphpへの配置  
- fuel/app/vendor/  
+
+・fuelphpへの配置@<br>{}
+ fuel/app/vendor/@<br>{}
  に以下のように配置します。
 
-~~~~ {.brush: .plain; .gutter: .false; .title: .; .notranslate title=""}
+#@# lang: .brush: .plain; .gutter: .false; .title: .; .notranslate title=""
+//emlist{
 vendor
 ├─Doctrine
 │  ├─Common
 │  ├─DBAL
 │  └─ORM
 └─Symfony
-~~~~
+//}
 
-\#SymfonyをTaskとYAMLの対応のために追加しています。
+
+#SymfonyをTaskとYAMLの対応のために追加しています。
+
 
 ・オートローダーへの追加
 
-~~~~ {.brush: .php; .highlight: .[0,3,4,5,6,7,8,9,10,11,12,13]; .title: .fuel/app/bootstrap.php; .notranslate title="fuel/app/bootstrap.php"}
+#@# lang: .brush: .php; .highlight: .[0,3,4,5,6,7,8,9,10,11,12,13]; .title: .fuel/app/bootstrap.php; .notranslate title="fuel/app/bootstrap.php"
+//emlist{
 Autoloader::register();
 
 $dir = dirname(__FILE__) . DS;
@@ -61,11 +76,13 @@ Autoloader::add_namespace('Repositories', $dir . 'classes' . DS . 'model' . DS .
 //ラッパーを追加します。
 Autoloader::add_namespace('Doctrine_Fuel', $dir . 'classes' . DS);
 Autoloader::alias_to_namespace('Doctrine_Fuel\Doctrine_Fuel');
-~~~~
+//}
+
 
 連携のためにラッパークラスを追加しています。
 
-~~~~ {.brush: .php; .collapse: .true; .highlight: .[62]; .light: .false; .title: .fuel/app/classes/doctrine/fuel.php; .toolbar: .true; .notranslate title="fuel/app/classes/doctrine/fuel.php"}
+#@# lang: .brush: .php; .collapse: .true; .highlight: .[62]; .light: .false; .title: .fuel/app/classes/doctrine/fuel.php; .toolbar: .true; .notranslate title="fuel/app/classes/doctrine/fuel.php"
+//emlist{
 <?php
 namespace Doctrine_Fuel;
 
@@ -212,12 +229,14 @@ class Doctrine_Fuel
         );
     }
 }
-~~~~
+//}
 
-2.Taskの追加  
+
+2.Taskの追加@<br>{}
  シェルからのコマンドがありますので、oilから使用できるようにタスクも追加します。
 
-~~~~ {.brush: .php; .title: .fuel/app/tasks/doctrine.php; .notranslate title="fuel/app/tasks/doctrine.php"}
+#@# lang: .brush: .php; .title: .fuel/app/tasks/doctrine.php; .notranslate title="fuel/app/tasks/doctrine.php"
+//emlist{
 <?php
 
 namespace Fuel\Tasks;
@@ -274,23 +293,27 @@ class Doctrine {
         $cli->run(new \Symfony\Component\Console\Input\StringInput('orm:generate-repositories ./fuel/app/classes/model'));
     }
 }
-~~~~
+//}
+
 
 これで以下のコマンドを使用できるようになっています。
 
-~~~~ {.brush: .jscript; .gutter: .false; .title: .; .notranslate title=""}
+#@# lang: .brush: .jscript; .gutter: .false; .title: .; .notranslate title=""
+//emlist{
 php oil refine doctrine:generate_entities      //Modelの生成
 php oil refine doctrine:generate_repositories  //Modelの生成
 php oil refine doctrine:version                //バージョンの確認
 php oil refine doctrine orm:schema-tool:create //データベースの作成
 php oil refine doctrine orm:schema-tool:update //データベースの更新
 php oil refine doctrine orm:schema-tool:drop   //データベースの削除
-~~~~
+//}
 
-3.configの追加  
+
+3.configの追加@<br>{}
  データベース接続の設定は同じというわけにはいかないので、設定の書き方は少し変わります。
 
-~~~~ {.brush: .php; .highlight: .[0,2,3,4,5,6,14,15,16,17,18,19]; .title: .fuel/app/config/db.php; .notranslate title="fuel/app/config/db.php"}
+#@# lang: .brush: .php; .highlight: .[0,2,3,4,5,6,14,15,16,17,18,19]; .title: .fuel/app/config/db.php; .notranslate title="fuel/app/config/db.php"
+//emlist{
 return array(
     'proxy_dir' => APPPATH . 'classes' . DS . 'proxy',
     'proxy_namespace' => 'Proxy',
@@ -318,21 +341,25 @@ return array(
         'profiling'    => false,
     ),
 );
-~~~~
+//}
 
-EntityクラスがArrayAccessを備えているため、fuelphpの対策に引っかかってしまう時があります。  
+
+EntityクラスがArrayAccessを備えているため、fuelphpの対策に引っかかってしまう時があります。@<br>{}
  場合によってはホワイトリストに追加することになります。
 
-~~~~ {.brush: .php; .highlight: .[2]; .title: .fuel/app/config/config.php; .notranslate title="fuel/app/config/config.php"}
+#@# lang: .brush: .php; .highlight: .[2]; .title: .fuel/app/config/config.php; .notranslate title="fuel/app/config/config.php"
+//emlist{
         'whitelisted_classes' => array(
             'Entities\News',
         )
-~~~~
+//}
 
-4.Modelの生成  
+
+4.Modelの生成@<br>{}
  スキーマファイルの書式はいくつか利用できますが、今回はYAMLを使用します。
 
-~~~~ {.brush: .plain; .title: .fuel/app/config/schema/Entities.News.dcm.yml; .notranslate title="fuel/app/config/schema/Entities.News.dcm.yml"}
+#@# lang: .brush: .plain; .title: .fuel/app/config/schema/Entities.News.dcm.yml; .notranslate title="fuel/app/config/schema/Entities.News.dcm.yml"
+//emlist{
 Entities\News:
   type: entity
   repositoryClass: Repositories\News
@@ -360,17 +387,20 @@ Entities\News:
   lifecycleCallbacks:
     prePersist: [ prePersist ]
     preUpdate: [ preUpdate ]
-~~~~
+//}
 
-スキーマからModelとデータベースを生成します。  
- \#php oil refine doctrine:generate\_entities  
- \#php oil refine doctrine:generate\_repositories  
- \#php oil refine doctrine orm:schema-tool:create –force
 
-実行するとfuel/app/classes/modelのEntitiesとRepositoriesにクラスが生成されています。  
+スキーマからModelとデータベースを生成します。@<br>{}
+ #php oil refine doctrine:generate_entities@<br>{}
+ #php oil refine doctrine:generate_repositories@<br>{}
+ #php oil refine doctrine orm:schema-tool:create –force
+
+
+実行するとfuel/app/classes/modelのEntitiesとRepositoriesにクラスが生成されています。@<br>{}
  ついでにちょっとした改造も加えますが、この変更は再生成しても自動的にマージされます。  
 
-~~~~ {.brush: .php; .collapse: .true; .highlight: .[133,135,156,158,200,201,209]; .light: .false; .title: .fuel/app/classes/model/Entities/News.php; .toolbar: .true; .notranslate title="fuel/app/classes/model/Entities/News.php"}
+#@# lang: .brush: .php; .collapse: .true; .highlight: .[133,135,156,158,200,201,209]; .light: .false; .title: .fuel/app/classes/model/Entities/News.php; .toolbar: .true; .notranslate title="fuel/app/classes/model/Entities/News.php"
+//emlist{
 <?php
 
 namespace Entities;
@@ -600,11 +630,13 @@ class News {
         }
     }
 }
-~~~~
+//}
+
 
 ゲッター・セッター、前処理を備えたクラスができています。
 
-~~~~ {.brush: .php; .highlight: .[0,15,16,17,18,19,20,21,22]; .title: .fuel/app/classes/model/Repositories/News.php; .notranslate title="fuel/app/classes/model/Repositories/News.php"}
+#@# lang: .brush: .php; .highlight: .[0,15,16,17,18,19,20,21,22]; .title: .fuel/app/classes/model/Repositories/News.php; .notranslate title="fuel/app/classes/model/Repositories/News.php"
+//emlist{
 <?php
 
 namespace Repositories;
@@ -629,24 +661,28 @@ class News extends EntityRepository {
         return $q->getQuery()->getResult();
     }
 }
-~~~~
+//}
+
 
 こちらは空ですが、magic finderは使えます。
 
-5.使ってみる！  
+
+5.使ってみる！@<br>{}
  駆け足でやってまいりましたが、一番大事な使い勝手を軽く試してみましょう。
 
-~~~~ {.brush: .php; .highlight: .[3,5,6]; .title: .fuel/app/config/routes.php; .notranslate title="fuel/app/config/routes.php"}
+#@# lang: .brush: .php; .highlight: .[3,5,6]; .title: .fuel/app/config/routes.php; .notranslate title="fuel/app/config/routes.php"
+//emlist{
 <?php
 return array(
     '_root_'  => 'news/list',  // The default route
-    
+
     'news/edit(/:newsid)?' => array('news/edit'),
     'news/delete(/:newsid)?' => array('news/delete'),
 );
-~~~~
+//}
 
-~~~~ {.brush: .php; .title: .fuel/app/classes/controller/news.php; .notranslate title="fuel/app/classes/controller/news.php"}
+#@# lang: .brush: .php; .title: .fuel/app/classes/controller/news.php; .notranslate title="fuel/app/classes/controller/news.php"
+//emlist{
 <?php
 
 /**
@@ -732,19 +768,21 @@ class Controller_News extends Controller
         Response::redirect('news/list');
     }
 }
-~~~~
+//}
 
-news/list  
-![News List](images/19/list.jpg "list")
- news/edit  
-![News Edit](images/19/edit.jpg "edit")
+
+news/list@<br>{}
+//image[list][News List]{
+//}
+ news/edit@<br>{}
+//image[edit][News Edit]{
+//}
  特に違和感無く内臓ORMのように使えています。
 
-6.最後に  
- 題材がORMということもあり少々長い上に難しい内容になってしまいましたが、いかがでしたでしょうか。  
+
+6.最後に@<br>{}
+ 題材がORMということもあり少々長い上に難しい内容になってしまいましたが、いかがでしたでしょうか。@<br>{}
  少し手を加えるだけで今まで使っていたライブラリの機能も利用する事もできます。
 
-明日は@\_halt\_compilerさんの『某サービスでFuelPHPを使った際のアレコレ(仮)』です。
 
-
-
+明日は@_halt_compilerさんの『某サービスでFuelPHPを使った際のアレコレ(仮)』です。
