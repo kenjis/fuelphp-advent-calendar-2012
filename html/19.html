@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<!--[if IE 6]> <html id="ie6" dir="ltr" lang="ja"> <![endif]-->
+<!--[if IE 7]> <html id="ie7" dir="ltr" lang="ja"> <![endif]-->
+<!--[if IE 8]> <html id="ie8" dir="ltr" lang="ja"> <![endif]-->
+<!--[if !(IE 6) | !(IE 7) | !(IE 8)]><!--> <html dir="ltr" lang="ja"> <!--<![endif]-->
+
+<head>
+	<meta charset="UTF-8" />
+	<link rel="pingback" href="http://www.cry-kit.com/xmlrpc.php" />
+
+	<title>  [FuelPHP Advent Calendar 2012]FuelPHPへのDoctrine2組み込み &raquo; Cry-Kit</title>
+	<!--[if lt IE 9]>
+	<script src="http://www.cry-kit.com/wp-content/themes/suffusion/scripts/html5.js" type="text/javascript"></script>
+	<![endif]-->
+<link rel="alternate" type="application/rss+xml" title="Cry-Kit &raquo; フィード" href="http://www.cry-kit.com/?feed=rss2" />
+<link rel="alternate" type="application/rss+xml" title="Cry-Kit &raquo; コメントフィード" href="http://www.cry-kit.com/?feed=comments-rss2" />
+<link rel="alternate" type="application/rss+xml" title="Cry-Kit &raquo; [FuelPHP Advent Calendar 2012]FuelPHPへのDoctrine2組み込み のコメントのフィード" href="http://www.cry-kit.com/?feed=rss2&#038;p=53" />
+<link rel='stylesheet' id='suffusion-theme-css'  href='http://www.cry-kit.com/wp-content/themes/suffusion/style.css?ver=4.4.2' type='text/css' media='all' />
+<link rel='stylesheet' id='suffusion-theme-skin-1-css'  href='http://www.cry-kit.com/wp-content/themes/suffusion/skins/light-theme-gray-1/skin.css?ver=4.4.2' type='text/css' media='all' />
+<!--[if !IE]>--><link rel='stylesheet' id='suffusion-rounded-css'  href='http://www.cry-kit.com/wp-content/themes/suffusion/rounded-corners.css?ver=4.4.2' type='text/css' media='all' />
+<!--<![endif]-->
+<!--[if gt IE 8]><link rel='stylesheet' id='suffusion-rounded-css'  href='http://www.cry-kit.com/wp-content/themes/suffusion/rounded-corners.css?ver=4.4.2' type='text/css' media='all' />
+<![endif]-->
+<!--[if lt IE 8]><link rel='stylesheet' id='suffusion-ie-css'  href='http://www.cry-kit.com/wp-content/themes/suffusion/ie-fix.css?ver=4.4.2' type='text/css' media='all' />
+<![endif]-->
+<link rel='stylesheet' id='suffusion-generated-css'  href='http://www.cry-kit.com?ver=4.4.2&#038;suffusion-css=css' type='text/css' media='all' />
+<script type='text/javascript' src='http://www.cry-kit.com/wp-includes/js/comment-reply.js?ver=3.4.2'></script>
+<script type='text/javascript' src='http://www.cry-kit.com/wp-includes/js/jquery/jquery.js?ver=1.7.2'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var Suffusion_JS = {"wrapper_width_type_page_template_1l_sidebar_php":"fixed","wrapper_max_width_page_template_1l_sidebar_php":"1200","wrapper_min_width_page_template_1l_sidebar_php":"600","wrapper_orig_width_page_template_1l_sidebar_php":"75","wrapper_width_type_page_template_1r_sidebar_php":"fixed","wrapper_max_width_page_template_1r_sidebar_php":"1200","wrapper_min_width_page_template_1r_sidebar_php":"600","wrapper_orig_width_page_template_1r_sidebar_php":"75","wrapper_width_type_page_template_1l1r_sidebar_php":"fixed","wrapper_max_width_page_template_1l1r_sidebar_php":"1200","wrapper_min_width_page_template_1l1r_sidebar_php":"600","wrapper_orig_width_page_template_1l1r_sidebar_php":"75","wrapper_width_type_page_template_2l_sidebars_php":"fixed","wrapper_max_width_page_template_2l_sidebars_php":"1200","wrapper_min_width_page_template_2l_sidebars_php":"600","wrapper_orig_width_page_template_2l_sidebars_php":"75","wrapper_width_type_page_template_2r_sidebars_php":"fixed","wrapper_max_width_page_template_2r_sidebars_php":"1200","wrapper_min_width_page_template_2r_sidebars_php":"600","wrapper_orig_width_page_template_2r_sidebars_php":"75","wrapper_width_type":"fixed","wrapper_max_width":"1200","wrapper_min_width":"600","wrapper_orig_width":"75","wrapper_width_type_page_template_no_sidebars_php":"fixed","wrapper_max_width_page_template_no_sidebars_php":"1200","wrapper_min_width_page_template_no_sidebars_php":"600","wrapper_orig_width_page_template_no_sidebars_php":"75","suf_featured_interval":"4000","suf_featured_transition_speed":"1000","suf_featured_fx":"fade","suf_featured_pause":"Pause","suf_featured_resume":"Resume","suf_featured_sync":"0","suf_featured_pager_style":"numbers","suf_nav_delay":"500","suf_nav_effect":"fade","suf_navt_delay":"500","suf_navt_effect":"fade","suf_jq_masonry_enabled":"disabled","suf_fix_aspect_ratio":"preserve","suf_show_drop_caps":""};
+/* ]]> */
+</script>
+<script type='text/javascript' src='http://www.cry-kit.com/wp-content/themes/suffusion/scripts/suffusion.js?ver=4.4.2'></script>
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://www.cry-kit.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://www.cry-kit.com/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='自己紹介' href='http://www.cry-kit.com/?p=9' />
+<link rel='canonical' href='http://www.cry-kit.com/?p=53' />
+<!-- Start Additional Feeds -->
+<!-- End Additional Feeds -->
+	<style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>
+<!-- location header -->
+<meta id="syntaxhighlighteranchor" name="syntaxhighlighter-version" content="3.1.3" />
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-35748378-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</head>
+
+<body class="single single-post postid-53 single-format-standard light-theme-gray-1 suffusion-custom preset-1000px device-desktop">
+    				<div id="wrapper" class="fix">
+					<div id="header-container" class="custom-header fix">
+					<header id="header" class="fix">
+			<h2 class="blogtitle left"><a href="http://www.cry-kit.com">Cry-Kit</a></h2>
+		<div class="description right"></div>
+    </header><!-- /header -->
+ 	<nav id="nav" class="tab fix">
+		<div class='col-control left'>
+	<!-- right-header-widgets -->
+	<div id="right-header-widgets" class="warea">
+	
+<form method="get" class="searchform " action="http://www.cry-kit.com/">
+	<input type="text" name="s" class="searchfield"
+			value="Search"
+			onfocus="if (this.value == 'Search') {this.value = '';}"
+			onblur="if (this.value == '') {this.value = 'Search';}"
+			/>
+	<input type="submit" class="searchsubmit" value="" name="searchsubmit" />
+</form>
+	</div>
+	<!-- /right-header-widgets -->
+		</div><!-- /col-control -->
+	</nav><!-- /nav -->
+			</div><!-- //#header-container -->
+			<div id="container" class="fix">
+				    <div id="main-col">
+		  	<div id="content">
+	<article class="post-53 post type-post status-publish format-standard hentry category-doctrine2 category-fuelphp category-php category-5-id category-4-id category-3-id full-content meta-position-corners fix" id="post-53">
+<header class='post-header title-container fix'>
+	<div class="title">
+		<h1 class="posttitle"><a href='http://www.cry-kit.com/?p=53' class='entry-title' rel='bookmark' title='[FuelPHP Advent Calendar 2012]FuelPHPへのDoctrine2組み込み' >[FuelPHP Advent Calendar 2012]FuelPHPへのDoctrine2組み込み</a></h1>
+		<div class="postdata fix">
+					<span class="category"><span class="icon">&nbsp;</span><a href="http://www.cry-kit.com/?cat=5" title="Doctrine2 の投稿をすべて表示" rel="category">Doctrine2</a>, <a href="http://www.cry-kit.com/?cat=4" title="FuelPHP の投稿をすべて表示" rel="category">FuelPHP</a>, <a href="http://www.cry-kit.com/?cat=3" title="PHP の投稿をすべて表示" rel="category">PHP</a></span>
+							<span class="comments"><span class="icon">&nbsp;</span><a href="#respond">Add comments</a></span>
+					</div><!-- /.postdata -->
+		</div><!-- /.title -->
+		<div class="date"><span class="month">12月</span> <span
+			class="day">19</span><span class="year">2012</span></div>
+	</header><!-- /.title-container -->
+	<span class='post-format-icon'>&nbsp;</span><span class='updated' title='2012-12-19T00:00:16+00:00'></span>		<div class="entry-container fix">
+			<div class="entry fix">
+<p><a href="http://atnd.org/events/33753" target="_blank">FuelPHP Advent Calendar 2012</a>の19日目担当の<a href="https://twitter.com/ttikitt" target="_blank">@ttikitt</a>です。</p>
+<p>昨日は<a href="https://twitter.com/tmd45" target="_blank">@tmd45</a>さんの『<a href="http://tech.tmd45.in/entry/2012/12/18/101053" target="_blank">さくらのレンタルサーバで FuelPHP を使ってはてなハイクブログを作る－ViewModel を使ってみる編 #FuelPHPAdvent2012</a>』でした。</p>
+<p>本日のテーマは『外部ライブラリの組み込み』です。<br />
+fuelphpは拡張性に富んだフレームワークで、外部ライブラリを取り込んで、容易に拡張する事ができます。<br />
+とはいうものの具体的に触れられている機会があまりないので、ORMライブラリの組み込みについて紹介します。</p>
+<p>先人が居りましたため、こちらのリポジトリを元に解説・調整します。<br />
+<a href="https://github.com/aspendigital/fuel-doctrine2" target="_blank">aspendigital/fuel-doctrine2</a></p>
+<p>組み込むライブラリについてはこちら。<br />
+Doctrine2 ORM（<a href="http://www.doctrine-project.org/" target="_blank">doctrine project</a>）</p>
+<p>なお、fuelphpのormパッケージも色々な機能を持っています。<br />
+どちらが優れているという事もないのですが、主に以下の3点の理由で採用しました。</p>
+<p>・スキーマ定義ファイルからのModelクラス生成<br />
+・Modelの役割のEntity（Rowデータ管理）とRepository（クエリ関連）への分割<br />
+・簡易な読み出しをクエリ不要で取得する機能(magic finder ※fuelphpのormにも付いています。)</p>
+<p>Symfony2に組み込まれている高機能なライブラリで、<br />
+他にも色々な機能があるのですが、細かい紹介は省きます。</p>
+<p>1.fuelphpへの配置<br />
+まずはfuelphp内にファイルを取り込みましょう。</p>
+<p>・Doctrine2 Object Relational Mapperのダウンロード<br />
+最新版の2.3.1をダウンロードします。</p>
+<p>・fuelphpへの配置<br />
+fuel/app/vendor/<br />
+に以下のように配置します。</p>
+<pre class="brush: plain; gutter: false; title: ; notranslate" title="">
+vendor
+├─Doctrine
+│  ├─Common
+│  ├─DBAL
+│  └─ORM
+└─Symfony</pre>
+<p>#SymfonyをTaskとYAMLの対応のために追加しています。</p>
+<p>・オートローダーへの追加</p>
+<pre class="brush: php; highlight: [0,3,4,5,6,7,8,9,10,11,12,13]; title: fuel/app/bootstrap.php; notranslate" title="fuel/app/bootstrap.php">
+Autoloader::register();
+
+$dir = dirname(__FILE__) . DS;
+
+Autoloader::add_namespace(&quot;Doctrine&quot;, $dir . 'vendor' . DS . 'Doctrine' . DS, true);
+Autoloader::add_namespace(&quot;Symfony&quot;, $dir . 'vendor' . DS . 'Symfony' . DS, true);
+//生成される(予定の)Modelも追加しておきます。
+Autoloader::add_namespace('Entities', $dir . 'classes' . DS . 'model' . DS . 'Entities' . DS, true);
+Autoloader::add_namespace('Repositories', $dir . 'classes' . DS . 'model' . DS . 'Repositories' . DS, true);
+//ラッパーを追加します。
+Autoloader::add_namespace('Doctrine_Fuel', $dir . 'classes' . DS);
+Autoloader::alias_to_namespace('Doctrine_Fuel\Doctrine_Fuel');</pre>
+<p>連携のためにラッパークラスを追加しています。</p>
+<pre class="brush: php; collapse: true; highlight: [62]; light: false; title: fuel/app/classes/doctrine/fuel.php; toolbar: true; notranslate" title="fuel/app/classes/doctrine/fuel.php">
+&lt;?php
+namespace Doctrine_Fuel;
+
+/**
+ * Convenience class to wrap Doctrine configuration with FuelPHP features.
+ * I'm only trying to handle relatively simple usage here, so if your configuration needs
+ * are more complicated, just extend/replace in your application
+ *
+ * Example:
+ *
+ * &lt;code&gt;
+ * $em = Doctrine_Fuel::manager();
+ * $em-&gt;createQuery(...);
+ * &lt;/code&gt;
+ *
+ * Or to use a defined connection other than 'default'
+ * &lt;code&gt;
+ * $em = Doctrine_Fuel::manager('connection_name');
+ * $em-&gt;createQuery(...);
+ * &lt;/code&gt;
+ *
+ */
+class Doctrine_Fuel
+{
+	/** @var array */
+	protected static $_managers;
+
+	/** @var array */
+	protected static $settings;
+
+	/**
+	 * Map cache types to class names
+	 * Memcache/Memcached can't be set up automatically the way the other types can, so they're not included
+	 *
+	 * @var array
+	 */
+	protected static $cache_drivers = array(
+			'array'=&gt;'ArrayCache',
+			'apc'=&gt;'ApcCache',
+			'xcache'=&gt;'XcacheCache',
+			'wincache'=&gt;'WinCache',
+			'zend'=&gt;'ZendDataCache'
+		);
+
+	/**
+	 * Map metadata driver types to class names
+	 */
+	protected static $metadata_drivers = array(
+			'annotation'=&gt;'', // We'll use the factory method; just here for the exception check
+			'php'=&gt;'PHPDriver',
+			'simplified_xml'=&gt;'SimplifiedXmlDriver',
+			'simplified_yaml'=&gt;'SimplifiedYamlDriver',
+			'xml'=&gt;'XmlDriver',
+			'yaml'=&gt;'YamlDriver'
+		);
+
+	/**
+	 * Read configuration and set up EntityManager singleton
+	 */
+	public static function _init()
+	{
+		static::$settings = \Config::load('db', true);
+	}
+
+	public static function _init_manager($connection)
+	{
+		$settings = static::$settings;
+
+		if (!isset($settings[$connection]))
+			throw new Exception('No connection configuration for '.$connection);
+
+		$config = new \Doctrine\ORM\Configuration();
+		$cache = static::_init_cache();
+		if ($cache)
+		{
+			$config-&gt;setMetadataCacheImpl($cache);
+			$config-&gt;setQueryCacheImpl($cache);
+		}
+
+		$config-&gt;setProxyDir($settings['proxy_dir']);
+		$config-&gt;setProxyNamespace($settings['proxy_namespace']);
+		$config-&gt;setAutoGenerateProxyClasses($settings['auto_generate_proxy_classes']);
+		$config-&gt;setMetadataDriverImpl(static::_init_metadata($config));
+
+		static::$_managers[$connection] = \Doctrine\ORM\EntityManager::create($settings[$connection]['connection'], $config);
+		if (!empty($settings[$connection]['profiling']))
+		{
+			static::$_managers[$connection]-&gt;getConnection()-&gt;getConfiguration()-&gt;setSQLLogger(new Logger($connection));
+		}
+	}
+
+	/**
+	 * @return \Doctrine\Common\Cache|false
+	 */
+	protected static function _init_cache()
+	{
+		$type = \Arr::get(static::$settings, 'cache_driver', 'array');
+		if ($type)
+		{
+			if (!array_key_exists($type, static::$cache_drivers))
+				throw new \Exception('Invalid Doctrine2 cache driver: ' . $type);
+
+			$class = '\\Doctrine\\Common\\Cache\\' . static::$cache_drivers[$type];
+			return new $class();
+		}
+
+		return false;
+	}
+
+	/**
+	 * @return \Doctrine\ORM\Mapping\Driver\Driver
+	 */
+	protected static function _init_metadata($config)
+	{
+		$type = \Arr::get(static::$settings, 'metadata_driver', 'annotation');
+		if (!array_key_exists($type, static::$metadata_drivers))
+			throw new \Exception('Invalid Doctrine2 metadata driver: ' . $type);
+
+		if ($type == 'annotation')
+			return $config-&gt;newDefaultAnnotationDriver(static::$settings['metadata_path']);
+		$class = '\\Doctrine\\ORM\\Mapping\\Driver\\' . static::$metadata_drivers[$type];
+		return new $class(static::$settings['metadata_path']);
+	}
+
+	/**
+	 * @return \Doctrine\ORM\EntityManager
+	 */
+	public static function manager($connection = 'default')
+	{if (!isset(static::$_managers[$connection]))
+			static::_init_manager($connection);
+
+		return static::$_managers[$connection];
+	}
+
+	/**
+	 * @return array Doctrine version information
+	 */
+	public static function version_check()
+	{
+		return array(
+			'common' =&gt; \Doctrine\Common\Version::VERSION,
+			'dbal' =&gt; \Doctrine\DBAL\Version::VERSION,
+			'orm' =&gt; \Doctrine\ORM\Version::VERSION,
+		);
+	}
+}</pre>
+<p>2.Taskの追加<br />
+シェルからのコマンドがありますので、oilから使用できるようにタスクも追加します。</p>
+<pre class="brush: php; title: fuel/app/tasks/doctrine.php; notranslate" title="fuel/app/tasks/doctrine.php">
+&lt;?php
+
+namespace Fuel\Tasks;
+
+class Doctrine {
+    protected static function getCli(){
+        $entityManager = \Doctrine_Fuel::manager();
+        $cli = new \Symfony\Component\Console\Application('Doctrine Command Line Interface', \Doctrine\Common\Version::VERSION);
+        $cli-&gt;setCatchExceptions(true);
+
+        $helperSet = $cli-&gt;getHelperSet();
+        $helperSet-&gt;set(new \Doctrine\DBAL\Tools\Console\Helper\ConnectionHelper($entityManager-&gt;getConnection()), 'db');
+        $helperSet-&gt;set(new \Doctrine\ORM\Tools\Console\Helper\EntityManagerHelper($entityManager), 'em');
+
+        return $cli;
+    }
+
+    public static function run($argv = 'list')
+    {
+        $cli = Doctrine::getCli();
+        $cli-&gt;addCommands(array(
+            // ORM Commands
+            //new \Doctrine\ORM\Tools\Console\Command\GenerateRepositoriesCommand(),
+            //new \Doctrine\ORM\Tools\Console\Command\GenerateEntitiesCommand(),
+            new \Doctrine\ORM\Tools\Console\Command\SchemaTool\CreateCommand(),
+            new \Doctrine\ORM\Tools\Console\Command\SchemaTool\UpdateCommand(),
+            new \Doctrine\ORM\Tools\Console\Command\SchemaTool\DropCommand(),
+        ));
+        //oil refineの分ずれるので入力をずらします。
+        array_shift($_SERVER['argv']);
+        array_shift($_SERVER['argv']);
+        $cli-&gt;run();
+    }
+
+    public static function version(){
+        print_r(\Doctrine_Fuel::version_check());
+    }
+
+    //Model生成先を固定したいので別に定義します。
+    public static function generate_entities(){
+        $cli = Doctrine::getCli();
+        $cli-&gt;addCommands(array(
+            new \Doctrine\ORM\Tools\Console\Command\GenerateEntitiesCommand(),
+        ));
+        $cli-&gt;run(new \Symfony\Component\Console\Input\StringInput('orm:generate-entities ./fuel/app/classes/model'));
+    }
+
+    //Model生成先を固定したいので別に定義します。
+    public static function generate_repositories(){
+        $cli = Doctrine::getCli();
+        $cli-&gt;addCommands(array(
+            new \Doctrine\ORM\Tools\Console\Command\GenerateRepositoriesCommand(),
+        ));
+        $cli-&gt;run(new \Symfony\Component\Console\Input\StringInput('orm:generate-repositories ./fuel/app/classes/model'));
+    }
+}</pre>
+<p style="text-align: left;">これで以下のコマンドを使用できるようになっています。</p>
+<pre class="brush: jscript; gutter: false; title: ; notranslate" title="">
+php oil refine doctrine:generate_entities      //Modelの生成
+php oil refine doctrine:generate_repositories  //Modelの生成
+php oil refine doctrine:version                //バージョンの確認
+php oil refine doctrine orm:schema-tool:create //データベースの作成
+php oil refine doctrine orm:schema-tool:update //データベースの更新
+php oil refine doctrine orm:schema-tool:drop   //データベースの削除</pre>
+<p>3.configの追加<br />
+データベース接続の設定は同じというわけにはいかないので、設定の書き方は少し変わります。</p>
+<pre class="brush: php; highlight: [0,2,3,4,5,6,14,15,16,17,18,19]; title: fuel/app/config/db.php; notranslate" title="fuel/app/config/db.php">
+return array(
+    'proxy_dir' =&gt; APPPATH . 'classes' . DS . 'proxy',
+    'proxy_namespace' =&gt; 'Proxy',
+    'metadata_path' =&gt; APPPATH . 'config' . DS . 'schema',
+    'auto_generate_proxy_classes' =&gt; true,
+    'metadata_driver' =&gt; 'yaml',
+    'active' =&gt; 'default',
+
+    /**
+     * Base config, just need to set the DSN, username and password in env. config.
+     */
+    'default' =&gt; array(
+        'connection'  =&gt; array(
+            'driver'     =&gt; 'pdo_mysql',
+            'host'        =&gt; 'localhost',
+            'password'   =&gt; 'dbpass',
+            'user'       =&gt; 'dbuser',
+            'dbname'     =&gt; 'fuel',
+            'persistent' =&gt; false,
+        ),
+        'identifier'   =&gt; '`',
+        'table_prefix' =&gt; '',
+        'charset'      =&gt; 'utf8',
+        'enable_cache' =&gt; true,
+        'profiling'    =&gt; false,
+    ),
+);</pre>
+<p>EntityクラスがArrayAccessを備えているため、fuelphpの対策に引っかかってしまう時があります。<br />
+場合によってはホワイトリストに追加することになります。</p>
+<pre class="brush: php; highlight: [2]; title: fuel/app/config/config.php; notranslate" title="fuel/app/config/config.php">
+        'whitelisted_classes' =&gt; array(
+            'Entities\News',
+        )</pre>
+<p>4.Modelの生成<br />
+スキーマファイルの書式はいくつか利用できますが、今回はYAMLを使用します。</p>
+<pre class="brush: plain; title: fuel/app/config/schema/Entities.News.dcm.yml; notranslate" title="fuel/app/config/schema/Entities.News.dcm.yml">
+Entities\News:
+  type: entity
+  repositoryClass: Repositories\News
+  table: News
+  id:
+    newsId:
+      type: integer
+      generator:
+        strategy: AUTO
+  fields:
+    title:
+      type: string
+      length: 50
+    body:
+      type: string
+      length: 1000
+    day:
+      type: datetime
+    created:
+      type: datetime
+    updated:
+      type: datetime
+    sortNo:
+      type: integer
+  lifecycleCallbacks:
+    prePersist: [ prePersist ]
+    preUpdate: [ preUpdate ]
+</pre>
+<p>スキーマからModelとデータベースを生成します。<br />
+#php oil refine doctrine:generate_entities<br />
+#php oil refine doctrine:generate_repositories<br />
+#php oil refine doctrine orm:schema-tool:create &#8211;force</p>
+<p>実行するとfuel/app/classes/modelのEntitiesとRepositoriesにクラスが生成されています。<br />
+ついでにちょっとした改造も加えますが、この変更は再生成しても自動的にマージされます。<br />
+<!--書籍時は削る？--></p>
+<pre class="brush: php; collapse: true; highlight: [133,135,156,158,200,201,209]; light: false; title: fuel/app/classes/model/Entities/News.php; toolbar: true; notranslate" title="fuel/app/classes/model/Entities/News.php">
+&lt;?php
+
+namespace Entities;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * News
+ */
+class News {
+
+    /**
+     * @var integer
+     */
+    private $newsId;
+
+    /**
+     * @var string
+     */
+    private $title;
+
+    /**
+     * @var string
+     */
+    private $body;
+
+    /**
+     * @var \DateTime
+     */
+    private $day;
+
+    /**
+     * @var \DateTime
+     */
+    private $created;
+
+    /**
+     * @var \DateTime
+     */
+    private $updated;
+
+    /**
+     * @var integer
+     */
+    private $sortNo;
+
+
+    /**
+     * Get newsId
+     *
+     * @return integer
+      */
+    public function getNewsId()
+    {
+        return $this-&gt;newsId;
+    }
+
+    /**
+     * Set title
+     *
+     * @param string $title
+     * @return News
+     */
+    public function setTitle($title)
+    {
+        $this-&gt;title = $title;
+
+        return $this;
+    }
+
+    /**
+     * Get title
+     *
+     * @return string
+     */
+    public function getTitle()
+    {
+        return $this-&gt;title;
+    }
+
+    /**
+     * Set body
+     *
+     * @param string $body
+     * @return News
+     */
+    public function setBody($body)
+    {
+        $this-&gt;body = $body;
+
+        return $this;
+    }
+
+    /**
+     * Get body
+     *
+     * @return string
+     */
+    public function getBody()
+    {
+        return $this-&gt;body;
+    }
+
+    /**
+     * Set day
+     *
+     * @param \DateTime $day
+     * @return News
+     */
+    public function setDay($day)
+    {
+        $this-&gt;day = $day;
+
+        return $this;
+    }
+
+    /**
+     * Get day
+     *
+     * @return \DateTime
+     */
+    public function getDay()
+    {
+        return $this-&gt;day;
+    }
+
+    /**
+     * Set created
+     *
+     * @param \DateTime $created
+     * @return News
+     */
+    public function setCreated()
+    {
+        $this-&gt;created = new \DateTime();
+
+        return $this;
+    }
+
+    /**
+     * Get created
+     *
+     * @return \DateTime
+     */
+    public function getCreated()
+    {
+        return $this-&gt;created;
+    }
+
+    /**
+     * Set updated
+     *
+     * @param \DateTime $updated
+     * @return News
+     */
+    public function setUpdated()
+    {
+        $this-&gt;updated = new \DateTime();
+
+        return $this;
+    }
+
+    /**
+     * Get updated
+     *
+     * @return \DateTime
+     */
+    public function getUpdated()
+    {
+        return $this-&gt;updated;
+    }
+
+    /**
+     * Set sortNo
+     *
+     * @param integer $sortNo
+     * @return News
+     */
+    public function setSortNo($sortNo)
+    {
+        $this-&gt;sortNo = $sortNo;
+
+        return $this;
+    }
+
+    /**
+     * Get sortNo
+     *
+     * @return integer
+     */
+    public function getSortNo()
+    {
+        return $this-&gt;sortNo;
+    }
+    /**
+     * @ORM\PrePersist
+     */
+    public function prePersist()
+    {
+        setUpdated();
+        setCreated();
+    }
+
+    /**
+     * @ORM\PreUpdate
+     */
+    public function preUpdate()
+    {
+        setUpdated();
+    }
+
+ 　　　/**
+     * FieldSetとの連携用
+     */
+    public static function set_form_fields($fieldset, $instance = null){
+        $fieldset-&gt;add('Title', 'Title', array('type' =&gt; 'text'), array(array('required')));
+        $fieldset-&gt;add('Body', 'Body', array(
+　　　　　　　　　　　　'type' =&gt; 'textarea',
+　　　　　　　　　　　　'rows' =&gt; 8,), array(array('required')));
+        $fieldset-&gt;add('Day', 'Day', array('type' =&gt; 'text'), array(array('required')));
+        if($instance){
+            $fieldset-&gt;populate(array(
+                'Title' =&gt; $instance-&gt;getTitle(),
+                'Body' =&gt; $instance-&gt;getBody(),
+                'Day' =&gt; $instance-&gt;getDay()?$instance-&gt;getDay()-&gt;format('Y-m-d'):date('Y-m-d'),
+            ));
+        }
+    }
+}</pre>
+<p>ゲッター・セッター、前処理を備えたクラスができています。</p>
+<pre class="brush: php; highlight: [0,15,16,17,18,19,20,21,22]; title: fuel/app/classes/model/Repositories/News.php; notranslate" title="fuel/app/classes/model/Repositories/News.php">
+&lt;?php
+
+namespace Repositories;
+
+use Doctrine\ORM\EntityRepository;
+
+/**
+ * News
+ *
+ * This class was generated by the Doctrine ORM. Add your own custom
+ * repository methods below.
+ */
+class News extends EntityRepository {
+
+    public function getNewsList($filter = ''){
+        $q = $this-&gt;createQueryBuilder('n')
+　　　　　　　　　　-&gt;orderBy('n.Day', 'DESC');
+        if($filter){
+            $q-&gt;where('n.title LIKE ?1')
+              -&gt;setParameter(1, '%'.$filter.'%');
+        }
+        return $q-&gt;getQuery()-&gt;getResult();
+    }
+}</pre>
+<p>こちらは空ですが、magic finderは使えます。</p>
+<p>5.使ってみる！<br />
+駆け足でやってまいりましたが、一番大事な使い勝手を軽く試してみましょう。</p>
+<pre class="brush: php; highlight: [3,5,6]; title: fuel/app/config/routes.php; notranslate" title="fuel/app/config/routes.php">
+&lt;?php
+return array(
+	'_root_'  =&gt; 'news/list',  // The default route
+	
+	'news/edit(/:newsid)?' =&gt; array('news/edit'),
+	'news/delete(/:newsid)?' =&gt; array('news/delete'),
+);</pre>
+<pre class="brush: php; title: fuel/app/classes/controller/news.php; notranslate" title="fuel/app/classes/controller/news.php">
+&lt;?php
+
+/**
+ * The News Controller.
+ *
+ * A fuelPHP with Doctrine 2 ORM example.
+ * 
+ * @package  app
+ * @extends  Controller
+ */
+class Controller_News extends Controller
+{
+
+    /**
+     * The news list action.
+     * 
+     * @access  public
+     * @return  Response
+     */
+    public function action_list()
+    {
+        $em = Doctrine_Fuel::manager();
+        $search = Input::post('search');
+        $newsList = $em-&gt;getRepository('Entities\News')-&gt;getNewsList($search);
+
+        return Response::forge(View::forge('news/list', array('newsList' =&gt; $newsList, 'search' =&gt; $search)));
+    }
+
+    /**
+     * News edit or insert action.
+     * 
+     * @access  public
+     * @return  Response
+     */
+    public function action_edit($newsid = null)
+    {
+        $em = Doctrine_Fuel::manager();
+        if($newsid)
+        {
+            $news = $em-&gt;find('Entities\News', $newsid);
+        }
+        else
+        {
+            $news = new \Entities\News();
+        }
+        $form = Fieldset::forge('news')-&gt;add_model('Entities\News', $news);
+
+        if('POST' == Input::method())
+        {
+            $val = $form-&gt;validation();
+            if($val-&gt;run())
+            {
+                $em-&gt;persist($news);
+                $news-&gt;setTitle(Input::post('Title'));
+                $news-&gt;setBody(Input::post('Body'));
+                $news-&gt;setDay(Input::post('Day'));
+                $em-&gt;flush();
+                Response::redirect('news/list');
+            }
+            $form-&gt;repopulate();
+        }
+        return Response::forge(View::forge('news/edit', array('form' =&gt; $form-&gt;build()), false));
+    }
+
+    /**
+     * News delete action.
+     * 
+     * @access  public
+     * @return  Response
+     */
+    public function action_delete($newsid)
+    {
+        $em = Doctrine_Fuel::manager();
+        if($newsid)
+        {
+            $news = $em-&gt;find('Entities\News', $newsid);
+            if($news)
+            {
+                $em-&gt;remove($news);
+                $em-&gt;flush();
+            }
+        }
+        Response::redirect('news/list');
+    }
+}</pre>
+<p>news/list<br />
+<a href="http://www.cry-kit.com/wp-content/uploads/2012/12/list.jpg"><img src="http://www.cry-kit.com/wp-content/uploads/2012/12/list.jpg" alt="News List" title="list"  class="alignnone size-full wp-image-136" /></a><br />
+news/edit<br />
+<a href="http://www.cry-kit.com/wp-content/uploads/2012/12/edit.jpg"><img src="http://www.cry-kit.com/wp-content/uploads/2012/12/edit.jpg" alt="News Edit" title="edit"  class="alignnone size-full wp-image-135" /></a><br />
+特に違和感無く内臓ORMのように使えています。</p>
+<p>6.最後に<br />
+題材がORMということもあり少々長い上に難しい内容になってしまいましたが、いかがでしたでしょうか。<br />
+少し手を加えるだけで今まで使っていたライブラリの機能も利用する事もできます。</p>
+<p>明日は@_halt_compilerさんの『某サービスでFuelPHPを使った際のアレコレ（仮）』です。</p>
+			</div><!--/entry -->
+		</div><!-- .entry-container -->
+<footer class="post-footer postdata fix">
+<span class="author"><span class="icon">&nbsp;</span>Posted by <span class="vcard"><a href="http://www.cry-kit.com/?author=1" class="url fn" rel="author">admin</a></span> at 12:00 AM</span></footer><!-- .post-footer -->
+<section id="comments">
+								<div id="respond">
+				<h3 id="reply-title"><span class="icon">&nbsp;</span>Leave a Reply <small><a rel="nofollow" id="cancel-comment-reply-link" href="/?p=53#respond" style="display:none;">Cancel reply</a></small></h3>
+									<form action="http://www.cry-kit.com/wp-comments-post.php" method="post" id="commentform">
+																			<span></span>							
+					<p>
+						<label for='author' class='suf-comment-label'>Name</label>
+						<input type='text' name='author' id='author' class='textarea' value='' size='28' tabindex='1' /> (required)
+					</p>
+
+					<p>
+						<label for='email' class='suf-comment-label'>E-mail</label>
+						<input type='text' name='email' id='email' value='' size='28' tabindex='2' class='textarea' /> (required)
+					</p>
+
+					<p>
+						<label for='url' class='suf-comment-label'>URI</label>
+						<input type='text' name='url' id='url' value='' size='28' tabindex='3' class='textarea' />
+					</p>
+												
+					<p>
+						<label for='comment' class='textarea suf-comment-label'>Your Comment</label>
+						<textarea name='comment' id='comment' cols='60' rows='10' tabindex='4' class='textarea'></textarea>
+					</p>						<p class="form-allowed-tags">You may use these <abbr title="HyperText Markup Language">HTML</abbr> tags and attributes: <code>&lt;a href=&quot;&quot; title=&quot;&quot;&gt; &lt;abbr title=&quot;&quot;&gt; &lt;acronym title=&quot;&quot;&gt; &lt;b&gt; &lt;blockquote cite=&quot;&quot;&gt; &lt;cite&gt; &lt;code&gt; &lt;del datetime=&quot;&quot;&gt; &lt;em&gt; &lt;i&gt; &lt;q cite=&quot;&quot;&gt; &lt;strike&gt; &lt;strong&gt; </code></p>						<p class="form-submit">
+							<input name="submit" type="submit" id="submit" value="Submit Comment" />
+							<input type='hidden' name='comment_post_ID' value='53' id='comment_post_ID' />
+<input type='hidden' name='comment_parent' id='comment_parent' value='0' />
+						</p>
+											</form>
+							</div><!-- #respond -->
+						</section>   <!-- #comments -->	</article><!--/post -->
+<nav class='post-nav fix'>
+<table>
+<tr>
+	<td class='previous'><a href="http://www.cry-kit.com/?p=5" rel="prev"><span class="icon">&nbsp;</span> ブログ開設</a></td>
+	<td class='next'></td>
+</tr>
+</table>
+</nav>
+      </div><!-- content -->
+    </div><!-- main col -->
+<div id='sidebar-shell-1' class='sidebar-shell sidebar-shell-right'>
+<div class="dbx-group right boxed warea" id="sidebar">
+<!--widget start --><aside id="search-2" class="dbx-box suf-widget search"><div class="dbx-content">
+<form method="get" class="searchform " action="http://www.cry-kit.com/">
+	<input type="text" name="s" class="searchfield"
+			value="Search"
+			onfocus="if (this.value == 'Search') {this.value = '';}"
+			onblur="if (this.value == '') {this.value = 'Search';}"
+			/>
+	<input type="submit" class="searchsubmit" value="" name="searchsubmit" />
+</form>
+</div></aside><!--widget end -->		<!--widget start --><aside id="recent-posts-2" class="dbx-box suf-widget widget_recent_entries"><div class="dbx-content">		<h3 class="dbx-handle plain">最近の投稿</h3>		<ul>
+				<li><a href="http://www.cry-kit.com/?p=53" title="[FuelPHP Advent Calendar 2012]FuelPHPへのDoctrine2組み込み">[FuelPHP Advent Calendar 2012]FuelPHPへのDoctrine2組み込み</a></li>
+				<li><a href="http://www.cry-kit.com/?p=9" title="自己紹介">自己紹介</a></li>
+				<li><a href="http://www.cry-kit.com/?p=5" title="ブログ開設">ブログ開設</a></li>
+				</ul>
+		</div></aside><!--widget end --><!--widget start --><aside id="recent-comments-2" class="dbx-box suf-widget widget_recent_comments"><div class="dbx-content"><h3 class="dbx-handle plain">最近のコメント</h3><ul id="recentcomments"></ul></div></aside><!--widget end --><!--widget start --><aside id="archives-2" class="dbx-box suf-widget widget_archive"><div class="dbx-content"><h3 class="dbx-handle plain">アーカイブ</h3>		<ul>
+			<li><a href='http://www.cry-kit.com/?m=201212' title='2012年12月'>2012年12月</a></li>
+	<li><a href='http://www.cry-kit.com/?m=201211' title='2012年11月'>2012年11月</a></li>
+		</ul>
+</div></aside><!--widget end --><!--widget start --><aside id="categories-2" class="dbx-box suf-widget widget_categories"><div class="dbx-content"><h3 class="dbx-handle plain">カテゴリー</h3>		<ul>
+	<li class="cat-item cat-item-5"><a href="http://www.cry-kit.com/?cat=5" >Doctrine2</a>
+</li>
+	<li class="cat-item cat-item-4"><a href="http://www.cry-kit.com/?cat=4" >FuelPHP</a>
+</li>
+	<li class="cat-item cat-item-3"><a href="http://www.cry-kit.com/?cat=3" >PHP</a>
+</li>
+	<li class="cat-item cat-item-1"><a href="http://www.cry-kit.com/?cat=1" >未分類</a>
+</li>
+		</ul>
+</div></aside><!--widget end --><!--widget start --><aside id="meta-2" class="dbx-box suf-widget widget_meta"><div class="dbx-content"><h3 class="dbx-handle plain">メタ情報</h3>			<ul>
+			<li><a href="http://www.cry-kit.com/wp-login.php?action=register">登録</a></li>			<li><a href="http://www.cry-kit.com/wp-login.php">ログイン</a></li>
+			<li><a href="http://www.cry-kit.com/?feed=rss2" title="このサイトを RSS2.0 で購読">投稿の <abbr title="Really Simple Syndication">RSS</abbr></a></li>
+			<li><a href="http://www.cry-kit.com/?feed=comments-rss2" title="すべての投稿への最新コメントを RSS で購読">コメントの <abbr title="Really Simple Syndication">RSS</abbr></a></li>
+			<li><a href="http://ja.wordpress.org/" title="Powered by WordPress, state-of-the-art semantic personal publishing platform.">WordPress.org</a></li>
+						</ul>
+</div></aside><!--widget end --></div><!--/sidebar -->
+</div>
+	</div><!-- /container -->
+
+<footer>
+	<div id="cred">
+		<table>
+			<tr>
+				<td class="cred-left">&#169; 2012 <a href='http://www.cry-kit.com'>Cry-Kit</a></td>
+				<td class="cred-center"></td>
+				<td class="cred-right"><a href="http://aquoid.com/news/themes/suffusion/">Suffusion theme by Sayontan Sinha</a></td>
+			</tr>
+		</table>
+	</div>
+</footer>
+<!-- 43 queries, 9MB in 0.313 seconds. -->
+</div><!--/wrapper -->
+<!-- location footer -->
+<script type='text/javascript' src='http://www.cry-kit.com/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shCore.js?ver=3.0.83c'></script>
+<script type='text/javascript' src='http://www.cry-kit.com/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushPlain.js?ver=3.0.83c'></script>
+<script type='text/javascript' src='http://www.cry-kit.com/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushPhp.js?ver=3.0.83c'></script>
+<script type='text/javascript' src='http://www.cry-kit.com/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushJScript.js?ver=3.0.83c'></script>
+<script type='text/javascript'>
+	(function(){
+		var corecss = document.createElement('link');
+		var themecss = document.createElement('link');
+		var corecssurl = "http://www.cry-kit.com/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shCore.css?ver=3.0.83c";
+		if ( corecss.setAttribute ) {
+				corecss.setAttribute( "rel", "stylesheet" );
+				corecss.setAttribute( "type", "text/css" );
+				corecss.setAttribute( "href", corecssurl );
+		} else {
+				corecss.rel = "stylesheet";
+				corecss.href = corecssurl;
+		}
+		document.getElementsByTagName("head")[0].insertBefore( corecss, document.getElementById("syntaxhighlighteranchor") );
+		var themecssurl = "http://www.cry-kit.com/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shThemeEclipse.css?ver=3.0.83c";
+		if ( themecss.setAttribute ) {
+				themecss.setAttribute( "rel", "stylesheet" );
+				themecss.setAttribute( "type", "text/css" );
+				themecss.setAttribute( "href", themecssurl );
+		} else {
+				themecss.rel = "stylesheet";
+				themecss.href = themecssurl;
+		}
+		//document.getElementById("syntaxhighlighteranchor").appendChild(themecss);
+		document.getElementsByTagName("head")[0].insertBefore( themecss, document.getElementById("syntaxhighlighteranchor") );
+	})();
+	SyntaxHighlighter.config.strings.expandSource = 'ソースを表示';
+	SyntaxHighlighter.config.strings.help = 'SyntaxHighlighterについて';
+	SyntaxHighlighter.config.strings.alert = 'SyntaxHighlighter\n\n';
+	SyntaxHighlighter.config.strings.noBrush = '指定のブラシが見つかりませんでした: ';
+	SyntaxHighlighter.config.strings.brushNotHtmlScript = 'HTMLスクリプトのオプションのためにブラシが構成されませんでした: ';
+	SyntaxHighlighter.defaults['auto-links'] = false;
+	SyntaxHighlighter.defaults['pad-line-numbers'] = false;
+	SyntaxHighlighter.defaults['smart-tabs'] = false;
+	SyntaxHighlighter.defaults['toolbar'] = false;
+	SyntaxHighlighter.all();
+</script>
+
+</body>
+</html>
