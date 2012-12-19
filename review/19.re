@@ -1,49 +1,49 @@
 
-= @<href>{http://www.cry-kit.com/?p=53,[FuelPHP Advent Calendar 2012]FuelPHPへのDoctrine2組み込み}
+= FuelPHPへのDoctrine2組み込み @<href>{https://twitter.com/ttikitt,@ttikitt}
 
 
 @<href>{http://atnd.org/events/33753,FuelPHP Advent Calendar 2012}の19日目担当の@<href>{https://twitter.com/ttikitt,@ttikitt}です。
+昨日は@<href>{https://twitter.com/tmd45,@tmd45}さんの「さくらのレンタルサーバで FuelPHP を使ってはてなハイクブログを作る－ViewModel を使ってみる編」でした。@<br>{}
 
 
-昨日は@<href>{https://twitter.com/tmd45,@tmd45}さんの『@<href>{http://tech.tmd45.in/entry/2012/12/18/101053,さくらのレンタルサーバで FuelPHP を使ってはてなハイクブログを作る－ViewModel を使ってみる編 #FuelPHPAdvent2012}』でした。
+本日のテーマは「外部ライブラリの組み込み」です。
+ FuelPHPは拡張性に富んだフレームワークで、外部ライブラリを取り込んで、容易に拡張する事ができます。
+ とはいうものの具体的に触れられている機会があまりないので、ORMライブラリの組み込みについて紹介します。@<br>{}
 
 
-本日のテーマは『外部ライブラリの組み込み』です。@<br>{}
- fuelphpは拡張性に富んだフレームワークで、外部ライブラリを取り込んで、容易に拡張する事ができます。@<br>{}
- とはいうものの具体的に触れられている機会があまりないので、ORMライブラリの組み込みについて紹介します。
+先人が居りましたため、こちらのリポジトリを元に解説・調整します。
+
+ * @<href>{https://github.com/aspendigital/fuel-doctrine2,aspendigital/fuel-doctrine2}
 
 
-先人が居りましたため、こちらのリポジトリを元に解説・調整します。@<br>{}
- @<href>{https://github.com/aspendigital/fuel-doctrine2,aspendigital/fuel-doctrine2}
+組み込むライブラリについてはこちら。
+
+ * Doctrine2 ORM(@<href>{http://www.doctrine-project.org/,doctrine project})
 
 
-組み込むライブラリについてはこちら。@<br>{}
- Doctrine2 ORM(@<href>{http://www.doctrine-project.org/,doctrine project})
-
-
-なお、fuelphpのormパッケージも色々な機能を持っています。@<br>{}
+なお、FuelPHPのormパッケージも色々な機能を持っています。
  どちらが優れているという事もないのですが、主に以下の3点の理由で採用しました。
 
 
-・スキーマ定義ファイルからのModelクラス生成@<br>{}
- ・Modelの役割のEntity(Rowデータ管理)とRepository(クエリ関連)への分割@<br>{}
- ・簡易な読み出しをクエリ不要で取得する機能(magic finder ※fuelphpのormにも付いています。)
+ * スキーマ定義ファイルからのModelクラス生成
+ * Modelの役割のEntity(Rowデータ管理)とRepository(クエリ関連)への分割
+ * 簡易な読み出しをクエリ不要で取得する機能(magic finder ※FuelPHPのormにも付いています)
 
 
-Symfony2に組み込まれている高機能なライブラリで、@<br>{}
+Symfony2に組み込まれている高機能なライブラリで、
  他にも色々な機能があるのですが、細かい紹介は省きます。
 
 
-1.fuelphpへの配置@<br>{}
- まずはfuelphp内にファイルを取り込みましょう。
+== 1. FuelPHPへの配置
+ まずはFuelPHP内にファイルを取り込みましょう。
 
 
-・Doctrine2 Object Relational Mapperのダウンロード@<br>{}
+=== Doctrine2 Object Relational Mapperのダウンロード
  最新版の2.3.1をダウンロードします。
 
 
-・fuelphpへの配置@<br>{}
- fuel/app/vendor/@<br>{}
+=== FuelPHPへの配置
+ fuel/app/vendor/
  に以下のように配置します。
 
 #@# lang: .brush: .plain; .gutter: .false; .title: .; .notranslate title=""
@@ -60,10 +60,10 @@ vendor
 #SymfonyをTaskとYAMLの対応のために追加しています。
 
 
-・オートローダーへの追加
+=== オートローダーへの追加
 
 #@# lang: .brush: .php; .highlight: .[0,3,4,5,6,7,8,9,10,11,12,13]; .title: .fuel/app/bootstrap.php; .notranslate title="fuel/app/bootstrap.php"
-//emlist{
+//emlist[fuel/app/bootstrap.php]{
 Autoloader::register();
 
 $dir = dirname(__FILE__) . DS;
@@ -71,8 +71,15 @@ $dir = dirname(__FILE__) . DS;
 Autoloader::add_namespace("Doctrine", $dir . 'vendor' . DS . 'Doctrine' . DS, true);
 Autoloader::add_namespace("Symfony", $dir . 'vendor' . DS . 'Symfony' . DS, true);
 //生成される(予定の)Modelも追加しておきます。
-Autoloader::add_namespace('Entities', $dir . 'classes' . DS . 'model' . DS . 'Entities' . DS, true);
-Autoloader::add_namespace('Repositories', $dir . 'classes' . DS . 'model' . DS . 'Repositories' . DS, true);
+Autoloader::add_namespace(
+    'Entities',
+    $dir . 'classes' . DS . 'model' . DS . 'Entities' . DS,
+    true
+);
+Autoloader::add_namespace('Repositories',
+    $dir . 'classes' . DS . 'model' . DS . 'Repositories' . DS,
+    true
+);
 //ラッパーを追加します。
 Autoloader::add_namespace('Doctrine_Fuel', $dir . 'classes' . DS);
 Autoloader::alias_to_namespace('Doctrine_Fuel\Doctrine_Fuel');
@@ -82,7 +89,7 @@ Autoloader::alias_to_namespace('Doctrine_Fuel\Doctrine_Fuel');
 連携のためにラッパークラスを追加しています。
 
 #@# lang: .brush: .php; .collapse: .true; .highlight: .[62]; .light: .false; .title: .fuel/app/classes/doctrine/fuel.php; .toolbar: .true; .notranslate title="fuel/app/classes/doctrine/fuel.php"
-//emlist{
+//emlist[fuel/app/classes/doctrine/fuel.php]{
 <?php
 namespace Doctrine_Fuel;
 
@@ -115,7 +122,7 @@ class Doctrine_Fuel
 
     /**
      * Map cache types to class names
-     * Memcache/Memcached can't be set up automatically the way the other types can, so they're not included
+     * Memcache/Memcached can't be set up automatically the way the other types can, so @<raw>{|latex|\n}they're not included
      *
      * @var array
      */
@@ -131,7 +138,7 @@ class Doctrine_Fuel
      * Map metadata driver types to class names
      */
     protected static $metadata_drivers = array(
-            'annotation'=>'', // We'll use the factory method; just here for the exception check
+            'annotation'=>'', // We'll use the factory method; just here for the @<raw>{|latex|\n}exception check
             'php'=>'PHPDriver',
             'simplified_xml'=>'SimplifiedXmlDriver',
             'simplified_yaml'=>'SimplifiedYamlDriver',
@@ -167,10 +174,14 @@ class Doctrine_Fuel
         $config->setAutoGenerateProxyClasses($settings['auto_generate_proxy_classes']);
         $config->setMetadataDriverImpl(static::_init_metadata($config));
 
-        static::$_managers[$connection] = \Doctrine\ORM\EntityManager::create($settings[$connection]['connection'], $config);
+        static::$_managers[$connection] = \Doctrine\ORM\EntityManager::create(
+            $settings[$connection]['connection'],
+            $config
+        );
         if (!empty($settings[$connection]['profiling']))
         {
-            static::$_managers[$connection]->getConnection()->getConfiguration()->setSQLLogger(new Logger($connection));
+            static::$_managers[$connection]->getConnection()->getConfiguration()
+            ->setSQLLogger(new Logger($connection));
         }
     }
 
@@ -202,7 +213,9 @@ class Doctrine_Fuel
             throw new \Exception('Invalid Doctrine2 metadata driver: ' . $type);
 
         if ($type == 'annotation')
-            return $config->newDefaultAnnotationDriver(static::$settings['metadata_path']);
+            return $config->newDefaultAnnotationDriver(
+                static::$settings['metadata_path']
+            );
         $class = '\\Doctrine\\ORM\\Mapping\\Driver\\' . static::$metadata_drivers[$type];
         return new $class(static::$settings['metadata_path']);
     }
@@ -232,11 +245,11 @@ class Doctrine_Fuel
 //}
 
 
-2.Taskの追加@<br>{}
+== 2. Taskの追加
  シェルからのコマンドがありますので、oilから使用できるようにタスクも追加します。
 
 #@# lang: .brush: .php; .title: .fuel/app/tasks/doctrine.php; .notranslate title="fuel/app/tasks/doctrine.php"
-//emlist{
+//emlist[fuel/app/tasks/doctrine.php]{
 <?php
 
 namespace Fuel\Tasks;
@@ -244,12 +257,25 @@ namespace Fuel\Tasks;
 class Doctrine {
     protected static function getCli(){
         $entityManager = \Doctrine_Fuel::manager();
-        $cli = new \Symfony\Component\Console\Application('Doctrine Command Line Interface', \Doctrine\Common\Version::VERSION);
+        $cli = new \Symfony\Component\Console\Application(
+            'Doctrine Command Line Interface',
+            \Doctrine\Common\Version::VERSION
+        );
         $cli->setCatchExceptions(true);
 
         $helperSet = $cli->getHelperSet();
-        $helperSet->set(new \Doctrine\DBAL\Tools\Console\Helper\ConnectionHelper($entityManager->getConnection()), 'db');
-        $helperSet->set(new \Doctrine\ORM\Tools\Console\Helper\EntityManagerHelper($entityManager), 'em');
+        $helperSet->set(
+            new \Doctrine\DBAL\Tools\Console\Helper\ConnectionHelper(
+                $entityManager->getConnection()
+            ),
+           'db'
+        );
+        $helperSet->set(
+            new \Doctrine\ORM\Tools\Console\Helper\EntityManagerHelper(
+                $entityManager
+            ),
+            'em'
+        );
 
         return $cli;
     }
@@ -281,7 +307,9 @@ class Doctrine {
         $cli->addCommands(array(
             new \Doctrine\ORM\Tools\Console\Command\GenerateEntitiesCommand(),
         ));
-        $cli->run(new \Symfony\Component\Console\Input\StringInput('orm:generate-entities ./fuel/app/classes/model'));
+        $cli->run(new \Symfony\Component\Console\Input\StringInput(
+            'orm:generate-entities ./fuel/app/classes/model'
+        ));
     }
 
     //Model生成先を固定したいので別に定義します。
@@ -290,7 +318,9 @@ class Doctrine {
         $cli->addCommands(array(
             new \Doctrine\ORM\Tools\Console\Command\GenerateRepositoriesCommand(),
         ));
-        $cli->run(new \Symfony\Component\Console\Input\StringInput('orm:generate-repositories ./fuel/app/classes/model'));
+        $cli->run(new \Symfony\Component\Console\Input\StringInput(
+            'orm:generate-repositories ./fuel/app/classes/model'
+        ));
     }
 }
 //}
@@ -299,21 +329,21 @@ class Doctrine {
 これで以下のコマンドを使用できるようになっています。
 
 #@# lang: .brush: .jscript; .gutter: .false; .title: .; .notranslate title=""
-//emlist{
-php oil refine doctrine:generate_entities      //Modelの生成
-php oil refine doctrine:generate_repositories  //Modelの生成
-php oil refine doctrine:version                //バージョンの確認
-php oil refine doctrine orm:schema-tool:create //データベースの作成
-php oil refine doctrine orm:schema-tool:update //データベースの更新
-php oil refine doctrine orm:schema-tool:drop   //データベースの削除
+//cmd{
+$ php oil refine doctrine:generate_entities      # Modelの生成
+$ php oil refine doctrine:generate_repositories  # Modelの生成
+$ php oil refine doctrine:version                # バージョンの確認
+$ php oil refine doctrine orm:schema-tool:create # データベースの作成
+$ php oil refine doctrine orm:schema-tool:update # データベースの更新
+$ php oil refine doctrine orm:schema-tool:drop   # データベースの削除
 //}
 
 
-3.configの追加@<br>{}
+== 3. configの追加
  データベース接続の設定は同じというわけにはいかないので、設定の書き方は少し変わります。
 
 #@# lang: .brush: .php; .highlight: .[0,2,3,4,5,6,14,15,16,17,18,19]; .title: .fuel/app/config/db.php; .notranslate title="fuel/app/config/db.php"
-//emlist{
+//emlist[fuel/app/config/db.php]{
 return array(
     'proxy_dir' => APPPATH . 'classes' . DS . 'proxy',
     'proxy_namespace' => 'Proxy',
@@ -344,22 +374,22 @@ return array(
 //}
 
 
-EntityクラスがArrayAccessを備えているため、fuelphpの対策に引っかかってしまう時があります。@<br>{}
+EntityクラスがArrayAccessを備えているため、FuelPHPの対策に引っかかってしまう時があります。
  場合によってはホワイトリストに追加することになります。
 
 #@# lang: .brush: .php; .highlight: .[2]; .title: .fuel/app/config/config.php; .notranslate title="fuel/app/config/config.php"
-//emlist{
+//emlist[fuel/app/config/config.php]{
         'whitelisted_classes' => array(
             'Entities\News',
         )
 //}
 
 
-4.Modelの生成@<br>{}
+== 4. Modelの生成
  スキーマファイルの書式はいくつか利用できますが、今回はYAMLを使用します。
 
 #@# lang: .brush: .plain; .title: .fuel/app/config/schema/Entities.News.dcm.yml; .notranslate title="fuel/app/config/schema/Entities.News.dcm.yml"
-//emlist{
+//emlist[fuel/app/config/schema/Entities.News.dcm.yml]{
 Entities\News:
   type: entity
   repositoryClass: Repositories\News
@@ -390,17 +420,19 @@ Entities\News:
 //}
 
 
-スキーマからModelとデータベースを生成します。@<br>{}
- #php oil refine doctrine:generate_entities@<br>{}
- #php oil refine doctrine:generate_repositories@<br>{}
- #php oil refine doctrine orm:schema-tool:create –force
+スキーマからModelとデータベースを生成します。
 
+//cmd{
+$ php oil refine doctrine:generate_entities
+$ php oil refine doctrine:generate_repositories
+$ php oil refine doctrine orm:schema-tool:create -force
+//}
 
 実行するとfuel/app/classes/modelのEntitiesとRepositoriesにクラスが生成されています。@<br>{}
  ついでにちょっとした改造も加えますが、この変更は再生成しても自動的にマージされます。  
 
 #@# lang: .brush: .php; .collapse: .true; .highlight: .[133,135,156,158,200,201,209]; .light: .false; .title: .fuel/app/classes/model/Entities/News.php; .toolbar: .true; .notranslate title="fuel/app/classes/model/Entities/News.php"
-//emlist{
+//emlist[fuel/app/classes/model/Entities/News.php]{
 <?php
 
 namespace Entities;
@@ -612,20 +644,23 @@ class News {
         setUpdated();
     }
 
- 　　　/**
+    /**
      * FieldSetとの連携用
      */
     public static function set_form_fields($fieldset, $instance = null){
-        $fieldset->add('Title', 'Title', array('type' => 'text'), array(array('required')));
+        $fieldset->add(
+            'Title', 'Title', array('type' => 'text'), array(array('required'))
+        );
         $fieldset->add('Body', 'Body', array(
-　　　　　　　　　　　'type' => 'textarea',
-　　　　　　　　　　　'rows' => 8,), array(array('required')));
+                      'type' => 'textarea',
+                      'rows' => 8,), array(array('required')));
         $fieldset->add('Day', 'Day', array('type' => 'text'), array(array('required')));
         if($instance){
             $fieldset->populate(array(
                 'Title' => $instance->getTitle(),
                 'Body' => $instance->getBody(),
-                'Day' => $instance->getDay()?$instance->getDay()->format('Y-m-d'):date('Y-m-d'),
+                'Day' => $instance->getDay() ? $instance->getDay()->format('Y-m-d')
+                         : date('Y-m-d'),
             ));
         }
     }
@@ -636,7 +671,7 @@ class News {
 ゲッター・セッター、前処理を備えたクラスができています。
 
 #@# lang: .brush: .php; .highlight: .[0,15,16,17,18,19,20,21,22]; .title: .fuel/app/classes/model/Repositories/News.php; .notranslate title="fuel/app/classes/model/Repositories/News.php"
-//emlist{
+//emlist[fuel/app/classes/model/Repositories/News.php]{
 <?php
 
 namespace Repositories;
@@ -653,7 +688,7 @@ class News extends EntityRepository {
 
     public function getNewsList($filter = ''){
         $q = $this->createQueryBuilder('n')
-　　　　　　　　　->orderBy('n.Day', 'DESC');
+                  ->orderBy('n.Day', 'DESC');
         if($filter){
             $q->where('n.title LIKE ?1')
               ->setParameter(1, '%'.$filter.'%');
@@ -667,11 +702,11 @@ class News extends EntityRepository {
 こちらは空ですが、magic finderは使えます。
 
 
-5.使ってみる！@<br>{}
+== 5. 使ってみる！
  駆け足でやってまいりましたが、一番大事な使い勝手を軽く試してみましょう。
 
 #@# lang: .brush: .php; .highlight: .[3,5,6]; .title: .fuel/app/config/routes.php; .notranslate title="fuel/app/config/routes.php"
-//emlist{
+//emlist[fuel/app/config/routes.php]{
 <?php
 return array(
     '_root_'  => 'news/list',  // The default route
@@ -682,7 +717,7 @@ return array(
 //}
 
 #@# lang: .brush: .php; .title: .fuel/app/classes/controller/news.php; .notranslate title="fuel/app/classes/controller/news.php"
-//emlist{
+//emlist[fuel/app/classes/controller/news.php]{
 <?php
 
 /**
@@ -708,7 +743,9 @@ class Controller_News extends Controller
         $search = Input::post('search');
         $newsList = $em->getRepository('Entities\News')->getNewsList($search);
 
-        return Response::forge(View::forge('news/list', array('newsList' => $newsList, 'search' => $search)));
+        return Response::forge(View::forge(
+            'news/list', array('newsList' => $newsList, 'search' => $search)
+        ));
     }
 
     /**
@@ -744,7 +781,9 @@ class Controller_News extends Controller
             }
             $form->repopulate();
         }
-        return Response::forge(View::forge('news/edit', array('form' => $form->build()), false));
+        return Response::forge(View::forge(
+            'news/edit', array('form' => $form->build()), false
+        ));
     }
 
     /**
@@ -771,18 +810,28 @@ class Controller_News extends Controller
 //}
 
 
-news/list@<br>{}
+news/list
 //image[list][News List]{
 //}
- news/edit@<br>{}
+
+news/edit
 //image[edit][News Edit]{
 //}
  特に違和感無く内臓ORMのように使えています。
 
 
-6.最後に@<br>{}
- 題材がORMということもあり少々長い上に難しい内容になってしまいましたが、いかがでしたでしょうか。@<br>{}
- 少し手を加えるだけで今まで使っていたライブラリの機能も利用する事もできます。
+== 6. 最後に
+ 題材がORMということもあり少々長い上に難しい内容になってしまいましたが、いかがでしたでしょうか。
+ 少し手を加えるだけで今まで使っていたライブラリの機能も利用する事もできます。@<br>{}
 
 
-明日は@_halt_compilerさんの『某サービスでFuelPHPを使った際のアレコレ(仮)』です。
+明日は@_halt_compilerさんの「某サービスでFuelPHPを使った際のアレコレ(仮)」です。
+
+//quote{
+@<strong>{@ttikitt}
+
+Twitter: @<href>{https://twitter.com/ttikitt,@ttikitt}
+
+Blog: @<href>{http://www.cry-kit.com/,http://www.cry-kit.com/}
+//}
+
