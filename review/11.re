@@ -1,4 +1,3 @@
-
 = FuelPHP + NetBeans + Gitで高速開発環境を整える @<href>{https://twitter.com/LandscapeSketch,@LandscapeSketch}
 
 
@@ -115,11 +114,9 @@ NetBeansでプロジェクトを作成します。[ファイル]→[新規プロ
 NetBeansでFuelPHPを便利に使うために、プラグインが開発されています。ただ、現状はほとんど機能が搭載されていないのですが、プロジェクトのアイコンがFuelPHPタイプに変化してうれしいので入れておきます。@<br>{}
 
 
-ダウンロードはこちら　＞　@<href>{https://github.com/junichi11/fuelphp-netbeans/downloads,https://github.com/junichi11/fuelphp-netbeans/downloads} @TODO GitHubのdownloadsは廃止される
+ダウンロードはこちら　＞　@<href>{http://plugins.netbeans.org/plugin/44665/php-fuelphp-framework,http://plugins.netbeans.org/plugin/44665/php-fuelphp-framework}
 
-
-NetBeansの@<strong>{7.2}、@<strong>{7.2.1}で分かれています。
-
+プラグインはNetBeans 7.2.1が必要です。7.2以下の場合はNetBeansを更新してください。
 
 //image[2012-11-21-22_51_11][]{
 //}
