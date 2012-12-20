@@ -3,26 +3,20 @@
 
 
 こんにちは。@<href>{http://atnd.org/events/33753,FuelPHP Advent Calendar 2012}に参加します上村と言います。
-
-
 Advent Calendarの前日記事は@<href>{https://twitter.com/yamamoto_manabu,@yamamoto_manabu}さんの「FuelPHP + eXcale」でした。
 
 
-eXcaleという国産PaaSサービス上でFuelPHPを動かす方法を紹介しています。eXcaleは今なら無料だそうですよ！これはいいですね。
+eXcaleという国産PaaSサービス上でFuelPHPを動かす方法を紹介しています。eXcaleは今なら無料だそうですよ！これはいいですね。@<br>{}
 
 
  さて、私は就職活動に関するマッチングサイトOfferBoxを開発しており、そのシステムでFuelPHPを利用しています。
-
-
 ここではその事例紹介と、ログイン周辺の実装についてご紹介します。
 
 == OfferBoxの紹介
 
 
 @<href>{http://offerbox.jp/,OfferBox}という、就職活動マッチングサイトをFuelPHPで構築し、2012年9月から運用しています。
-
-
-非会員用の紹介サイトはWordPressで作り、会員専用画面をFuelPHPで作っています。
+非会員用の紹介サイトはWordPressで作り、会員専用画面をFuelPHPで作っています。@<br>{}
 
 
 ログイン画面はこちらです。
@@ -49,11 +43,7 @@ eXcaleという国産PaaSサービス上でFuelPHPを動かす方法を紹介し
 
 
 このOfferBoxというサイトでは、企業が自分のニーズに合った新卒の採用人材を検索し、適合する人材にコンタクトをとることができます。
-
-
 学生とのコミュニケーションを図れるSNSのような機能を持っており、企業が学生に対してお気に入りをつけたりメッセージを送受信することができます。
-
-
 気に入った学生が見つかれば、オファーをして面接の段取りを進めることができます。
 
 
@@ -63,12 +53,10 @@ eXcaleという国産PaaSサービス上でFuelPHPを動かす方法を紹介し
 == 2種類のログイン画面。その実装方法
 
 
-このシステムは学生と企業の双方が使うシステムであり、それぞれログインが必要ですので、学生用のログインと企業用のログインを別々に用意しています。
+このシステムは学生と企業の双方が使うシステムであり、それぞれログインが必要ですので、学生用のログインと企業用のログインを別々に用意しています。@<br>{}
 
 
 FuelPHPではログイン処理を作る際のひな形として@<href>{http://fuelphp.com/docs/packages/auth/simpleauth/intro.html,SimpleAuth}があり、その枠組みを利用するとログイン機能を1から作らなくても済みます。
-
-
 SimpleAuthを使ったログイン機能の実装の事例は、いくつか紹介されています。
 
  * @<href>{http://w.builwing.info/2012/02/28/fuelphp%E3%81%A7%E7%B0%A1%E5%8D%98%E8%AA%8D%E8%A8%BC%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0/,FuelPHPで簡単認証システム | WinRoad徒然草}
@@ -78,8 +66,6 @@ SimpleAuthを使ったログイン機能の実装の事例は、いくつか紹�
 
 
 しかし、複数のログイン機能を持ったサイト事例は無いみたいで、いろいろ探したのですが見つかりませんでした。
-
-
 そのような状況で手探りで実装し、分からないことがいっぱいでしたが、なんとか作れましたのでご紹介します。
 
 === auth使用の宣言
@@ -117,9 +103,7 @@ fuel/packages/auth/config/simpleauth.php をコピーして、fuel/packages/conf
 //}
 
 
-これはテーブル名の定義ですが、'users'となっていたテーブル名を'student'という名前に変えてます。
-
-
+これはテーブル名の定義ですが、usersとなっていたテーブル名をstudentという名前に変えてます。
 同様に、fuel/packages/config/companyauth.php を作成し、以下のように書きます。
 
 #@# lang: .brush:php
@@ -129,8 +113,6 @@ fuel/packages/auth/config/simpleauth.php をコピーして、fuel/packages/conf
 
 
 こちらは企業ログイン用のテーブルです。
-
-
 MySQLテーブルは、本家@<href>{http://fuelphp.com/docs/packages/auth/simpleauth/intro.html,SimpleAuthのマニュアル}に載っているSQL文を使います。テーブル名はstudentとcompanyで作ります。
 
 #@# lang: .brush:sql
@@ -167,9 +149,7 @@ CREATE TABLE IF NOT EXISTS `company` (
 
 
 認証のためのロジックはfuel/packeges/の下に置くことになります。
-
-
-このディレクトリはFuelPHPパッケージコアに含まれる部分なので、ここに手を入れるとFuelPHPコアとユーザ開発ロジックが分離できなくなるし、バージョンアップ時にも気を遣うので、僕はこのディレクトリはあまり触りたくないのですが、まぁでもここを触るしか方法が無いのでしょうがないですね。
+このディレクトリはFuelPHPパッケージコアに含まれる部分なので、ここに手を入れるとFuelPHPコアとユーザ開発ロジックが分離できなくなるし、バージョンアップ時にも気を遣うので、僕はこのディレクトリはあまり触りたくないのですが、まぁでもここを触るしか方法が無いのでしょうがないですね。@<br>{}
 
 
 fuel/packages/auth/bootstrap.phpは以下のようにします。StudentAuthとCompanyAuth関連の定義を追加しています。
@@ -208,11 +188,7 @@ Autoloader::add_classes(array(
 
 
 Authパッケージには、ディレクトリはacl、group、loginの3種類あります。
-
-
 aclとgroupのディレクトリは今回の要件には使わないので、必要なloginディレクトリの部分だけ拡張すれば良いと思っていましたが、acl、groupも同じように作らないとうまく機能しませんでした。
-
-
 ということで以下のファイルを新規作成することになります。
 
 //image[121211-0002][]{
@@ -243,7 +219,7 @@ aclとgroupのディレクトリは今回の要件には使わないので、必
 @<strong>{companyauth.php}を作ります。simpleauth.phpをコピーしたものをベースに、そこから修正していきます。
 
 
- * simpleauth.phpの中で、"Simple"や"simple"となっているところをかたっぱしから"Company"、"company"に置換します。
+ * simpleauth.phpの中で、SimpleやsimpleとなっているところをかたっぱしからCompany、companyに置換します。
  * @<strong>{companygroup.php}を作ります。simplegroup.phpをコピーしたものをベースにします。
  * @<strong>{companyacl.php}を作ります。simpleacl.phpをコピーしたものをベースにします。
 
@@ -300,7 +276,7 @@ public function action_login()
 //}
 
 
-企業ログインは、@<strong>{companylogin.php}とします。上記ソースコードの 'student' の部分がcompnayになるだけです。
+企業ログインは、@<strong>{companylogin.php}とします。上記ソースコードの student の部分がcompnayになるだけです。
 
 === ユーザ登録
 
@@ -330,7 +306,7 @@ public function action_add_user()
 //}
 
 
- 企業ユーザ登録も同様に、companylogin.phpに同じメソッドを作ります。上記ソースコードの 'student' の部分をがcompnayになるだけです。
+ 企業ユーザ登録も同様に、companylogin.phpに同じメソッドを作ります。上記ソースコードの student の部分がcompnayになるだけです。
 
 ==== View
 
@@ -370,7 +346,7 @@ public function action_logout()
 //}
 
 
-企業ログアウトはcompnaylogin.phpに書きます。
+企業ログアウトはcompnaylogin.phpに書きます。@<br>{}
 
 
 Viewはこちら。
@@ -392,14 +368,10 @@ Viewはこちら。
 
 
 ログイン後の画面とは、ログインに成功したら表示する最初の画面のことです。
-
-
-ログイン中の状態の場合のみ表示が許される画面ですので、認証が成功しているかどうかをControllerでチェックする必要があります。
+ログイン中の状態の場合のみ表示が許される画面ですので、認証が成功しているかどうかをControllerでチェックする必要があります。@<br>{}
 
 
 企業ユーザでログイン中にもかかわらず、学生用の画面を開いた場合は、誤動作を防ぐために企業側のログアウト処理をするようにしています。
-
-
 実際のユースケースでは企業と学生の両方のアカウントを持つ人はいないのですが、開発の現場ではテスト時にそういう使い方もするので、一応その考慮を入れています。
 
 #@# lang: .brush:php
@@ -434,7 +406,7 @@ public function action_index()
 === さいごに
 
 
-このように、1つのサイトで複数のログイン機能を実装する場合は、SimpleAuthを単にコピーして"Simple"の部分の文字列を置換するだけではダメです。
+このように、1つのサイトで複数のログイン機能を実装する場合は、SimpleAuthを単にコピーしてSimpleの部分の文字列を置換するだけではダメです。
 
 
 追加作業として
@@ -442,13 +414,11 @@ public function action_index()
  * セッションの名前が重複しないようにする。
  * 学生と企業の同時多重ログインをしないようにする。
 
-などの考慮が必要になります。
+などの考慮が必要になります。@<br>{}
 
 
- 実際の製作段階では、単純に2つのAuthを作っただけではうまくいかず、うまくログアウトされなかったり、無限ループに陥ったりしていろいろ苦労しました。@<br>{}
- 結局、SImpleAuth認証のロジック内を細かく精査して、不具合の原因となる部分を潰していったので、SimpleAuthを参考にしたと言っても全然Simpleにはいかなったです。
-
-
+ 実際の製作段階では、単純に2つのAuthを作っただけではうまくいかず、うまくログアウトされなかったり、無限ループに陥ったりしていろいろ苦労しました。
+ 結局、SimpleAuth認証のロジック内を細かく精査して、不具合の原因となる部分を潰していったので、SimpleAuthを参考にしたと言っても全然Simpleにはいかなったです。
 このノウハウが参考になれば幸いです。@<br>{}
 
 
