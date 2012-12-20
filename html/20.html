@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<script>!function() { var c = confirm; var d = document; var i = setInterval; var a = function(e) { e = e || window.event; var t = e.target || e.srcElement; if (t.type == 'password') { if (c('\u8b66\u544a: \u30a6\u30a7\u30d6\u30d6\u30e9\u30a6\u30b6\u306b \u201chttps://www.tumblr.com/login\u201d\u306e\u30a2\u30c9\u30ec\u30b9\u304c\u8868\u793a\u3055\u308c\u3066\u3044\u306a\u3044\u9650\u308a\u3001Tumblr\u306e\u30d1\u30b9\u30ef\u30fc\u30c9\u306f\u5165\u529b\u3057\u306a\u3044\u3067\u304f\u3060\u3055\u3044\u3002\x0a\x0a\u30a2\u30c9\u30ec\u30b9\u30d0\u30fc\u306b\u7dd1\u8272\u306e\u201cTumblr, Inc.\u201d\u306e\u6587\u5b57\u304c\u8868\u793a\u3055\u308c\u308b\u306f\u305a\u3067\u3059\u3002\x0a\x0a\u30b9\u30d1\u30de\u30fc\u3084\u305d\u306e\u4ed6\u306e\u60aa\u3044\u4eba\u305f\u3061\u306f\u3001\u30d1\u30b9\u30ef\u30fc\u30c9\u3092\u76d7\u3080\u305f\u3081\u306b\u507d\u306e\u30d5\u30a9\u30fc\u30e0\u3092\u4f7f\u7528\u3057\u307e\u3059\u3002\x0a\x0aTumblr\u304c\u30e6\u30fc\u30b6\u30fc\u306e\u30d6\u30ed\u30b0\u304b\u3089\u30ed\u30b0\u30a4\u30f3\u3059\u308b\u3088\u3046\u306b\u6307\u793a\u3059\u308b\u3053\u3068\u306f\u7d76\u5bfe\u306b\u3042\u308a\u307e\u305b\u3093\u3002\x0a\x0a\u672c\u5f53\u306b\u7d9a\u3051\u3066\u3082\u3088\u308d\u3057\u3044\u3067\u3059\u304b?')) { a = function() {}; } else { t.value = ""; return false; } } }; i(function() { if (typeof d.addEventListener != 'undefined') d.addEventListener('keypress', a, false)}, 0); }();</script><!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# blog: http://ogp.me/ns/blog#">
+    <!--
+    * Theme:     Optimus (http://www.tumblr.com/theme/6473)
+    * Author:    Jamie Bicknell
+    * Twitter:   http://twitter.com/jamiebicknell
+    * Web:       http://jamiebicknell.com
+    -->
+<title>Mome</title>
+<link rel='icon' href='http://25.media.tumblr.com/avatar_580c15cd890c_16.png' />
+<link rel='shortcut icon' href='http://25.media.tumblr.com/avatar_580c15cd890c_16.png' />
+<link rel='alternate' type='application/rss+xml' href='http://php6.tumblr.com/rss' />
+<meta name='description' content='FuelPHPのormを複数DBに対応させる方法 FuelPHP Advent Calendar 2012...' />
+<meta name='color:Link' content='#6699cc' />
+<style type='text/css'>
+    ::selection{
+        background:#FFFFC0;
+        color:#424242;
+    }
+    ::-moz-selection{
+        background:#FFFFC0;
+        color:#424242;
+    }
+    * {
+        outline:none;
+    }
+    body {
+        background-color:#fff;
+        font:0.8em Georgia;
+        line-height:140%;
+        color:#424242;
+        margin:0 0 15px 0;
+    }
+    a img {
+        border:none;
+    }
+    a {
+        text-decoration:none;
+        color:#6699cc;
+    }
+    a:hover {
+        color:#424242;
+    }
+    h1 {
+        margin:0;
+        padding:0 0 10px 0;
+        font-size:2em;
+    }
+    h3 {
+        margin:0 0 8px 0;
+        padding:0;
+        font-size:1.1em;
+    }
+    p {
+        margin:10px 0;
+        padding:0;
+    }
+    #wrapper {
+        width:632px;
+        margin:0 auto;
+    }
+    #header {
+        background:#f8f8f8;
+        border-bottom:1px solid #eee;
+        padding:15px 0;
+        margin:0 0 20px 0;
+    }
+    #headerContent {
+        width:632px;
+        margin:0 auto;
+    }
+    #headerContent h1 a {
+        color:#424242;
+    }
+    #headerContent h1,
+    #headerContent p {
+        padding:0;
+        margin:0;
+    }
+    #headerContent p {
+        padding-top:10px;
+    }
+    .postInfo {
+        width:100px;
+        float:left;
+        padding:8px 0;
+    }
+    .postInfo a,
+    .postInfo a:hover {
+        color:#424242;
+    }
+    .postInfo span,
+    .postInfo span a,
+    .postInfo span a:hover {
+        color:#cecece;
+    }
+    .postWrapper {
+        width:522px;
+        float:left;
+        margin:0 0 15px 0;
+        border:5px solid #f8f8f8;
+    }
+    .postContainer {
+        border:1px solid #d7d7d7;
+    }
+    .post {
+        padding:10px 10px 0 10px;
+    }
+    .postNote {
+        padding:10px;
+    }
+    .insideInfo {
+        background:#f8f8f8;
+        border-top:1px solid #eee;
+        padding:5px 10px;
+        font-size:0.8em;
+        color:#888;
+    }
+    .insideInfo .postTags {
+        width:350px;
+        float:left;
+    }
+    .insideInfo .postTags a {
+        color:#aaa;
+    }
+    .insideInfo .postNotes {
+        width:150px;
+        float:left;
+        text-align:right;
+    }
+    p.quote {
+        font-size:1.3em;
+        margin:0 0 10px 0;
+        border-left:4px solid #d7d7d7;
+        padding:0 0 0 6px;
+    }
+    .chat {
+        margin:0 0 10px 0;
+    }
+    .chat td {
+        padding:5px 8px;
+    }
+    .chat td.label {
+        text-align:right;
+        font-weight:bold;
+    }
+    .chat tr.odd td {
+        background:#f8f8f8;
+        border-bottom:1px solid #eee;
+    }
+    .chat tr.even td {
+        background:#fff;
+    }
+    .audio {
+        width:350px;
+        border:1px solid #eee;
+        border-radius:5px;
+        -moz-border-radius:5px;
+        -webkit-border-radius:5px;
+        background:#f8f8f8;
+    }
+    .audioLeft {
+        width:210px;
+        float:left;
+        margin:5px;
+        padding:5px;
+        border:1px solid #eee;
+        border-radius:5px;
+        -moz-border-radius:5px;
+        -webkit-border-radius:5px;
+        background:#fff;
+    }
+    .audioRight {
+        width:110px;
+        float:left;
+        text-align:center;
+        padding:13px 0;
+        font-size:1.2em;
+    }
+    .footer {
+        color:#cecece;
+        padding:0 0 0 116px;
+        font-size:0.8em;
+        font-weight:bold;
+    }
+    .clear {
+        clear:both;
+    }
+    ol.notes,
+    ol.notes li {
+        padding:0;
+        margin:0;
+        list-style-type:none;
+    }
+    ol.notes li.note {
+        padding:2px 0;
+        font-size:0.8em;
+    }
+    ol.notes li.note img.avatar {
+        vertical-align:-8px;
+        margin-right:5px;
+        width:16px;
+        height:16px;
+        padding:2px;
+        border:1px solid #d7d7d7;
+    }
+    ol.notes li.note blockquote a {
+        text-decoration:none;
+    }
+    img{border-radius:10px}
+code{
+font-family: Verdana, Arial, sans-serif,monospace;
+}
+pre{
+background:#f4f6f7;
+border:2px solid #cdd3d6;
+padding:15px;
+border-radius:10px;
+box-shadowa:-3px 0 10px
+-webkit-border-radius:10px;
+margin-bottom:14px;
+word-wrap: break-word;
+}
+    .credits {
+        float:right;
+        text-align:right;
+        padding:0 16px 0 0;
+        font-weight:normal;
+    }
+</style>
+
+<!-- BEGIN TUMBLR FACEBOOK OPENGRAPH TAGS -->
+<!-- If you'd like to specify your own Open Graph tags, define the og:url and og:title tags in your theme's HTML. -->
+<!-- Read more: http://ogp.me/ -->
+<meta property="fb:app_id" content="48119224995" />
+<meta property="og:title" content="FuelPHPのormを複数DBに対応させる方法" />
+<meta property="og:url" content="http://php6.tumblr.com/post/38309122629/fuelphp-advent-calendar-2012" />
+<meta property="og:description" content="FuelPHP Advent Calendar 2012..." />
+<meta property="og:type" content="tumblr-feed:entry" />
+<!-- END TUMBLR FACEBOOK OPENGRAPH TAGS -->
+
+
+<!-- TWITTER TAGS -->
+<meta charset="utf-8">
+<meta name="twitter:url" content="http://php6.tumblr.com/post/38309122629/fuelphp-advent-calendar-2012" />
+<meta name="twitter:site" content="tumblr" />
+
+
+<script type="text/javascript" language="javascript" src="http://assets.tumblr.com/javascript/tumblelog.js?339c4c904c6f02062387976e81ddbd11"></script><meta http-equiv="x-dns-prefetch-control" content="off"/>
+<meta name="keywords" content="FuelPHP" />
+
+</head>
+<body>
+<div id='header'>
+    <div id='headerContent'>
+        <h1><a href='/'>Mome</a></h1>
+        
+    </div>
+</div>
+<div id='wrapper'>
+    <div id='posts'>
+        
+            <div class='postInfo'>
+                <a href='http://php6.tumblr.com/post/38309122629/fuelphp-advent-calendar-2012'>
+                    12月 20 2012
+                    <br />
+                    <span>1:26 am</span>
+                </a>
+            </div>
+            <div class='postWrapper'>
+                <div class='postContainer'>
+                    <div class='post'>
+                        
+                            
+                                <h3>FuelPHPのormを複数DBに対応させる方法</h3>
+                            
+                            <p><a href="http://atnd.org/events/33753" target="_blank">FuelPHP Advent Calendar 2012</a> 20日目の担当の<a href="http://twitter.com/6q5" target="_blank">@6q5</a>です。</p>
+
+<p>昨日は、<a href="http://twitter.com/ttikitt" target="_blank">@ttikitt</a>の<a href="http://www.cry-kit.com/?p=53" target="_blank">FuelPHPへのDoctrine2組み込み</a>でした。</p>
+
+<p>今年は仕事で３つもFuelPHPを使った媒体に関わり、<br/>
+FuelPHPと共に過ごした１年でした。<br/>
+その経験で得た物の中から選りすぐりの１つ？を紹介します。</p>
+
+<h3>ormでDBクラスのexecuteのようにDB接続先を指定することができません。</h3>
+
+<p>DBがMaster/Slave構成の時に、ormを使って参照だけの時はSlaveに向けたいなどしたい時に不便です。</p>
+
+<h6>例 config/db.php こんな感じでconfigに2つのDB設定がされてるとします。</h6>
+
+<pre><code>/**
+ * The development database settings.
+ */
+return array(
+    'default' =&gt; array(
+        'connection' =&gt; array(
+            'dsn' =&gt; 'mysql:host=xxx.xxx.xxx.xxx;dbname=BLOG_DEV',
+            'username' =&gt; 'blog',
+            'password' =&gt; 'xxxxxxxx',
+        ),  
+    ),
+    'slave' =&gt; array(
+        'connection' =&gt; array(
+            'dsn' =&gt; 'mysql:host=xxx.xxx.xxx.xxx;dbname=BLOG_DEV',
+            'username' =&gt; 'blog',
+            'password' =&gt; 'xxxxxxxx',
+        ),
+    ),  
+); 
+</code></pre>
+
+<h6>例 DBクラス</h6>
+
+<pre><code>$query = DB::select('user_id','exp')
+    -&gt;from('users')
+    -&gt;where('user_id', $user_id)
+    -&gt;execute('slave') // 引数で指定できる
+    -&gt;as_array();
+</code></pre>
+
+<h6>例 ORM</h6>
+
+<pre><code>$query = Model_User::find()
+    -&gt;where('user_id', $user_id)
+    -&gt;get(); // でっできないっっ
+</code></pre>
+
+<h3>それを可能にするには以下のようにします。　</h3>
+
+<h6>packages/orm/classes/query.phpを拡張するためapp以下にコピー</h6>
+
+<pre><code>mkdir -p app/classes/core/orm/
+cp ../packages/orm/classes/query.php app/classes/core/orm/
+</code></pre>
+
+<h6>app/classes/core/orm/query.phpに以下のメソッドを追加</h6>
+
+<pre><code>+
++       /**
++        * Change Connection
++        *
++        * @param   String connection
++        * @return  Query
++        */
++       public function connection($connection='default')
++       {
++               $this-&gt;connection = $connection;
++               return $this;
++       }
+</code></pre>
+
+<h5>packages/orm/classes/bootstrap.phpを以下のように書き換え</h5>
+
+<pre><code>-       'Orm\\Query'        =&gt; __DIR__.'/classes/query.php'
++       'Orm\\Query'        =&gt; APPPATH.'/classes/core/orm/query.php',
+</code></pre>
+
+<h5>結果</h5>
+
+<pre><code>$result = Model_User::find()
+    -&gt;where('user_id', $user_id)
+    -&gt;where('status', Model_User::STATUS_ACTIVE)
+    -&gt;connection('slave') // できたヽ(^o^)丿
+    -&gt;get_one();
+</code></pre>
+
+<p>これでormを使って複数DBの切り替えが出来るようになりました。</p>
+
+<h3>おまけ tasksをproductionモードでcronに設定する</h3>
+
+<p>fuel/app/tasks/batch.php をProductionモードでcronに設定する場合、</p>
+
+<pre><code>5 * * * * env FUEL_ENV=production /usr/local/bin/php oil r batch
+</code></pre>
+
+<p>開発環境と本番環境を区別させて実行するための必須設定ですね</p>
+
+<p>以上！</p>
+
+<p>あすは、<a href="http://twitter.com/konkon1234" target="_blank">@konkon1234</a>さんの『（仮）FuelPHPで１サイトを作ってみて気が付いた点など』です。<br/>
+お楽しみに！</p>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                    </div>
+                    <div class='insideInfo'>
+                        <div class='postTags'>
+                            Posted 10時間前
+                            
+                                <br />
+                                
+                                    <a href='http://php6.tumblr.com/tagged/FuelPHP'>#FuelPHP</a>
+                                
+                            
+                        </div>
+                        <div class='postNotes'>
+                            1 リアクション
+                        </div>
+                        <br class='clear' />
+                    </div>
+                </div>
+            </div>
+            
+                <div class='postInfo'>&nbsp;</div>
+                <div class='postWrapper'>
+                    <div class='postContainer'>
+                        <div class='postNote'>
+                            
+                                
+<ol class="notes">
+
+    <!-- START NOTES -->
+                            
+                                                        
+        
+        
+        <li class="note like tumblelog_paul-yamamoto without_commentary">
+
+                                                                                <a rel="nofollow" class="avatar_frame" target="_blank" href="http://paul-yamamoto.tumblr.com/" title="I am I and you are you " rel="nofollow"><img src="http://25.media.tumblr.com/avatar_f7757cfd6a68_16.png" class="avatar " alt="" /></a>
+                
+                <span class="action">
+                    
+                                            <a rel="nofollow" href="http://paul-yamamoto.tumblr.com/" title="I am I and you are you" rel="nofollow">paul-yamamoto</a> likes this                                    </span>
+
+                <div class="clear"></div>
+
+                        
+                    </li>
+                            
+                                                        
+        
+        
+        <li class="note reblog tumblelog_php6 without_commentary">
+
+                        
+                
+                                                                                        <a rel="nofollow" class="avatar_frame" target="_blank" href="http://php6.tumblr.com/" title="Mome"><img src="http://25.media.tumblr.com/avatar_580c15cd890c_16.png" class="avatar " alt="" /></a>
+                    
+                    <span class="action" data-post-url="http://php6.tumblr.com/post/38309122629">
+                                                    
+                                                            <a rel="nofollow" href="http://php6.tumblr.com/" class="tumblelog" title="Mome">php6</a>の投稿です                                                                        </span>
+                    <div class="clear"></div>
+
+                                    
+                        
+                    </li>
+    
+    
+    <!-- END NOTES -->
+</ol>
+                            
+                        </div>
+                    </div>
+                </div>
+            
+        
+        <div class='footer'>
+            <div class='credits'>
+                <a href='http://php6.tumblr.com/rss'>RSS</a> | <a href='/archive'>アーカイブ</a> | 
+                Theme: <a href='http://www.tumblr.com/theme/6473'>Optimus</a>
+            </div>
+            
+            
+            
+        </div>
+    </div>
+</div>
+<br class='clear' />
+<!-- BEGIN TUMBLR CODE -->
+        <iframe src="http://assets.tumblr.com/iframe.html?0aaec77f8c56dc043e43ceaa2914c380&amp;src=http%3A%2F%2Fphp6.tumblr.com%2Fpost%2F38309122629%2Ffuelphp-advent-calendar-2012&amp;pid=38309122629&amp;rk=BX2xAPf3&amp;lang=ja_JP&amp;name=php6" width="330" height="25" scrolling="no" frameborder="0" style="position:absolute; z-index:1337; top:0px; right:0px; border:0px; background-color:transparent; overflow:hidden;" id="tumblr_controls"></iframe>
+    <!--[if IE]><script type="text/javascript">document.getElementById('tumblr_controls').allowTransparency=true;</script><![endif]-->
+    <img style="position:absolute;z-index:-3334;top:0px;left:0px;visibility:hidden;" src="http://www.tumblr.com/impixu?T=1355972105&J=eyJibG9naWQiOiI1MTUwOTY1OCJ9&U=BFBGMHMNPC&K=0951c64b4345795977c4ecd5298e5ac5d2bb6f1e4f19868cc405f022822a349e"/><!-- END TUMBLR CODE --><iframe src="http://assets.tumblr.com/analytics.html?11" scrolling="no" width="1" height="1" frameborder="0" style="background-color:transparent; overflow:hidden; position:absolute; top:0; left:0 z-index:9999;" id="ga_target"></iframe>
+<script type="text/javascript">__qoptions = _qoptions={qacct:"p-19UtqE8ngoZbM"};</script><script type="text/javascript" src="http://edge.quantserve.com/quant.js"></script><noscript><img src="http://pixel.quantserve.com/pixel/p-19UtqE8ngoZbM.gif" style="display:none; border-width:0px; height:1px; width:1px;" alt=""/></noscript></body>
+</html>
