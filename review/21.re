@@ -1,5 +1,5 @@
 
-= FuelPHPで１サイトを作ってみて気が付いた点など
+= FuelPHPで１サイトを作ってみて気が付いた点など @<href>{https://twitter.com/konkon1234,@konkon1234}
 
 
 @<href>{http://atnd.org/events/33753,FuelPHP Advent Calendar 2012} (#FuelPHPAdvent2012) 21日目です。
@@ -282,4 +282,12 @@ class Model_Xxxxx extends Model_Crud
 
 明日は@<href>{https://twitter.com/ts_asano,@ts_asano}さんの「(仮)QueryBuilderで小難しいSELECT文を書くためのノウハウ」です。
  表題からして素敵ですね。お楽しみに♪
+
+//quote{
+@<strong>{@konkon1234}
+
+Twitter: @<href>{https://twitter.com/konkon1234,@konkon1234}
+
+Blog: @<href>{http://www.crossl.net/blog/,http://www.crossl.net/blog/}
+//}
 
