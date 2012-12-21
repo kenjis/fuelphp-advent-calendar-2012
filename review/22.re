@@ -1,84 +1,96 @@
-# QueryBuilderで小難しいSELECT文を書くためのノウハウ
 
-この記事は [FuelPHP Advent Calendar 2012](http://atnd.org/events/33753) の 22日目の記事です。  
-昨日は@[konkon1234](http://twitter.com/konkon1234)さんの「[FuelPHPで１サイトを作ってみて気が付いた点など](http://www.crossl.net/blog/fuelphp-advcal121221/)」でした。  
-  
-あさのひとしと申します。  
-今回はタイトルの通り、FuelPHPのQueryBuilderを使いこなすために悪戦苦闘した結果得られたエッセンスをノウハウとしてまとめてみました。  
+= QueryBuilderで小難しいSELECT文を書くためのノウハウ
+
+
+この記事は @<href>{http://atnd.org/events/33753,FuelPHP Advent Calendar 2012} の 22日目の記事です。@<br>{}
+昨日は@@<href>{http://twitter.com/konkon1234,konkon1234}さんの「@<href>{http://www.crossl.net/blog/fuelphp-advcal121221/,FuelPHPで１サイトを作ってみて気が付いた点など}」でした。  
+
+
+あさのひとしと申します。@<br>{}
+今回はタイトルの通り、FuelPHPのQueryBuilderを使いこなすために悪戦苦闘した結果得られたエッセンスをノウハウとしてまとめてみました。@<br>{}
 少し長いですが、どうぞよろしくお願い致します。  
-  
 
-## はじめに
+== はじめに
 
-さて、みなさんは普段どれくらいの「SQL文」を書かれるでしょうか？  
+
+さて、みなさんは普段どれくらいの「SQL文」を書かれるでしょうか？@<br>{}
 ORMが登場して、ほとんどSQL文自体を書くことは少なくなったのかなと思います。  
-  
-ただ、時には効率重視にする必要がある場合もあります。  
+
+
+ただ、時には効率重視にする必要がある場合もあります。@<br>{}
 その場合はDBからデータを取得して処理するのではなく、できる限りの処理をデータベース側に行わせたいものです。  
-  
-そういったときにサブクエリが効いてくるわけですが、これをFuelPHPのQueryBuilderで表現するには？というのがこの記事の目的です。  
+
+
+そういったときにサブクエリが効いてくるわけですが、これをFuelPHPのQueryBuilderで表現するには？というのがこの記事の目的です。@<br>{}
 ORMの有用性はご存知のとおりと思いますので、ここではORMには触れずに参ります。  
-  
-以下すべてのソースコードは、PHP5.4のビルトインサーバ(PHP5.4.9)＋FuelPHP 1.4、MySQLバージョン5.5.28にて動作確認済みです。  
+
+
+以下すべてのソースコードは、PHP5.4のビルトインサーバ(PHP5.4.9)＋FuelPHP 1.4、MySQLバージョン5.5.28にて動作確認済みです。@<br>{}
 以下すべてのソースコードはそれ単体で動くものではなく、また著作権表示・許諾表示を怠っておりますが、MITライセンスを適用させて頂きます。  
-  
 
-## 0.環境準備
+== 0.環境準備
 
-まずは、まっさらのFuelPHP1.4環境を用意します。[\*1](/ts_asano/20121222/1356102000#20121222f1 "FuelPHPの環境準備手順は省略します。")  
-  
-どのようなSQL文が生成されているか分かりやすくなるよう、profilingをtrueにしておきましょう。   
+
+まずは、まっさらのFuelPHP1.4環境を用意します。@<href>{/ts_asano/20121222/1356102000#20121222f1,*1}  
+
+
+どのようなSQL文が生成されているか分かりやすくなるよう、profilingをtrueにしておきましょう。@<br>{}
 データベースのprofilingもtrueにしておく必要があります。  
-  
 
-### fuel/app/config/development/config.php
+=== fuel/app/config/development/config.php
 
-~~~~ {.syntax-highlight}
+#@# lang: .syntax-highlight
+//emlist{
 return array(
     'profiling' => true,
 );
-~~~~
+//}
 
-### fuel/app/config/development/db.php
+=== fuel/app/config/development/db.php
 
-~~~~ {.syntax-highlight}
+#@# lang: .syntax-highlight
+//emlist{
 return array(
     'default' => array(
         'connection' => ({省略}),
         'profiling' => true,
     ),
 );
-~~~~
+//}
 
-今回は説明用に、oilを使用してテーブルを4つ作成します。  
+
+今回は説明用に、oilを使用してテーブルを4つ作成します。@<br>{}
 簡単な図書館の蔵書・貸出管理システムをイメージして頂ければと思います。  
 
--   出版社テーブル 出版社名
--   書籍テーブル 書籍名と出版社ID
--   貸出テーブル 貸出日時、書籍IDと会員ID
--   会員テーブル 名前と誕生日
+ * 出版社テーブル 出版社名
+ * 書籍テーブル 書籍名と出版社ID
+ * 貸出テーブル 貸出日時、書籍IDと会員ID
+ * 会員テーブル 名前と誕生日
+
+
 
 ということで、コマンドラインで以下を実行します。
 
-~~~~ {.syntax-highlight}
+#@# lang: .syntax-highlight
+//emlist{
 oil g model publisher  name:string[10]
 oil g model book  name:string[20] publisher_id:int[11]
 oil g model member  name:string[10] birth_date:date
 oil g model rental  rental_dttm:datetime book_id:int[11] member_id:int[11]
 oil r migrate
-~~~~
+//}
 
-お手数ですが、これらのテーブルに適当にデータを投入して下さい。  
+
+お手数ですが、これらのテーブルに適当にデータを投入して下さい。@<br>{}
 ここまでで、環境準備は終了です。  
-  
 
-## 1.QueryBuilderのおさらい
+== 1.QueryBuilderのおさらい
 
-  
 
 まずは、QueryBuilderについてのおさらいです。
 
-~~~~ {.syntax-highlight}
+#@# lang: .syntax-highlight
+//emlist{
 $search_book_id = \Input::post('book_id');
 $search_member_id = \Input::post('member_id');
 
@@ -97,72 +109,84 @@ if ($search_member_id)
 
 $query = $query->order_by('rental_dttm', 'desc');
 $result  = $query->execute();
-~~~~
+//}
+
 
 今更書くほどのことでもないと思いますが、条件に応じて動的にwhere条件を追加できるのが便利ですよね。  
-  
+
+
 ただ、少し難しいSQL文、例えばMySQL関数を使おうとする場合には少しコツが必要になります。  
-  
 
-## 2.MySQL関数を使うためのノウハウ
+== 2.MySQL関数を使うためのノウハウ
 
-クエリビルダはエスケープ処理を自動でかけてくれるため、場合によっては困る場合があります。  
-MySQL関数を使う場合には、エスケープ処理が行われないようにする必要があります。  
+
+クエリビルダはエスケープ処理を自動でかけてくれるため、場合によっては困る場合があります。@<br>{}
+MySQL関数を使う場合には、エスケープ処理が行われないようにする必要があります。@<br>{}
 そういう場合に使用できるのが、DB::expr() メソッドです。  
-  
+
+
 たとえばMAX関数を使う場合は、こんな感じになります。
 
-~~~~ {.syntax-highlight}
+#@# lang: .syntax-highlight
+//emlist{
 $result = \DB::select(\DB::expr('MAX(`birth_date`)'))
     ->from('members')
     ->execute();
-~~~~
+//}
 
-しかし実は、以下の書き方でもOKです。  
+
+しかし実は、以下の書き方でもOKです。@<br>{}
 バッククォートをダブルクォートにするのがポイントです。
 
-~~~~ {.syntax-highlight}
+#@# lang: .syntax-highlight
+//emlist{
 $result = \DB::select('MAX("birth_date")')
     ->from('members')
     ->execute();
-~~~~
+//}
 
-これはselect句に限られませんので、where句で書いてもOKです。  
+
+これはselect句に限られませんので、where句で書いてもOKです。@<br>{}
 たとえば「40歳以上の会員を取得」するには、こんな感じで書けばOKです。
 
-~~~~ {.syntax-highlight}
+#@# lang: .syntax-highlight
+//emlist{
 $result = \DB::select('*')
     ->from('members')
     ->where('FLOOR(CURDATE()+0 - DATE_FORMAT("birth_date", \'%Y%m%d\')+0 ) / 10000', '>=', '40')
     ->execute();
-~~~~
+//}
 
-カラム名をダブルクォートで囲う。コレがポイントです。  
+
+カラム名をダブルクォートで囲う。コレがポイントです。@<br>{}
 適切にエスケープすることで、シングルクォートも使えます。  
-  
-ここでひとつ注意点ですが、これらの方法を使う場合、エスケープ処理が行われません。  
-それはつまり、ユーザーが入力した内容をこの内部に反映させる場合、SQLインジェクション攻撃を受ける可能性があるという事になります。[\*2](/ts_asano/20121222/1356102000#20121222f2 "ただし、私が試した限りはSQLインジェクション攻撃を引き起こすことはできませんでした。")  
-  
+
+
+ここでひとつ注意点ですが、これらの方法を使う場合、エスケープ処理が行われません。@<br>{}
+それはつまり、ユーザーが入力した内容をこの内部に反映させる場合、SQLインジェクション攻撃を受ける可能性があるという事になります。@<href>{/ts_asano/20121222/1356102000#20121222f2,*2}  
+
+
 ユーザー入力をDB::expr() メソッド内またはそれに準ずる方法で処理する場合は必ずDB::escape()を使用し、以下のように対策を行うようにして下さい。
 
-~~~~ {.syntax-highlight}
+#@# lang: .syntax-highlight
+//emlist{
 // $date_strには、'20121222'のような文字列を期待する
 $date_str = \Input::post('base_date_str');
 $result = \DB::select('*')
     ->from('members')
     ->where('FLOOR('. \DB::escape($date_str). '+0 - DATE_FORMAT("birth_date", \'%Y%m%d\')+0 ) / 10000', '>=', '40')
     ->execute();
-~~~~
+//}
 
-  
+== 3.サブクエリを使うためのノウハウ
 
-## 3.サブクエリを使うためのノウハウ
 
-さて、それでは「A社とC社が発行している本についての蔵書、各々最後に貸し出した日付、借りた人物を取得」してみたいと思います。  
-普通はこんなにややこしい処理を一文で書くことは少ないかもしれませんが、  
+さて、それでは「A社とC社が発行している本についての蔵書、各々最後に貸し出した日付、借りた人物を取得」してみたいと思います。@<br>{}
+普通はこんなにややこしい処理を一文で書くことは少ないかもしれませんが、@<br>{}
 「データベースでできることはデータベースで」というポリシーで処理してみるとこんな感じになります。
 
-~~~~ {.syntax-highlight}
+#@# lang: .syntax-highlight
+//emlist{
 $query = \DB::query(
     'select p.name as publisher_name, b.name as book_name, r.rental_dttm, m.name as member_name'.
     ' from books as b'.
@@ -179,13 +203,16 @@ $query = \DB::query(
     ' where p.name in ("A社", "C社")'.
     ' order by p.id, b.id');
 $result = $query->execute();
-~~~~
+//}
+
 
 100行200行のSQL文を見慣れている方であれば大したことはないですが、SQL文に慣れていないかたはぎょっとするかも知れません。  
-  
+
+
 それではこれをQBで書き換えてみましょう。
 
-~~~~ {.syntax-highlight}
+#@# lang: .syntax-highlight
+//emlist{
 $query = \DB::select( array('p.name', 'publisher_name'),
         array('b.name', 'book_name'), 'r.rental_dttm', array('m.name', 'member_name'))
     ->from(array('books', 'b'))
@@ -202,20 +229,23 @@ $query = \DB::select( array('p.name', 'publisher_name'),
     ->order_by('p.id')
     ->order_by('b.id');
 $result = $query->execute();
-~~~~
+//}
 
-これぐらい長い箇所がある場合は、無理にダブルクォートを使うより、素直にDB::expr() メソッドを使うことをおすすめします。  
+
+これぐらい長い箇所がある場合は、無理にダブルクォートを使うより、素直にDB::expr() メソッドを使うことをおすすめします。@<br>{}
 どうしてもDB::expr() メソッドを使いたくないという場合は、各カラム名をダブルクォートで囲むようにして下さい。  
-  
 
-## 4.where句の右辺にMySQL関数を使いたい時のノウハウ
+== 4.where句の右辺にMySQL関数を使いたい時のノウハウ
 
-最後に、一番お伝えしたかったのがこのノウハウです。  
+
+最後に、一番お伝えしたかったのがこのノウハウです。@<br>{}
 where句の右辺にMySQL関数を使うと値扱いでクォートされてしまい、データを取得できません。  
-  
+
+
 「直近30日の貸し出し履歴を書籍名、借りた人物込みで取得」する事を想定してみます。
 
-~~~~ {.syntax-highlight}
+#@# lang: .syntax-highlight
+//emlist{
 $query = \DB::select('r.id', 'r.rental_dttm',
         array('b.name', 'book_name'), array('m.name', 'member_name'))
     ->from(array('rentals', 'r'))
@@ -224,17 +254,21 @@ $query = \DB::select('r.id', 'r.rental_dttm',
     ->where('DATE(r."rental_dttm")', '>=', 'ADDDATE( CURDATE(), INTERVAL -30 DAY )')
     ->order_by('r.rental_dttm', 'DESC');
 $result = $query->execute()->as_array();
-~~~~
+//}
+
 
 この場合、where句は以下のように解釈されてしまいます。
 
-~~~~ {.syntax-highlight}
+#@# lang: .syntax-highlight
+//emlist{
   WHERE DATE(r.`rental_dttm`) >= 'ADDDATE( CURDATE(), INTERVAL -30 DAY )'
-~~~~
+//}
+
 
 しかしこれも小技を効かせれば、解決可能です。
 
-~~~~ {.syntax-highlight}
+#@# lang: .syntax-highlight
+//emlist{
 $query = \DB::select('r.id', 'r.rental_dttm', array('b.name', 'book_name'), array('m.name', 'member_name'))
     ->from(array('rentals', 'r'))
     ->join(array('books', 'b'), 'inner')->on('r.book_id', '=', 'b.id')
@@ -242,35 +276,40 @@ $query = \DB::select('r.id', 'r.rental_dttm', array('b.name', 'book_name'), arra
     ->where('DATE(r."rental_dttm") >= ADDDATE( CURDATE(), INTERVAL -30 DAY )', '=', true)
     ->order_by('r.rental_dttm', 'DESC');
 $result = $query->execute()->as_array();
-~~~~
+//}
+
 
 こうすると、where句が以下のように解釈されます。
 
-~~~~ {.syntax-highlight}
+#@# lang: .syntax-highlight
+//emlist{
   WHERE DATE(r.`rental_dttm`) >= ADDDATE( CURDATE(), INTERVAL -30 DAY ) = '1'
-~~~~
+//}
 
-ぱっと見でわかりにくいのですが、「DATE(r.\`rental\_dttm\`) \>= ADDDATE( CURDATE(), INTERVAL -30 DAY )」がtrueのデータ、つまり「1」と評価できるデータが取得対象ということになります。  
-これは「DATE(r.\`rental\_dttm\`) \>= ADDDATE( CURDATE(), INTERVAL -30 DAY )」そのものとして処理される、という事になります。  
-  
+
+ぱっと見でわかりにくいのですが、「DATE(r.`rental_dttm`) >= ADDDATE( CURDATE(), INTERVAL -30 DAY )」がtrueのデータ、つまり「1」と評価できるデータが取得対象ということになります。@<br>{}
+これは「DATE(r.`rental_dttm`) >= ADDDATE( CURDATE(), INTERVAL -30 DAY )」そのものとして処理される、という事になります。  
+
+
 この方法は、where in でサブクエリを使いたい場合にも応用が効くノウハウです。  
-  
 
-## おわりに
+== おわりに
 
-いかがでしたでしょうか？  
+
+いかがでしたでしょうか？@<br>{}
 FuelPHPにはマニュアルでは触れられていない、思わぬ機能がまだまだ隠されています。  
-  
-当然ながらcoreのソースもPHPで書かれていますので、処理の中身を読むことができます。  
-気になる箇所があれば、時間を掛けて読み込んでみたいものです。  
+
+
+当然ながらcoreのソースもPHPで書かれていますので、処理の中身を読むことができます。@<br>{}
+気になる箇所があれば、時間を掛けて読み込んでみたいものです。@<br>{}
 思わぬ発見があるかも知れませんよ？  
-  
-  
+
+
 この記事がFuelPHPでDBを扱う方にとって、お役に立てますと幸いです！  
-  
-明日は@[mukaken](http://twitter.com/mukaken)さんの「FuelPHP vs CodeIgniter」です。お楽しみに！  
-  
-\# mukakenさん、いつもはてなスターありがとうございます！  
+
+
+明日は@@<href>{http://twitter.com/mukaken,mukaken}さんの「FuelPHP vs CodeIgniter」です。お楽しみに！  
+
+
+# mukakenさん、いつもはてなスターありがとうございます！@<br>{}
  この場をお借りしてお礼申し上げます。
-
-
