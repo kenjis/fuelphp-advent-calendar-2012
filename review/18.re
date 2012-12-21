@@ -691,7 +691,7 @@ class View_Hhblog_Article_Keyword extends ViewModel
 いかがでしたでしょうか。コードを載せているのでだいぶ記事が長くなってしまいました。準備から実装まで通して記事にできたので自分の復習用には良かったと思うのですが、Advent Calendar としてどうなんでしょう(苦笑)@<br>{}
 
 
-明日は @@<href>{https://twitter.com/ttikitt,ttikitt} さんの『(仮)FuelPHPへのDoctrine2組み込み』です！('ω`)シ
+明日は @<href>{https://twitter.com/ttikitt,@ttikitt} さんの「(仮)FuelPHPへのDoctrine2組み込み」です！('ω`)シ
 
 //quote{
 @<strong>{@tmd45}
