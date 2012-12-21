@@ -2,8 +2,8 @@
 = FuelPHPのOrmを複数DBに対応させる方法 @<href>{https://twitter.com/6q5,@6q5}
 
 
-@<href>{http://atnd.org/events/33753,FuelPHP Advent Calendar 2012} 20日目の担当の@<href>{http://twitter.com/6q5,@6q5}です。
-昨日は、@<href>{http://twitter.com/ttikitt,@ttikitt}さんの「FuelPHPへのDoctrine2組み込み」でした。@<br>{}
+@<href>{http://atnd.org/events/33753,FuelPHP Advent Calendar 2012} 20日目の担当の@<href>{https://twitter.com/6q5,@6q5}です。
+昨日は、@<href>{https://twitter.com/ttikitt,@ttikitt}さんの「FuelPHPへのDoctrine2組み込み」でした。@<br>{}
 
 
 今年は仕事で3つもFuelPHPを使った媒体に関わり、
