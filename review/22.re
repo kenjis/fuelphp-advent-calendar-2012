@@ -1,55 +1,54 @@
 
-= QueryBuilderで小難しいSELECT文を書くためのノウハウ
+= QueryBuilderで小難しいSELECT文を書くためのノウハウ @<href>{https://twitter.com/ts_asano,@ts_asano}
 
 
-この記事は @<href>{http://atnd.org/events/33753,FuelPHP Advent Calendar 2012} の 22日目の記事です。@<br>{}
-昨日は@@<href>{http://twitter.com/konkon1234,konkon1234}さんの「@<href>{http://www.crossl.net/blog/fuelphp-advcal121221/,FuelPHPで１サイトを作ってみて気が付いた点など}」でした。  
+この記事は @<href>{http://atnd.org/events/33753,FuelPHP Advent Calendar 2012} の 22日目の記事です。
+昨日は@@<href>{http://twitter.com/konkon1234,konkon1234}さんの「@<href>{http://www.crossl.net/blog/fuelphp-advcal121221/,FuelPHPで１サイトを作ってみて気が付いた点など}」でした。@<br>{}
 
 
-あさのひとしと申します。@<br>{}
-今回はタイトルの通り、FuelPHPのQueryBuilderを使いこなすために悪戦苦闘した結果得られたエッセンスをノウハウとしてまとめてみました。@<br>{}
-少し長いですが、どうぞよろしくお願い致します。  
+あさのひとしと申します。
+今回はタイトルの通り、FuelPHPのQueryBuilderを使いこなすために悪戦苦闘した結果得られたエッセンスをノウハウとしてまとめてみました。
+少し長いですが、どうぞよろしくお願い致します。
 
 == はじめに
 
 
-さて、みなさんは普段どれくらいの「SQL文」を書かれるでしょうか？@<br>{}
-ORMが登場して、ほとんどSQL文自体を書くことは少なくなったのかなと思います。  
+さて、みなさんは普段どれくらいの「SQL文」を書かれるでしょうか？
+ORMが登場して、ほとんどSQL文自体を書くことは少なくなったのかなと思います。
+ただ、時には効率重視にする必要がある場合もあります。
+その場合はDBからデータを取得して処理するのではなく、できる限りの処理をデータベース側に行わせたいものです。@<br>{}
 
 
-ただ、時には効率重視にする必要がある場合もあります。@<br>{}
-その場合はDBからデータを取得して処理するのではなく、できる限りの処理をデータベース側に行わせたいものです。  
+そういったときにサブクエリが効いてくるわけですが、これをFuelPHPのQueryBuilderで表現するには？というのがこの記事の目的です。
+ORMの有用性はご存知のとおりと思いますので、ここではORMには触れずに参ります。@<br>{}
 
 
-そういったときにサブクエリが効いてくるわけですが、これをFuelPHPのQueryBuilderで表現するには？というのがこの記事の目的です。@<br>{}
-ORMの有用性はご存知のとおりと思いますので、ここではORMには触れずに参ります。  
-
-
-以下すべてのソースコードは、PHP5.4のビルトインサーバ(PHP5.4.9)＋FuelPHP 1.4、MySQLバージョン5.5.28にて動作確認済みです。@<br>{}
-以下すべてのソースコードはそれ単体で動くものではなく、また著作権表示・許諾表示を怠っておりますが、MITライセンスを適用させて頂きます。  
+以下すべてのソースコードは、PHP5.4のビルトインサーバ(PHP5.4.9)＋FuelPHP 1.4、MySQLバージョン5.5.28にて動作確認済みです。
+以下すべてのソースコードはそれ単体で動くものではなく、また著作権表示・許諾表示を怠っておりますが、MITライセンスを適用させて頂きます。
 
 == 0.環境準備
 
 
-まずは、まっさらのFuelPHP1.4環境を用意します。@<href>{/ts_asano/20121222/1356102000#20121222f1,*1}  
+まずは、まっさらのFuelPHP 1.4環境を用意します。@<fn>{fuel-dev}
+
+//footnote[fuel-dev][FuelPHPの環境準備手順は省略します。]
+
+どのようなSQL文が生成されているか分かりやすくなるよう、profilingをtrueにしておきましょう。
+データベースのprofilingもtrueにしておく必要があります。
 
 
-どのようなSQL文が生成されているか分かりやすくなるよう、profilingをtrueにしておきましょう。@<br>{}
-データベースのprofilingもtrueにしておく必要があります。  
-
-=== fuel/app/config/development/config.php
 
 #@# lang: .syntax-highlight
-//emlist{
+//emlist[fuel/app/config/development/config.php]{
 return array(
     'profiling' => true,
 );
 //}
 
-=== fuel/app/config/development/db.php
+
 
 #@# lang: .syntax-highlight
-//emlist{
+//emlist[fuel/app/config/development/db.php]{
 return array(
     'default' => array(
         'connection' => ({省略}),
@@ -59,8 +58,8 @@ return array(
 //}
 
 
-今回は説明用に、oilを使用してテーブルを4つ作成します。@<br>{}
-簡単な図書館の蔵書・貸出管理システムをイメージして頂ければと思います。  
+今回は説明用に、oilを使用してテーブルを4つ作成します。
+簡単な図書館の蔵書・貸出管理システムをイメージして頂ければと思います。
 
  * 出版社テーブル 出版社名
  * 書籍テーブル 書籍名と出版社ID
@@ -72,19 +71,19 @@ return array(
 ということで、コマンドラインで以下を実行します。
 
 #@# lang: .syntax-highlight
-//emlist{
-oil g model publisher  name:string[10]
-oil g model book  name:string[20] publisher_id:int[11]
-oil g model member  name:string[10] birth_date:date
-oil g model rental  rental_dttm:datetime book_id:int[11] member_id:int[11]
-oil r migrate
+//cmd{
+$ oil g model publisher  name:string[10]
+$ oil g model book  name:string[20] publisher_id:int[11]
+$ oil g model member  name:string[10] birth_date:date
+$ oil g model rental  rental_dttm:datetime book_id:int[11] member_id:int[11]
+$ oil r migrate
 //}
 
 
-お手数ですが、これらのテーブルに適当にデータを投入して下さい。@<br>{}
-ここまでで、環境準備は終了です。  
+お手数ですが、これらのテーブルに適当にデータを投入して下さい。
+ここまでで、環境準備は終了です。
 
-== 1.QueryBuilderのおさらい
+== 1. QueryBuilderのおさらい
 
 
 まずは、QueryBuilderについてのおさらいです。
@@ -112,17 +111,15 @@ $result  = $query->execute();
 //}
 
 
-今更書くほどのことでもないと思いますが、条件に応じて動的にwhere条件を追加できるのが便利ですよね。  
-
-
+今更書くほどのことでもないと思いますが、条件に応じて動的にwhere条件を追加できるのが便利ですよね。
 ただ、少し難しいSQL文、例えばMySQL関数を使おうとする場合には少しコツが必要になります。  
 
-== 2.MySQL関数を使うためのノウハウ
+== 2. MySQL関数を使うためのノウハウ
 
 
-クエリビルダはエスケープ処理を自動でかけてくれるため、場合によっては困る場合があります。@<br>{}
-MySQL関数を使う場合には、エスケープ処理が行われないようにする必要があります。@<br>{}
-そういう場合に使用できるのが、DB::expr() メソッドです。  
+クエリビルダはエスケープ処理を自動でかけてくれるため、場合によっては困る場合があります。
+MySQL関数を使う場合には、エスケープ処理が行われないようにする必要があります。
+そういう場合に使用できるのが、DB::expr() メソッドです。
 
 
 たとえばMAX関数を使う場合は、こんな感じになります。
@@ -135,7 +132,7 @@ $result = \DB::select(\DB::expr('MAX(`birth_date`)'))
 //}
 
 
-しかし実は、以下の書き方でもOKです。@<br>{}
+しかし実は、以下の書き方でもOKです。
 バッククォートをダブルクォートにするのがポイントです。
 
 #@# lang: .syntax-highlight
@@ -146,7 +143,7 @@ $result = \DB::select('MAX("birth_date")')
 //}
 
 
-これはselect句に限られませんので、where句で書いてもOKです。@<br>{}
+これはselect句に限られませんので、where句で書いてもOKです。
 たとえば「40歳以上の会員を取得」するには、こんな感じで書けばOKです。
 
 #@# lang: .syntax-highlight
@@ -158,13 +155,14 @@ $result = \DB::select('*')
 //}
 
 
-カラム名をダブルクォートで囲う。コレがポイントです。@<br>{}
-適切にエスケープすることで、シングルクォートも使えます。  
+カラム名をダブルクォートで囲う。コレがポイントです。
+適切にエスケープすることで、シングルクォートも使えます。
 
 
-ここでひとつ注意点ですが、これらの方法を使う場合、エスケープ処理が行われません。@<br>{}
-それはつまり、ユーザーが入力した内容をこの内部に反映させる場合、SQLインジェクション攻撃を受ける可能性があるという事になります。@<href>{/ts_asano/20121222/1356102000#20121222f2,*2}  
+ここでひとつ注意点ですが、これらの方法を使う場合、エスケープ処理が行われません。
+それはつまり、ユーザーが入力した内容をこの内部に反映させる場合、SQLインジェクション攻撃を受ける可能性があるという事になります。@<fn>{sql-injection}
 
+//footnote[sql-injection][ただし、私が試した限りはSQLインジェクション攻撃を引き起こすことはできませんでした。]
 
 ユーザー入力をDB::expr() メソッド内またはそれに準ずる方法で処理する場合は必ずDB::escape()を使用し、以下のように対策を行うようにして下さい。
 
@@ -178,11 +176,12 @@ $result = \DB::select('*')
     ->execute();
 //}
 
-== 3.サブクエリを使うためのノウハウ
+== 3. サブクエリを使うためのノウハウ
 
 
-さて、それでは「A社とC社が発行している本についての蔵書、各々最後に貸し出した日付、借りた人物を取得」してみたいと思います。@<br>{}
-普通はこんなにややこしい処理を一文で書くことは少ないかもしれませんが、@<br>{}
+さて、それでは「A社とC社が発行している本についての蔵書、各々最後に貸し出した日付、借りた人物を取得」してみたいと思います。
+
+普通はこんなにややこしい処理を一文で書くことは少ないかもしれませんが、
 「データベースでできることはデータベースで」というポリシーで処理してみるとこんな感じになります。
 
 #@# lang: .syntax-highlight
@@ -232,16 +231,14 @@ $result = $query->execute();
 //}
 
 
-これぐらい長い箇所がある場合は、無理にダブルクォートを使うより、素直にDB::expr() メソッドを使うことをおすすめします。@<br>{}
-どうしてもDB::expr() メソッドを使いたくないという場合は、各カラム名をダブルクォートで囲むようにして下さい。  
+これぐらい長い箇所がある場合は、無理にダブルクォートを使うより、素直にDB::expr() メソッドを使うことをおすすめします。
+どうしてもDB::expr() メソッドを使いたくないという場合は、各カラム名をダブルクォートで囲むようにして下さい。
 
-== 4.where句の右辺にMySQL関数を使いたい時のノウハウ
-
-
-最後に、一番お伝えしたかったのがこのノウハウです。@<br>{}
-where句の右辺にMySQL関数を使うと値扱いでクォートされてしまい、データを取得できません。  
+== 4. where句の右辺にMySQL関数を使いたい時のノウハウ
 
 
+最後に、一番お伝えしたかったのがこのノウハウです。
+where句の右辺にMySQL関数を使うと値扱いでクォートされてしまい、データを取得できません。
 「直近30日の貸し出し履歴を書籍名、借りた人物込みで取得」する事を想定してみます。
 
 #@# lang: .syntax-highlight
@@ -287,8 +284,9 @@ $result = $query->execute()->as_array();
 //}
 
 
-ぱっと見でわかりにくいのですが、「DATE(r.`rental_dttm`) >= ADDDATE( CURDATE(), INTERVAL -30 DAY )」がtrueのデータ、つまり「1」と評価できるデータが取得対象ということになります。@<br>{}
-これは「DATE(r.`rental_dttm`) >= ADDDATE( CURDATE(), INTERVAL -30 DAY )」そのものとして処理される、という事になります。  
+ぱっと見でわかりにくいのですが、「@<code>{DATE(r.`rental_dttm`) >= ADDDATE( CURDATE(), INTERVAL -30 DAY )}」がtrueのデータ、つまり「1」と評価できるデータが取得対象ということになります。
+
+これは「@<code>{DATE(r.`rental_dttm`) >= ADDDATE( CURDATE(), INTERVAL -30 DAY )}」そのものとして処理される、という事になります。
 
 
 この方法は、where in でサブクエリを使いたい場合にも応用が効くノウハウです。  
@@ -296,16 +294,16 @@ $result = $query->execute()->as_array();
 == おわりに
 
 
-いかがでしたでしょうか？@<br>{}
-FuelPHPにはマニュアルでは触れられていない、思わぬ機能がまだまだ隠されています。  
+いかがでしたでしょうか？
+FuelPHPにはマニュアルでは触れられていない、思わぬ機能がまだまだ隠されています。
 
 
-当然ながらcoreのソースもPHPで書かれていますので、処理の中身を読むことができます。@<br>{}
-気になる箇所があれば、時間を掛けて読み込んでみたいものです。@<br>{}
-思わぬ発見があるかも知れませんよ？  
+当然ながらcoreのソースもPHPで書かれていますので、処理の中身を読むことができます。
+気になる箇所があれば、時間を掛けて読み込んでみたいものです。
+思わぬ発見があるかも知れませんよ？
 
 
-この記事がFuelPHPでDBを扱う方にとって、お役に立てますと幸いです！  
+この記事がFuelPHPでDBを扱う方にとって、お役に立てますと幸いです！@<br>{}
 
 
 明日は@@<href>{http://twitter.com/mukaken,mukaken}さんの「FuelPHP vs CodeIgniter」です。お楽しみに！  
@@ -313,3 +311,12 @@ FuelPHPにはマニュアルでは触れられていない、思わぬ機能が�
 
 # mukakenさん、いつもはてなスターありがとうございます！@<br>{}
  この場をお借りしてお礼申し上げます。
+
+//quote{
+@<strong>{@ts_asano}
+
+Twitter: @<href>{https://twitter.com/ts_asano,@ts_asano}
+
+Blog: @<href>{http://d.hatena.ne.jp/ts_asano/,http://d.hatena.ne.jp/ts_asano/}
+//}
+
