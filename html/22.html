@@ -1,0 +1,683 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html xmlns:og="http://ogp.me/ns#">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=euc-jp">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<title>QueryBuilderで小難しいSELECT文を書くためのノウハウ #FuelPHPAdvent2012 - Dazing days</title>
+<link rel="start" href="/" title="Dazing days">
+<link rel="help" href="/help" title="ヘルプ">
+<link rel="prev" href="/ts_asano/20121215/1355562841" title="[電子工作][Arduino][Bluetooth]...">
+
+<link rel="stylesheet" href="http://d.st-hatena.com/statics/css/base.css?5d7f38e4a6d82f044c81959ae4de5445d7f238cd" type="text/css" media="all">
+<link rel="stylesheet" href="http://d.st-hatena.com/statics/css/headerstyle_lb.css?b89e3d26af9bff96182d94a4f9bc43c609e56aed" type="text/css" media="all">
+<link rel="stylesheet" href="http://d.st-hatena.com/statics/theme/hatena2-lightblue/hatena2-lightblue.css?653a68c3f23121b6064d0599fb2bf701b198d071" type="text/css" media="all">
+
+
+<link rel="alternate" type="application/rss+xml" title="RSS" href="http://d.hatena.ne.jp/ts_asano/rss">
+<link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="http://d.hatena.ne.jp/ts_asano/rss2">
+
+<link rel="meta" type="application/rdf+xml" title="FOAF" href="http://d.hatena.ne.jp/ts_asano/foaf" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://d.hatena.ne.jp/ts_asano/opensearch/diary.xml" title="Dazing days内日記検索" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://d.hatena.ne.jp/ts_asano/opensearch/archive.xml" title="Dazing days内一覧検索" />
+
+
+
+<link rel="shortcut icon" href="http://d.hatena.ne.jp/images/lb_favicon.ico">
+
+
+
+
+<style type="text/css">
+<!-- 
+
+-->
+</style>
+
+
+<script type="text/javascript">if(/[\x3c\x3e\x22]/.test(location.hash))location.hash=location.hash.replace(/[\x3c\x3e\x22]/g,'');if(/[\x3c\x3e]/.test(document.referrer))location.href=location.href;</script>
+
+
+
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="QueryBuilderで小難しいSELECT文を書くためのノウハウ #FuelPHPAdvent2012 - Dazing days">
+<meta property="og:url" content="http://d.hatena.ne.jp/ts_asano/20121222/1356102000">
+<meta property="og:description" content=" この記事は FuelPHP Advent Calendar 2012 の 22日目の記事です。 昨日はさんの「FuelPHPで１サイトを作っ..">
+<meta property="og:site_name" content="はてなダイアリー">
+
+
+<!--
+<rdf:RDF
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:foaf="http://xmlns.com/foaf/0.1/">
+<rdf:Description rdf:about="http://d.hatena.ne.jp/ts_asano/20121222/1356102000">
+   <foaf:maker rdf:parseType="Resource">
+     <foaf:holdsAccount>
+       <foaf:OnlineAccount foaf:accountName="ts_asano">
+         <foaf:accountServiceHomepage rdf:resource="http://www.hatena.ne.jp/" />
+       </foaf:OnlineAccount>
+     </foaf:holdsAccount>
+   </foaf:maker>
+</rdf:Description>
+</rdf:RDF>
+-->
+
+<link rel="alternate" media="handheld" type="text/html" href="http://d.hatena.ne.jp/ts_asano/mobile?date=20121222&section=1356102000" />
+<!--
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:dc="http://purl.org/dc/elements/1.1/"
+         xmlns:trackback="http://madskills.com/public/xml/rss/module/trackback/">
+<rdf:Description
+  rdf:about="http://d.hatena.ne.jp/ts_asano/20121222/1356102000"
+  trackback:ping="http://d.hatena.ne.jp/ts_asano/20121222/1356102000"
+  dc:title="[FuelPHP]QueryBuilderで小難しいSELECT文を書くためのノウハウ #FuelPHPAdvent2012"
+  dc:identifier="http://d.hatena.ne.jp/ts_asano/20121222/1356102000" />
+</rdf:RDF>
+-->
+
+<script type="text/javascript" src="http://d.st-hatena.com/statics/js/MochiKit/1125/Base.js?b89e3d26af9bff96182d94a4f9bc43c609e56aed"></script>
+<script type="text/javascript" src="http://d.st-hatena.com/statics/js/MochiKit/1125/Iter.js?b89e3d26af9bff96182d94a4f9bc43c609e56aed"></script>
+<script type="text/javascript" src="http://d.st-hatena.com/statics/js/MochiKit/1125/DOM.js?b89e3d26af9bff96182d94a4f9bc43c609e56aed"></script>
+<script type="text/javascript" src="http://d.st-hatena.com/statics/js/MochiKit/1125/Style.js?b89e3d26af9bff96182d94a4f9bc43c609e56aed"></script>
+<script type="text/javascript" src="http://d.st-hatena.com/statics/js/MochiKit/1125/Signal.js?b89e3d26af9bff96182d94a4f9bc43c609e56aed"></script>
+<script type="text/javascript" src="http://d.st-hatena.com/statics/js/MochiKit/1125/Async.js?b89e3d26af9bff96182d94a4f9bc43c609e56aed"></script>
+<script type="text/javascript" src="http://d.st-hatena.com/statics/js/MochiKit/1125/Logging.js?b89e3d26af9bff96182d94a4f9bc43c609e56aed"></script>
+<script type="text/javascript" src="http://d.st-hatena.com/statics/js/BookmarkCommentViewer.js?b89e3d26af9bff96182d94a4f9bc43c609e56aed" charset="utf-8"></script>
+
+
+
+<link rel="canonical" href="http://d.hatena.ne.jp/ts_asano/20121222/1356102000">
+
+
+
+
+<script type="text/javascript" src="http://s.hatena.ne.jp/js/HatenaStar.js"></script>
+<script type="text/javascript">
+Hatena.Star.SiteConfig = {
+  entryNodes: {
+    'div.section': {
+      uri: 'h3 a',
+      title: 'h3',
+      container: 'h3'
+    }
+  }
+};
+Hatena.Author  = new Hatena.User('ts_asano');
+Hatena.DiaryName  = new Hatena.User('ts_asano');
+
+</script>
+
+
+
+<script type="text/javascript" src="http://d.st-hatena.com/statics/js/twitter_entry_icon.js?624193d7525aa17863f03b145a0662aa8bfba0bb"></script>
+
+
+
+<script type="text/javascript" src="http://d.st-hatena.com/statics/js/adcolor.js?b89e3d26af9bff96182d94a4f9bc43c609e56aed"></script>
+
+
+<script type="text/javascript" src="http://d.st-hatena.com/statics/js/quick_pager.js?73e8efd3adc8709460b4c8ff9af5a3d4c97eba4e"></script>
+<script type="text/javascript" src="http://d.st-hatena.com/statics/js/diary_utils.js?b89e3d26af9bff96182d94a4f9bc43c609e56aed"></script>
+<script type="text/javascript" src="http://d.st-hatena.com/statics/js/max_width_fotolife.js?2d5c0a4915fdb8930122a506dbf154b9db674a3b"></script>
+
+
+
+
+
+
+
+<meta name="keywords" content="株式会社トゥ・ステップ,プログラム,サーバ管理,営業,読書" />
+
+<meta name="google-site-verification" content="xjLVbaVI6Yqmm1fhSQgFi2B82FeK9ccdpw5T-jqVhAw" />
+
+
+
+
+
+
+<script type="text/javascript" src="http://d.st-hatena.com/statics/js/jquery-1.4.2.min.js?1c983e39f64600478e5a829cf7a7a61f68527715"></script>
+<script type="text/javascript">
+  jQuery.noConflict()(function($){
+    var j$ = jQuery;
+  });
+</script>
+
+
+
+
+</head>
+<body>
+
+<div id="simple-header">
+
+  <a href="http://www.hatena.ne.jp/"><img src="/images/hatena-simple_lb.gif" alt="Hatena::" title="Hatena::" id="logo-hatena" width="65" height="17"></a><a href="/"><img src="/images/diary-simple_lb.gif" alt="ブログ(Diary)" title="Diary" id="logo-diary" width="43" height="17"></a>
+  <form method="get" action="/search" class="search-form">
+    <input type="text" class="search-word" name="word" value=""><input name="name" value="ts_asano" type="hidden"><input type="submit" name="diary" value="日記" class="search-button"><input type="submit" name="submit" value="検索" class="search-button">
+  </form>
+  <ul class="menu">
+    <li><a href="/ts_asano/">ブログトップ</a></li>
+    <li><a href="/ts_asano/archive">記事一覧</a></li>
+
+
+
+    <li><a href="https://www.hatena.ne.jp/login?backurl=http%3A%2F%2Fd.hatena.ne.jp%2Fts_asano%2F20121222%2F1356102000&add_timestamp=1">ログイン</a></li>
+    <li><a href="https://www.hatena.ne.jp/register?location=http://d.hatena.ne.jp/">無料ブログ開設</a></li>
+
+  </ul>
+</div>
+
+
+
+<h1><a href="http://d.hatena.ne.jp/ts_asano/">Dazing days</a> <a href="http://a.hatena.ne.jp/append?http://d.hatena.ne.jp/ts_asano/"><img src="http://d.hatena.ne.jp/images/a_append_lb.gif" title="このページをアンテナに追加" alt="このページをアンテナに追加" border="0" width="16" height="12" class="icon"></a> <a href="http://d.hatena.ne.jp/ts_asano/rss"><img src="http://d.hatena.ne.jp/images/rss_lb.gif" alt="RSSフィード" title="RSSフィード" border="0" width="24" height="12" class="icon"></a></h1>
+<div class="hatena-body">
+<div class="main">
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="calendar" id="pager-top">
+  <a rel="prev" href="/ts_asano/20121215/1355562841" class="prev">&lt;[電子工作][Arduino][Bluetooth]...</a><span id="edit-in-place-add"></span>
+</div>
+<div id="days">
+
+<div class="day day-br">
+<h2><a href="http://d.hatena.ne.jp/ts_asano/20121222" rel="nofollow"><span class="date">2012-12-22</span></a></h2>
+
+<div class="body">
+
+<!-- google_ad_section_start -->
+
+		<div class="section">
+			<h3 class="title"><a href="/ts_asano/20121222/1356102000" name="1356102000">QueryBuilderで小難しいSELECT文を書くためのノウハウ #FuelPHPAdvent2012</a></h3>
+			<p class="sectionheader"><span class="sectioncategory"><a href="/ts_asano/searchdiary?word=%2A%5BFuelPHP%5D" class="sectioncategory">FuelPHP</a></span></p>
+<br><p>この記事は <a href="http://atnd.org/events/33753" target="_blank">FuelPHP Advent Calendar 2012</a> の 22日目の記事です。<br>昨日は@<a class="twitter-user-screen-name" href="http://twitter.com/konkon1234">konkon1234</a>さんの「<a href="http://www.crossl.net/blog/fuelphp-advcal121221/" target="_blank">FuelPHPで１サイトを作ってみて気が付いた点など</a>」でした。<br><br>あさのひとしと申します。<br>今回はタイトルの通り、<a class="keyword" href="http://d.hatena.ne.jp/keyword/FuelPHP">FuelPHP</a>のQueryBuilderを使いこなすために悪戦苦闘した結果得られたエッセンスをノウハウとしてまとめてみました。<br>少し長いですが、どうぞよろしくお願い致します。<br><br></p>
+			<h4>はじめに</h4>
+<p>さて、みなさんは普段どれくらいの「<a class="keyword" href="http://d.hatena.ne.jp/keyword/SQL">SQL</a>文」を書かれるでしょうか？<br>ORMが登場して、ほとんど<a class="keyword" href="http://d.hatena.ne.jp/keyword/SQL">SQL</a>文自体を書くことは少なくなったのかなと思います。<br><br>ただ、時には効率重視にする必要がある場合もあります。<br>その場合はDBからデータを取得して処理するのではなく、できる限りの処理をデータベース側に行わせたいものです。<br><br>そういったときにサブクエリが効いてくるわけですが、これを<a class="keyword" href="http://d.hatena.ne.jp/keyword/FuelPHP">FuelPHP</a>のQueryBuilderで表現するには？というのがこの記事の目的です。<br>ORMの有用性はご存知のとおりと思いますので、ここではORMには触れずに参ります。<br><br><span style="font-weight:bold;" class="deco">以下すべての<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%BD%A1%BC%A5%B9%A5%B3%A1%BC%A5%C9">ソースコード</a>は、PHP5.4のビルトインサーバ(PHP5.4.9)＋<a class="keyword" href="http://d.hatena.ne.jp/keyword/FuelPHP">FuelPHP</a> 1.4、<a class="keyword" href="http://d.hatena.ne.jp/keyword/MySQL">MySQL</a>バージョン5.5.28にて動作確認済みです。<br>以下すべての<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%BD%A1%BC%A5%B9%A5%B3%A1%BC%A5%C9">ソースコード</a>はそれ単体で動くものではなく、また著作権表示・許諾表示を怠っておりますが、MITライセンスを適用させて頂きます。</span><br><br></p>
+			<h4>0.環境準備</h4><p>まずは、まっさらのFuelPHP1.4環境を用意します。<span class="footnote"><a href="/ts_asano/20121222/1356102000#20121222f1" name="20121222fn1" title="FuelPHPの環境準備手順は省略します。">*1</a></span><br><br>どのような<a class="keyword" href="http://d.hatena.ne.jp/keyword/SQL">SQL</a>文が生成されているか分かりやすくなるよう、profilingをtrueにしておきましょう。	<br>データベースのprofilingもtrueにしておく必要があります。<br><br></p>
+			<h5>fuel/app/config/development/config.<a class="keyword" href="http://d.hatena.ne.jp/keyword/php">php</a></h5>
+<pre class="syntax-highlight">
+return array(
+    'profiling' =<span class="synError">&gt;</span> true,
+);
+</pre>
+
+			<h5>fuel/app/config/development/db.<a class="keyword" href="http://d.hatena.ne.jp/keyword/php">php</a></h5>
+<pre class="syntax-highlight">
+return array(
+    'default' =<span class="synError">&gt;</span> array(
+        'connection' =<span class="synError">&gt;</span> ({省略}),
+        'profiling' =<span class="synError">&gt;</span> true,
+    ),
+);
+</pre>
+
+<p>今回は説明用に、oilを使用してテーブルを4つ作成します。<br>簡単な図書館の蔵書・貸出管理システムをイメージして頂ければと思います。<br></p>
+<ul>
+				<li>出版社テーブル 出版社名</li>
+				<li>書籍テーブル 書籍名と出版社ID</li>
+				<li>貸出テーブル 貸出日時、書籍IDと会員ID</li>
+				<li>会員テーブル 名前と誕生日</li>
+<br>			</ul>
+<p>ということで、コマンドラインで以下を実行します。</p>
+<pre class="syntax-highlight">
+oil g model publisher  name:string<span class="synStatement">[</span><span class="synConstant">10</span><span class="synStatement">]</span>
+oil g model book  name:string<span class="synStatement">[</span><span class="synConstant">20</span><span class="synStatement">]</span> publisher_id:int<span class="synStatement">[</span><span class="synConstant">11</span><span class="synStatement">]</span>
+oil g model member  name:string<span class="synStatement">[</span><span class="synConstant">10</span><span class="synStatement">]</span> birth_date:date
+oil g model rental  rental_dttm:datetime book_id:int<span class="synStatement">[</span><span class="synConstant">11</span><span class="synStatement">]</span> member_id:int<span class="synStatement">[</span><span class="synConstant">11</span><span class="synStatement">]</span>
+oil <span class="synStatement">r</span> migrate
+</pre>
+
+<p>お手数ですが、これらのテーブルに適当にデータを投入して下さい。<br>ここまでで、環境準備は終了です。<br><br></p>
+			<h4>1.QueryBuilderのおさらい</h4><br>
+<p>まずは、QueryBuilderについてのおさらいです。</p>
+<pre class="syntax-highlight">
+$search_book_id = \Input::post('book_id');
+$search_member_id = \Input::post('member_id');
+
+$query = \DB::select('*')-<span class="synError">&gt;</span>from('rentals');
+
+if ($search_book_id)
+{
+    // 検索条件に本のIDがあれば、where条件に追加
+    $query = $query-<span class="synError">&gt;</span>where('book_id', '=', $search_book_id);
+}
+if ($search_member_id)
+{
+    // 検索条件に会員IDがあれば、where条件に追加
+    $query = $query-<span class="synError">&gt;</span>where('member_id', '=', $search_member_id);
+}
+
+$query = $query-<span class="synError">&gt;</span>order_by('rental_dttm', 'desc');
+$result  = $query-<span class="synError">&gt;</span>execute();
+</pre>
+
+<p>今更書くほどのことでもないと思いますが、条件に応じて動的にwhere条件を追加できるのが便利ですよね。<br><br>ただ、少し難しい<a class="keyword" href="http://d.hatena.ne.jp/keyword/SQL">SQL</a>文、例えば<a class="keyword" href="http://d.hatena.ne.jp/keyword/MySQL">MySQL</a>関数を使おうとする場合には少しコツが必要になります。<br><br></p>
+			<h4>2.<a class="keyword" href="http://d.hatena.ne.jp/keyword/MySQL">MySQL</a>関数を使うためのノウハウ</h4>
+<p>クエリビルダはエスケープ処理を自動でかけてくれるため、場合によっては困る場合があります。<br><a class="keyword" href="http://d.hatena.ne.jp/keyword/MySQL">MySQL</a>関数を使う場合には、エスケープ処理が行われないようにする必要があります。<br>そういう場合に使用できるのが、DB::expr() メソッドです。<br><br>たとえばMAX関数を使う場合は、こんな感じになります。</p>
+<pre class="syntax-highlight">
+$result = \DB::select(\DB::expr('MAX(`birth_date`)'))
+    -<span class="synError">&gt;</span>from('members')
+    -<span class="synError">&gt;</span>execute();
+</pre>
+
+<p>しかし実は、以下の書き方でもOKです。<br>バッククォートをダブルクォートにするのがポイントです。</p>
+<pre class="syntax-highlight">
+$result = \DB::select('MAX(&quot;birth_date&quot;)')
+    -<span class="synError">&gt;</span>from('members')
+    -<span class="synError">&gt;</span>execute();
+</pre>
+
+<p>これはselect句に限られませんので、where句で書いてもOKです。<br>たとえば「40歳以上の会員を取得」するには、こんな感じで書けばOKです。</p>
+<pre class="syntax-highlight">
+$result = \DB::select('*')
+    -<span class="synError">&gt;</span>from('members')
+    -<span class="synError">&gt;</span>where('FLOOR(CURDATE()+0 - DATE_FORMAT(&quot;birth_date&quot;, \'%Y%m%d\')+0 ) / 10000', '<span class="synError">&gt;</span>=', '40')
+    -<span class="synError">&gt;</span>execute();
+</pre>
+
+<p><a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%AB%A5%E9%A5%E0%CC%BE">カラム名</a>をダブルクォートで囲う。コレがポイントです。<br>適切にエスケープすることで、シングルクォートも使えます。<br><br>ここでひとつ注意点ですが、これらの方法を使う場合、エスケープ処理が行われません。<br>それはつまり、ユーザーが入力した内容をこの内部に反映させる場合、<a class="keyword" href="http://d.hatena.ne.jp/keyword/SQL%A5%A4%A5%F3%A5%B8%A5%A7%A5%AF%A5%B7%A5%E7%A5%F3">SQLインジェクション</a>攻撃を受ける可能性があるという事になります。<span class="footnote"><a href="/ts_asano/20121222/1356102000#20121222f2" name="20121222fn2" title="ただし、私が試した限りはSQLインジェクション攻撃を引き起こすことはできませんでした。">*2</a></span><br><br>ユーザー入力をDB::expr() メソッド内またはそれに準ずる方法で処理する場合は必ずDB::escape()を使用し、以下のように対策を行うようにして下さい。</p>
+<pre class="syntax-highlight">
+// $date_strには、'20121222'のような文字列を期待する
+$date_str = \Input::post('base_date_str');
+$result = \DB::select('*')
+    -<span class="synError">&gt;</span>from('members')
+    -<span class="synError">&gt;</span>where('FLOOR('. \DB::escape($date_str). '+0 - DATE_FORMAT(&quot;birth_date&quot;, \'%Y%m%d\')+0 ) / 10000', '<span class="synError">&gt;</span>=', '40')
+    -<span class="synError">&gt;</span>execute();
+</pre>
+<br>
+			<h4>3.サブクエリを使うためのノウハウ</h4>
+<p>さて、それでは「A社とC社が発行している本についての蔵書、各々最後に貸し出した日付、借りた人物を取得」してみたいと思います。<br>普通はこんなにややこしい処理を一文で書くことは少ないかもしれませんが、<br>「データベースでできることはデータベースで」というポリシーで処理してみるとこんな感じになります。</p>
+<pre class="syntax-highlight">
+$query = \DB::query(
+    'select p.name as publisher_name, b.name as book_name, r.rental_dttm, m.name as member_name'.
+    ' from books as b'.
+    ' inner join publishers as p on b.publisher_id = p.id'.
+    ' left outer join ('.
+    '  select out_r.rental_dttm, out_r.book_id, out_r.member_id'.
+    '  from rentals as out_r'.
+    '  where (out_r.rental_dttm, out_r.book_id) in'.
+    '   (select MAX(in_r.rental_dttm) as rental_dttm, in_r.book_id'.
+    '    from rentals as in_r'.
+    '    group by in_r.book_id)'.
+    ' ) as r on b.id = r.book_id'.
+    ' left outer join members as m on r.member_id = m.id'.
+    ' where p.name in (&quot;A社&quot;, &quot;C社&quot;)'.
+    ' order by p.id, b.id');
+$result = $query-<span class="synError">&gt;</span>execute();
+</pre>
+
+<p>100行200行の<a class="keyword" href="http://d.hatena.ne.jp/keyword/SQL">SQL</a>文を見慣れている方であれば大したことはないですが、<a class="keyword" href="http://d.hatena.ne.jp/keyword/SQL">SQL</a>文に慣れていないかたはぎょっとするかも知れません。<br><br>それではこれをQBで書き換えてみましょう。</p>
+<pre class="syntax-highlight">
+$query = \DB::select( array('p.name', 'publisher_name'),
+        array('b.name', 'book_name'), 'r.rental_dttm', array('m.name', 'member_name'))
+    -<span class="synError">&gt;</span>from(array('books', 'b'))
+    -<span class="synError">&gt;</span>join(array('publishers', 'p'), 'inner')-<span class="synError">&gt;</span>on('b.publisher_id', '=', 'p.id')
+    -<span class="synError">&gt;</span>join(array(DB::expr('(select out_r.rental_dttm, out_r.book_id, out_r.member_id'.
+        ' from rentals as out_r'.
+        ' where (out_r.rental_dttm, out_r.book_id) in'.
+        '  (select MAX(in_r.rental_dttm) as rental_dttm, in_r.book_id'.
+        '   from rentals as in_r'.
+        '   group by in_r.book_id) )')
+            , 'r'), 'left outer')-<span class="synError">&gt;</span>on('b.id', '=', 'r.book_id')
+    -<span class="synError">&gt;</span>join(array('members', 'm'), 'left outer')-<span class="synError">&gt;</span>on('r.member_id', '=', 'm.id')
+    -<span class="synError">&gt;</span>where('p.name', 'in', array('A社', 'C社'))
+    -<span class="synError">&gt;</span>order_by('p.id')
+    -<span class="synError">&gt;</span>order_by('b.id');
+$result = $query-<span class="synError">&gt;</span>execute();
+</pre>
+
+<p>これぐらい長い箇所がある場合は、無理にダブルクォートを使うより、素直にDB::expr() メソッドを使うことをおすすめします。<br>どうしてもDB::expr() メソッドを使いたくないという場合は、各<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%AB%A5%E9%A5%E0%CC%BE">カラム名</a>をダブルクォートで囲むようにして下さい。<br><br></p>
+			<h4>4.where句の右辺に<a class="keyword" href="http://d.hatena.ne.jp/keyword/MySQL">MySQL</a>関数を使いたい時のノウハウ</h4>
+<p>最後に、一番お伝えしたかったのがこのノウハウです。<br>where句の右辺に<a class="keyword" href="http://d.hatena.ne.jp/keyword/MySQL">MySQL</a>関数を使うと値扱いでクォートされてしまい、データを取得できません。<br><br>「直近30日の貸し出し履歴を書籍名、借りた人物込みで取得」する事を想定してみます。</p>
+<pre class="syntax-highlight">
+$query = \DB::select('r.id', 'r.rental_dttm',
+        array('b.name', 'book_name'), array('m.name', 'member_name'))
+    -<span class="synError">&gt;</span>from(array('rentals', 'r'))
+    -<span class="synError">&gt;</span>join(array('books', 'b'), 'inner')-<span class="synError">&gt;</span>on('r.book_id', '=', 'b.id')
+    -<span class="synError">&gt;</span>join(array('members', 'm'), 'inner')-<span class="synError">&gt;</span>on('r.member_id', '=', 'm.id')
+    -<span class="synError">&gt;</span>where('DATE(r.&quot;rental_dttm&quot;)', '<span class="synError">&gt;</span>=', 'ADDDATE( CURDATE(), INTERVAL -30 DAY )')
+    -<span class="synError">&gt;</span>order_by('r.rental_dttm', 'DESC');
+$result = $query-<span class="synError">&gt;</span>execute()-<span class="synError">&gt;</span>as_array();
+</pre>
+
+<p>この場合、where句は以下のように解釈されてしまいます。</p>
+<pre class="syntax-highlight">
+  <span class="synSpecial">WHERE</span> <span class="synType">DATE</span>(r.`rental_dttm`) &gt;= <span class="synConstant">'ADDDATE( CURDATE(), INTERVAL -30 DAY )'</span>
+</pre>
+
+<p>しかしこれも小技を効かせれば、解決可能です。</p>
+<pre class="syntax-highlight">
+$query = \DB::select('r.id', 'r.rental_dttm', array('b.name', 'book_name'), array('m.name', 'member_name'))
+    -<span class="synError">&gt;</span>from(array('rentals', 'r'))
+    -<span class="synError">&gt;</span>join(array('books', 'b'), 'inner')-<span class="synError">&gt;</span>on('r.book_id', '=', 'b.id')
+    -<span class="synError">&gt;</span>join(array('members', 'm'), 'inner')-<span class="synError">&gt;</span>on('r.member_id', '=', 'm.id')
+    -<span class="synError">&gt;</span>where('DATE(r.&quot;rental_dttm&quot;) <span class="synError">&gt;</span>= ADDDATE( CURDATE(), INTERVAL -30 DAY )', '=', true)
+    -<span class="synError">&gt;</span>order_by('r.rental_dttm', 'DESC');
+$result = $query-<span class="synError">&gt;</span>execute()-<span class="synError">&gt;</span>as_array();
+</pre>
+
+<p>こうすると、where句が以下のように解釈されます。</p>
+<pre class="syntax-highlight">
+  <span class="synSpecial">WHERE</span> <span class="synType">DATE</span>(r.`rental_dttm`) &gt;= ADDDATE( CURDATE(), INTERVAL <span class="synConstant">-30</span> DAY ) = <span class="synConstant">'1'</span>
+</pre>
+
+<p>ぱっと見でわかりにくいのですが、「DATE(r.`rental_dttm`) &gt;= ADDDATE( CURDATE(), INTERVAL -30 DAY )」がtrueのデータ、つまり「1」と評価できるデータが取得対象ということになります。<br>これは「DATE(r.`rental_dttm`) &gt;= ADDDATE( CURDATE(), INTERVAL -30 DAY )」そのものとして処理される、という事になります。<br><br>この方法は、where in でサブクエリを使いたい場合にも応用が効くノウハウです。<br><br></p>
+			<h4>おわりに</h4>
+<p>いかがでしたでしょうか？<br><a class="keyword" href="http://d.hatena.ne.jp/keyword/FuelPHP">FuelPHP</a>にはマニュアルでは触れられていない、思わぬ機能がまだまだ隠されています。<br><br>当然ながらcoreのソースも<a class="keyword" href="http://d.hatena.ne.jp/keyword/PHP">PHP</a>で書かれていますので、処理の中身を読むことができます。<br>気になる箇所があれば、時間を掛けて読み込んでみたいものです。<br>思わぬ発見があるかも知れませんよ？<br><br><br>この記事が<a class="keyword" href="http://d.hatena.ne.jp/keyword/FuelPHP">FuelPHP</a>でDBを扱う方にとって、お役に立てますと幸いです！<br><br>明日は@<a class="twitter-user-screen-name" href="http://twitter.com/mukaken">mukaken</a>さんの「<a class="keyword" href="http://d.hatena.ne.jp/keyword/FuelPHP">FuelPHP</a> vs CodeIgniter」です。お楽しみに！<br><br># mukakenさん、いつもはてなスターありがとうございます！<br>  この場をお借りしてお礼申し上げます。</p>
+			<p class="share-button sectionfooter"><a href="http://b.hatena.ne.jp/entry/http://d.hatena.ne.jp/ts_asano/20121222/1356102000" class="hatena-bookmark-button" data-hatena-bookmark-title="QueryBuilderで小難しいSELECT文を書くためのノウハウ #FuelPHPAdvent2012" data-hatena-bookmark-layout="standard" title="このエントリーをはてなブックマークに追加"><img src="http://b.st-hatena.com/images/entry-button/button-only.gif" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="http://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script><a href="http://twitter.com/share" class="twitter-share-button" data-lang="ja" data-count="none" data-url="http://d.hatena.ne.jp/ts_asano/20121222/1356102000" data-text="QueryBuilderで小難しいSELECT文を書くためのノウハウ #FuelPHPAdvent2012 - Dazing days (id:ts_asano / @ts_asano)">ツイートする</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js" charset="utf-8"></script><iframe src="http://www.facebook.com/plugins/like.php?href=http%3A%2F%2Fd.hatena.ne.jp%2Fts_asano%2F20121222%2F1356102000&amp;layout=button_count&amp;show_faces=false&amp;width=100&amp;action=like&amp;colorscheme=light&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:100px; height:21px;" allowTransparency="true"></iframe></p>
+
+			<p class="sectionfooter"><a href="/ts_asano/20121222/1356102000">Permalink</a> | <a href="/ts_asano/20121222/1356102000#c">コメント(0)</a> | <a href="/ts_asano/20121222/1356102000#tb">トラックバック(0)</a> | 00:00 <a href="http://b.hatena.ne.jp/entry/http://d.hatena.ne.jp/ts_asano/20121222/1356102000" class="bookmark-icon"><img src="http://d.hatena.ne.jp/images/b_entry_lb.gif" border="0" title="QueryBuilderで小難しいSELECT文を書くためのノウハウ #FuelPHPAdvent2012を含むブックマーク" alt="QueryBuilderで小難しいSELECT文を書くためのノウハウ #FuelPHPAdvent2012を含むブックマーク" width="16" height="12" class="icon"></a> <a href="http://b.hatena.ne.jp/entry/http://d.hatena.ne.jp/ts_asano/20121222/1356102000" class="bookmark-count"><img src="http://b.hatena.ne.jp/entry/image/http://d.hatena.ne.jp/ts_asano/20121222/1356102000" title="はてなブックマーク - QueryBuilderで小難しいSELECT文を書くためのノウハウ #FuelPHPAdvent2012" alt=""></a> <img class="hatena-bcomment-view-icon" src="http://r.hatena.ne.jp/images/popup.gif" onclick="javascript:BookmarkCommentViewer.iconImageClickHandler(this, 'http://d.hatena.ne.jp/ts_asano/20121222/1356102000', event);" title="QueryBuilderで小難しいSELECT文を書くためのノウハウ #FuelPHPAdvent2012のブックマークコメント" alt="QueryBuilderで小難しいSELECT文を書くためのノウハウ #FuelPHPAdvent2012のブックマークコメント" width="13" height="13"></p>
+
+		</div>
+
+<div id="google_afc_user" class="section">
+<div id="google_afc_user_container" class="google_afc_blocklink2_5 google_afc_boder">
+<script type="text/javascript">
+<!--
+    google_ad_client = 'ca-hatena_html';
+    google_ad_channel = 'd_user';
+    google_ad_type     = 'image';
+    google_ad_width = '300';
+    google_ad_height = '250';
+    google_image_size = '300x250';
+    google_ad_format = '300x250_pas_abgc';
+    document.write('<scri' + 'pt charset="utf-8" type="text/javascript" src="http://ad.hatena.ne.jp/js/hatena_afc-compiled.js"></scri' + 'pt>');
+// -->
+</script>
+</div>
+</div>
+
+		<div class="footnote">
+			<p class="footnote"><a href="/ts_asano/20121222/1356102000#20121222fn1" name="20121222f1">*1</a>：<a class="keyword" href="http://d.hatena.ne.jp/keyword/FuelPHP">FuelPHP</a>の環境準備手順は省略します。</p>
+			<p class="footnote"><a href="/ts_asano/20121222/1356102000#20121222fn2" name="20121222f2">*2</a>：ただし、私が試した限りは<a class="keyword" href="http://d.hatena.ne.jp/keyword/SQL%A5%A4%A5%F3%A5%B8%A5%A7%A5%AF%A5%B7%A5%E7%A5%F3">SQLインジェクション</a>攻撃を引き起こすことはできませんでした。</p>
+		</div>
+
+<!-- google_ad_section_end -->
+
+</div>
+
+<form id="comment-form" method="post" action="/ts_asano/comment#c" class="comment">
+<input type="hidden" name="mode" value="enter">
+<input type="hidden" name="rkm" value="">
+<input type="hidden" name="date" value="2012-12-22">
+<div class="comment">
+  <div class="caption"><a name="c">コメントを書く</a></div>
+  <div class="commentshort">
+    
+    
+
+    <a name="error-message"></a>
+    <p class="message" style="display:none"></p>
+
+    
+
+    
+            
+    <p class="commentform">
+      <span class="commentator">
+        <span class="usermailconfirm"><input name="usermail" size="1" value=""><input name="userurl" size="1" value="">スパム対策のためのダミーです。もし見えても何も入力しないでください<br></span>
+        <span class="username">
+        <img src="http://www.hatena.ne.jp/images/guest_icon.gif" class="hatena-id-icon" alt="ゲスト" title="ゲスト" height="16" width="16">
+        <input type="hidden" name="section" value="1356102000">
+        
+          <input id="comment-username" name="username" size="15">
+        
+        </span>
+        
+          <span class="usermail"><img src="/images/icon-usermail.gif" style="vertical-align:middle;margin-right:3px;"><input id="comment-usermail" name="useremail" size="15" value=""></span>
+          <span class="userurl"><img src="/images/icon-userurl.gif" style="vertical-align:middle;margin-right:3px;"><input id="comment-userurl" name="useruri" size="15" value=""></span>
+        
+      </span>
+<br>
+      <!-- NOT_VERIFIED_COMMENT_AUTH -->
+      <textarea id="comment-textarea" name="body" value="" cols="60" rows="3"></textarea><br>
+      
+          <div class="captcha">
+            <img src="/ts_asano/captcha?1356124963" class="captcha-image">
+            <span class="captcha-message">画像認証</span><br />
+            <input type="text" name="captcha_code" size="10" class="captcha-string" id="comment-captcha">
+          </div>
+      
+      <span class="comment-submit"><input type="submit" id="comment-form-button" value="投稿"></span>
+    </p>
+
+      <script type="text/javascript" src="/js/diary_comment_edit_form.js"></script>
+    
+
+  </div>
+</div>
+
+</form>
+
+
+
+
+
+  
+  <div class="refererlist">
+    <div class="caption">
+      <a name="tb">トラックバック</a> - http://d.hatena.ne.jp/ts_asano/20121222/1356102000
+    </div>
+    
+  </div>
+  
+    <div class="refererlist">
+      <div class="caption"><a name="idtb">idトラックバック</a></div>
+      
+      <ul>
+        
+            <li><a href="http://twitter.com/php_hatena_bot/status/282147426205331457" title="QueryBuilderで小難しいSELECT文を書くためのノウハウ #FuelPHPAdvent2012 - Dazing days (id:ts_asano) http://t.co/ZXJS0E6q" rel="nofollow">Twitter / @php_hatena_bot</a></li>
+          
+        </ul>
+      </div>
+    
+  
+
+
+
+
+
+    <div class="refererlist">
+      <div class="caption">リンク元</div>
+      <ul>
+          <li>17 <a href="http://b.hatena.ne.jp/hotentry/it" rel="nofollow">http://b.hatena.ne.jp/hotentry/it</a></li>
+          <li>14 <a href="http://b.hatena.ne.jp/" rel="nofollow">http://b.hatena.ne.jp/</a></li>
+          <li>8 <a href="http://b.hatena.ne.jp/entrylist/it" rel="nofollow">http://b.hatena.ne.jp/entrylist/it</a></li>
+          <li>8 <a href="http://reader.livedoor.com/reader/" rel="nofollow">http://reader.livedoor.com/reader/</a></li>
+          <li>5 <a href="http://b.hatena.ne.jp/entrylist" rel="nofollow">http://b.hatena.ne.jp/entrylist</a></li>
+          <li>3 <a href="http://t.co/tvYWikxz" rel="nofollow">http://t.co/tvYWikxz</a></li>
+          <li>3 <a href="http://w3q.jp/go/10365" rel="nofollow">http://w3q.jp/go/10365</a></li>
+          <li>3 <a href="http://www-ig-opensocial.googleusercontent.com/gadgets/ifr?exp_rpc_js=1&amp;exp_track_js=1&amp;url=http%3A%2F%2Fchoichoi.sakura.ne.jp%2Fhatena_bookmark.xml&amp;container=ig&amp;view=default&amp;lang=ja&amp;country=JP&amp;sanitize=0&amp;v=a5bd8be9cea1edd1&amp;parent=http://www.google.co.jp&amp;l" rel="nofollow">http://www-ig-opensocial.googleusercontent.com/gadgets/ifr?exp_rpc_js=1&amp;exp_track_js=1&amp;url=http://choichoi.sakura.ne.jp/hatena_bookmark.xml&amp;container=ig&amp;view=default&amp;lang=ja&amp;country=JP&amp;sanitize=0&amp;v=a5bd8be9cea1edd1&amp;parent=http://www.google.co.jp&amp;l</a></li>
+          <li>3 <a href="http://www.sleipnirstart.com/" rel="nofollow">http://www.sleipnirstart.com/</a></li>
+          <li>2 <a href="http://b.hatena.ne.jp/hotentry" rel="nofollow">http://b.hatena.ne.jp/hotentry</a></li>
+      </ul>
+      
+    </div>
+
+
+
+	<div class="refererlist referer-similar">
+		<div class="caption">おとなり日記</div>
+		<ul>
+
+			<li>2012-12-18 <a href="http://d.hatena.ne.jp/uki_e/20121218" rel="nofollow">Hack Myself</a> 3/32 9%
+		</ul>
+	</div>
+
+
+</div>
+
+
+
+</div>
+<div class="calendar" id="pager-bottom">
+  <a rel="prev" href="/ts_asano/20121215/1355562841" class="prev">&lt;[電子工作][Arduino][Bluetooth]...</a>
+</div>
+</div>
+<div class="sidebar">
+	<div class="hatena-module hatena-module-profile">
+  <div class="hatena-moduletitle">プロフィール</div>
+  <div class="hatena-modulebody">
+    <div class="hatena-profile">
+      <p class="hatena-profile-image"><a href="/ts_asano/about"><img src="http://www.st-hatena.com/users/ts/ts_asano/profile.gif" alt="ts_asano" /></a></p>
+      <p class="hatena-profile-id"><a href="/ts_asano/about">ts_asano</a> <a href="/ts_asano/about"><img src="/images/icon-plus.gif" alt="はてなダイアリープラス利用中" class="icon-plus" /></a></p>
+      <p class="hatena-profile-body">@ts_asano 節操無く色々</p>
+    </div>
+  </div>
+</div>
+
+	<div class="hatena-module hatena-module-sectioncategory">
+<div class="hatena-moduletitle">カテゴリー</div>
+<div class="hatena-modulebody">
+<ul class="hatena-sectioncategory">
+<li><a href="/ts_asano/searchdiary?word=%2A%5B%A5%B5%A1%BC%A5%D0%B4%C9%CD%FD%5D">サーバ管理</a></li>
+<li><a href="/ts_asano/searchdiary?word=%2A%5B%C6%C9%BD%F1%5D">読書</a></li>
+<li><a href="/ts_asano/searchdiary?word=%2A%5B%B1%C4%B6%C8%5D">営業</a></li>
+<li><a href="/ts_asano/searchdiary?word=%2A%5Bpostfix%5D">postfix</a></li>
+<li><a href="/ts_asano/searchdiary?word=%2A%5B%A5%E1%A1%BC%A5%EB%C7%DB%BF%AE%5D">メール配信</a></li>
+<li><a href="/ts_asano/searchdiary?word=%2A%5B%B6%C8%CC%B3%5D">業務</a></li>
+<li><a href="/ts_asano/searchdiary?word=%2A%5BPHP%5D">PHP</a></li>
+<li><a href="/ts_asano/searchdiary?word=%2A%5BFuelPHP%5D">FuelPHP</a></li>
+<li><a href="/ts_asano/searchdiary?word=%2A%5Bgit%5D">git</a></li>
+<li><a href="/ts_asano/searchdiary?word=%2A%5BNetbeans%5D">Netbeans</a></li>
+<li><a href="/ts_asano/searchdiary?word=%2A%5B%CE%C1%CD%FD%5D">料理</a></li>
+<li><a href="/ts_asano/searchdiary?word=%2A%5BAWS%5D">AWS</a></li>
+<li><a href="/ts_asano/searchdiary?word=%2A%5Bpostgres%5D">postgres</a></li>
+<li><a href="/ts_asano/searchdiary?word=%2A%5Bmount%5D">mount</a></li>
+<li><a href="/ts_asano/searchdiary?word=%2A%5BRaspberry%20pi%5D">Raspberry pi</a></li>
+<li><a href="/ts_asano/searchdiary?word=%2A%5Blinux%5D">linux</a></li>
+<li><a href="/ts_asano/searchdiary?word=%2A%5BApache%5D">Apache</a></li>
+<li><a href="/ts_asano/searchdiary?word=%2A%5BS3%5D">S3</a></li>
+<li><a href="/ts_asano/searchdiary?word=%2A%5BIAM%5D">IAM</a></li>
+<li><a href="/ts_asano/searchdiary?word=%2A%5BQuery%20Builder%5D">Query Builder</a></li>
+<li><a href="/ts_asano/searchdiary?word=%2A%5BSQL%5D">SQL</a></li>
+<li><a href="/ts_asano/searchdiary?word=%2A%5BMySQL%5D">MySQL</a></li>
+<li><a href="/ts_asano/searchdiary?word=%2A%5B%BB%E4%B4%B6%5D">私感</a></li>
+<li><a href="/ts_asano/searchdiary?word=%2A%5BMac%5D">Mac</a></li>
+<li><a href="/ts_asano/searchdiary?word=%2A%5B%C5%C5%BB%D2%B9%A9%BA%EE%5D">電子工作</a></li>
+<li><a href="/ts_asano/searchdiary?word=%2A%5BArduino%5D">Arduino</a></li>
+<li><a href="/ts_asano/searchdiary?word=%2A%5BBluetooth%5D">Bluetooth</a></li>
+</ul>
+</div>
+</div>
+
+	<div class="hatena-module hatena-module-section">
+<div class="hatena-moduletitle"><a href="/ts_asano/archive">最新タイトル</a></div>
+<div class="hatena-modulebody">
+<ul class="hatena-section">
+<li><a href="http://d.hatena.ne.jp/ts_asano/20121222/1356102000">[FuelPHP]QueryBuilderで小難しいSELECT文を書くためのノウハウ #FuelPHPAdvent2012</a></li>
+<li><a href="http://d.hatena.ne.jp/ts_asano/20121215/1355562841">[電子工作][Arduino][Bluetooth][mac]Arduino＋BluetoothとMacとで通信してみた</a></li>
+<li><a href="http://d.hatena.ne.jp/ts_asano/20121214/1355486890">[PHP]PHPのレイトバインディングについて</a></li>
+<li><a href="http://d.hatena.ne.jp/ts_asano/20121202/1354408701">[Mac]Pandocインストール</a></li>
+<li><a href="http://d.hatena.ne.jp/ts_asano/20121126/1353897001">[私感]30歳3ヶ月と1週間</a></li>
+<li><a href="http://d.hatena.ne.jp/ts_asano/20121115/1352994862">[SQL][MySQL]日付関数を使用して月初と月末の日付を取得する（MySQL）</a></li>
+<li><a href="http://d.hatena.ne.jp/ts_asano/20121114/1352899282">[FuelPHP][Query Builder]DB::expr()万能すぎワロタ</a></li>
+<li><a href="http://d.hatena.ne.jp/ts_asano/20121106/1352180792">[サーバ管理][AWS][S3][IAM]Amazon AWS S3を社外に貸し出す設定</a></li>
+<li><a href="http://d.hatena.ne.jp/ts_asano/20121023/1350996722">やらかしたり</a></li>
+<li><a href="http://d.hatena.ne.jp/ts_asano/20121018/1350547581">[FuelPHP]シェルスクリプトからFuelPHPで組んだ処理を呼び出す</a></li>
+</ul>
+</div>
+</div>
+
+	<div class="hatena-module hatena-module-comment">
+<div class="hatena-moduletitle">最近のコメント</div>
+<div class="hatena-modulebody">
+<ul class="hatena-recentcomment">
+<li><a href="/ts_asano/20121215/1355562841#c">2012-12-15</a>&nbsp;ts_asano</li>
+<li><a href="/ts_asano/20121215/1355562841#c">2012-12-15</a>&nbsp;micono</li>
+<li><a href="/ts_asano/20120902/1346586189#c">2012-09-02</a>&nbsp;ts_asano</li>
+<li><a href="/ts_asano/20120822/1345640388#c">2012-08-22</a>&nbsp;ts_asano</li>
+<li><a href="/ts_asano/20120822/1345640388#c">2012-08-22</a>&nbsp;田代</li>
+</ul>
+</div>
+</div>
+
+	<div class="hatena-module hatena-module-trackback">
+<div class="hatena-moduletitle">最近のトラックバック</div>
+<div class="hatena-modulebody">
+<ul class="hatena-recentcomment">
+<li><a href="/ts_asano/20121222#tb">2012-12-22</a>&nbsp;<a href="http://twitter.com/php_hatena_bot/status/282147426205331457">Twitter / @php_hatena_bot</a></li>
+<li><a href="/ts_asano/20121114#tb">2012-11-14</a>&nbsp;<a href="http://twitter.com/php_hatena_bot/status/268746821046767616">Twitter / @php_hatena_bot</a></li>
+<li><a href="/ts_asano/20121023#tb">2012-10-23</a>&nbsp;<a href="http://twitter.com/sa2yasu/status/262929441439752192">Twitter / @sa2yasu</a></li>
+<li><a href="/ts_asano/20121023#tb">2012-10-23</a>&nbsp;<a href="http://twitter.com/sa2yasu/status/262929434082963456">Twitter / @sa2yasu</a></li>
+</ul>
+</div>
+</div>
+
+	<div class="hatena-module">
+	<div class="hatena-moduletitle">リンク集</div>
+	<div class="hatena-modulebody">
+	<ul class="hatena-urllist">
+	<li><a href="http://www.two-step.co.jp/">株式会社トゥ・ステップ</a></li>
+	<li><a href="https://twitter.com/ts_asano">@ts_asano</a></li>
+	</ul>
+	</div>
+	</div>
+</div><div style="display:none"><script type="text/javascript"><!--
+    hatena_counter_name = "ts_asano";
+    hatena_counter_id = "1";
+    hatena_counter_ref = document.referrer+"";
+    hatena_counter_screen = screen.width + "x" + screen.height+","+screen.colorDepth;
+//--></script>
+<script type="text/javascript" src="http://counter.hatena.ne.jp//js/counter.js"></script>
+<noscript><img src="http://counter.hatena.ne.jp/ts_asano/1" border="0" alt="counter"></noscript>
+</div>
+</div>
+
+
+
+
+
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  var days = document.getElementById('days');
+  if (days && days.innerHTML.indexOf("今週のお題") != -1) {
+    _gaq.push(['_setCustomVar', 2, 'campaign', 'odai', 3]);
+  }
+
+  if (days && /\u6d77\u5916\u30c9\u30e9\u30de\u300e\u30e9\u30a4\u30fb\u30c8\u30a5\u30fb\u30df\u30fc \u5618\u306e\u77ac\u9593\u300f\u89b3\u305f\u3044\uff01|\u300e\u30e9\u30a4\u30fb\u30c8\u30a5\u30fb\u30df\u30fc \u5618\u306e\u77ac\u9593\u300f\u7b2c1\u8a71\u306e\u611f\u60f3\u3092\u6559\u3048\u3066\u304f\u3060\u3055\u3044|\u4eca\u3060\u304b\u3089\u8a00\u3048\u308b\u300c\u5618\u3092\u3064\u3044\u3066\u3057\u307e\u3063\u305f\u30a8\u30d4\u30bd\u30fc\u30c9\u300d\u3092\u6559\u3048\u3066\u304f\u3060\u3055\u3044|\u3060\u307e\u3055\u308c\u305f\u3051\u3069\u3001\u8a31\u305b\u3066\u3057\u307e\u3063\u305f\u5618\u3092\u6559\u3048\u3066\u304f\u3060\u3055\u3044/.test(days.innerHTML)) {
+    _gaq.push(['_setCustomVar', 2, 'campaign', 'lietome', 3]);
+  }
+
+  if (days && /Visa\u30d7\u30ea\u30da\u30a4\u30c9\u300cV\u30d7\u30ea\u30ab\u300d\u8a66\u3057\u305f\u3044\uff01|Visa\u30d7\u30ea\u30da\u30a4\u30c9\u300cV\u30d7\u30ea\u30ab\u300d\u3001\u81ea\u5206\u306a\u3089\u3053\u3046\u4f7f\u3046\uff01|V\u30d7\u30ea\u30ab\u304c1\u4e07\u5186\u5206\u3042\u3063\u305f\u3089\u3001\u30cd\u30c3\u30c8\u3067\u4f55\u3092\u8cb7\u3044\u307e\u3059\u304b\uff1f/.test(days.innerHTML)) {
+    _gaq.push(['_setCustomVar', 2, 'campaign', 'vpreca', 3]);
+  }
+
+  if (days && /\u30a2\u30a4\u30c7\u30e0 \u30a8\u30f3\u30b8\u30cb\u30a2\u30ad\u30e3\u30ea\u30a2Hacks\u5171\u6709\u30d7\u30ed\u30b8\u30a7\u30af\u30c8|\u30a8\u30f3\u30b8\u30cb\u30a2\u3068\u3057\u3066\u306e\u3001\u3068\u3063\u3066\u304a\u304d\u306e\u30ad\u30e3\u30ea\u30a2Hacks\u3092\u6559\u3048\u3066\u304f\u3060\u3055\u3044|\u3042\u306a\u305f\u304c\u30a8\u30f3\u30b8\u30cb\u30a2\u8ee2\u8077\u30b5\u30a4\u30c8\u3092\u4f5c\u308b\u306a\u3089\u3001\u3069\u3093\u306a\u30b5\u30a4\u30c8\u306b\u3057\u307e\u3059\u304b\uff1f|5\u5e74\u5f8c\u306e\u300c\u30a8\u30f3\u30b8\u30cb\u30a2\u306e\u50cd\u304d\u65b9\u300d\u306f\u3001\u3069\u3046\u5909\u308f\u3063\u3066\u3044\u3066\u307b\u3057\u3044\u3067\u3059\u304b\uff1f/.test(days.innerHTML)) {
+    _gaq.push(['_setCustomVar', 2, 'campaign', 'aidemcareer', 3]);
+  }
+
+  _gaq.push(
+  ['_setAccount', 'UA-441387-31'],
+  ['_setCustomVar', 1, 'afc_type', 'point', 3],
+  ['_setCustomVar', 3, 'theme', 'hatena2-lightblue', 3],
+  ['_setCustomVar', 4, 'usertype', 'guest', 1],
+  ['_trackPageview'],
+  ['b._setAccount', 'UA-7855606-1'],
+  ['b._setDomainName', '.hatena.ne.jp'],
+  ['b._trackPageview']
+  ,['c._setAccount', 'UA-34175934-1'],
+  ['c._trackPageview']
+  );
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+<!-- CG:1,CH:1,ICG:18,ICH:1,T: -->
+</body>
+</html>
