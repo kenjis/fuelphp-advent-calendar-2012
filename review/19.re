@@ -825,7 +825,7 @@ news/edit
  少し手を加えるだけで今まで使っていたライブラリの機能も利用する事もできます。@<br>{}
 
 
-明日は@_halt_compilerさんの「某サービスでFuelPHPを使った際のアレコレ(仮)」です。
+明日は@<href>{https://twitter.com/6q5,@6q5}さんの「FuelPHPのOrmを複数DBに対応させる方法」です。
 
 //quote{
 @<strong>{@ttikitt}
