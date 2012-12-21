@@ -3,7 +3,7 @@
 
 
 この記事は @<href>{http://atnd.org/events/33753,FuelPHP Advent Calendar 2012} の 22日目の記事です。
-昨日は@@<href>{http://twitter.com/konkon1234,konkon1234}さんの「@<href>{http://www.crossl.net/blog/fuelphp-advcal121221/,FuelPHPで１サイトを作ってみて気が付いた点など}」でした。@<br>{}
+昨日は@<href>{http://twitter.com/konkon1234,@konkon1234}さんの「FuelPHPで1サイトを作ってみて気が付いた点など」でした。@<br>{}
 
 
 あさのひとしと申します。
@@ -306,7 +306,7 @@ FuelPHPにはマニュアルでは触れられていない、思わぬ機能が�
 この記事がFuelPHPでDBを扱う方にとって、お役に立てますと幸いです！@<br>{}
 
 
-明日は@@<href>{http://twitter.com/mukaken,mukaken}さんの「FuelPHP vs CodeIgniter」です。お楽しみに！  
+明日は@<href>{http://twitter.com/mukaken,@mukaken}さんの「FuelPHP vs CodeIgniter」です。お楽しみに！  
 
 
 # mukakenさん、いつもはてなスターありがとうございます！@<br>{}
