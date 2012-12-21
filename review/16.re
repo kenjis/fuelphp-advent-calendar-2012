@@ -286,7 +286,7 @@ Facebookページへの追加方法は、このページで紹介されていま
 このように、Facebookアプリの枠組みとしてFuelPHPを利用することで、アプリのアイデアさえあれば、簡単にFacebookアプロを作成でき、Facebookページへの集客に役立てる事が出来ます。@<br>{}
  このノウハウが参考になれば幸いです。@<br>{}
 
-次は@@<href>{https://twitter.com/ootatter,ootatter}さんで「fuelphpで既存DBをあつかうとか」です。DBまわりの内容でとても興味深いですね。
+次は@<href>{https://twitter.com/ootatter,@ootatter}さんで「fuelphpで既存DBをあつかうとか」です。DBまわりの内容でとても興味深いですね。
 
 //quote{
 @<strong>{@mayama4u}
