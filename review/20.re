@@ -1,5 +1,5 @@
 
-= FuelPHPのOrmを複数DBに対応させる方法
+= FuelPHPのOrmを複数DBに対応させる方法 @<href>{https://twitter.com/6q5,@6q5}
 
 
 @<href>{http://atnd.org/events/33753,FuelPHP Advent Calendar 2012} 20日目の担当の@<href>{http://twitter.com/6q5,@6q5}です。
@@ -117,4 +117,12 @@ fuel/app/tasks/batch.php をProductionモードでcronに設定する場合、�
 
 あすは、@<href>{http://twitter.com/konkon1234,@konkon1234}さんの「(仮)FuelPHPで1サイトを作ってみて気が付いた点など」です。@<br>{}
  お楽しみに！
+
+//quote{
+@<strong>{@6q5}
+
+Twitter: @<href>{https://twitter.com/6q5,@6q5}
+
+Blog: @<href>{http://php6.tumblr.com/,http://php6.tumblr.com/}
+//}
 
