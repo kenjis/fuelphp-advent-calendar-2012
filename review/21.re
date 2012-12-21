@@ -2,19 +2,17 @@
 = FuelPHPで１サイトを作ってみて気が付いた点など
 
 
-@<href>{http://atnd.org/events/33753,FuelPHP Advent Calendar 2012}(#FuelPHPAdvent2012)21日目です。
-
-
-前日の記事は@<href>{http://tiwtter.com/haltcompiler,@haltcompilerさん}の@<href>{http://php6.tumblr.com/post/38309122629/fuelphp-advent-calendar-2012,FuelPHPのormを複数DBに対応させる方法}でした。
+@<href>{http://atnd.org/events/33753,FuelPHP Advent Calendar 2012} (#FuelPHPAdvent2012) 21日目です。
+前日の記事は@<href>{https://tiwtter.com/haltcompiler,@haltcompiler}さんの「FuelPHPのOrmを複数DBに対応させる方法」でした。@<br>{}
 
 
 本日は私が初めてFuelPHPを使った時に、躓いたことの解決法を焦点を絞らずに書いていきたいと思います。
 
- * ==   fieldsetでform出力したいけど見た目は場所によって変更したい
+==   fieldsetでform出力したいけど見た目は場所によって変更したい
 
 
-fieldsetでフィールドの定義をまとめて、表示はViewで自在に配置したい。@<br>{}
- 結構あるケースだと思います。
+fieldsetでフィールドの定義をまとめて、表示はViewで自在に配置したい。
+結構あるケースだと思います。
 
 
 そんな時はViewで個別にfield単位で表示して、その際にtemplateを設定すれば入力欄のみだったりエラーメッセージのみを取得できます。
@@ -64,18 +62,20 @@ $form->add('gender', '性別')
 //}
 
 
-こんな感じで出力されます。@<br>{}
- //image[form_output][formの描画イメージ]{
+こんな感じで出力されます。
+
+//image[form_output][formの描画イメージ]{
 //}
 
 
-config/form.phpを参考に、使える置換文字列をset_templateで設定することでその項目の必要な部分のみ描画できます。@<br>{}
- 動的に出力されるタグに属性を追加したい場合はset_attributeで追加します。
+config/form.phpを参考に、使える置換文字列をset_template()で設定することでその項目の必要な部分のみ描画できます。
+動的に出力されるタグに属性を追加したい場合はset_attribute()で追加します。@<br>{}
 
 
-私は上の記述方法が結構好きなのですが、項目が多くなってきたりするとViewがとても残念なことになってくるのでもっと綺麗に書きたいと思うのがプログラマの性です。@<br>{}
- そんな時は@<href>{http://blog.omoon.org/20121207/523http://blog.omoon.org/20121207/523,advent calendar7日目の@omoonさんの記事}等を参考にしてfieldset自体を拡張するのがお勧めです。
- * ==   phpunitすると文字化ける(windows)
+私は上の記述方法が結構好きなのですが、項目が多くなってきたりするとViewがとても残念なことになってくるのでもっと綺麗に書きたいと思うのがプログラマの性です。
+ そんな時は@<href>{http://blog.omoon.org/20121207/523http://blog.omoon.org/20121207/523,Advent Calendar 7日目の@omoonさんの記事}等を参考にしてfieldset自体を拡張するのがお勧めです。
+
+==   phpunitすると文字が化ける(Windows)
 
 
 Windows環境下でoil testすると結果が下のように出てきて悩んでました。
@@ -90,48 +90,50 @@ Windows環境下でoil testすると結果が下のように出てきて悩ん�
 これは文字化けというよりはカラー用のエスケープシーケンスがそのまま出ているようで、utf8がどうのとか文字コードを調べてしまうとなかなか解決に辿り着けません。以下を修正してください。
 
 
-COREPATH/phpunit.xml 3行目
+
 
 #@# lang: .brush: .xml; .title: .; .notranslate title=""
-//emlist{
+//emlist[COREPATH/phpunit.xml 3行目]{
 - <phpunit colors="true" stopOnFailure="false" bootstrap="../core/bootstrapphpunit.php">
 + <phpunit colors="false" stopOnFailure="false" bootstrap="../core/bootstrapphpunit.php">
 //}
- * ==   クラスの名前空間はFuelPHPのスタイルに合わせて絶対でなく相対で
+
+==   クラスの名前空間はFuelPHPのスタイルに合わせて絶対でなく相対で
 
 
 IDEの自動補完があるのでついついクラス名をルートから完全修飾したくなりますが、これが挙動にも影響を与えるケースがあります。
 
 
-@<href>{https://groups.google.com/forum/#!topic/fuelphp_jp/JT4QgQqWNjE,fuelphp.jp | Google グループ　コントローラからのレスポンスのContent-Typeを変更できません}
+ * @<href>{https://groups.google.com/forum/#!topic/fuelphp_jp/JT4QgQqWNjE,fuelphp.jp | Google グループ　コントローラからのレスポンスのContent-Typeを変更できません}
 
 
 郷に入っては郷に従えという諺に従いましょう。
 
 
-クラス名だけで自動補完をするためのIDE用定義を生成するスクリプトを@<href>{http://twitter.com/kenji_s,@kenji_sさん}が公開してくださっているので、ここはありがたく使用させていただきます。
+クラス名だけで自動補完をするためのIDE用定義を生成するスクリプトを@<href>{https://twitter.com/kenji_s,@kenji_s}さんが公開してくださっているので、ここはありがたく使用させていただきます。
 
 
-@<href>{http://d.hatena.ne.jp/Kenji_s/20120123/1327301678,A Day in Serenity @ kenjis | Eclipse で FuelPHP のコード補完を行わせる冴えたやり方}
+ * @<href>{http://d.hatena.ne.jp/Kenji_s/20120123/1327301678,A Day in Serenity @ kenjis | Eclipse で FuelPHP のコード補完を行わせる冴えたやり方}
 
 
 Windowsで使用する場合は以下を修正してください。
 
 
-関数の41行目
+
 
 #@# lang: .brush: .php; .title: .; .notranslate title=""
-//emlist{
+//emlist[関数の41行目]{
  if (is_array($file))
  {
 - static::generate_class_definition($file, $str . ucfirst(rtrim($dir, '/') . '_'));
 + static::generate_class_definition($file, $str . ucfirst(rtrim($dir, DS) . '_'));
  }
 //}
- * ==   fieldsetの選択項目でauto_id_prefixが2重に付く
+
+==   fieldsetの選択項目でauto_id_prefixが2重に付く
 
 
-デフォルトの設定だと'form_'になっているauto_id_prefixの値がradioなどの選択項目で<label for='form_form_xxxxx'>となるバグに遭遇しました。(v1.4)
+デフォルトの設定だと 'form_' になっているauto_id_prefixの値がradioなどの選択項目で@<code>{<label for='form_form_xxxxx'>}となるバグに遭遇しました(v1.4)。
 
 
 調べてみるとCOREPATH/classes/fieldset/field.phpの以下が原因だったので修正。
@@ -139,32 +141,33 @@ Windowsで使用する場合は以下を修正してください。
 #@# lang: .brush: .php; .title: .; .notranslate title=""
 //emlist{
 - $buildfield[$form->label($label, $attributes['id'])] = $this->type == 'radio'
-+ $buildfield[$form->label($label, $attributes['id'], array('for' => $attributes['id']))] = $this->type == 'radio'
++ $buildfield[$form->label($label, $attributes['id'], array('for' => $attributes['id']))@<raw>{|latex|\n}] = $this->type == 'radio'
 //}
 
 
-そしてpull requestを送っちゃうぞ〜と意気揚々とgithubを確認してみると、そこには既に修正済みのコードが掲載されていました。@<br>{}
+そしてpull requestを送っちゃうぞ〜と意気揚々とgithubを確認してみると、そこには既に修正済みのコードが掲載されていました。
  gitで最新取ってる人には無縁の悩みだったようです。
- * ==   テキストフィールドに0を設定しても空になる
+
+==   テキストフィールドに0を設定しても空になる
 
 
-タイトルのまんまです。(v1.4)
+タイトルのまんまです(v1.4)。
 
 
-Model側
+
 
 #@# lang: .brush: .php; .title: .; .notranslate title=""
-//emlist{
+//emlist[Model側]{
 $form->add('price', '金額')
  ->set_type('text')
  ->set_value('0');
 //}
 
 
-View側
+
 
 #@# lang: .brush: .php; .title: .; .notranslate title=""
-//emlist{
+//emlist[View側]{
 <?php echo $form->field('price'); ?>
 //}
 
@@ -172,8 +175,8 @@ View側
 とやっても空白なテキストフィールドが表示されてしまいました。(v1.4)
 
 
-これはCORE/base.phpのarray_to_attrという関数内での条件が原因となっていました。@<br>{}
- 案の定、github上では修正されておりましたので修正内容をありがたくマージしました。
+これはCORE/base.phpのarray_to_attrという関数内での条件が原因となっていました。
+ 案の定、GitHub上では修正されておりましたので修正内容をありがたくマージしました。
 
 #@# lang: .brush: .php; .title: .; .notranslate title=""
 //emlist{
@@ -183,9 +186,10 @@ View側
 //}
 
 
-prefixの件と合わせて本来はgit使って最新版使ってると悩まないことなのかもしれません。@<br>{}
- ですが私のように公式のzipアーカイブをダウンロードして、これを基に実装を進めるような人がフレームワーク側のバグっぽい現象に遭遇したら最初にgithubで最新のソースを確認してみることをお勧めします。
- * ==   別DBのテーブルをModel_Crudで参照する
+prefixの件と合わせて本来はgit使って最新版使ってると悩まないことなのかもしれません。
+ ですが私のように公式のzipアーカイブをダウンロードして、これを基に実装を進めるような人がフレームワーク側のバグっぽい現象に遭遇したら最初にGitHubで最新のソースを確認してみることをお勧めします。
+
+==   別DBのテーブルをModel_Crudで参照する
 
 
 APPPATH/config/db.phpに複数の接続情報を用意すると、Model別に使用する設定を変えることが出来ます。
@@ -194,10 +198,10 @@ APPPATH/config/db.phpに複数の接続情報を用意すると、Model別に使
 まずは接続情報をconfigに追加します。
 
 
-APPPATH/config/db.php
+
 
 #@# lang: .brush: .php; .title: .; .notranslate title=""
-//emlist{
+//emlist[APPPATH/config/db.php]{
 return array(
     'active' => 'default',
 
@@ -221,10 +225,10 @@ return array(
 //}
 
 
-APPPATH/config/各種ステージ/db.php
+
 
 #@# lang: .brush: .php; .title: .; .notranslate title=""
-//emlist{
+//emlist[APPPATH/config/各種ステージ/db.php]{
 return array(
     'active' => 'default',
 
@@ -257,7 +261,7 @@ return array(
 //}
 
 
-後はModel_Crud側で$_connectionプロパティを設定します。
+後はModel_Crud側で@<code>{$_connection}プロパティを設定します。
 
 #@# lang: .brush: .php; .title: .; .notranslate title=""
 //emlist{
@@ -268,13 +272,14 @@ class Model_Xxxxx extends Model_Crud
 //}
 
 
-これで設定完了です。@<br>{}
- $_connectionを省略した際はactiveで示された設定が使用されます。
+これで設定完了です。
+@<code>{$_connection}を省略した際はactiveで示された設定が使用されます。
 
 
 
-以上、他の日の記事と微妙に被ってる内容の多い21日目でした。
+以上、他の日の記事と微妙に被ってる内容の多い21日目でした。@<br>{}
 
 
-明日は@<href>{http://twitter.com/ts_asano,@ts_asanoさん}の「(仮)QueryBuilderで小難しいSELECT文を書くためのノウハウ」です。@<br>{}
+明日は@<href>{https://twitter.com/ts_asano,@ts_asano}さんの「(仮)QueryBuilderで小難しいSELECT文を書くためのノウハウ」です。
  表題からして素敵ですね。お楽しみに♪
+
