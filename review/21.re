@@ -3,7 +3,7 @@
 
 
 @<href>{http://atnd.org/events/33753,FuelPHP Advent Calendar 2012} (#FuelPHPAdvent2012) 21日目です。
-前日の記事は@<href>{https://tiwtter.com/haltcompiler,@haltcompiler}さんの「FuelPHPのOrmを複数DBに対応させる方法」でした。@<br>{}
+前日の記事は@<href>{https://twitter.com/6q5,@6q5}さんの「FuelPHPのOrmを複数DBに対応させる方法」でした。@<br>{}
 
 
 本日は私が初めてFuelPHPを使った時に、躓いたことの解決法を焦点を絞らずに書いていきたいと思います。
