@@ -150,7 +150,7 @@ $result = \DB::select('MAX("birth_date")')
 //emlist{
 $result = \DB::select('*')
     ->from('members')
-    ->where('FLOOR(CURDATE()+0 - DATE_FORMAT("birth_date", \'%Y%m%d\')+0 ) / 10000', '>=', '40')
+    ->where('FLOOR(CURDATE()+0 - DATE_FORMAT("birth_date", \'%Y%m%d\')+0 ) / 10000', @<raw>{|latex|\n}'>=', '40')
     ->execute();
 //}
 
@@ -172,7 +172,7 @@ $result = \DB::select('*')
 $date_str = \Input::post('base_date_str');
 $result = \DB::select('*')
     ->from('members')
-    ->where('FLOOR('. \DB::escape($date_str). '+0 - DATE_FORMAT("birth_date", \'%Y%m%d\')+0 ) / 10000', '>=', '40')
+    ->where('FLOOR('. \DB::escape($date_str). '+0 - DATE_FORMAT("birth_date", @<raw>{|latex|\n}\'%Y%m%d\')+0 ) / 10000', '>=', '40')
     ->execute();
 //}
 
@@ -187,7 +187,7 @@ $result = \DB::select('*')
 #@# lang: .syntax-highlight
 //emlist{
 $query = \DB::query(
-    'select p.name as publisher_name, b.name as book_name, r.rental_dttm, m.name as member_name'.
+    'select p.name as publisher_name, b.name as book_name, r.rental_dttm, m.name as @<raw>{|latex|\n}member_name'.
     ' from books as b'.
     ' inner join publishers as p on b.publisher_id = p.id'.
     ' left outer join ('.
@@ -266,7 +266,7 @@ $result = $query->execute()->as_array();
 
 #@# lang: .syntax-highlight
 //emlist{
-$query = \DB::select('r.id', 'r.rental_dttm', array('b.name', 'book_name'), array('m.name', 'member_name'))
+$query = \DB::select('r.id', 'r.rental_dttm', array('b.name', 'book_name'), @<raw>{|latex|\n}array('m.name', 'member_name'))
     ->from(array('rentals', 'r'))
     ->join(array('books', 'b'), 'inner')->on('r.book_id', '=', 'b.id')
     ->join(array('members', 'm'), 'inner')->on('r.member_id', '=', 'm.id')
@@ -309,7 +309,8 @@ FuelPHPにはマニュアルでは触れられていない、思わぬ機能が�
 明日は@<href>{http://twitter.com/mukaken,@mukaken}さんの「FuelPHP vs CodeIgniter」です。お楽しみに！  
 
 
-# mukakenさん、いつもはてなスターありがとうございます！@<br>{}
+# mukakenさん、いつもはてなスターありがとうございます！
+
  この場をお借りしてお礼申し上げます。
 
 //quote{
