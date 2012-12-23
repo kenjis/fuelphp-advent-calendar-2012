@@ -3,7 +3,7 @@
 
 
 この記事は @<href>{http://atnd.org/events/33753,FuelPHP Advent Calendar 2012} の 22日目の記事です。
-昨日は@<href>{http://twitter.com/konkon1234,@konkon1234}さんの「FuelPHPで1サイトを作ってみて気が付いた点など」でした。@<br>{}
+昨日は@<href>{https://twitter.com/konkon1234,@konkon1234}さんの「FuelPHPで1サイトを作ってみて気が付いた点など」でした。@<br>{}
 
 
 あさのひとしと申します。
