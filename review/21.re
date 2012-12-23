@@ -141,7 +141,7 @@ Windowsで使用する場合は以下を修正してください。
 #@# lang: .brush: .php; .title: .; .notranslate title=""
 //emlist{
 - $buildfield[$form->label($label, $attributes['id'])] = $this->type == 'radio'
-+ $buildfield[$form->label($label, $attributes['id'], array('for' => $attributes['id']))@<raw>{|latex|\n}] = $this->type == 'radio'
++ $buildfield[$form->label($label, $attributes['id'], array('for' => $attributes['id']))] = $this->type == 'radio'
 //}
 
 
