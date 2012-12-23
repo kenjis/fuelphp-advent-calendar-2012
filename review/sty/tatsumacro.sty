@@ -1,0 +1,108 @@
+\geometry{top=14mm,bottom=14mm,left=12mm,right=12mm}
+
+%% from review-pdfmaker
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\lhead{\gtfamily\sffamily\bfseries\upshape \leftmark}
+\chead{}
+\rhead{\gtfamily\sffamily\bfseries\upshape \rightmark}
+\fancyfoot{} % clear all header and footer fields
+\fancyfoot[R]{\thepage}
+\renewcommand{\sectionmark}[1]{\markright{\thesection~#1}{}}
+\renewcommand{\chaptermark}[1]{\markboth{\prechaptername\ \thechapter\ \postchaptername~#1}{}}
+\renewcommand{\headfont}{\gtfamily\sffamily\bfseries}
+
+\fancypagestyle{plainhead}{%
+\fancyhead{}
+\fancyfoot{} % clear all header and footer fields
+\fancyfoot[R]{\thepage}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}}
+
+\renewcommand{\reviewtitlefont}[0]{%
+  \usefont{T1}{phv}{b}{n}\gtfamily\ebseries}
+\renewcommand{\reviewmainfont}[0]{%
+  \usefont{T1}{phv}{m}{n}\mgfamily}
+
+\urlstyle{same}
+
+%% 章見出しの変更
+\renewcommand{\prechaptername}{Day~}
+\renewcommand{\postchaptername}{ }
+
+%%Helveticaを使う
+\renewcommand{\sfdefault}{phv}
+
+%%全体のデフォルトを設定
+%\renewcommand{\kanjifamilydefault}{\gtdefault} % 日本語書体をゴシック体に
+\renewcommand{\kanjifamilydefault}{\mgdefault}
+\renewcommand{\familydefault}{\sfdefault} % 欧文書体をHelveticaに
+
+
+%%% @<sub>を有効に
+%\usepackage{fixltx2e}
+
+%% 図をリンクに
+\renewcommand{\reviewimageref}[2]{%
+  図 \ref{#2}}
+
+%% 表もリンクに
+\renewcommand{\reviewtableref}[2]{%
+  表 \ref{#2}}
+
+\renewcommand{\reviewminicolumntitle}[1]{%
+  {\large ■Note：#1}\\}
+
+%% quoteに枠線
+\renewenvironment{quote}{%
+  \begin{framed}}{%
+  \end{framed}\vspace{2zw}}
+
+%%色修正
+\definecolor{shadecolorb}{gray}{0.5}
+
+%% 部の数字をローマ数字からアラビア数字に変更
+\renewcommand{\thepart}{\@arabic\c@part}
+
+%% ソース中のクォートを変換しない
+\usepackage{upquote,textcomp}
+\xspcode`'=0
+
+\def\@makechapterhead#1{%
+  \vspace*{2\Cvs}% 欧文は50pt
+  {\parindent \z@ \raggedright \normalfont
+    \ifnum \c@secnumdepth >\m@ne
+      \if@mainmatter
+        \hfill{\huge\headfont \@chapapp\thechapter\@chappos}
+        \par\nobreak
+        \vskip \Cvs % 欧文は20pt
+      \fi
+    \fi
+    \interlinepenalty\@M
+    \hfill{\huge \headfont #1\par\nobreak}
+    \vspace*{-2mm}%
+    \rule{\textwidth}{0.1mm}
+    \vskip 1.5\Cvs}} % 欧文は40pt
+
+
+
+\makeatletter%%
+
+\long\def\@makecaption#1#2{{\small
+  \advance\leftskip .0628\linewidth
+  \advance\rightskip .0628\linewidth
+  \vskip\abovecaptionskip
+  \sbox\@tempboxa{\textgt{\textsf{#1}}\hskip1zw\relax \textgt{\textsf{#2}}}%
+  \ifdim \wd\@tempboxa <\hsize \centering \fi
+  \textgt{\textsf{#1}}\hskip1zw\relax \textgt{\textsf{#2}}\par
+  \vskip\belowcaptionskip}}
+
+\makeatother%% プリアンブルで定義する場合は必須(文字コードも)
+
+\sloppy
+
+%%目次と本文でページ番号を振り直しても表紙・中表紙ページと重複しないようRomanにしておく
+\pagenumbering{Roman}
+
+%\usepackage{nruby}
+
