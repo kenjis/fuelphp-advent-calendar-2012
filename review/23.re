@@ -1,5 +1,5 @@
 
-= FuelPHP vs CodeIgniter
+= FuelPHP vs CodeIgniter @<href>{https://twitter.com/mukaken,@mukaken}
 
 
 この記事は @<href>{http://atnd.org/events/33753,FuelPHP Advent Calendar 2012 : ATND} の 23日目の記事です。
@@ -231,4 +231,10 @@ Codeigniter には裏技的なものがありません。
 
 明日は@<href>{https://twitter.com/kurotaky,@kurotaky}さんです。お楽しみに！
 
+//quote{
+@<strong>{@mukaken}
 
+Twitter: @<href>{https://twitter.com/mukaken,@mukaken}
+
+Blog: @<href>{http://d.hatena.ne.jp/mukaken/,http://d.hatena.ne.jp/mukaken/}
+//}
