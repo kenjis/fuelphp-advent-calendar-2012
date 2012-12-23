@@ -1,0 +1,762 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html xmlns:og="http://ogp.me/ns#">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=euc-jp">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<title>FuelPHP vs CodeIgniter #FuelPHPAdvent2012 - mukakenの日記</title>
+<link rel="start" href="/" title="mukakenの日記">
+<link rel="help" href="/help" title="ヘルプ">
+<link rel="prev" href="/mukaken/20121101/1351783162" title=" [book]書評『@cosme公式総合年...">
+
+<link rel="stylesheet" href="http://d.st-hatena.com/statics/css/base.css?5d7f38e4a6d82f044c81959ae4de5445d7f238cd" type="text/css" media="all">
+<link rel="stylesheet" href="http://d.st-hatena.com/statics/css/headerstyle_de.css?1e7f1ae8a305b254105e3093bcf711b2af81c2a0" type="text/css" media="all">
+<link rel="stylesheet" href="http://d.st-hatena.com/statics/theme/hatena2-lightblue/hatena2-lightblue.css?1e7f1ae8a305b254105e3093bcf711b2af81c2a0" type="text/css" media="all">
+
+
+<link rel="alternate" type="application/rss+xml" title="RSS" href="http://d.hatena.ne.jp/mukaken/rss">
+<link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="http://d.hatena.ne.jp/mukaken/rss2">
+
+<link rel="meta" type="application/rdf+xml" title="FOAF" href="http://d.hatena.ne.jp/mukaken/foaf" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://d.hatena.ne.jp/mukaken/opensearch/diary.xml" title="mukakenの日記内日記検索" />
+<link rel="search" type="application/opensearchdescription+xml" href="http://d.hatena.ne.jp/mukaken/opensearch/archive.xml" title="mukakenの日記内一覧検索" />
+
+
+<link rel="shortcut icon" href="http://d.hatena.ne.jp/images/diary/mukaken/favicon.ico">
+
+
+
+<style type="text/css">
+<!-- 
+
+-->
+</style>
+
+
+<script type="text/javascript">if(/[\x3c\x3e\x22]/.test(location.hash))location.hash=location.hash.replace(/[\x3c\x3e\x22]/g,'');if(/[\x3c\x3e]/.test(document.referrer))location.href=location.href;</script>
+
+
+
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="FuelPHP vs CodeIgniter #FuelPHPAdvent2012 - mukakenの日記">
+<meta property="og:url" content="http://d.hatena.ne.jp/mukaken/20121223/1356256954">
+<meta property="og:description" content="この記事は http://atnd.org/events/33753 の 23日目の記事です。 昨日は@ts_asanoさんの「http://d.hatena..">
+<meta property="og:site_name" content="はてなダイアリー">
+
+
+<!--
+<rdf:RDF
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:foaf="http://xmlns.com/foaf/0.1/">
+<rdf:Description rdf:about="http://d.hatena.ne.jp/mukaken/20121223/1356256954">
+   <foaf:maker rdf:parseType="Resource">
+     <foaf:holdsAccount>
+       <foaf:OnlineAccount foaf:accountName="mukaken">
+         <foaf:accountServiceHomepage rdf:resource="http://www.hatena.ne.jp/" />
+       </foaf:OnlineAccount>
+     </foaf:holdsAccount>
+   </foaf:maker>
+</rdf:Description>
+</rdf:RDF>
+-->
+
+<link rel="alternate" media="handheld" type="text/html" href="http://d.hatena.ne.jp/mukaken/mobile?date=20121223&section=1356256954" />
+<!--
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:dc="http://purl.org/dc/elements/1.1/"
+         xmlns:trackback="http://madskills.com/public/xml/rss/module/trackback/">
+<rdf:Description
+  rdf:about="http://d.hatena.ne.jp/mukaken/20121223/1356256954"
+  trackback:ping="http://d.hatena.ne.jp/mukaken/20121223/1356256954"
+  dc:title="FuelPHP vs CodeIgniter #FuelPHPAdvent2012"
+  dc:identifier="http://d.hatena.ne.jp/mukaken/20121223/1356256954" />
+</rdf:RDF>
+-->
+
+<script type="text/javascript" src="http://d.st-hatena.com/statics/js/MochiKit/1125/Base.js?1e7f1ae8a305b254105e3093bcf711b2af81c2a0"></script>
+<script type="text/javascript" src="http://d.st-hatena.com/statics/js/MochiKit/1125/Iter.js?1e7f1ae8a305b254105e3093bcf711b2af81c2a0"></script>
+<script type="text/javascript" src="http://d.st-hatena.com/statics/js/MochiKit/1125/DOM.js?1e7f1ae8a305b254105e3093bcf711b2af81c2a0"></script>
+<script type="text/javascript" src="http://d.st-hatena.com/statics/js/MochiKit/1125/Style.js?1e7f1ae8a305b254105e3093bcf711b2af81c2a0"></script>
+<script type="text/javascript" src="http://d.st-hatena.com/statics/js/MochiKit/1125/Signal.js?1e7f1ae8a305b254105e3093bcf711b2af81c2a0"></script>
+<script type="text/javascript" src="http://d.st-hatena.com/statics/js/MochiKit/1125/Async.js?1e7f1ae8a305b254105e3093bcf711b2af81c2a0"></script>
+<script type="text/javascript" src="http://d.st-hatena.com/statics/js/MochiKit/1125/Logging.js?1e7f1ae8a305b254105e3093bcf711b2af81c2a0"></script>
+<script type="text/javascript" src="http://d.st-hatena.com/statics/js/BookmarkCommentViewer.js?1e7f1ae8a305b254105e3093bcf711b2af81c2a0" charset="utf-8"></script>
+
+
+
+<link rel="canonical" href="http://d.hatena.ne.jp/mukaken/20121223/1356256954">
+
+
+
+
+<script type="text/javascript" src="http://s.hatena.ne.jp/js/HatenaStar.js"></script>
+<script type="text/javascript">
+Hatena.Star.SiteConfig = {
+  entryNodes: {
+    'div.section': {
+      uri: 'h3 a',
+      title: 'h3',
+      container: 'h3'
+    }
+  }
+};
+Hatena.Author  = new Hatena.User('mukaken');
+Hatena.DiaryName  = new Hatena.User('mukaken');
+
+</script>
+
+
+
+<script type="text/javascript" src="http://d.st-hatena.com/statics/js/twitter_entry_icon.js?1e7f1ae8a305b254105e3093bcf711b2af81c2a0"></script>
+
+
+
+<script type="text/javascript" src="http://d.st-hatena.com/statics/js/adcolor.js?1e7f1ae8a305b254105e3093bcf711b2af81c2a0"></script>
+
+
+<script type="text/javascript" src="http://d.st-hatena.com/statics/js/quick_pager.js?1e7f1ae8a305b254105e3093bcf711b2af81c2a0"></script>
+<script type="text/javascript" src="http://d.st-hatena.com/statics/js/diary_utils.js?1e7f1ae8a305b254105e3093bcf711b2af81c2a0"></script>
+<script type="text/javascript" src="http://d.st-hatena.com/statics/js/max_width_fotolife.js?1e7f1ae8a305b254105e3093bcf711b2af81c2a0"></script>
+
+
+
+
+
+<script type="text/javascript" charset="utf-8" src="http://b.hatena.ne.jp/js/bookmark_blogparts.js"></script>
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="http://d.st-hatena.com/statics/js/jquery-1.4.2.min.js?1e7f1ae8a305b254105e3093bcf711b2af81c2a0"></script>
+<script type="text/javascript">
+  jQuery.noConflict()(function($){
+    var j$ = jQuery;
+  });
+</script>
+
+
+
+
+</head>
+<body>
+
+<div id="simple-header">
+
+  <a href="http://www.hatena.ne.jp/"><img src="/images/hatena-simple_de.gif" alt="Hatena::" title="Hatena::" id="logo-hatena" width="65" height="17"></a><a href="/"><img src="/images/diary-simple_de.gif" alt="ブログ(Diary)" title="Diary" id="logo-diary" width="43" height="17"></a>
+  <form method="get" action="/search" class="search-form">
+    <input type="text" class="search-word" name="word" value=""><input name="name" value="mukaken" type="hidden"><input type="submit" name="diary" value="日記" class="search-button"><input type="submit" name="submit" value="検索" class="search-button">
+  </form>
+  <ul class="menu">
+    <li><a href="/mukaken/">ブログトップ</a></li>
+    <li><a href="/mukaken/archive">記事一覧</a></li>
+
+
+
+    <li><a href="https://www.hatena.ne.jp/login?backurl=http%3A%2F%2Fd.hatena.ne.jp%2Fmukaken%2F20121223%2F1356256954&add_timestamp=1">ログイン</a></li>
+    <li><a href="https://www.hatena.ne.jp/register?location=http://d.hatena.ne.jp/">無料ブログ開設</a></li>
+
+  </ul>
+</div>
+
+
+
+<h1><a href="http://d.hatena.ne.jp/mukaken/">mukakenの日記</a> <a href="http://a.hatena.ne.jp/append?http://d.hatena.ne.jp/mukaken/"><img src="http://d.hatena.ne.jp/images/a_append_de.gif" title="このページをアンテナに追加" alt="このページをアンテナに追加" border="0" width="16" height="12" class="icon"></a> <a href="http://d.hatena.ne.jp/mukaken/rss"><img src="http://d.hatena.ne.jp/images/rss_de.gif" alt="RSSフィード" title="RSSフィード" border="0" width="24" height="12" class="icon"></a> <a id="twitter-header-icon" href="http://twitter.com/mukaken"><img src="/images/icon-twitter.png" alt="Twitter" title="このページ作者のTwitterへ" border="0" width="16" height="16" class="icon"></a></h1>
+<div class="hatena-body">
+<div class="main"><div class="breadcrumbs"><a href="/mukaken/">mukakenの日記</a>&nbsp;&gt;&nbsp;<a href="/mukaken/20121223">December 23(Sun), 2012</a>&nbsp;&gt;&nbsp;FuelPHP vs CodeIgniter #FuelPH...</div> 
+
+
+
+
+
+
+
+
+<div class="calendar" id="pager-top">
+  <a rel="prev" href="/mukaken/20121101/1351783162" class="prev">&lt; [book]書評『@cosme公式総合年...</a><span id="edit-in-place-add"></span>
+</div>
+<div id="days">
+
+<div class="day">
+<h2><a href="http://d.hatena.ne.jp/mukaken/20121223" rel="nofollow"><span class="date">December 23(Sun), 2012</span></a></h2>
+
+<div class="body">
+
+<!-- google_ad_section_start -->
+
+		<div class="section">
+			<h3><a href="/mukaken/20121223/1356256954" name="1356256954"><span class="sanchor">■</span></a><a class="keyword" href="http://d.hatena.ne.jp/keyword/FuelPHP">FuelPHP</a> vs CodeIgniter #FuelPHPAdvent2012</h3>
+			<p>この記事は <a href="http://atnd.org/events/33753" target="_blank">FuelPHP Advent Calendar 2012 : ATND</a> の 23日目の記事です。</p>
+			<p>昨日は<a href="https://twitter.com/ts_asano" target="_blank">@ts_asano</a>さんの「<a href="http://d.hatena.ne.jp/ts_asano/20121222/1356102000" target="_blank">QueryBuilderで小難しいSELECT文を書くためのノウハウ #FuelPHPAdvent2012 - Dazing days</a>」でした。</p>
+			<br>
+
+			<p>本日の「<a class="keyword" href="http://d.hatena.ne.jp/keyword/FuelPHP">FuelPHP</a> Advent Calendar 2012」は @mukaken こと向井が担当させて頂きます。よろしくお願いします。</p>
+			<p>本日は「<a class="keyword" href="http://d.hatena.ne.jp/keyword/FuelPHP">FuelPHP</a> vs CodeIgniter」について書きます。</p>
+			<p><a class="keyword" href="http://d.hatena.ne.jp/keyword/FuelPHP">FuelPHP</a>のコア開発者はCodeIgniterに関わった事のある人達が作った<a class="keyword" href="http://d.hatena.ne.jp/keyword/FW">FW</a>ですので、両<a class="keyword" href="http://d.hatena.ne.jp/keyword/FW">FW</a>は非常に似ています。</p>
+			<p>また、<a class="keyword" href="http://d.hatena.ne.jp/keyword/%BB%E4%BC%AB">私自</a>身、<a class="keyword" href="http://d.hatena.ne.jp/keyword/FuelPHP">FuelPHP</a> と CodeIgniter の両方のユーザなので、両方の比較記事を書きます。</p>
+			<h4> <a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%E9%A5%A4%A5%BB%A5%F3%A5%B9">ライセンス</a>、対応する <a class="keyword" href="http://d.hatena.ne.jp/keyword/PHP">PHP</a> のバージョン、開発元</h4>
+			<p><a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%E9%A5%A4%A5%BB%A5%F3%A5%B9">ライセンス</a>や対応する<a class="keyword" href="http://d.hatena.ne.jp/keyword/PHP">PHP</a>のバージョン、開発元などについての比較です。</p>
+
+			<table>
+				<tr><th>名称</th><th>本家<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%DB%A1%BC%A5%E0%A5%DA%A1%BC%A5%B8">ホームページ</a></th><th><a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%E9%A5%A4%A5%BB%A5%F3%A5%B9">ライセンス</a></th><th>対応する <a class="keyword" href="http://d.hatena.ne.jp/keyword/PHP">PHP</a></th><th>最新の安定バージョン</th><th>開発元</th></tr>
+				<tr><td><a class="keyword" href="http://d.hatena.ne.jp/keyword/FuelPHP">FuelPHP</a></td><td><a href="http://fuelphp.com" target="_blank">http://fuelphp.com</a></td><td><a class="keyword" href="http://d.hatena.ne.jp/keyword/MIT">MIT</a></td><td>5.3 以上</td><td>1.4</td><td><a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%B3%A5%DF%A5%E5%A5%CB%A5%C6%A5%A3">コミュニティ</a></td></tr>
+				<tr><td>CodeIgniter</td><td><a href="http://ellislab.com/codeigniter" target="_blank">http://ellislab.com/codeigniter</a></td><td>CodeIgniter License</td><td>5.1.6 以上</td><td>2.1.3</td><td><a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%A2%A5%E1%A5%EA%A5%AB">アメリカ</a>のEllisLab</td></tr>
+
+			</table>
+			<h5> 本家<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%DB%A1%BC%A5%E0%A5%DA%A1%BC%A5%B8">ホームページ</a></h5>
+			<p>今年、両方とも<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%EA%A5%CB%A5%E5%A1%BC%A5%A2%A5%EB">リニューアル</a>されました。特に大きな変化があったのはCodeIgniterで、<a class="keyword" href="http://d.hatena.ne.jp/keyword/URL">URL</a> が今年の12月になり変わり、ellislab.comの直下になりました。これは、何かの意図があるのかは不明ですが、より企業ベースで開発されている感が感じられるようになりました。</p>
+			<h5> <a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%E9%A5%A4%A5%BB%A5%F3%A5%B9">ライセンス</a></h5>
+			<p><a class="keyword" href="http://d.hatena.ne.jp/keyword/FuelPHP">FuelPHP</a> は <a class="keyword" href="http://d.hatena.ne.jp/keyword/MIT">MIT</a> ですので何も問題ないでしょう。</p>
+			<p>CodeIgniter の<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%E9%A5%A4%A5%BB%A5%F3%A5%B9">ライセンス</a>は、現時点では CodeIgniter License ですが、今後は OSL 3.0 になるかもしれません。現時点では不明です。この<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%E9%A5%A4%A5%BB%A5%F3%A5%B9">ライセンス</a>が非常に難しく、変更になる件については一時期、本家のフォーラム(<a href="http://ellislab.com/forums/viewthread/202562/" target="_blank">CodeIgniter changes license to OSL 3.0&#63; / Forums / Community / EllisLab</a>)や、いろいろなサイトで活発に議論されていましたが、ここ最近半年は議論している人を見かけなくなりました。</p>
+			<br>
+
+			<h5> 対応する<a class="keyword" href="http://d.hatena.ne.jp/keyword/PHP">PHP</a>のバージョン</h5>
+			<p><a class="keyword" href="http://d.hatena.ne.jp/keyword/FuelPHP">FuelPHP</a> は <a class="keyword" href="http://d.hatena.ne.jp/keyword/PHP">PHP</a> 5.3 以上なので新しい機能を積極的に取り入れています。また、<a class="keyword" href="http://d.hatena.ne.jp/keyword/%B2%BC%B0%CC%B8%DF%B4%B9">下位互換</a>がないために簡潔にコードを記述する事ができます。少しの事なのですが、開発者にとっては気分が良いです。</p>
+			<p>CodeIgniter は 過去のしがらみがあるために、<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%E1%A5%F3%A5%C6%A5%CA%A5%F3%A5%B9">メンテナンス</a>をしていると <a class="keyword" href="http://d.hatena.ne.jp/keyword/PHP">PHP</a> 4 で記述されたコードをチラホラと見かけます。<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%E1%A5%F3%A5%C6%A5%CA%A5%F3%A5%B9">メンテナンス</a>時などは気分が沈みます。</p>
+			<h5> 運用時の問題</h5>
+			<p>現在の <a class="keyword" href="http://d.hatena.ne.jp/keyword/PHP">PHP</a> の Old stable は <a class="keyword" href="http://d.hatena.ne.jp/keyword/PHP">PHP</a> 5.3.20 なので、<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%E1%A5%F3%A5%C6%A5%CA%A5%F3%A5%B9">メンテナンス</a>されている<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%B5%A1%BC%A5%D0">サーバ</a>であれば両方とも問題なく動くと思います。</p>
+			<p>ですが、ごくたまに、 <a class="keyword" href="http://d.hatena.ne.jp/keyword/FuelPHP">FuelPHP</a> で開発していて開発環境は <a class="keyword" href="http://d.hatena.ne.jp/keyword/PHP">PHP</a> 5.3 だったのに本番環境は <a class="keyword" href="http://d.hatena.ne.jp/keyword/PHP">PHP</a> 5.2 だったので作り直した、という話を見かけますので注意です。</p>
+			<p>CodeIgniter は <a class="keyword" href="http://d.hatena.ne.jp/keyword/PHP">PHP</a> 5.1.6 以上なので、大抵の環境では動くと思います。</p>
+			<h4> <a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%B3%A5%DF%A5%E5%A5%CB%A5%C6%A5%A3">コミュニティ</a></h4>
+			<h5> <a class="keyword" href="http://d.hatena.ne.jp/keyword/FuelPHP">FuelPHP</a></h5>
+			<p>日本の<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%B3%A5%DF%A5%E5%A5%CB%A5%C6%A5%A3">コミュニティ</a>の活動は凄く活発です。今年、短期間で爆発的に増大しました。</p>
+			<p><a class="keyword" href="http://d.hatena.ne.jp/keyword/%BB%E4%BC%AB">私自</a>身、「<a href="https://www.facebook.com/jp.fuel" target="_blank">FuelPHP 日本語ニュース | Facebook</a>」で<a class="keyword" href="http://d.hatena.ne.jp/keyword/FuelPHP">FuelPHP</a>の記事についてウォッチしているのですが、ほぼ毎日、日本語で何かしらのの<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%D6%A5%ED%A5%B0">ブログ</a>が書かれています。</p>
+			<p>日本以外では<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%D6%A5%E9%A5%B8%A5%EB">ブラジル</a>、<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%A2%A5%B8%A5%A2">アジア</a>諸国で人気が高いと感じます。</p>
+			<p>また、本家フォーラムの方もより一層活発になってきています。</p>
+			<h5> CodeIgniter</h5>
+			<p>日本では、それほど活発ではありませんが、世界的にはかなり巨大な<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%B3%A5%DF%A5%E5%A5%CB%A5%C6%A5%A3">コミュニティ</a>になっています。</p>
+			<p>日本以外だと、<a class="keyword" href="http://d.hatena.ne.jp/keyword/FuelPHP">FuelPHP</a>と同じく<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%D6%A5%E9%A5%B8%A5%EB">ブラジル</a>、<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%A2%A5%B8%A5%A2">アジア</a>諸国がとくに活発だと感じます。</p>
+			<p>本家フォーラムは活発過ぎて<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%AB%A5%AA%A5%B9">カオス</a>状態になっています。何が何だか分からない状態です。</p>
+			<h4> 注目度</h4>
+			<p>注目度の比較です。</p>
+			<p>web での注目度の指標として「<a class="keyword" href="http://d.hatena.ne.jp/keyword/Google%20%A5%C8%A5%EC%A5%F3%A5%C9">Google トレンド</a>」が使われるのを、よく見かけますが、今回は開発者に注目されている指標として近いであろう「<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A4%CF%A4%C6%A4%CA%A5%D6%A5%C3%A5%AF%A5%DE%A1%BC%A5%AF">はてなブックマーク</a>」と「stackoverflow」で比較してみました。</p>
+			<p>やはり、実際の運用や業務で使用していて、困った事がでてきたときに開発事例が豊富にあり探せるというのは心強いです。</p>
+			<h5> <a class="keyword" href="http://d.hatena.ne.jp/keyword/%A4%CF%A4%C6%A4%CA%A5%D6%A5%C3%A5%AF%A5%DE%A1%BC%A5%AF">はてなブックマーク</a></h5>
+			<p>日本国内で使われているであろうサービスで、web系サービスの人気度が分かるといえば、<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A4%CF%A4%C6%A4%CA%A5%D6%A5%C3%A5%AF%A5%DE%A1%BC%A5%AF">はてなブックマーク</a>です。</p>
+			<p><a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%D6%A5%C3%A5%AF%A5%DE%A1%BC%A5%AF">ブックマーク</a>数が1user以上で、それぞれのタグ名別で比較しました。</p>
+
+			<ul>
+				<li><a href="http://b.hatena.ne.jp/search/tag?q=fuelphp&users=1&sort=recent" target="_blank">タグ「fuelphp」を検索 - はてなブックマーク</a>
+
+				<ul>
+					<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/FuelPHP">FuelPHP</a> : 1,195</li>
+				</ul>
+				</li>
+			</ul>
+
+			<ul>
+				<li><a href="http://b.hatena.ne.jp/search/tag?sort=recent&q=codeigniter&users=1" target="_blank">タグ「codeigniter」を検索 - はてなブックマーク</a>
+
+				<ul>
+					<li>Codeigniter : 1,342</li>
+				</ul>
+				</li>
+			</ul>
+			<p><a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%D6%A5%C3%A5%AF%A5%DE%A1%BC%A5%AF">ブックマーク</a>数の結果は大差ありませんでした。</p>
+			<p>Codeigniter より <a class="keyword" href="http://d.hatena.ne.jp/keyword/FuelPHP">FuelPHP</a> の方が新しい<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%D5%A5%EC%A1%BC%A5%E0%A5%EF%A1%BC%A5%AF">フレームワーク</a>という点を考慮すると、短期間で数が増えた <a class="keyword" href="http://d.hatena.ne.jp/keyword/FuelPHP">FuelPHP</a> の方が勝っています。</p>
+			<h5> stackoverflow</h5>
+			<p><a href="http://stackoverflow.com/" target="_blank">Stack Overflow</a> は世界中の<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%D7%A5%ED%A5%B0%A5%E9%A5%DE%A1%BC">プログラマー</a>が連日連夜、技術的な疑問を投稿しているサイトです。</p>
+			<p>stack <a class="keyword" href="http://d.hatena.ne.jp/keyword/overflow">overflow</a> でのタグの数を比較してみました。</p>
+
+			<ul>
+				<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/FuelPHP">FuelPHP</a> : 198</li>
+				<li>Codeigniter:15,047</li>
+			</ul>
+			<p>やはり、世界的にみると Codeigniter が強いみたいです。 <a class="keyword" href="http://d.hatena.ne.jp/keyword/FuelPHP">FuelPHP</a> はこれからといった感じでしょうか。</p>
+			<h4> ドキュメントの読みやすさ</h4>
+
+			<ul>
+				<li><a href="http://fuelphp.com/docs/" target="_blank">FuelPHP Documentation</a></li>
+				<li><a href="http://ellislab.com/codeigniter/user-guide/" target="_blank">Welcome to CodeIgniter : CodeIgniter User Guide</a></li>
+			</ul>
+			<p>両方とも、とても使いやすいドキュメントページだと思います。<a class="keyword" href="http://d.hatena.ne.jp/keyword/FuelPHP">FuelPHP</a> や Codeigniter が、他の<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%D5%A5%EC%A1%BC%A5%E0%A5%EF%A1%BC%A5%AF">フレームワーク</a>と比べて優れている点は、やはりドキュメントの読みやすさだと思います。</p>
+			<p>両方ともすばらしいのですが、<a class="keyword" href="http://d.hatena.ne.jp/keyword/FuelPHP">FuelPHP</a> の方が目次を<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%DE%A5%A6%A5%B9">マウス</a><a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%AA%A1%BC%A5%D0">オーバ</a>すれば色分けされて表示されるなど、より見やすいように工夫されています。</p>
+			<h4> パフォーマンスの比較</h4>
+			<p>パフォーマンスの比較をしてみました。</p>
+			<h5> 前提</h5>
+
+			<ul>
+				<li> <a class="keyword" href="http://d.hatena.ne.jp/keyword/FuelPHP">FuelPHP</a> 1.4</li>
+				<li> CodeIgniter 2.1.3</li>
+			</ul>
+			<blockquote>
+			<p>Model Name:	<a class="keyword" href="http://d.hatena.ne.jp/keyword/MacBook%20Air">MacBook Air</a></p>
+			<p>Model Identifier:	MacBookAir4,1</p>
+			<p>Processor Name:	<a class="keyword" href="http://d.hatena.ne.jp/keyword/Intel">Intel</a> <a class="keyword" href="http://d.hatena.ne.jp/keyword/Core%20i5">Core i5</a></p>
+			<p>Processor Speed:	1.6 GHz</p>
+			<p>Memory:	4 GB</p>
+			</blockquote>
+			<blockquote>
+			<p><a class="keyword" href="http://d.hatena.ne.jp/keyword/PHP">PHP</a> Version 5.3.15</p>
+			<p><a class="keyword" href="http://d.hatena.ne.jp/keyword/Apache">Apache</a>/2.2.22 </p>
+			<p><a class="keyword" href="http://d.hatena.ne.jp/keyword/APC">APC</a> なし</p>
+			</blockquote>
+			<p><a class="keyword" href="http://d.hatena.ne.jp/keyword/localhost">localhost</a> にて、それぞれの<a class="keyword" href="http://d.hatena.ne.jp/keyword/FW">FW</a>は<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%C7%A5%D5%A5%A9%A5%EB%A5%C8">デフォルト</a>設定でコントローラーに"<a class="keyword" href="http://d.hatena.ne.jp/keyword/Hello%20World">Hello World</a>!"と表示する単純な例で比較しました。</p>
+			<p>比較ツールは siege を使い、下記の設定で実行しました。</p>
+			<blockquote>
+			<p>siege -b -c 10 -t 3S <a href="http://localhost" target="_blank">http://localhost</a></p>
+			</blockquote>
+			<h5> 結果</h5>
+
+			<ul>
+				<li><a class="keyword" href="http://d.hatena.ne.jp/keyword/FuelPHP">FuelPHP</a>
+
+				<ul>
+					<li>Transaction rate : 93.06 trans/sec</li>
+				</ul>
+				</li>
+				<li>CodeIgniter
+
+				<ul>
+					<li>Transaction rate : 155.67 trans/sec</li>
+				</ul>
+				</li>
+			</ul>
+			<p>(Transaction rate : 数値が高い方が、よりアクセスがさばけている)</p>
+			<p>パフォーマンスの比較では <a class="keyword" href="http://d.hatena.ne.jp/keyword/FuelPHP">FuelPHP</a> より Codeigniter の方が性能が良いという結果になりました。<a class="keyword" href="http://d.hatena.ne.jp/keyword/FuelPHP">FuelPHP</a> の方が何かと便利ですが、速いとなると Codeigniter の方です。</p>
+			<p>ただ、ある程度のアクセスが見込めるようなパフォーマンスが気になるサイトとなると、リバース<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%D7%A5%ED%A5%AD%A5%B7">プロキシ</a>を使ったりとwebのシステム全体で<a class="keyword" href="http://d.hatena.ne.jp/keyword/%BA%C7%C5%AC%B2%BD">最適化</a>するので、今回比べたような Web <a class="keyword" href="http://d.hatena.ne.jp/keyword/FW">FW</a> 自体の純粋な性能は問題にならないかもしれないです。</p>
+			<h4> <a class="keyword" href="http://d.hatena.ne.jp/keyword/%B0%C6%B7%EF">案件</a>での採用のしやすさ</h4>
+			<h5> 実<a class="keyword" href="http://d.hatena.ne.jp/keyword/%B0%C6%B7%EF">案件</a>での国内での代表的な採用実績</h5>
+
+			<ul>
+				<li> <a class="keyword" href="http://d.hatena.ne.jp/keyword/FuelPHP">FuelPHP</a>
+
+				<ul>
+					<li> <a href="http://animita.tv/top" target="_blank">あにみた！ あなたが見たアニメを楽しく記録するサービス</a></li>
+				</ul>
+				</li>
+				<li> Codeigniter
+
+				<ul>
+					<li><a href="http://www.mtvjapan.com/home" target="_blank">音楽のことなら MTV JAPAN! | 邦楽・洋楽・イベントなどの音楽エンターテイメント</a></li>
+				</ul>
+				</li>
+			</ul>
+			<p>上記以外の、日本でのビジネス的な実<a class="keyword" href="http://d.hatena.ne.jp/keyword/%B0%C6%B7%EF">案件</a>での採用実績を調べようとしたのですが公開されている企業が少なく分かりませんでした。</p>
+			<p>ですので、<a class="keyword" href="http://d.hatena.ne.jp/keyword/PHP">PHP</a> のイベントや <a class="keyword" href="http://d.hatena.ne.jp/keyword/IT">IT</a> <a class="keyword" href="http://d.hatena.ne.jp/keyword/%CA%D9%B6%AF%B2%F1">勉強会</a>で聞いた、私の知る限りで書きます。</p>
+			<p>現在、実稼働しているサービスで多く使われている方は Codeigniter でした。</p>
+			<p>ただし、小規模な<a class="keyword" href="http://d.hatena.ne.jp/keyword/%BC%F5%C2%F7">受託</a><a class="keyword" href="http://d.hatena.ne.jp/keyword/%B0%C6%B7%EF">案件</a>(開発メンバは1から3人)や自社サービスなどの開発環境を開発者が自ら自由に選べる新規<a class="keyword" href="http://d.hatena.ne.jp/keyword/%B0%C6%B7%EF">案件</a>では <a class="keyword" href="http://d.hatena.ne.jp/keyword/FuelPHP">FuelPHP</a> を採用したという話をよく聞きました。</p>
+			<p>現時点で実稼働しているサービスは Codeigniter で、新規<a class="keyword" href="http://d.hatena.ne.jp/keyword/%B0%C6%B7%EF">案件</a>では <a class="keyword" href="http://d.hatena.ne.jp/keyword/FuelPHP">FuelPHP</a> を採用するという流れみたいです。</p>
+			<p>開発メンバーの集めやすさでは <a class="keyword" href="http://d.hatena.ne.jp/keyword/FuelPHP">FuelPHP</a> にしろ Codeigniter にしろ学習コストが低いので、<a class="keyword" href="http://d.hatena.ne.jp/keyword/PHP">PHP</a><a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%D7%A5%ED%A5%B0%A5%E9%A5%DE%A1%BC">プログラマー</a>ならすぐに開発メンバーに加われるので問題ないと思います。</p>
+			<h4> <a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%A4%A1%BC%A5%B9%A5%BF%A1%BC%A1%A6%A5%A8%A5%C3%A5%B0">イースター・エッグ</a></h4>
+			<p><a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%A4%A1%BC%A5%B9%A5%BF%A1%BC%A1%A6%A5%A8%A5%C3%A5%B0">イースター・エッグ</a>とは<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%D7%A5%ED%A5%B0%A5%E9%A5%E0">プログラム</a>の裏技の事です。</p>
+			<p><a class="keyword" href="http://d.hatena.ne.jp/keyword/FuelPHP">FuelPHP</a> には <a class="keyword" href="http://d.hatena.ne.jp/keyword/Mac">Mac</a> 限定で喋る機能や、 oil から表示される<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%ED%A5%DC%A5%C3%A5%C8">ロボット</a>など、いろいろな楽しい仕組みが提供されています。</p>
+			<p>Codeigniter には裏技的なものがありません。</p>
+			<p><a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%A4%A1%BC%A5%B9%A5%BF%A1%BC%A1%A6%A5%A8%A5%C3%A5%B0">イースター・エッグ</a> については <a class="keyword" href="http://d.hatena.ne.jp/keyword/FuelPHP">FuelPHP</a> の圧勝です！</p>
+			<p>少しの事ですが、楽しく開発できる事は大切ですね。</p>
+			<h4> 機能面 & まとめ</h4>
+			<p>機能面の比較に関しての詳細な比較は、<a class="keyword" href="http://d.hatena.ne.jp/keyword/Google">Google</a> で検索すると、すばらしい記事を書かれた<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%D6%A5%ED%A5%B0">ブログ</a>が多数ヒットします(例えば<a href="http://ilikekillnerds.com/2012/10/codeigniter-vs-fuelphp-revisited/" target="_blank">Codeigniter vs FuelPHP (Revisited) | I Like Kill Nerds</a>など)。</p>
+			<p>ですので、詳しくはそちらを参考にしていただくとして、今回は私が感じた事を書きます。</p>
+			<p>機能の多さは <a class="keyword" href="http://d.hatena.ne.jp/keyword/FuelPHP">FuelPHP</a> &gt; CodeIgniter です。<a class="keyword" href="http://d.hatena.ne.jp/keyword/FuelPHP">FuelPHP</a> にあって CodeIgniter にない機能は、大抵はCodeIgniter の本家フォーラムを探せば同じような機能の追加方法（ハック）が見つかります。しかし、CodeIgniter のコアを改造しなければいけないものもあり、そうするくらいなら最初から、ある程度まとまっている <a class="keyword" href="http://d.hatena.ne.jp/keyword/FuelPHP">FuelPHP</a> を採用した方がいいように思います。</p>
+			<p>新規<a class="keyword" href="http://d.hatena.ne.jp/keyword/%B0%C6%B7%EF">案件</a>で <a class="keyword" href="http://d.hatena.ne.jp/keyword/FuelPHP">FuelPHP</a> か CodeIgniter を採用するのを迷っているなら、 思いきって <a class="keyword" href="http://d.hatena.ne.jp/keyword/FuelPHP">FuelPHP</a> を採用するのもいいかもしれません。<a class="keyword" href="http://d.hatena.ne.jp/keyword/FuelPHP">FuelPHP</a> の方が凄く開発が活発で新機能が積極的に取り入れられていますし、日本の<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%B3%A5%DF%A5%E5%A5%CB%A5%C6%A5%A3">コミュニティ</a>が活発だからです。</p>
+			<p>そして、何より開発時のコードがシンプルに保たれていて開発者の気分が良いからです。</p>
+			<h4> 来年の抱負</h4>
+			<p>今年は「<a class="keyword" href="http://d.hatena.ne.jp/keyword/FuelPHP">FuelPHP</a> <a class="keyword" href="http://d.hatena.ne.jp/keyword/%CA%D9%B6%AF%B2%F1">勉強会</a> <a class="keyword" href="http://d.hatena.ne.jp/keyword/%C5%EC%B5%FE">東京</a>」を2回開催できたのはよかったのですが、継続開催ができませんでした。来年こそは継続して開催したいと思います。やはり、<a class="keyword" href="http://d.hatena.ne.jp/keyword/OSS">OSS</a>において<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%B3%A5%DF%A5%E5%A5%CB%A5%C6%A5%A3">コミュニティ</a>の継続活動は大事だと思います。</p>
+			<p>また、来年は本家の<a class="keyword" href="http://d.hatena.ne.jp/keyword/FuelPHP">FuelPHP</a> <a class="keyword" href="http://d.hatena.ne.jp/keyword/Github">Github</a> へのPRを積極的にしたいと思います。</p>
+			<br>
+
+			<br>
+
+			<p>明日は<a href="https://twitter.com/kurotaky" target="_blank">@kurotaky</a>さんです。お楽しみに！</p>
+			<p class="share-button sectionfooter"><a href="http://twitter.com/share" class="twitter-share-button" data-lang="ja" data-count="none" data-url="http://d.hatena.ne.jp/mukaken/20121223/1356256954" data-text="FuelPHP vs CodeIgniter #FuelPHPAdvent2012 - mukakenの日記 (id:mukaken / @mukaken)">ツイートする</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js" charset="utf-8"></script></p>
+
+			<p class="sectionfooter"><a href="/mukaken/20121223/1356256954">Permalink</a> | <a href="/mukaken/20121223/1356256954#c">コメント(0)</a> | <a href="/mukaken/20121223/1356256954#tb">トラックバック(0)</a> | 19:02 <a href="http://b.hatena.ne.jp/entry/http://d.hatena.ne.jp/mukaken/20121223/1356256954" class="bookmark-icon"><img src="http://d.hatena.ne.jp/images/b_entry_de.gif" border="0" title="FuelPHP vs CodeIgniter #FuelPHPAdvent2012を含むブックマーク" alt="FuelPHP vs CodeIgniter #FuelPHPAdvent2012を含むブックマーク" width="16" height="12" class="icon"></a> <a href="http://b.hatena.ne.jp/entry/http://d.hatena.ne.jp/mukaken/20121223/1356256954" class="bookmark-count"><img src="http://b.hatena.ne.jp/entry/image/http://d.hatena.ne.jp/mukaken/20121223/1356256954" title="はてなブックマーク - FuelPHP vs CodeIgniter #FuelPHPAdvent2012" alt=""></a> <img class="hatena-bcomment-view-icon" src="http://r.hatena.ne.jp/images/popup.gif" onclick="javascript:BookmarkCommentViewer.iconImageClickHandler(this, 'http://d.hatena.ne.jp/mukaken/20121223/1356256954', event);" title="FuelPHP vs CodeIgniter #FuelPHPAdvent2012のブックマークコメント" alt="FuelPHP vs CodeIgniter #FuelPHPAdvent2012のブックマークコメント" width="13" height="13"></p>
+
+		</div>
+
+<div id="google_afc_user" class="section">
+<div id="google_afc_user_container" class="google_afc_blocklink2_5 google_afc_boder">
+<script type="text/javascript">
+<!--
+    google_ad_client = 'ca-hatena_html';
+    google_ad_channel = 'd_user';
+    google_ad_type     = 'image';
+    google_ad_width = '300';
+    google_ad_height = '250';
+    google_image_size = '300x250';
+    google_ad_format = '300x250_pas_abgc';
+    document.write('<scri' + 'pt charset="utf-8" type="text/javascript" src="http://ad.hatena.ne.jp/js/hatena_afc-compiled.js"></scri' + 'pt>');
+// -->
+</script>
+</div>
+</div>
+
+
+<!-- google_ad_section_end -->
+<div class="ad">
+
+<script type="text/javascript"><!--
+google_ad_client = "pub-4438296558807254";
+google_alternate_ad_url = "http://d.hatena.ne.jp/altad?mode=468x60&color_border=ffffff&color_ads=ffffff";
+google_ad_width = 468;
+google_ad_height = 60;
+google_ad_format = "468x60_as";
+google_ad_type = "text";
+google_ad_channel ="5901068518";
+google_color_link = "0000FF";
+google_color_url = "008000";
+google_color_border = "FFFFFF";
+google_color_bg = "FFFFFF";
+google_color_text = "000000";
+//--></script>
+<script type="text/javascript"
+  src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+
+</div>
+
+</div>
+
+<form id="comment-form" method="post" action="/mukaken/comment#c" class="comment">
+<input type="hidden" name="mode" value="enter">
+<input type="hidden" name="rkm" value="">
+<input type="hidden" name="date" value="2012-12-23">
+<div class="comment">
+  <div class="caption"><a name="c">コメントを書く</a></div>
+  <div class="commentshort">
+    
+    
+
+    <a name="error-message"></a>
+    <p class="message" style="display:none"></p>
+
+    
+
+    
+            
+    <p class="commentform">
+      <span class="commentator">
+        <span class="usermailconfirm"><input name="usermail" size="1" value=""><input name="userurl" size="1" value="">スパム対策のためのダミーです。もし見えても何も入力しないでください<br></span>
+        <span class="username">
+        <img src="http://www.hatena.ne.jp/images/guest_icon.gif" class="hatena-id-icon" alt="ゲスト" title="ゲスト" height="16" width="16">
+        <input type="hidden" name="section" value="1356256954">
+        
+          <input id="comment-username" name="username" size="15">
+        
+        </span>
+        
+          <span class="usermail"><img src="/images/icon-usermail.gif" style="vertical-align:middle;margin-right:3px;"><input id="comment-usermail" name="useremail" size="15" value=""></span>
+          <span class="userurl"><img src="/images/icon-userurl.gif" style="vertical-align:middle;margin-right:3px;"><input id="comment-userurl" name="useruri" size="15" value=""></span>
+        
+      </span>
+<br>
+      <!-- NOT_VERIFIED_COMMENT_AUTH -->
+      <textarea id="comment-textarea" name="body" value="" cols="60" rows="3"></textarea><br>
+      
+          <div class="captcha">
+            <img src="/mukaken/captcha?1356299417" class="captcha-image">
+            <span class="captcha-message">画像認証</span><br />
+            <input type="text" name="captcha_code" size="10" class="captcha-string" id="comment-captcha">
+          </div>
+      
+      <span class="comment-submit"><input type="submit" id="comment-form-button" value="投稿"></span>
+    </p>
+
+      <script type="text/javascript" src="/js/diary_comment_edit_form.js"></script>
+    
+
+  </div>
+</div>
+
+</form>
+
+
+
+
+
+  
+  <div class="refererlist">
+    <div class="caption">
+      <a name="tb">トラックバック</a> - http://d.hatena.ne.jp/mukaken/20121223/1356256954
+    </div>
+    
+  </div>
+  
+    <div class="refererlist">
+      <div class="caption"><a name="idtb">idトラックバック</a></div>
+      
+      <ul>
+        
+            <li><a href="http://twitter.com/php_hatena_bot/status/282804335287615488" title="FuelPHP vs CodeIgniter #FuelPHPAdvent2012 - mukakenの日記 (id:mukaken) http://t.co/f1gnSsgR" rel="nofollow">Twitter / @php_hatena_bot</a></li>
+          
+        </ul>
+      </div>
+    
+  
+
+
+
+
+
+    <div class="refererlist">
+      <div class="caption">リンク元</div>
+      <ul>
+          <li>6 <a href="http://t.co/3xHJVEpu" rel="nofollow">http://t.co/3xHJVEpu</a></li>
+          <li>3 <a href="http://rd.yahoo.co.jp/rss/l/blogsearch/search/S=2078379537/P=RSS/Q=%E6%8A%80%E8%A1%93/O=ALL/SIG=11m6bohru/*-http%3A//d.hatena.ne.jp/mukaken/20121223/1356256954" rel="nofollow">http://rd.yahoo.co.jp/rss/l/blogsearch/search/S=2078379537/P=RSS/Q=技術/O=ALL/SIG=11m6bohru/*-http://d.hatena.ne.jp/mukaken/20121223/1356256954</a></li>
+          <li>2 <a href="http://t.co/0O7qcCld" rel="nofollow">http://t.co/0O7qcCld</a></li>
+          <li>1 <a href="http://api.twitter.com/1/statuses/show/282793333984747520.json" rel="nofollow">http://api.twitter.com/1/statuses/show/282793333984747520.json</a></li>
+          <li>1 <a href="http://b.hatena.ne.jp/entrylist/it?of=40" rel="nofollow">http://b.hatena.ne.jp/entrylist/it?of=40</a></li>
+          <li>1 <a href="http://d.hatena.ne.jp/ts_asano/20121222" rel="nofollow">http://d.hatena.ne.jp/ts_asano/20121222</a></li>
+          <li>1 <a href="http://hootsuite.com/dashboard" rel="nofollow">http://hootsuite.com/dashboard</a></li>
+          <li>1 <a href="http://search.yahoo.co.jp/search?fr=slv1-tbtop&amp;p=PHP%20%E3%83%95%E3%83%AC%E3%83%BC%E3%83%A0%E3%83%AF%E3%83%BC%E3%82%AF%E3%80%80%E6%AF%94%E8%BC%83&amp;ei=UTF-8" rel="nofollow">http://search.yahoo.co.jp/search?fr=slv1-tbtop&amp;p=PHP フレームワーク　比較&amp;ei=UTF-8</a></li>
+          <li>1 <a href="http://twtr.jp/search?q=%23FuelPHPAdvent2012" rel="nofollow">http://twtr.jp/search?q=#FuelPHPAdvent2012</a></li>
+          <li>1 <a href="http://www.google.co.jp/url?sa=t&amp;rct=j&amp;q=&amp;esrc=s&amp;source=web&amp;cd=2&amp;ved=0CD0QFjAB&amp;url=http%3A%2F%2Fd.hatena.ne.jp%2Fmukaken%2F20121018%2F1350499098&amp;ei=QejWUN3SIOnTmAWn-YGQDQ&amp;usg=AFQjCNGhx27Vo_jT-yfFUB022nJPlnjQkg&amp;sig2=Yl-lgCywdSsvLPvNfjRHew&amp;bvm=bv.1355534169" rel="nofollow">http://www.google.co.jp/url?sa=t&amp;rct=j&amp;q=&amp;esrc=s&amp;source=web&amp;cd=2&amp;ved=0CD0QFjAB&amp;url=http://d.hatena.ne.jp/mukaken/20121018/1350499098&amp;ei=QejWUN3SIOnTmAWn-YGQDQ&amp;usg=AFQjCNGhx27Vo_jT-yfFUB022nJPlnjQkg&amp;sig2=Yl-lgCywdSsvLPvNfjRHew&amp;bvm=bv.1355534169</a></li>
+      </ul>
+      
+    </div>
+
+
+
+	<div class="refererlist referer-similar">
+		<div class="caption">おとなり日記</div>
+		<ul>
+
+			<li>2012-12-23 <a href="http://d.hatena.ne.jp/masahal/20121223" rel="nofollow">Firefoxアドオンとか</a> 3/21 14%
+		</ul>
+	</div>
+
+
+</div>
+
+
+
+</div>
+<div class="calendar" id="pager-bottom">
+  <a rel="prev" href="/mukaken/20121101/1351783162" class="prev">&lt; [book]書評『@cosme公式総合年...</a>
+</div>
+</div>
+<div class="sidebar">
+<img width="1" alt="" src="http://www.assoc-amazon.jp/e/ir?t=mukaken-22&amp;l=ur2&amp;o=9" style="border:none !important; margin:0px !important;" height="1" border="0"><br>
+
+<img width="1" alt="" src="http://www.assoc-amazon.jp/e/ir?t=mukaken-22&amp;l=ur2&amp;o=9" style="border:none !important; margin:0px !important;" height="1" border="0">
+	<div class="hatena-module hatena-module-profile">
+  <div class="hatena-moduletitle">プロフィール</div>
+  <div class="hatena-modulebody">
+    <div class="hatena-profile">
+      <p class="hatena-profile-image"><a href="/mukaken/about"><img src="http://www.st-hatena.com/users/mu/mukaken/user_p.gif" alt="mukaken" /></a></p>
+      <p class="hatena-profile-id"><a href="/mukaken/about">mukaken</a></p>
+      <p class="hatena-profile-body">日々の出来事を綴っていきます。よろしくお願いします。</p>
+    </div>
+  </div>
+</div>
+
+<hr>
+<div class="hatena-module hatena-module-section">
+<div class="hatena-moduletitle"><a href="/mukaken/archive">最新タイトル</a></div>
+<div class="hatena-modulebody">
+<ul class="hatena-section">
+<li><a href="http://d.hatena.ne.jp/mukaken/20121223/1356256954">FuelPHP vs CodeIgniter #FuelPHPAdvent2012</a></li>
+<li><a href="http://d.hatena.ne.jp/mukaken/20121101/1351783162"> [book]書評『@cosme公式総合年鑑 2012年保存版@cosmeクチコミランキング 940万件のクチコミ集計結果発表』</a></li>
+<li><a href="http://d.hatena.ne.jp/mukaken/20121030/1351583393">[php][CodeIgniter][linux] Scientific Linux で CodeIgniter-for-PHP_CodeSniffer を使う</a></li>
+<li><a href="http://d.hatena.ne.jp/mukaken/20121018/1350499098"> PHP フレームワークの比較</a></li>
+<li><a href="http://d.hatena.ne.jp/mukaken/20121017/1350448540">[FuelPHP]『Find your Ability! for デベロッパ』第5弾 Symfony、CakePHP、Codeigniterと比較解説するWebアプリ開発の新星「FuelPHP」 10/25開催！</a></li>
+<li><a href="http://d.hatena.ne.jp/mukaken/20121016/1350402844">[Haskell][book]『関数プログラミング入門 ―Haskellで学ぶ原理と技法―』発売決定</a></li>
+<li><a href="http://d.hatena.ne.jp/mukaken/20120624/1340546681">[FuelPHP] FuelPHP 勉強会 東京 vol.1</a></li>
+<li><a href="http://d.hatena.ne.jp/mukaken/20120610/1339320897">[yapc][perl]YAPC::Asia Tokyo 2012 のチケットを購入</a></li>
+<li><a href="http://d.hatena.ne.jp/mukaken/20120201/1328130391">[book] 『小さなチーム、大きな仕事』を購入</a></li>
+<li><a href="http://d.hatena.ne.jp/mukaken/20110813/1313252004">[haskell]『プログラミングHaskell』の練習問題を解く</a></li>
+</ul>
+</div>
+</div>
+ 
+<hr>
+<div class="hatena-module hatena-module-ring">
+
+<div class="hatena-modulebody">
+<ul class="hatena-photo">
+
+
+
+  <script type="text/javascript"
+    src="http://ring.hatena.ne.jp/showlogo?rid=python&sid=151917&mode=image">
+  </script>
+  <noscript>
+  <a href="http://python.ring.hatena.ne.jp"><img src="http://ring.hatena.ne.jp/images/logo/p/python/python_s.jpg" border=0></a>
+  <a href="http://python.ring.hatena.ne.jp/go?type=random&sid=151917">random</a>
+  <a href="http://python.ring.hatena.ne.jp/">Hatena Ring python</a>
+  </noscript>
+
+
+
+</div>
+</div>
+
+<div class="hatena-module hatena-module-ring">
+
+<div class="hatena-modulebody">
+<ul class="hatena-photo">
+
+
+
+  <script type="text/javascript"
+    src="http://ring.hatena.ne.jp/showlogo?rid=ruby&sid=151917&mode=image">
+  </script>
+  <noscript>
+  <a href="http://ruby.ring.hatena.ne.jp"><img src="http://ring.hatena.ne.jp/images/logo/r/ruby/ruby_s.jpg" border=0></a>
+  <a href="http://ruby.ring.hatena.ne.jp/go?type=random&sid=151917">random</a>
+  <a href="http://ruby.ring.hatena.ne.jp/">Hatena Ring ruby</a>
+  </noscript>
+
+
+
+</div>
+</div>
+
+<div class="hatena-module hatena-module-ring">
+
+<div class="hatena-modulebody">
+<ul class="hatena-photo">
+
+
+
+  <script type="text/javascript"
+    src="http://ring.hatena.ne.jp/showlogo?rid=perl&sid=151917&mode=image">
+  </script>
+  <noscript>
+  <a href="http://perl.ring.hatena.ne.jp"><img src="http://ring.hatena.ne.jp/images/logo/p/perl/perl_s.jpg" border=0></a>
+  <a href="http://perl.ring.hatena.ne.jp/go?type=random&sid=151917">random</a>
+  <a href="http://perl.ring.hatena.ne.jp/">Hatena Ring perl</a>
+  </noscript>
+
+
+
+</div>
+</div>
+
+<div class="hatena-module hatena-module-ring">
+
+<div class="hatena-modulebody">
+<ul class="hatena-photo">
+
+
+
+  <script type="text/javascript"
+    src="http://ring.hatena.ne.jp/showlogo?rid=php&sid=151917&mode=image">
+  </script>
+  <noscript>
+  <a href="http://php.ring.hatena.ne.jp"><img src="http://ring.hatena.ne.jp/images/logo/p/php/php_s.jpg" border=0></a>
+  <a href="http://php.ring.hatena.ne.jp/go?type=random&sid=151917">random</a>
+  <a href="http://php.ring.hatena.ne.jp/">Hatena Ring php</a>
+  </noscript>
+
+
+
+</div>
+</div>
+
+<div class="hatena-module hatena-module-sectioncategory">
+<div class="hatena-moduletitle">カテゴリー</div>
+<div class="hatena-modulebody">
+<ul class="hatena-sectioncategory">
+<li><a href="/mukaken/searchdiary?word=%2A%5B%BE%DC%C0%E2%A1%A1%C0%B5%B5%AC%C9%BD%B8%BD%5D">詳説　正規表現</a></li>
+<li><a href="/mukaken/searchdiary?word=%2A%5B%C6%C8%A4%EA%C6%C9%BD%F1%B2%F1%5D">独り読書会</a></li>
+<li><a href="/mukaken/searchdiary?word=%2A%5B%C0%B5%B5%AC%C9%BD%B8%BD%5D">正規表現</a></li>
+<li><a href="/mukaken/searchdiary?word=%2A%5BSQL%5D">SQL</a></li>
+<li><a href="/mukaken/searchdiary?word=%2A%5Bcss%5D">css</a></li>
+<li><a href="/mukaken/searchdiary?word=%2A%5BRuby%5D">Ruby</a></li>
+<li><a href="/mukaken/searchdiary?word=%2A%5B%BD%F1%C9%BE%5D">書評</a></li>
+<li><a href="/mukaken/searchdiary?word=%2A%5BExcel%5D">Excel</a></li>
+<li><a href="/mukaken/searchdiary?word=%2A%5B%CB%DC%5D">本</a></li>
+<li><a href="/mukaken/searchdiary?word=%2A%5Byapcasia2008%5D">yapcasia2008</a></li>
+<li><a href="/mukaken/searchdiary?word=%2A%5BOpenID%5D">OpenID</a></li>
+<li><a href="/mukaken/searchdiary?word=%2A%5BRubyKaigi2008%5D">RubyKaigi2008</a></li>
+<li><a href="/mukaken/searchdiary?word=%2A%5Bjavascript%5D">javascript</a></li>
+<li><a href="/mukaken/searchdiary?word=%2A%5B%B2%BB%B3%DA%5D">音楽</a></li>
+<li><a href="/mukaken/searchdiary?word=%2A%5BC%23%5D">C#</a></li>
+<li><a href="/mukaken/searchdiary?word=%2A%5BCMS%5D">CMS</a></li>
+<li><a href="/mukaken/searchdiary?word=%2A%5Brubykaigi2009%5D">rubykaigi2009</a></li>
+<li><a href="/mukaken/searchdiary?word=%2A%5BOOS%5D">OOS</a></li>
+<li><a href="/mukaken/searchdiary?word=%2A%5Bbook%5D">book</a></li>
+<li><a href="/mukaken/searchdiary?word=%2A%5Bocaml%5D">ocaml</a></li>
+<li><a href="/mukaken/searchdiary?word=%2A%5BF%23%5D">F#</a></li>
+<li><a href="/mukaken/searchdiary?word=%2A%5Bjquery%5D">jquery</a></li>
+<li><a href="/mukaken/searchdiary?word=%2A%5BHaskell%5D">Haskell</a></li>
+<li><a href="/mukaken/searchdiary?word=%2A%5Bstart_haskell%5D">start_haskell</a></li>
+<li><a href="/mukaken/searchdiary?word=%2A%5BFuelPHP%5D">FuelPHP</a></li>
+<li><a href="/mukaken/searchdiary?word=%2A%5Bphp%5D">php</a></li>
+<li><a href="/mukaken/searchdiary?word=%2A%5BCodeIgniter%5D">CodeIgniter</a></li>
+<li><a href="/mukaken/searchdiary?word=%2A%5Blinux%5D">linux</a></li>
+</ul>
+</div>
+</div>
+
+        <div class="hatena-module hatena-module-pv">
+                <div class="hatena-moduletitle">ページビュー</div>
+                <div class="hatena-modulebody">
+                        <span class="hatena-counter">173386</span>
+                </div>
+        </div>
+
+<a href="http://b.hatena.ne.jp/entrylist?url=http://d.hatena.ne.jp/mukaken/"><img src="http://b.hatena.ne.jp/bc/lb/http://d.hatena.ne.jp/mukaken/" class="bcounter" alt="この日記のはてなブックマーク数" title="この日記のはてなブックマーク数"></a>
+
+<br>
+<!-- -->
+<a href="http://fusion.google.com/add?feedurl=http%3A//d.hatena.ne.jp/mukaken/rss2"><img width="104" alt="Add to Google" src="http://buttons.googlesyndication.com/fusion/add.gif" height="17" border="0"></a>
+<br>
+
+<a href="http://getfirefox.jp/"><img alt="Mozilla Firefox ブラウザ無料ダウンロード" src="http://getfirefox.jp/b/125x125_square_blue" title="Mozilla Firefox ブラウザ無料ダウンロード" border="0"></a>
+
+<br>
+<!-- -->
+<a href="http://nakanohito.jp/"><img width="48" alt="なかのひと" src="http://nakanohito.jp/an/?u=112187&h=445774&w=48" height="48" border="0"></a>
+<!-- -->
+<br>
+<!-- -->
+<a href="http://nakanohito.jp/stage/foxmeter/"><img width="140" alt="Firefox3 Meter" src="http://ff.nakanohito.jp/anff/?u=112187&h=445774&type=ff" height="43" border="0"></a>
+<!-- -->
+<br>
+<embed src="http://twitter.com/flash/twitter_badge.swf"  flashvars="color1=3355647&type=user&id=4336001"  quality="high" width="176" height="176" name="twitter_badge" align="middle" allowScriptAccess="always" wmode="transparent" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" ></embed><br><a href="http://twitter.com/mukaken" style="font-size: 10px; color: #3333FF; text-decoration: none">follow mukaken at http://twitter.com</a></div>
+</div>
+
+
+
+
+
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  var days = document.getElementById('days');
+  if (days && days.innerHTML.indexOf("今週のお題") != -1) {
+    _gaq.push(['_setCustomVar', 2, 'campaign', 'odai', 3]);
+  }
+
+  if (days && /\u6d77\u5916\u30c9\u30e9\u30de\u300e\u30e9\u30a4\u30fb\u30c8\u30a5\u30fb\u30df\u30fc \u5618\u306e\u77ac\u9593\u300f\u89b3\u305f\u3044\uff01|\u300e\u30e9\u30a4\u30fb\u30c8\u30a5\u30fb\u30df\u30fc \u5618\u306e\u77ac\u9593\u300f\u7b2c1\u8a71\u306e\u611f\u60f3\u3092\u6559\u3048\u3066\u304f\u3060\u3055\u3044|\u4eca\u3060\u304b\u3089\u8a00\u3048\u308b\u300c\u5618\u3092\u3064\u3044\u3066\u3057\u307e\u3063\u305f\u30a8\u30d4\u30bd\u30fc\u30c9\u300d\u3092\u6559\u3048\u3066\u304f\u3060\u3055\u3044|\u3060\u307e\u3055\u308c\u305f\u3051\u3069\u3001\u8a31\u305b\u3066\u3057\u307e\u3063\u305f\u5618\u3092\u6559\u3048\u3066\u304f\u3060\u3055\u3044/.test(days.innerHTML)) {
+    _gaq.push(['_setCustomVar', 2, 'campaign', 'lietome', 3]);
+  }
+
+  if (days && /Visa\u30d7\u30ea\u30da\u30a4\u30c9\u300cV\u30d7\u30ea\u30ab\u300d\u8a66\u3057\u305f\u3044\uff01|Visa\u30d7\u30ea\u30da\u30a4\u30c9\u300cV\u30d7\u30ea\u30ab\u300d\u3001\u81ea\u5206\u306a\u3089\u3053\u3046\u4f7f\u3046\uff01|V\u30d7\u30ea\u30ab\u304c1\u4e07\u5186\u5206\u3042\u3063\u305f\u3089\u3001\u30cd\u30c3\u30c8\u3067\u4f55\u3092\u8cb7\u3044\u307e\u3059\u304b\uff1f/.test(days.innerHTML)) {
+    _gaq.push(['_setCustomVar', 2, 'campaign', 'vpreca', 3]);
+  }
+
+  if (days && /\u30a2\u30a4\u30c7\u30e0 \u30a8\u30f3\u30b8\u30cb\u30a2\u30ad\u30e3\u30ea\u30a2Hacks\u5171\u6709\u30d7\u30ed\u30b8\u30a7\u30af\u30c8|\u30a8\u30f3\u30b8\u30cb\u30a2\u3068\u3057\u3066\u306e\u3001\u3068\u3063\u3066\u304a\u304d\u306e\u30ad\u30e3\u30ea\u30a2Hacks\u3092\u6559\u3048\u3066\u304f\u3060\u3055\u3044|\u3042\u306a\u305f\u304c\u30a8\u30f3\u30b8\u30cb\u30a2\u8ee2\u8077\u30b5\u30a4\u30c8\u3092\u4f5c\u308b\u306a\u3089\u3001\u3069\u3093\u306a\u30b5\u30a4\u30c8\u306b\u3057\u307e\u3059\u304b\uff1f|5\u5e74\u5f8c\u306e\u300c\u30a8\u30f3\u30b8\u30cb\u30a2\u306e\u50cd\u304d\u65b9\u300d\u306f\u3001\u3069\u3046\u5909\u308f\u3063\u3066\u3044\u3066\u307b\u3057\u3044\u3067\u3059\u304b\uff1f/.test(days.innerHTML)) {
+    _gaq.push(['_setCustomVar', 2, 'campaign', 'aidemcareer', 3]);
+  }
+
+  _gaq.push(
+  ['_setAccount', 'UA-441387-31'],
+  ['_setCustomVar', 1, 'afc_type', 'point', 3],
+  ['_setCustomVar', 3, 'theme', 'hatena2-lightblue', 3],
+  ['_setCustomVar', 4, 'usertype', 'guest', 1],
+  ['_trackPageview'],
+  ['b._setAccount', 'UA-7855606-1'],
+  ['b._setDomainName', '.hatena.ne.jp'],
+  ['b._trackPageview']
+  ,['c._setAccount', 'UA-2725037-1'],
+  ['c._trackPageview']
+  );
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+<!-- CG:1,CH:1,ICG:13,ICH:3,T: -->
+</body>
+</html>
