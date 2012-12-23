@@ -2,10 +2,10 @@
 = さくらのレンタルサーバでFuelPHPを使ってはてなハイクブログを作る－ViewModelを使ってみる編 @<href>{https://twitter.com/tmd45,@tmd45}
 
 
-この記事は @<href>{http://atnd.org/events/33753,FuelPHP Advent Calendar 2012} の 18 日目の記事です。昨日は @@<href>{http://twitter.com/ootatter,ootatter} さんによる「FuelPHPで既存DBをあつかうとか」でした。@<br>{}
+この記事は @<href>{http://atnd.org/events/33753,FuelPHP Advent Calendar 2012} の 18 日目の記事です。昨日は @<href>{https://twitter.com/ootatter,@ootatter} さんによる「FuelPHPで既存DBをあつかうとか」でした。@<br>{}
 
 
-本日の担当は、毎年クリスマスには仕事で問題が起こりクルシミマス恒例になりつつあります、@@<href>{https://twitter.com/tmd45,tmd45} です。
+本日の担当は、毎年クリスマスには仕事で問題が起こりクルシミマス恒例になりつつあります、@<href>{https://twitter.com/tmd45,@tmd45} です。
 
 
 FuelPHP 標準のサーバキャッシュと「@<href>{http://developer.hatena.ne.jp/ja/documents/haiku/apis/rest,はてなハイクAPI}」、ViewModel を利用したブログのようなものを作ってみましたので、その全貌を公開したいと思います。
