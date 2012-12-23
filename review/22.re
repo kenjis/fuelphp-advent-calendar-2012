@@ -26,7 +26,7 @@ ORMの有用性はご存知のとおりと思いますので、ここではORM�
 以下すべてのソースコードは、PHP5.4のビルトインサーバ(PHP5.4.9)＋FuelPHP 1.4、MySQLバージョン5.5.28にて動作確認済みです。
 以下すべてのソースコードはそれ単体で動くものではなく、また著作権表示・許諾表示を怠っておりますが、MITライセンスを適用させて頂きます。
 
-== 0.環境準備
+== 0. 環境準備
 
 
 まずは、まっさらのFuelPHP 1.4環境を用意します。@<fn>{fuel-dev}
@@ -306,7 +306,7 @@ FuelPHPにはマニュアルでは触れられていない、思わぬ機能が�
 この記事がFuelPHPでDBを扱う方にとって、お役に立てますと幸いです！@<br>{}
 
 
-明日は@<href>{http://twitter.com/mukaken,@mukaken}さんの「FuelPHP vs CodeIgniter」です。お楽しみに！  
+明日は@<href>{https://twitter.com/mukaken,@mukaken}さんの「FuelPHP vs CodeIgniter」です。お楽しみに！
 
 
 # mukakenさん、いつもはてなスターありがとうございます！
