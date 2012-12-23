@@ -1,5 +1,5 @@
 
-= FuelPHPで１サイトを作ってみて気が付いた点など @<href>{https://twitter.com/konkon1234,@konkon1234}
+= FuelPHPで1サイトを作ってみて気が付いた点など @<href>{https://twitter.com/konkon1234,@konkon1234}
 
 
 @<href>{http://atnd.org/events/33753,FuelPHP Advent Calendar 2012} (#FuelPHPAdvent2012) 21日目です。
