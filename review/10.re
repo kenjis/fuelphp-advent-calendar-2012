@@ -7,7 +7,7 @@
 Fuelはコアクラスを拡張してアレコレするのがやりやすいですね。@<br>{}
 
 
-10日担当の私(@@<href>{https://twitter.com/EGMC,EGMC})は自作の認証パッケージの紹介です。
+10日担当の私(@<href>{https://twitter.com/EGMC,@EGMC})は自作の認証パッケージの紹介です。
 「@<href>{http://dasalog.eg2mix.com/fuelphp-%e5%8b%89%e5%bc%b7%e4%bc%9a-%e6%9d%b1%e4%ba%ac-vol-2%e3%81%a7oauth%e3%83%ad%e3%82%b0%e3%82%a4%e3%83%b3%e3%81%ae%e7%99%ba%e8%a1%a8%e3%82%92%e3%81%97%e3%81%a6%e3%81%8d%e3%81%9f/,FuelPHP 勉強会 東京 vol.2でOAuthログインの発表をしてきた}」の続きでもあります。
 
 == ソーシャル連携のログイン機能
