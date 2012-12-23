@@ -11,7 +11,7 @@ booktitle: FuelPHP Advent Calendar 2012
 # 著者
 aut: FuelPHP Advent Calendar 2012 参加有志
 # 以下はオプション
-prt: 出版社
+prt: 達人出版会
 # asn: Associated name
 # ant: Bibliographic antecedent
 # clb: 貢献者
@@ -21,7 +21,7 @@ prt: 出版社
 # pht: 撮影者
 # trl: 翻訳者
 # date: 刊行日
-date: 2012/12/XX
+date: 2012/12/25
 # rights: 権利表記
 # description: ブックの説明
 #
@@ -35,7 +35,8 @@ coverimage: cover.jpg
 # CSSファイル (yamlファイルおよびReVIEWファイルを置いたディレクトリにあること)
 stylesheet: stylesheet.css
 # LaTeX用のスタイルファイル(styディレクトリ以下に置くこと)
-texstyle: style
+##texstyle: style
+texstyle: tatsumacro
 # LaTeX用のdocumentclassを指定する
 # texdocumentclass: ["jsarticle", "b5paper,oneside"]
 # 目次として抽出するレベル
