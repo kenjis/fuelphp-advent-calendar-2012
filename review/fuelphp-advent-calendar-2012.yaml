@@ -26,9 +26,9 @@ date: 2012/12/XX
 # description: ブックの説明
 #
 # coverfile: カバーページのbody要素内に挿入する内容を記述したファイル名
-#coverfile: cover.html
+coverfile: _cover.html
 # coverimage: カバー用画像。画像ディレクトリ内に置いてもディレクトリ名は不要(例: cover.jpg)
-#coverimage: cover.jpg
+coverimage: cover.jpg
 #
 # 固有IDに使用するドメイン。指定しない場合には、時刻に基づくランダムUUIDが入る
 # urnid: urn:uid:http://example.com/some-book-title/1.0.2/
