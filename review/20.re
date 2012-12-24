@@ -115,7 +115,7 @@ fuel/app/tasks/batch.php をProductionモードでcronに設定する場合、�
 以上！@<br>{}
 
 
-あすは、@<href>{https://twitter.com/konkon1234,@konkon1234}さんの「(仮)FuelPHPで1サイトを作ってみて気が付いた点など」です。@<br>{}
+あすは、@<href>{https://twitter.com/konkon1234,@konkon1234}さんの「FuelPHPで1サイトを作ってみて気が付いた点など」です。@<br>{}
  お楽しみに！
 
 //quote{
