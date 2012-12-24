@@ -428,9 +428,14 @@ $view = View::forge('marriage/index');
 
 こういったことが、むしろこの程度のコード片でデキてしまうFuelPHPの使いやすさ、改めて好きになりました！みなさんもFuelPHPで楽しいウェブ開発ライフを！
 
+
+明日は、@<href>{https://twitter.com/EGMC,@EGMC}さんの「FuelPHP用ソーシャルログイン専用認証パッケージDsAuthでNinjAuthをもっと簡単に利用する」です。お楽しみに！
+
 //quote{
 @<strong>{@fushiroyama}
 
+株式会社ミクシィ コミュニティユニット エンジニア
+白山 文彦
 
 Twitter: @<href>{https://twitter.com/fushiroyama,@fushiroyama}
 
