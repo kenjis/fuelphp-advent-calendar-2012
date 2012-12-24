@@ -280,7 +280,7 @@ class Model_Xxxxx extends Model_Crud
 以上、他の日の記事と微妙に被ってる内容の多い21日目でした。@<br>{}
 
 
-明日は@<href>{https://twitter.com/ts_asano,@ts_asano}さんの「(仮)QueryBuilderで小難しいSELECT文を書くためのノウハウ」です。
+明日は@<href>{https://twitter.com/ts_asano,@ts_asano}さんの「QueryBuilderで小難しいSELECT文を書くためのノウハウ」です。
  表題からして素敵ですね。お楽しみに♪
 
 //quote{
