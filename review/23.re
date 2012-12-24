@@ -25,17 +25,17 @@ CodeIgniter	@<href>{http://ellislab.com/codeigniter,http://ellislab.com/codeigni
 
 === 本家ホームページ
 
-今年、両方ともリニューアルされました。特に大きな変化があったのはCodeIgniterで、URL が今年の12月になり変わり、ellislab.comの直下になりました。これは、何かの意図があるのかは不明ですが、より企業ベースで開発されている感が感じられるようになりました。@<br>{}
+今年、両方ともリニューアルされました。特に大きな変化があったのはCodeIgniterで、URL が今年の12月になり変わり、ellislab.comの直下になりました。これは、何かの意図があるのかは不明ですが、より企業ベースで開発されている感が感じられるようになりました。
 
 === ライセンス
 
 FuelPHP は MIT ですので何も問題ないでしょう。
-CodeIgniter のライセンスは、現時点では CodeIgniter License ですが、今後は OSL 3.0 になるかもしれません。現時点では不明です。このライセンスが非常に難しく、変更になる件については一時期、本家のフォーラム(@<href>{http://ellislab.com/forums/viewthread/202562/,CodeIgniter changes license to OSL 3.0? / Forums / Community / EllisLab})や、いろいろなサイトで活発に議論されていましたが、ここ最近半年は議論している人を見かけなくなりました。@<br>{}
+CodeIgniter のライセンスは、現時点では CodeIgniter License ですが、今後は OSL 3.0 になるかもしれません。現時点では不明です。このライセンスが非常に難しく、変更になる件については一時期、本家のフォーラム(@<href>{http://ellislab.com/forums/viewthread/202562/,CodeIgniter changes license to OSL 3.0? / Forums / Community / EllisLab})や、いろいろなサイトで活発に議論されていましたが、ここ最近半年は議論している人を見かけなくなりました。
 
 === 対応するPHPのバージョン
 
 FuelPHP は PHP 5.3 以上なので新しい機能を積極的に取り入れています。また、下位互換がないために簡潔にコードを記述する事ができます。少しの事なのですが、開発者にとっては気分が良いです。
-CodeIgniter は 過去のしがらみがあるために、メンテナンスをしていると PHP 4 で記述されたコードをチラホラと見かけます。メンテナンス時などは気分が沈みます。@<br>{}
+CodeIgniter は 過去のしがらみがあるために、メンテナンスをしていると PHP 4 で記述されたコードをチラホラと見かけます。メンテナンス時などは気分が沈みます。
 
 === 運用時の問題
 
