@@ -34,8 +34,9 @@ Fuelはコアクラスを拡張してアレコレするのがやりやすいで�
 == 動作サンプル
 
 
-こちらで@<href>{http://dsauth-sample.eg2mix.com/,サンプルページ}を公開しています。
+以下でサンプルページを公開しています。
 
+ * @<href>{http://dsauth-sample.eg2mix.com/,http://dsauth-sample.eg2mix.com/}
 
 ※実際にログイン可能ですがサンプルなのでアプリは特に何もしません。必要なユーザー情報とトークンは取得しています。
 
