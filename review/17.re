@@ -5,13 +5,13 @@
 作成事例として詳細に解説して頂いてるのでこれからFuelPHPでFacebookアプリを作るときはすごく参考になるかと思いました！
 個人的にまだアプリを作ったことがないので参考にさせて頂きたいと思います!@<br>{}
 
-さて、私はといえば、「既存DBをあつかう」と見出しにつけておりますがこれまでFuelPHPを使うときは、
+さて、私はといえば、「既存DBをあつかう」と見出しにつけておりますが、これまでFuelPHPを使うときは、
 
  * フロントエンド FuelPHP
  * バックエンド CakePHP
 
 という構成で使ってました。
-主に取得する目的で使ってきましたのでちょっと期待はずれ感があるかもしれませんがご了承頂ければと!
+主に取得する目的で使ってきましたのでちょっと期待はずれ感があるかもしれませんがご了承頂ければと！
 今回は、その中でも@<strong>{こうしてみました}っていうこところを部分的に紹介できればと思います。
 
 == ページ送り時のデータ取得はどうしてますか？
@@ -41,7 +41,7 @@ $return['result'] = $result->as_array();
 
 == 例えばEC-CUBEのデータ(PostgreSQL)を取得したい時がありまして
 
-シーケンスどうすれば!?と思ったんですが下記のようにしました。
+シーケンスどうすれば!?と思ったんですが、下記のようにしました。
 
 model/app.phpを定義して
 
@@ -81,11 +81,11 @@ class Model_Order extends Model_App
 
 == そしてWordPressのサイトをFuelPHPで置き換えたいな〜とふと思った時がありまして
 
-モデルの部分だけでもパッケージ化に挑戦してみようかと思いました(ormを継承してます)。
+モデルの部分だけでもパッケージ化に挑戦してみようかと思いました(Ormを継承してます)。
 
  * @<href>{https://github.com/milds/fuelpress,https://github.com/milds/fuelpress}
 
-ですが途中で、、中途半端に出してすみません。
+ですが途中で、中途半端に出してすみません。
 せめてmodel定義だけでも何かしらの…@<br>{}
 
 配慮したこと
@@ -93,7 +93,7 @@ class Model_Order extends Model_App
  * WordPress用のdb定義を使うこと
  * テーブルのプレフィックスを付けること
 
-ormを継承したときはdb.phpのprefixがつかずにinitメソッドで対応
+Ormを継承したときはdb.phpのprefixがつかずにinitメソッドで対応。
 
 #@# lang: .brush: .php;
 //emlist{
@@ -107,11 +107,11 @@ public static function _init(){
 
 FuelPHPは既存のDBを扱いやすいんだな〜と思ったところでは、
 
- * 基本はormを継承して
+ * 基本はOrmを継承して
  * $_propertiesでカラム定義して
- * アソシエーションはormを使うかQuery_Builderのjoinを使う
+ * アソシエーションはOrmを使うかQuery Builderのjoinを使う
 
-ormを継承していても複雑なアソシエーションの場合とかはDBクラスを使うとかいう選択肢もあるんじゃないかな〜と思います。
+Ormを継承していても複雑なアソシエーションの場合とかはDBクラスを使うとかいう選択肢もあるんじゃないかな〜と思います。
 
  * @<href>{https://github.com/milds/fuelpress/blob/master/classes/model/post.php,https://github.com/milds/fuelpress/blob/master/classes/model/post.php}
 
