@@ -432,10 +432,9 @@ $view = View::forge('marriage/index');
 明日は、@<href>{https://twitter.com/EGMC,@EGMC}さんの「FuelPHP用ソーシャルログイン専用認証パッケージDsAuthでNinjAuthをもっと簡単に利用する」です。お楽しみに！
 
 //quote{
-@<strong>{@fushiroyama}
+@<strong>{白山 文彦}
 
 株式会社ミクシィ コミュニティユニット エンジニア
-白山 文彦
 
 Twitter: @<href>{https://twitter.com/fushiroyama,@fushiroyama}
 
