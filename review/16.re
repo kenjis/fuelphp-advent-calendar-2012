@@ -108,11 +108,11 @@ Facebook認証からのcallbackで返ってきた場合は、$user_idにユー�
     public function action_index()
      {
           // view定義
-          $view=View::forge('diag');
+          $view = View::forge('diag');
 
           if (isset($_POST['signed_request'])){
-              $signed_request=$_POST['signed_request'];
-              $data = $this->parse_signed_request($signed_request,"アプリケーションID");
+              $signed_request = $_POST['signed_request'];
+              $data = $this->parse_signed_request($signed_request, "アプリケーションID");
 
               if ($data["page"]["liked"]){  // 分岐1："いいね済の人に見せるコンテンツ";
                     //ログイン状態を取得
@@ -145,7 +145,7 @@ Facebook認証からのcallbackで返ってきた場合は、$user_idにユー�
      public function action_start()
      {
           // view定義
-          $view=View::forge('oauth');
+          $view = View::forge('oauth');
 
           return $view;
      }
@@ -159,7 +159,7 @@ Facebook認証からのcallbackで返ってきた場合は、$user_idにユー�
 //emlist[fuel/app/classes/controller/diag.php]{
      public function action_result()
      {
-          $view=View::forge('diag');
+          $view = View::forge('diag');
 
           if (Input::method() == 'POST')
           {
@@ -283,10 +283,11 @@ Facebookページへの追加方法は、このページで紹介されていま
 
 == 5. さいごに
 
-このように、Facebookアプリの枠組みとしてFuelPHPを利用することで、アプリのアイデアさえあれば、簡単にFacebookアプロを作成でき、Facebookページへの集客に役立てる事が出来ます。@<br>{}
+このように、Facebookアプリの枠組みとしてFuelPHPを利用することで、アプリのアイデアさえあれば、簡単にFacebookアプリを作成でき、Facebookページへの集客に役立てる事が出来ます。
+
  このノウハウが参考になれば幸いです。@<br>{}
 
-次は@<href>{https://twitter.com/ootatter,@ootatter}さんで「fuelphpで既存DBをあつかうとか」です。DBまわりの内容でとても興味深いですね。
+次は@<href>{https://twitter.com/ootatter,@ootatter}さんで「FuelPHPで既存DBをあつかうとか」です。DBまわりの内容でとても興味深いですね。
 
 //quote{
 @<strong>{@mayama4u}
