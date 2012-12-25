@@ -1,14 +1,14 @@
 
-= Coda+FuelPHPでお手軽開発環境を作る @<href>{https://twitter.com/seltzer,@seltzer}
+= Coda + FuelPHPでお手軽開発環境を作る @<href>{https://twitter.com/seltzer,@seltzer}
 
 
 今年、私がもっともはまった言語系のプロダクトと言えば「FuelPHP」になります。
 
 
-そんな、FuelPHPの Advent Calendarが開催されていたので、私も参加いたしました。 昨日の @<href>{https://twitter.com/LandscapeSketch,@LandscapeSketch} さんの「FuelPHP+NetBeans+Gitで高速開発環境を整える」を受けて、私からは「Coda + FuelPHPでお手軽開発環境を作る」をお送りします。
+そんな、FuelPHPのAdvent Calendarが開催されていたので、私も参加いたしました。 昨日の @<href>{https://twitter.com/LandscapeSketch,@LandscapeSketch} さんの「FuelPHP + NetBeans + Gitで高速開発環境を整える」を受けて、私からは「Coda + FuelPHPでお手軽開発環境を作る」をお送りします。
 
 
-Codaとは、Panic社から販売されている OS X向けの Web開発ソフトです。軽量・高機能で筆者ももっとも愛用しているソフトの一つです。
+Codaとは、Panic社から販売されているOS X向けのWeb開発ソフトです。軽量・高機能で筆者ももっとも愛用しているソフトの一つです。
 
 
 この「Coda」、名前からしてHTMLのコーディングにしか使えないだろうと思われている方も少なくないのですが、実はプログラミングにも最適な開発ソフトです。ここでは、FuelPHPを少しでも開発しやすくするための、各種機能を紹介していきましょう。
@@ -16,9 +16,9 @@ Codaとは、Panic社から販売されている OS X向けの Web開発ソフ�
 == セットアップ
 
 
-Codaの最新バージョンは、「Coda 2(2.0.6)」です。Lion以降なら App Storeからワンクリックで購入・インストールをすることができます。それ以外の環境だったり、少しお試しをしてみたい場合は直販サイトから、ダウンロードすると良いでしょう。
+Codaの最新バージョンは、「Coda 2(2.0.6)」です。Lion以降ならApp Storeからワンクリックで購入・インストールをすることができます。それ以外の環境だったり、少しお試しをしてみたい場合は直販サイトから、ダウンロードすると良いでしょう。
 
- * @<href>{http://panic.com/jp/coda/,Coda 2}
+ * Coda 2 @<href>{http://panic.com/jp/coda/,http://panic.com/jp/coda/}
 
 
 
@@ -32,14 +32,14 @@ Codaの最新バージョンは、「Coda 2(2.0.6)」です。Lion以降なら A
 「ターミナル」をクリックすると、Coda内でターミナルを開くことができます。ここで、次のように打ち込んで、@<href>{http://fuelphp.com/docs/installation/instructions.html,公式ドキュメント} に従って次のようにプロジェクトを作っていきます。
 
 //cmd{
-oil create
+$ oil create
 //}
 
 
 oilがインストールされていない場合は、先にこちらを打ち込みます。
 
 //cmd{
-curl get.fuelphp.com/oil | sh
+$ curl get.fuelphp.com/oil | sh
 //}
 
 
@@ -48,9 +48,9 @@ curl get.fuelphp.com/oil | sh
 == ローカルサーバーの構築
 
 
-続いて、このプロジェクトを動作させるための、Webサーバーを準備します。コマンドラインに長けている場合には、HomeBrewなどを利用して Apache+MySQLをセットアップしても良いですが、筆者は手軽に MAMPを利用して構築しています。
+続いて、このプロジェクトを動作させるための、Webサーバーを準備します。コマンドラインに長けている場合には、Homebrewなどを利用してApache + MySQLをセットアップしても良いですが、筆者は手軽にMAMPを利用して構築しています。
 
- * @<href>{http://www.mamp.info/en/index.html,MAMP}
+ * MAMP @<href>{http://www.mamp.info/en/index.html,http://www.mamp.info/en/index.html}
 
 
 
@@ -85,7 +85,7 @@ http://localhost:8888
 
 
 
-その他の設定項目は FTPに関わるものなので、サイトを公開するときに設定すれば良いでしょう。こうすると、サイトのアイコンができあがります。
+その他の設定項目はFTPに関わるものなので、サイトを公開するときに設定すれば良いでしょう。こうすると、サイトのアイコンができあがります。
 
 
 //image[tumblr_mevdvx0W3l1qzx5tb][]{
@@ -139,8 +139,9 @@ return array(
 
 次のコマンドを打ち込んで、Scaffoldを作ります。
 
-//quote{
-oil g scaffold message name:varchar[500] message:text oil refine migrate
+//cmd{
+$ oil g scaffold message name:varchar[500] message:text
+$ oil refine migrate
 //}
 
 == 確認する
@@ -179,7 +180,7 @@ FuelPHPで開発をする場合、大抵のファイルは「fuel/app/classes」
 //}
 
 
-これで、場所パネルが気軽に使えるようになります。場所パネルを開いて、画面上部のタブから「ファイル」を選びます。すると、メインウィンドウにフォルダの一覧が表示されるので、よくアクセスするフォルダを場所パネルにドラッグドロップで追加していきましょう。
+これで、場所パネルが気軽に使えるようになります。場所パネルを開いて、画面上部のタブから「ファイル」を選びます。すると、メインウィンドウにフォルダの一覧が表示されるので、よくアクセスするフォルダを場所パネルにドラッグ＆ドロップで追加していきましょう。
 
 
 //image[tumblr_meveliXHpC1qzx5tb][]{
@@ -224,7 +225,7 @@ FuelPHPを利用すると、例えばコントローラーを新しく作ると�
 //}
 
 
-これで Coda上で FuelPHPのドキュメントを参照することができます。
+これでCoda上でFuelPHPのドキュメントを参照することができます。
 
 == 画面分割で Codaを統合環境に
 
@@ -244,7 +245,7 @@ FuelPHPを利用すると、例えばコントローラーを新しく作ると�
 == その他にも…
 
 
-Codaには、この他にも GitやFTP、MySQLなどを操作できる機能も内蔵されています。いずれも、使いやすく作られていて、一度使うと手放せません(ただし、Gitのクライアント機能はまだ若干開発途上です)。
+Codaには、この他にもGitやFTP、MySQLなどを操作できる機能も内蔵されています。いずれも、使いやすく作られていて、一度使うと手放せません(ただし、Gitのクライアント機能はまだ若干開発途上です)。
 
 
 「Coda」という名前は「HTMLコーダー」ではなく、「プログラマがコードを書く」という意味で「Coda」という名前なのではないか、と思えるほど開発者にうれしいソフトになっていますので、ぜひ一度使ってみてはいかがでしょうか？
