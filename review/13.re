@@ -1,19 +1,22 @@
 
-= FuelPHP+eXcale @<href>{https://twitter.com/yamamoto_manabu,@yamamoto_manabu}
+= FuelPHP + eXcale @<href>{https://twitter.com/yamamoto_manabu,@yamamoto_manabu}
 
 
 @<href>{http://atnd.org/events/33753,FuelPHP Advent Calendar 2012}の13日目担当の@<href>{https://twitter.com/yamamoto_manabu,@yamamoto_manabu}です。
- 昨日は@<href>{https://twitter.com/seltzer,@seltzer}さんの「Coda+FuelPHPでお手軽開発環境を作る」でした。
+ 昨日は@<href>{https://twitter.com/seltzer,@seltzer}さんの「Coda + FuelPHPでお手軽開発環境を作る」でした。
 
 
 私は、Eclipse→NetBeans→PhpStormをお試し中。と定番IDEを渡り歩いてきたのですが、記事を読ませて頂くとCodaもあるある機能は網羅してそうですし、iPad版もあるようなので、ちょっと浮気してみようと思います。@<br>{}
 
 
 さて、今日で13日目といことで折り返し地点を迎えた訳ですが、本日のお題は今年10月にTISさんが公開したPaaSサービス@<strong>{「eXcale(えくすけーる)」}です。
- 気にはなっていたものの触れず仕舞いだったのですが、今回「FuelPHP Advent Calendar 2012」に参加させて頂くあたって、題材にさせて頂こうと思います。@<br>{}
+ 気にはなっていたものの触れず仕舞いだったのですが、今回「FuelPHP Advent Calendar 2012」に参加させて頂くにあたって、題材にさせて頂こうと思います。@<br>{}
 
 
-まずは簡単に「eXcale」のご紹介。オフィシャルサイトは@<href>{https://www.excale.net/,こちら}。
+まずは簡単に「eXcale」のご紹介。オフィシャルサイトはこちら。
+
+ * @<href>{https://www.excale.net/,https://www.excale.net/}
+
 ほぼオフィシャルサイトからの抜粋ですが、以下のような感じ。
 
  1. 「eXcale」は、オートスケール、負荷分散の機能を有したPaaSサービスです
@@ -21,7 +24,7 @@
  1. 対応言語はRuby、Java、PHP、Node.js。PHPのバージョンは5.3。フレームワークの制限はありません
  1. データベースはMySQL 5.5。容量は500MB
  1. アプリケーションデプロイはGit、ブラウザからのアップロードに対応しています
- 1. β版ということで@<strong>{無料！}料金周りは2013年春頃にアナウンスがあるようです
+ 1. β版ということで@<strong>{無料!} 料金周りは2013年春頃にアナウンスがあるようです
  1. 国産ということで@<strong>{ドキュメントが日本語}。英語アレルギーの方には朗報です
 
 
@@ -39,7 +42,7 @@
 
 
 右上の青い「作成」ボタンをクリックして、アプリケーション作成画面に遷移したら、アプリケーション名を入力、言語はPHPを選択して「作成」ボタンをクリックします。
- ここで指定したアプリケーション名は、@<strong>{http://アプリケーション名.excale.net}のようにURLに利用されるので、慎重かつ大胆に決めましょう。
+ ここで指定したアプリケーション名は、@<strong>{http://アプリケーション名.excale.net} のようにURLに利用されるので、慎重かつ大胆に決めましょう。
 
 == アプリケーションパッケージの作成
 
@@ -69,9 +72,9 @@ return array(
  またtar.gz形式にする際、docsなど不要なファイル群も含めてしまっていますが、デモということで大目に見てくださいませ。
 
 #@# lang: .brush: .bash; .title: .; .notranslate title=""
-//emlist{
-cd /fuelphp-1.4/
-tar -czf ./app.tar.gz .
+//cmd{
+$ cd /fuelphp-1.4/
+$ tar -czf ./app.tar.gz .
 //}
 
 
@@ -97,14 +100,16 @@ Tue Dec 11 21:15:34 UTC 2012 [phptest] 2012-12-11 21:15:34 Instance started.
 //}
 
 
-それでは、@<strong>{http://アプリケーション名.excale.net/public/index.php/hello}にアクセスしてみましょう。
+それでは、@<strong>{http://アプリケーション名.excale.net/public/index.php/hello} にアクセスしてみましょう。
  見慣れた画面が表示されたら無事成功です。
 
 //image[2][FuelPHPのHello World]{
 //}
 
 
-ここまでの手順は@<href>{http://doc.excale.net/getting_started/getting_started_with_php.html,コチラ}の内容を簡略化したものなので、もっと詳しくという方はリンク先をご参照あれ。
+ここまでの手順は以下の内容を簡略化したものなので、もっと詳しくという方はリンク先をご参照あれ。
+
+ * PHPアプリケーションのデプロイ — eXcale (beta) documentation@<br>{}@<href>{http://doc.excale.net/getting_started/getting_started_with_php.html,http://doc.excale.net/getting_started/getting_started_with_php.html}
 
 == DB接続
 
@@ -139,8 +144,9 @@ return array(
 
 次にMySQLの準備です。
  eXcaleのMySQLにデータをインポートする場合には、SQLファイルかmysqldumpで出力したファイルが利用可能とのことです。
- 正確な情報は@<href>{http://doc.excale.net/getting_started/getting_started_data_import_export.html,コチラ}。@<br>{}
+ 正確な情報はリンク先をご参照あれ。
 
+ * データインポート/エクスポート — eXcale (beta) documentation@<br>{}@<href>{http://doc.excale.net/getting_started/getting_started_data_import_export.html,http://doc.excale.net/getting_started/getting_started_data_import_export.html}
 
 私はXAMPPのphpMyAdminを使って、これまたXAMPPのデモアプリが使っているcdcol.cdsのデータをSQL形式でエクスポートしてテストデータを作成しました。
  できあがったのがコチラ。
@@ -231,7 +237,7 @@ class Controller_Db extends Controller
 //}
 
 
-それでは、@<strong>{http://アプリケーション名.excale.net/public/index.php/db}にアクセスしてみましょう。
+それでは、@<strong>{http://アプリケーション名.excale.net/public/index.php/db} にアクセスしてみましょう。
  以下のように表示されればDB接続成功です。
 
 //image[4][FuelPHP Dbコントローラ]{
