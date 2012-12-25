@@ -139,7 +139,7 @@ ini_set('display_errors', 1);    // この引数を 0 にする。
 //}
 
 
- レンタルサーバへの配置ですが、今回はレンサバのアカウントホーム @<tt>{/home/{user-id\}} 直下に fuel ディレクトリを、レンサバのドキュメントルート @<tt>{/home/{account-id\}/www} 直下に www ディレクトリの中身（hhblog ディレクトリ）を配置します。公開ディレクトリは @<tt>{/home/{user-id\}/www/hhblog} です。アクセス時の URL は @<tt>{http://{user-id\}.sakura.ne.jp/hhblog/} になります。
+ レンタルサーバへの配置ですが、今回はレンサバのアカウントホーム @<tt>{/home/{user-id\}} 直下に fuel ディレクトリを、レンサバのドキュメントルート @<tt>{/home/{user-id\}/www} 直下に www ディレクトリの中身（hhblog ディレクトリ）を配置します。公開ディレクトリは @<tt>{/home/{user-id\}/www/hhblog} です。アクセス時の URL は @<tt>{http://{user-id\}.sakura.ne.jp/hhblog/} になります。
 
 
 この配置であれば、.htaccess ファイルを修正する必要はありません。アーカイブに在ったものをそのまま使用すれば mod_rewrite が仕事してくれます。
@@ -689,7 +689,7 @@ class View_Hhblog_Article_Keyword extends ViewModel
 明日は @<href>{https://twitter.com/ttikitt,@ttikitt} さんの「FuelPHPへのDoctrine2組み込み」です！('ω`)シ
 
 //quote{
-@<strong>{@tmd45}
+@<strong>{Yoko TAMADA}
 
 Twitter: @<href>{https://twitter.com/tmd45,@tmd45}
 
