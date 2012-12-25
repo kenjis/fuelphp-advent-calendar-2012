@@ -1,5 +1,5 @@
 
-= FuelPHP の Fieldset クラスをこんな風に拡張してまーす、という話 @<href>{https://twitter.com/omoon,@omoon}
+= FuelPHPのFieldsetクラスをこんな風に拡張してまーす、という話 @<href>{https://twitter.com/omoon,@omoon}
 
 
 @<href>{http://atnd.org/events/33753,FuelPHP Advent Calendar 2012} の 7 日目の記事です。昨日は @<href>{https://twitter.com/ounziw,@ounziw} さんの「ユニットテストのすすめ」でした。
