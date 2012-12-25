@@ -60,7 +60,7 @@ RESTコントローラーを継承してコントローラーを作成します�
 === ②の部分
 
 通常のコントローラーはactionですが、RestコントローラーはHTTPメソッドを接頭語につけます。
-この場合は、getリクエストを受け付けるアクションとなり、その他、POSTやPUTなどが使えます。
+この場合は、GETリクエストを受け付けるアクションとなり、その他、POSTやPUTなどが使えます。
 それぞれ指定したメソッド以外でリクエストすると、
 
 //emlist{
@@ -74,13 +74,13 @@ HTTP/1.1 405 Method Not Allowed
 === ③の部分
 
 出力データを指定のフォーマットに変換し出力してくれます。
-フォーマットを指定する一例としては、リクエストする際に、URIの末尾に@<b>{.json}などの出力指定をすると、自動的にFormatクラスのforgeメソッドを使って変換を行い出力してくれます。
-また、それぞれのフォーマットにあわせた@<b>{Content-Type}もHTTPレスポンスヘッダーにつけてくれます。@<br>{}
+フォーマットを指定する一例としては、リクエストする際に、URIの末尾に「@<b>{.json}」などの出力指定をすると、自動的にFormatクラスのforgeメソッドを使って変換を行い出力してくれます。
+また、それぞれのフォーマットにあわせた @<b>{Content-Type} もHTTPレスポンスヘッダーにつけてくれます。@<br>{}
 
 注意点としては、どの形式で出力させたいかによって、入力するデータの形式が変わってきます。
 例えば、もともとJSON形式のデータを何も考えずにJSONで出力すると、ダブルエンコードされてデータがおかしくなります。
 その場合は、一度配列にデコードして出力させるか、Responseクラスのforgeメソッドを利用してノーエンコードで出力するようにしましょう。
-どのようなデータを用意したらよいかは、Formatクラスの@<strong>{to_○○○メソッド}のマニュアルを参照してください。
+どのようなデータを用意したらよいかは、Formatクラスの「@<strong>{to_○○○メソッド}」のマニュアルを参照してください。
 
 == 3. HTTPレスポンスコードのカスタマイズ
 
@@ -98,10 +98,9 @@ coreクラスのカスタマイズが可能であれば、方法1がスマート
 
 //emlist[ファイル：/fuel/core/classes/response.php]{
 public static $statuses = array(
-    :
+    …省略…
     230 => 'OK request succeed', //追加
-    :
-    :
+    …省略…
 );
 //}
 
@@ -128,7 +127,7 @@ FileパートのデータをUploadクラスで、StringパートのデータをI
 @<strong>{プログラムの仕様}
 
  * StringパートのAuthorフィールドの文字列を用いてtmpディレクトリ配下にファイル保存用ディレクトリを作成
- * アップロードするファイルはxmlファイル(mimetype:application/xml)とし、拡張子とmimetypeの検査を行う
+ * アップロードするファイルはxmlファイル(MIME Type: application/xml)とし、拡張子とMIME Typeの検査を行う
  * アップロード結果をクライアントに返却する
 
 
@@ -154,7 +153,7 @@ public function post_upload()
             'create_path' => true, //ディレクトリが存在しなければ作成
             'auto_rename' => true, //ファイル名が重複した場合に自動でリネーム
             'ext_whitelist' => array('xml'), //拡張子xmlのみアップロードを許可
-            'mime_whitelist' => array('application/xml') // mimetypeがapplication/xmlのみアップロードを許可
+            'mime_whitelist' => array('application/xml') //MIME Typeがapplication/xmlのみアップロードを許可
     );
     Upload::process($_config); //アップロード実行(コンフィグ指定が無ければ省略できる)
     $_files = Upload::get_files(); //アップロードしたファイルの情報を取り出す
@@ -190,8 +189,8 @@ public function post_upload()
 //}
 
 
-補足ですが、FuelPHPのUploadクラスはmime-typeの判定について、HTTPヘッダーのContent-typeを利用するのではなく、PHPが一時領域に保存したファイルの実態をfinfo_file関数にかけてmime-typeを取得してくれているようです。
-よって、HTTPヘッダーを偽装されてもきちんとファイルの実態にあったmime-typeを取得しファイルの検査を行ってくれます。
+補足ですが、FuelPHPのUploadクラスはMIME Typeの判定について、HTTPヘッダーのContent-Typeを利用するのではなく、PHPが一時領域に保存したファイルの実態をfinfo_file関数にかけてMIME Typeを取得してくれているようです。
+よって、HTTPヘッダーを偽装されてもきちんとファイルの実態にあったMIME Typeを取得しファイルの検査を行ってくれます。
 
 == 5. WebAPIとtasksによる非同期バッチ処理
 
