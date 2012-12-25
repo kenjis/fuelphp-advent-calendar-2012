@@ -18,7 +18,8 @@ FuelPHP 標準のサーバキャッシュと「@<href>{http://developer.hatena.n
 などを行っています。
 
 
-長いですが、マイナーな組み合わせすぎて需要が無いことをひそかに期待してます(笑)@<br>{}
+長いですが、マイナーな組み合わせすぎて需要が無いことをひそかに期待してます(笑)
+
  なお、使う人がいらっしゃるか分かりませんが記事中のソースコードは MIT ライセンスです。
 
 
@@ -44,7 +45,8 @@ FuelPHP 標準のサーバキャッシュと「@<href>{http://developer.hatena.n
 === php.ini の編集
 
 
-さくらのレンサバはコントロールパネルから php.ini の編集が可能です。@<br>{}
+さくらのレンサバはコントロールパネルから php.ini の編集が可能です。
+
  FuelPHP を正常に動作させるには @<tt>{cgi.fix_pathinfo = 1} の記述が必要です。リクエスト URL の取得に、cgi 版 PHP ではこの設定を行って @<tt>{$_SERVER["ORIG_PATH_INFO"]} の利用を有効にする必要があるためです。
 
 
@@ -139,7 +141,7 @@ ini_set('display_errors', 1);    // この引数を 0 にする。
 //}
 
 
- レンタルサーバへの配置ですが、今回はレンサバのアカウントホーム @<tt>{/home/{user-id\}} 直下に fuel ディレクトリを、レンサバのドキュメントルート @<tt>{/home/{user-id\}/www} 直下に www ディレクトリの中身（hhblog ディレクトリ）を配置します。公開ディレクトリは @<tt>{/home/{user-id\}/www/hhblog} です。アクセス時の URL は @<tt>{http://{user-id\}.sakura.ne.jp/hhblog/} になります。
+ レンタルサーバへの配置ですが、今回はレンサバのアカウントホーム @<tt>{/home/{user-id\}} 直下に fuel ディレクトリを、レンサバのドキュメントルート @<tt>{/home/{user-id\}/www} 直下に www ディレクトリの中身(hhblog ディレクトリ)を配置します。公開ディレクトリは @<tt>{/home/{user-id\}/www/hhblog} です。アクセス時の URL は @<tt>{http://{user-id\}.sakura.ne.jp/hhblog/} になります。
 
 
 この配置であれば、.htaccess ファイルを修正する必要はありません。アーカイブに在ったものをそのまま使用すれば mod_rewrite が仕事してくれます。
@@ -165,10 +167,9 @@ $ diff fuelphp-1.4/public/.htaccess hhblog/.htaccess
 手動インストール(oil を使わないで配置する)を行ったので、ディレクトリのパーミッションの変更も自分で行います(参考：@<href>{http://fuelphp.com/docs/installation/instructions.html,Instruction - Installation - FuelPHP Documentation})。
 
 
-以下の４つのディレクトリのパーミッションを 755（rwxr-xr-x）にします。「所有者」に書込み（w）権限があればよいので、700（rwx------）のほうが安心です。FTP/SCP ツールで変更しても良いですし、さくらのコントロールパネルからファイルマネージャーを使用して変更することも可能です（ディレクトリを 右クリック → プロパティ で属性の変更が可能）。
+以下の4つのディレクトリのパーミッションを 755(rwxr-xr-x) にします。「所有者」に書込み(w)権限があればよいので、700(rwx------) のほうが安心です。FTP/SCP ツールで変更しても良いですし、さくらのコントロールパネルからファイルマネージャーを使用して変更することも可能です(ディレクトリを 右クリック → プロパティ で属性の変更が可能)。
 
-//emlist{
-以下の４つのディレクトリを書込み可にする
+//emlist[以下の4つのディレクトリを書込み可にする]{
 /home/{user-id}
   |-- /fuel
   |  |-- /app
@@ -176,7 +177,7 @@ $ diff fuelphp-1.4/public/.htaccess hhblog/.htaccess
   |  |  |-- /config
   |  |  |-- /logs
   |  |  |-- /tmp
-  ...
+  …
 //}
 
 
@@ -195,7 +196,7 @@ $ diff fuelphp-1.4/public/.htaccess hhblog/.htaccess
 フレームワークの準備が出来ましたので、ここから実装に入ります。コードはとくに省略せずに貼り付けてますので、長いです。
 
 
-はてなハイクの API を利用して記事を取得する処理を Model に作成します。@<br>{}
+はてなハイクの API を利用して記事を取得する処理を Model に作成します。
  ちなみに今回利用した API では、認証を必要としません。なので認証部分の実装も考えません。
 
 
@@ -351,9 +352,8 @@ class Model_Api_Hatena_Haiku extends Model
 
 file_getコンテキストのオプションに指定する Host 名は、ご自分の環境にあわせて修正してください。
 
-//quote{
-重要：@<br>{}
-以降の処理では、この Model クラスで取得した外部からの入力データを検証せずにそのままブラウザに表示させています。はてなハイク API の応答結果には html を含めることが可能です。セキュリティ上好ましくありませんので画面出力前にデータのフィルタリングを行うようにしましょう。今回は説明の都合上、検証処理については割愛します。
+//note[重要]{
+以降の処理では、この Model クラスで取得した外部からの入力データを検証せずにそのままブラウザに表示させています。はてなハイク API の応答結果には HTML を含めることが可能です。セキュリティ上好ましくありませんので画面出力前にデータのフィルタリングを行うようにしましょう。今回は説明の都合上、検証処理については割愛します。
 //}
 
 == 3. ViewModel を使ってブログ(表示部分のみ)を作る
@@ -372,14 +372,14 @@ View は贅沢(？)に Template を使ってみます。
 さきに書いてしまいますが、最終的なディレクトリ構成は以下のようになりました。
 
 //emlist[実装のディレクトリ構成]{
-/home/{user-id\}
+/home/{user-id}
   |-- /fuel
   |  |-- /app
   |  |  |-- /classes
   |  |  |  |-- /controller
   |  |  |  |  `-- hhblog.php
   |  |  |  |-- /model
-  |  |  |  |  `-- ・・・
+  |  |  |  |  `-- …
   |  |  |  `-- /view
   |  |  |     `-- /hhblog
   |  |  |        `-- /article
@@ -404,7 +404,7 @@ View は贅沢(？)に Template を使ってみます。
  まずはコントローラー。
 
 #@# lang: .code .lang-php data-lang="php" data-unlink=""
-//emlist[ファイル：~/hhblog/fuel/app/classes/controller/hhblog.php]{
+//emlist[ファイル：~/fuel/app/classes/controller/hhblog.php]{
 <?php
 
 /**
@@ -486,7 +486,7 @@ class Controller_Hhblog extends Controller_Template
 テンプレートのソースコード(template.php)の中で、コントローラーで ViewModel を forge した @<tt>{$article} 変数を利用して記事を埋め込みます。
 
 #@# lang: .code .lang-php data-lang="php" data-unlink=""
-//emlist[ファイル：~/hhblog/fuel/app/views/hhblog/template.php の一部]{
+//emlist[ファイル：~/fuel/app/views/hhblog/template.php の一部]{
 <!-- CONTENT -->
 <div class="span9">
 
@@ -500,7 +500,7 @@ class Controller_Hhblog extends Controller_Template
 記事側のソースコード(public.php、keyword.php)では、API で取得した記事の配列を繰り返し表示させています。これがテンプレートの @<tt>{$article} 部分に展開されます。
 
 #@# lang: .code .lang-php data-lang="php" data-unlink=""
-//emlist[ファイル：~/hhblog/fuel/app/views/hhblog/article/public.php の一部]{
+//emlist[ファイル：~/fuel/app/views/hhblog/article/public.php の一部]{
 <?php
     foreach ($articles as $a)
     {
@@ -517,12 +517,12 @@ class Controller_Hhblog extends Controller_Template
 //}
 
 
-これらをサイトのトップページに表示させるために、ルーティングの設定も修正します。@<br>{}
+これらをサイトのトップページに表示させるために、ルーティングの設定も修正します。
  サイトのトップにアクセスすると、キーワード・タイムラインが表示されます(1)。また @<tt>{http://{user-id\}.sakura.ne.jp/hhblog/public_timeline} にアクセスするとパブリック・タイムラインが、@<tt>{http://{user-id\}.sakura.ne.jp/hhblog/keyword_timeline} にアクセスするとキーワード・タイムラインが表示されるようにしました(2)。
 
 #@# lang: .code .lang-php data-lang="php" data-unlink=""
 //emlist{
-ファイル：~/hhblog/fuel/app/config/routes.php
+ファイル：~/fuel/app/config/routes.php
 <?php
 return array(
 // '_root_'  => 'welcome/index',              // コメント化
@@ -544,7 +544,7 @@ return array(
 まずはパブリック・タイムライン用のビューモデル。API 制限を考慮して、新しいデータは 30 分に 1回だけ取得するようにして、それ以外はキャッシュからデータを取得します。API の実行は Model を呼び出すだけです。
 
 #@# lang: .code .lang-php data-lang="php" data-unlink=""
-//emlist[ファイル：~/hhblog/fuel/app/classes/view/hhblog/article/public.php]{
+//emlist[ファイル：~/fuel/app/classes/view/hhblog/article/public.php]{
 <?php
 
 /**
@@ -597,7 +597,7 @@ class View_Hhblog_Article_Public extends ViewModel
 次にキーワード・タイムライン用のビューモデルです。パブリック・タイムラインと同じです。Model の実行時に引数にキーワードを渡しています。
 
 #@# lang: .code .lang-php data-lang="php" data-unlink=""
-//emlist[ファイル：~/hhblog/fuel/app/classes/view/hhblog/article/keyword.php]{
+//emlist[ファイル：~/fuel/app/classes/view/hhblog/article/keyword.php]{
 <?php
 
 /**
