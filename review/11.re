@@ -1,4 +1,4 @@
-= FuelPHP+NetBeans+Gitで高速開発環境を整える @<href>{https://twitter.com/LandscapeSketch,@LandscapeSketch}
+= FuelPHP + NetBeans + Gitで高速開発環境を整える @<href>{https://twitter.com/LandscapeSketch,@LandscapeSketch}
 
 
 こんにちは。
@@ -8,7 +8,7 @@ FuelPHP Advent Calendar初参加のタケです。
 昨日は@EGMCさんの「FuelPHP用ソーシャルログイン専用認証パッケージDsAuthでNinjAuthをもっと簡単に利用する」でした。@<br>{}
 
 
-今日の私の記事はFuelPHP+NetBeans+Gitで高速で便利な開発環境を作る手順です。
+今日の私の記事はFuelPHP + NetBeans + Gitで高速で便利な開発環境を作る手順です。
 画像ばかりでしかも長くなってしまいましたが、お付き合いください。
 
 == NetBeansのダウンロード
@@ -108,16 +108,15 @@ NetBeansでプロジェクトを作成します。[ファイル]→[新規プロ
 
 
 さてここでまた@<strong>{寄り道}。FuelPHP用のプラグインを追加します。
-このプラグインはインストールしなくても、このあとの説明には問題ありません。時間がある人だけ読んでください。
+このプラグインはインストールしなくても、このあとの説明には問題ありません。時間がある人だけ読んでください。@<br>{}
 
 
-NetBeansでFuelPHPを便利に使うために、プラグインが開発されています。ただ、現状はほとんど機能が搭載されていないのですが、プロジェクトのアイコンがFuelPHPタイプに変化してうれしいので入れておきます。@<br>{}
+NetBeansでFuelPHPを便利に使うために、プラグインが開発されています。ただ、現状はほとんど機能が搭載されていないのですが、プロジェクトのアイコンがFuelPHPタイプに変化してうれしいので入れておきます。
 
 
-ダウンロードはこちら　＞　@<href>{http://plugins.netbeans.org/plugin/44665/php-fuelphp-framework,http://plugins.netbeans.org/plugin/44665/php-fuelphp-framework}
+ * @<href>{http://plugins.netbeans.org/plugin/44665/php-fuelphp-framework,http://plugins.netbeans.org/plugin/44665/php-fuelphp-framework}
 
 プラグインはNetBeans 7.2.1が必要です。7.2以下の場合はNetBeansを更新してください。
-
 NetBeansのバージョンが違うとインストールエラーになりますので必ずあわせてください。@<br>{}
 
 
@@ -127,7 +126,7 @@ NetBeansに戻り、[ツール]→[プラグイン]を開きます。
 
 
 「ダウンロード済み」タブをクリックし、[プラグインの追加]ボタンをクリックします。
-先ほどダウンロードした .nbm ファイルを選択し、[インストール]をクリックします。@<br>{}
+先ほどダウンロードした「.nbm」ファイルを選択し、[インストール]をクリックします。@<br>{}
 
 
 正常に登録されると、
@@ -145,10 +144,10 @@ NetBeansに戻り、[ツール]→[プラグイン]を開きます。
 == コード補完用ファイルを持ってくる
 
 
-次にコード補完をするために、@<href>{https://twitter.com/kenji_s,@kenji_s}さんのページから補完用作ります。
+次にコード補完をするために、@<href>{https://twitter.com/kenji_s,@kenji_s}さんのページから補完用ファイルを作ります。
 
 
-こちら > @<href>{http://d.hatena.ne.jp/Kenji_s/20120123/1327301678,http://d.hatena.ne.jp/Kenji_s/20120123/1327301678}
+ * @<href>{http://d.hatena.ne.jp/Kenji_s/20120123/1327301678,http://d.hatena.ne.jp/Kenji_s/20120123/1327301678}
 
 
 autocomplete.phpを作り、ソース・ファイル直下に置きます。
@@ -166,6 +165,10 @@ autocomplete.phpを作り、ソース・ファイル直下に置きます。
 
 
 このファイルを置いておくことでクラスなどのコード補完が使えます。
+
+//note[[編注\] 自動補完用ファイルの作成]{
+その後、NetBeansのFuelPHPプラグインの機能追加により、プロジェクトを右クリックし、[FuelPHP]→[自動補完用ファイルの作成]を選択することで、コード補完用ファイルを自動生成できるようになっています。
+//}
 
 == 強力なコードテンプレートを使う
 
@@ -320,7 +323,9 @@ OKを押して全てを閉じます。@<br>{}
 今回はGitHubではなくて@<href>{https://bitbucket.org/,Bitbucket}を使用します。Bitbucketは無料でプライベートリポジトリを無制限に作れますので、秘密でお金をかけず作りたい人に向いています。(笑)
 
 
-まずはBitbucketでアカウントを作成します。Bitbucketはこちら　＞　@<href>{https://bitbucket.org/,https://bitbucket.org/}@<br>{}
+まずはBitbucketでアカウントを作成します。
+
+ * Bitbucket @<href>{https://bitbucket.org/,https://bitbucket.org/}
 
 
 ログインしましたら、Repositoriesから「Create repository」を選択します。
@@ -373,7 +378,7 @@ HTTPSを選択します。
 //}
 
 
-https://　から始まるURLが現れます。
+https:// から始まるURLが現れます。
 このURLがNetBeansで使えます。
 クリップボードにコピー、もしくはメモなどに貼り付けておいてください。
 
@@ -482,13 +487,15 @@ NetBeansは動作も比較的軽く、サポート機能が充実しています
 == 明日は
 
 
-あすは@seltzerさんの「Coda+FuelPHPでお手軽開発環境を作る」です。
+あすは@seltzerさんの「Coda + FuelPHPでお手軽開発環境を作る」です。
 おたのしみに！
 
 == P.S.
 
 
-完全に内容を欲張りすぎましたね…こんな長い記事になってしまってすみません。
+完全に内容を欲張りすぎましたね…
+
+こんな長い記事になってしまってすみません。
 
 //quote{
 @<strong>{@LandscapeSketch}
