@@ -95,7 +95,7 @@ return array(
 === ログイン用テーブルの作成
 
 
-fuel/packages/auth/config/simpleauth.php をコピーして、fuel/packages/config/studentauth.php にrenameし、以下のように書きます。
+fuel/packages/auth/config/simpleauth.php をコピーして、fuel/app/config/studentauth.php にrenameし、以下のように書きます。
 
 #@# lang: .brush:php
 //emlist{
@@ -104,7 +104,7 @@ fuel/packages/auth/config/simpleauth.php をコピーして、fuel/packages/conf
 
 
 これはテーブル名の定義ですが、usersとなっていたテーブル名をstudentという名前に変えてます。
-同様に、fuel/packages/config/companyauth.php を作成し、以下のように書きます。
+同様に、fuel/app/config/companyauth.php を作成し、以下のように書きます。
 
 #@# lang: .brush:php
 //emlist{
