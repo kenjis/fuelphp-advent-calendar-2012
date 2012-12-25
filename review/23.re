@@ -3,12 +3,12 @@
 
 
 この記事は @<href>{http://atnd.org/events/33753,FuelPHP Advent Calendar 2012 : ATND} の 23日目の記事です。
-昨日は@<href>{https://twitter.com/ts_asano,@ts_asano}さんの「QueryBuilderで小難しいSELECT文を書くためのノウハウ」でした。@<br>{}
+昨日は@<href>{https://twitter.com/ts_asano,@ts_asano}さんの「Query Builderで小難しいSELECT文を書くためのノウハウ」でした。@<br>{}
 
 
 本日の「FuelPHP Advent Calendar 2012」は @mukaken こと向井が担当させて頂きます。よろしくお願いします。
 本日は「FuelPHP vs CodeIgniter」について書きます。
-FuelPHPのコア開発者はCodeIgniterに関わった事のある人達が作ったFWですので、両FWは非常に似ています。
+FuelPHPはCodeIgniterに関わった事のある人達が作ったFWですので、両FWは非常に似ています。
 また、私自身、FuelPHP と CodeIgniter の両方のユーザなので、両方の比較記事を書きます。
 
 == ライセンス、対応する PHP のバージョン、開発元
@@ -30,7 +30,7 @@ CodeIgniter	@<href>{http://ellislab.com/codeigniter,http://ellislab.com/codeigni
 === ライセンス
 
 FuelPHP は MIT ですので何も問題ないでしょう。
-CodeIgniter のライセンスは、現時点では CodeIgniter License ですが、今後は OSL 3.0 になるかもしれません。現時点では不明です。このライセンスが非常に難しく、変更になる件については一時期、本家のフォーラム(@<href>{http://ellislab.com/forums/viewthread/202562/,CodeIgniter changes license to OSL 3.0? / Forums / Community / EllisLab})や、いろいろなサイトで活発に議論されていましたが、ここ最近半年は議論している人を見かけなくなりました。
+CodeIgniter のライセンスは、現時点では CodeIgniter License ですが、今後は OSL 3.0 になる予定です。この OSL 3.0 といわれるライセンスが非常に難しく、変更になる件については一時期、本家のフォーラム(@<href>{http://ellislab.com/forums/viewthread/202562/,CodeIgniter changes license to OSL 3.0? / Forums / Community / EllisLab})や、いろいろなサイトで活発に議論されていましたが、ここ最近半年は議論している人を見かけなくなりました。
 
 === 対応するPHPのバージョン
 
@@ -48,7 +48,7 @@ CodeIgniter は PHP 5.1.6 以上なので、大抵の環境では動くと思い
 === FuelPHP
 
 日本のコミュニティの活動は凄く活発です。今年、短期間で爆発的に増大しました。
-私自身、「@<href>{https://www.facebook.com/jp.fuel,FuelPHP 日本語ニュース | Facebook}」でFuelPHPの記事についてウォッチしているのですが、ほぼ毎日、日本語で何かしらののブログが書かれています。
+私自身、「@<href>{https://www.facebook.com/jp.fuel,FuelPHP 日本語ニュース | Facebook}」でFuelPHPの記事についてウォッチしているのですが、ほぼ毎日、日本語で何かしらのブログが書かれています。
 
 
 日本以外ではブラジル、アジア諸国で人気が高いと感じます。
@@ -64,7 +64,7 @@ CodeIgniter は PHP 5.1.6 以上なので、大抵の環境では動くと思い
 
 
 注目度の比較です。
-Web での注目度の指標として「Google トレンド」が使われるのを、よく見かけますが、今回は開発者に注目されている指標として近いであろう「はてなブックマーク」と「stackoverflow」で比較してみました。
+Web での注目度の指標として「Google トレンド」が使われるのを、よく見かけますが、今回は開発者に注目されている指標として近いであろう「はてなブックマーク」と「Stack Overflow」で比較してみました。
 やはり、実際の運用や業務で使用していて、困った事がでてきたときに開発事例が豊富にあり探せるというのは心強いです。
 
 === はてなブックマーク
@@ -76,26 +76,26 @@ Web での注目度の指標として「Google トレンド」が使われるの
  ** FuelPHP : 1,195
 
  * @<href>{http://b.hatena.ne.jp/search/tag?sort=recent&q=codeigniter&users=1,タグ「codeigniter」を検索 - はてなブックマーク}
- ** Codeigniter : 1,342
+ ** CodeIgniter : 1,342
 
 
 
 ブックマーク数の結果は大差ありませんでした。
-Codeigniter より FuelPHP の方が新しいフレームワークという点を考慮すると、短期間で数が増えた FuelPHP の方が勝っています。
+CodeIgniter より FuelPHP の方が新しいフレームワークという点を考慮すると、短期間で数が増えた FuelPHP の方が勝っています。
 
 
-=== stackoverflow
+=== Stack Overflow
 
 
 @<href>{http://stackoverflow.com/,Stack Overflow} は世界中のプログラマーが連日連夜、技術的な疑問を投稿しているサイトです。
-stack overflow でのタグの数を比較してみました。
+Stack Overflow でのタグの数を比較してみました。
 
  * FuelPHP : 198
- * Codeigniter : 15,047
+ * CodeIgniter : 15,047
 
 
 
-やはり、世界的にみると Codeigniter が強いみたいです。 FuelPHP はこれからといった感じでしょうか。
+やはり、世界的にみると CodeIgniter が強いみたいです。 FuelPHP はこれからといった感じでしょうか。
 
 == ドキュメントの読みやすさ
 
@@ -104,7 +104,7 @@ stack overflow でのタグの数を比較してみました。
 
 
 
-両方とも、とても使いやすいドキュメントページだと思います。FuelPHP や Codeigniter が、他のフレームワークと比べて優れている点は、やはりドキュメントの読みやすさだと思います。
+両方とも、とても使いやすいドキュメントページだと思います。FuelPHP や CodeIgniter が、他のフレームワークと比べて優れている点は、やはりドキュメントの読みやすさだと思います。
 
 
 両方ともすばらしいのですが、FuelPHP の方が目次をマウスオーバすれば色分けされて表示されるなど、より見やすいように工夫されています。
@@ -146,7 +146,7 @@ APC なし
 //}
 
 
-localhost にて、それぞれのFWはデフォルト設定でコントローラーに"Hello World!"と表示する単純な例で比較しました。
+localhost にて、それぞれのFWはデフォルト設定でコントローラーに "Hello World!" と表示する単純な例で比較しました。
 
 
 比較ツールは siege を使い、下記の設定で実行しました。
@@ -167,7 +167,7 @@ $ siege -b -c 10 -t 3S http://localhost
 (Transaction rate : 数値が高い方が、よりアクセスがさばけている)
 
 
-パフォーマンスの比較では FuelPHP より Codeigniter の方が性能が良いという結果になりました。FuelPHP の方が何かと便利ですが、速いとなると Codeigniter の方です。
+パフォーマンスの比較では FuelPHP より CodeIgniter の方が性能が良いという結果になりました。FuelPHP の方が何かと便利ですが、速いとなると CodeIgniter の方です。
 
 
 ただ、ある程度のアクセスが見込めるようなパフォーマンスが気になるサイトとなると、リバースプロキシを使ったりとWebのシステム全体で最適化するので、今回比べたような Web FW 自体の純粋な性能は問題にならないかもしれないです。
@@ -178,7 +178,7 @@ $ siege -b -c 10 -t 3S http://localhost
 
  * FuelPHP
  ** @<href>{http://animita.tv/top,あにみた！ あなたが見たアニメを楽しく記録するサービス}
- * Codeigniter
+ * CodeIgniter
  ** @<href>{http://www.mtvjapan.com/home,音楽のことなら MTV JAPAN! | 邦楽・洋楽・イベントなどの音楽エンターテイメント}
 
 
@@ -187,14 +187,14 @@ $ siege -b -c 10 -t 3S http://localhost
 ですので、PHP のイベントや IT 勉強会で聞いた、私の知る限りで書きます。
 
 
-現在、実稼働しているサービスで多く使われている方は Codeigniter でした。
+現在、実稼働しているサービスで多く使われている方は CodeIgniter でした。
 
 
 ただし、小規模な受託案件(開発メンバは1から3人)や自社サービスなどの開発環境を開発者が自ら自由に選べる新規案件では FuelPHP を採用したという話をよく聞きました。
-現時点で実稼働しているサービスは Codeigniter で、新規案件では FuelPHP を採用するという流れみたいです。
+現時点で実稼働しているサービスは CodeIgniter で、新規案件では FuelPHP を採用するという流れみたいです。
 
 
-開発メンバーの集めやすさでは FuelPHP にしろ Codeigniter にしろ学習コストが低いので、PHPプログラマーならすぐに開発メンバーに加われるので問題ないと思います。
+開発メンバーの集めやすさでは FuelPHP にしろ CodeIgniter にしろ学習コストが低いので、PHPプログラマーならすぐに開発メンバーに加われるので問題ないと思います。
 
 == イースター・エッグ
 
@@ -203,18 +203,18 @@ $ siege -b -c 10 -t 3S http://localhost
 
 
 FuelPHP には Mac 限定で喋る機能や、 oil から表示されるロボットなど、いろいろな楽しい仕組みが提供されています。
-Codeigniter には裏技的なものがありません。
+CodeIgniter には裏技的なものがありません。
 イースター・エッグ については FuelPHP の圧勝です！
 少しの事ですが、楽しく開発できる事は大切ですね。
 
-== 機能面 & まとめ
+== 機能面＆まとめ
 
 
-機能面の比較に関しての詳細な比較は、Google で検索すると、すばらしい記事を書かれたブログが多数ヒットします(例えば@<href>{http://ilikekillnerds.com/2012/10/codeigniter-vs-fuelphp-revisited/,Codeigniter vs FuelPHP (Revisited) | I Like Kill Nerds}など)。
+機能面の比較に関しての詳細な比較は、Google で検索すると、すばらしい記事を書かれたブログが多数ヒットします(例えば @<href>{http://ilikekillnerds.com/2012/10/codeigniter-vs-fuelphp-revisited/,Codeigniter vs FuelPHP (Revisited) | I Like Kill Nerds} など)。
 ですので、詳しくはそちらを参考にしていただくとして、今回は私が感じた事を書きます。@<br>{}
 
 
-機能の多さは FuelPHP > CodeIgniter です。FuelPHP にあって CodeIgniter にない機能は、大抵はCodeIgniter の本家フォーラムを探せば同じような機能の追加方法(ハック)が見つかります。しかし、CodeIgniter のコアを改造しなければいけないものもあり、そうするくらいなら最初から、ある程度まとまっている FuelPHP を採用した方がいいように思います。@<br>{}
+機能の多さは FuelPHP > CodeIgniter です。FuelPHP にあって CodeIgniter にない機能は、大抵は CodeIgniter の本家フォーラムを探せば同じような機能の追加方法(ハック)が見つかります。しかし、CodeIgniter のコアを改造しなければいけないものもあり、そうするくらいなら最初から、ある程度まとまっている FuelPHP を採用した方がいいように思います。@<br>{}
 
 
 新規案件で FuelPHP か CodeIgniter を採用するのを迷っているなら、 思いきって FuelPHP を採用するのもいいかもしれません。FuelPHP の方が凄く開発が活発で新機能が積極的に取り入れられていますし、日本のコミュニティが活発だからです。
@@ -226,7 +226,7 @@ Codeigniter には裏技的なものがありません。
 今年は「FuelPHP 勉強会 東京」を2回開催できたのはよかったのですが、継続開催ができませんでした。来年こそは継続して開催したいと思います。やはり、OSSにおいてコミュニティの継続活動は大事だと思います。
 
 
-また、来年は本家のFuelPHP Github へのPRを積極的にしたいと思います。@<br>{}
+また、来年は本家の FuelPHP Github へのPRを積極的にしたいと思います。@<br>{}
 
 
 明日は@<href>{https://twitter.com/kurotaky,@kurotaky}さんです。お楽しみに！
