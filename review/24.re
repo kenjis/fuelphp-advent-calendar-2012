@@ -203,7 +203,7 @@ http://localhost:8888/MAMP/?language=Japanese の phpMyAdminからデータベ�
 
 
 
-明日は@<href>{https://twitter.com/Tukimikage,@tukimikage} さんです。 お楽しみに！
+明日は@<href>{https://twitter.com/Tukimikage,@tukimikage}さんです。 お楽しみに！
 
 //quote{
 @<strong>{@kurotaky}
