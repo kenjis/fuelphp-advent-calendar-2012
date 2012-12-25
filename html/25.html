@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<!--[if IE 7]>
+<html class="ie ie7" lang="ja">
+<![endif]-->
+<!--[if IE 8]>
+<html class="ie ie8" lang="ja">
+<![endif]-->
+<!--[if !(IE 7) | !(IE 8)  ]><!-->
+<html lang="ja">
+<!--<![endif]-->
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width" />
+<title>FuelPHPでWEBAPIを作ってみる | いま、つぶやきたいこと。（仮）</title>
+<link rel="profile" href="http://gmpg.org/xfn/11" />
+<link rel="pingback" href="http://www.think-sv.net/blog/xmlrpc.php" />
+<!--[if lt IE 9]>
+<script src="http://www.think-sv.net/blog/wp-content/themes/twentytwelve/js/html5.js" type="text/javascript"></script>
+<![endif]-->
+<link rel="alternate" type="application/rss+xml" title="いま、つぶやきたいこと。（仮） &raquo; フィード" href="http://www.think-sv.net/blog/?feed=rss2" />
+<link rel="alternate" type="application/rss+xml" title="いま、つぶやきたいこと。（仮） &raquo; コメントフィード" href="http://www.think-sv.net/blog/?feed=comments-rss2" />
+<link rel="alternate" type="application/rss+xml" title="いま、つぶやきたいこと。（仮） &raquo; FuelPHPでWEBAPIを作ってみる のコメントのフィード" href="http://www.think-sv.net/blog/?feed=rss2&#038;p=957" />
+<link rel='stylesheet' id='twentytwelve-style-css'  href='http://www.think-sv.net/blog/wp-content/themes/twentytwelve/style.css?ver=3.5' type='text/css' media='all' />
+<!--[if lt IE 9]>
+<link rel='stylesheet' id='twentytwelve-ie-css'  href='http://www.think-sv.net/blog/wp-content/themes/twentytwelve/css/ie.css?ver=20121010' type='text/css' media='all' />
+<![endif]-->
+<link rel='stylesheet' id='md_style-css'  href='http://www.think-sv.net/blog/wp-content/plugins/wp-markdown/css/demo.css?ver=3.5' type='text/css' media='all' />
+<link rel='stylesheet' id='tw-stylesheet-css'  href='http://www.think-sv.net/blog/wp-content/plugins/twitter-wings/css/tw_styles.css?ver=3.5' type='text/css' media='all' />
+<script type='text/javascript' src='http://www.think-sv.net/blog/wp-includes/js/jquery/jquery.js?ver=1.8.3'></script>
+<script type='text/javascript' src='http://www.think-sv.net/blog/wp-content/plugins/wp-markdown/js/prettify.js?ver=1.1'></script>
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://www.think-sv.net/blog/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://www.think-sv.net/blog/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='とりあえず、ブログを再開' href='http://www.think-sv.net/blog/?p=916' />
+<meta name="generator" content="WordPress 3.5" />
+<link rel='canonical' href='http://www.think-sv.net/blog/?p=957' />
+	<style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>
+
+<style type="text/css">
+.a-stats {
+	width: auto;
+}
+.a-stats a { 
+	background: #7CA821;
+	background-image:-moz-linear-gradient(0% 100% 90deg,#5F8E14,#7CA821);
+	background-image:-webkit-gradient(linear,0% 0,0% 100%,from(#7CA821),to(#5F8E14));
+	border: 1px solid #5F8E14;
+	border-radius:3px;
+	color: #CFEA93;
+	cursor: pointer;
+	display: block;
+	font-weight: normal;
+	height: 100%;
+	-moz-border-radius:3px;
+	padding: 7px 0 8px;
+	text-align: center;
+	text-decoration: none;
+	-webkit-border-radius:3px;
+	width: 100%;
+}
+.a-stats a:hover { 
+	text-decoration: none;
+	background-image:-moz-linear-gradient(0% 100% 90deg,#6F9C1B,#659417);
+	background-image:-webkit-gradient(linear,0% 0,0% 100%,from(#659417),to(#6F9C1B));
+}
+.a-stats .count {
+	color: #FFF;
+	display: block;
+	font-size: 15px;
+	line-height: 16px;
+	padding: 0 13px;
+	white-space: nowrap;
+}
+</style>
+
+<!-- BEGIN: WP Social Bookmarking Light -->
+<style type="text/css">
+.wp_social_bookmarking_light{
+    border: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+.wp_social_bookmarking_light div{
+    float: left !important;
+    border: 0 !important;
+    padding: 0 !important;
+    margin: 0 5px 0px 0 !important;
+    height: 23px !important;
+    text-indent: 0 !important;
+}
+.wp_social_bookmarking_light img{
+    border: 0 !important;
+    padding: 0;
+    margin: 0;
+    vertical-align: top !important;
+}
+.wp_social_bookmarking_light_clear{
+    clear: both !important;
+}
+.wsbl_twitter{
+    width: 100px;
+}</style>
+<!-- END: WP Social Bookmarking Light -->
+<style type="text/css" id="custom-background-css">
+body.custom-background { background-color: #6e7caf; }
+</style>
+</head>
+
+<body class="single single-post postid-957 single-format-standard custom-background">
+<div id="page" class="hfeed site">
+	<header id="masthead" class="site-header" role="banner">
+		<hgroup>
+			<h1 class="site-title"><a href="http://www.think-sv.net/blog/" title="いま、つぶやきたいこと。（仮）" rel="home">いま、つぶやきたいこと。（仮）</a></h1>
+			<h2 class="site-description">いつも続かないブログをこりずにまたはじめてみた。今度はいつまで続くだろう。</h2>
+		</hgroup>
+
+		<nav id="site-navigation" class="main-navigation" role="navigation">
+			<h3 class="menu-toggle">メニュー</h3>
+			<a class="assistive-text" href="#content" title="コンテンツへ移動">コンテンツへ移動</a>
+			<div class="nav-menu"><ul><li ><a href="http://www.think-sv.net/blog/" title="ホーム">ホーム</a></li><li class="page_item page-item-340"><a href="http://www.think-sv.net/blog/?page_id=340">Profile</a></li></ul></div>
+		</nav><!-- #site-navigation -->
+
+			</header><!-- #masthead -->
+
+	<div id="main" class="wrapper">
+	<div id="primary" class="site-content">
+		<div id="content" role="main">
+
+			
+				
+	<article id="post-957" class="post-957 post type-post status-publish format-standard hentry category-fuelphp">
+				<header class="entry-header">
+									<h1 class="entry-title">FuelPHPでWEBAPIを作ってみる</h1>
+										<div class="comments-link">
+					<a href="http://www.think-sv.net/blog/?p=957#respond" title="FuelPHPでWEBAPIを作ってみる へのコメント"><span class="leave-reply">コメントをどうぞ</span></a>				</div><!-- .comments-link -->
+					</header><!-- .entry-header -->
+
+				<div class="entry-content">
+			<p>この記事は<a href="http://atnd.org/events/33753">FuelPHP Advent Calendar 2012</a>の２５日目（最終日）です。<br />昨日は<a href="https://mobile.twitter.com/kurotaky">@kurotaky</a>さんの<a href="http://mo-fu.org/blog/2012/12/24/1/">「FuelPHPで簡単なWebアプリケーションを作ってみる」</a>でした。</p>
+<p>本日の記事を担当する<a href="https://twitter.com/Tukimikage">@tukimikage</a>です。<br />至らない点が多々あるかと思いますが、ご容赦ください。</p>
+<h2>1. はじめに</h2>
+<hr />
+<p>私がFuelPHPでWEBAPIを開発した時のネタをいくつか紹介します。<br />PHPでフレームワークを利用するのは、実はFuelPHPが初めてでして、私のように初めてフレームワークを利用する方の視点で書きたいと思います。<br />この記事のサンプルコードは<a href="http://fuelphp.com/blogs/2012/09/fuelphp-releases-v1-3">FuelPHP Ver1.3</a> + MacOSX(Apache/2.2.21 + PHP 5.3.10)で動作確認を行っています。</p>
+<p><strong>尚、この記事中のサンプルでは、本来コントローラーとモデルで処理を分担させるべき所についても、簡略化のためにすべてコントローラー内に処理を記載しています。<br />ご了承ください。</strong></p>
+<h2>2. RESTコントローラーを使う</h2>
+<hr />
+<p>FuelPHPにはRESTfulAPIを簡単に実現するためのRESTコントローラーが用意されています。<br />使い方は以下のようになります。</p>
+<pre><code>&lt;?php
+class Controller_Fuelwebapi extends Controller_Rest //①
+{
+    public function get_name() //②
+    {
+        $_inputBuffer = Input::get('name') == null ? null:Security::htmlentities(Input::get('name'));
+        $_outputBuffer = array('name' =&gt; $_inputBuffer == null ? '名無しさん':$_inputBuffer);
+        return $this-&gt;response($_outputBuffer,200); //③
+    }
+}
+</code></pre>
+<p>このサンプルは、getメソッドでクライアントからAPIにアップロードされたデータをエスケープ処理し、指定されたフォーマットでクライアントに返します。<br />IF文は省略形で書いていますので、必要あればググってください。</p>
+<p><strong>①の部分</strong><br />RESTコントローラーを継承してコントローラーを作成します。</p>
+<p><strong>②の部分</strong><br />通常のコントローラーはactionですが、RestコントローラーはHTTPメソッドを接頭語につけます。<br />この場合は、getリクエストを受け付けるアクションとなり、その他、POSTやPUTなどが使えます。<br />それぞれ指定したメソッド以外でリクエストすると、</p>
+<pre><code>HTTP/1.1 405 Method Not Allowed
+</code></pre>
+<p>となり、勝手にエラーを返してくれます。</p>
+<p><strong>③の部分</strong><br />出力データを指定のフォーマットに変換し出力してくれます。<br />フォーマットを指定する一例としては、リクエストする際に、URIの末尾に<em>.json</em>などの出力指定をすると、自動的にFormatクラスのforgeメソッドを使って変換を行い出力してくれます。<br />また、それぞれのフォーマットにあわせた<em>Content-Type</em>もHTTPレスポンスヘッダーにつけてくれます。<br />注意点としては、どの形式で出力させたいかによって、入力するデータの形式が変わってきます。<br />例えば、もともとJSON形式のデータを何も考えずにJSONで出力すると、ダブルエンコードされてデータがおかしくなります。<br />その場合は、一度配列にデコードして出力させるか、Responseクラスのforgeメソッドを利用してノーエンコードで出力するようにしましょう。<br />どのようなデータを用意したらよいかは、Formatクラスの<strong>to_○○○メソッド</strong>のマニュアルを参照してください。</p>
+<h2>3. HTTPレスポンスコードのカスタマイズ</h2>
+<hr />
+<p>WEBAPIのレスポンスを示すHTTPレスポンスコードですが、FuelPHPでは予め代表的なコードが規定されており、それ以外のオリジナルコードを使いたい場合等は、一工夫する必要があります。<br />先述したサンプル③の部分では、第二引数にHTTPレスポンスコードをしていしていますが、オリジナルのコードを使いたい場合、以下のように定義を追加する必要があります。<br />coreクラスのカスタマイズが可能であれば、方法1がスマートだと個人的には思います。</p>
+<p><strong>実現方法１</strong></p>
+<pre><code>ファイル：/fuel/core/classes/response.php
+public static $statuses = array(
+    :
+    230 =&gt; 'OK request succeed', //追加
+    :
+    :
+);
+</code></pre>
+<p><strong>実現方法２</strong></p>
+<pre><code>Response::$statuses += array(230 =&gt; 'OK request succeed'); //ソースの先頭や共通処理部に記載
+</code></pre>
+<p>FuelPHPとは関係ありませんが、オリジナルコードを定義する際は、RFC2616の定義に従い既存コードと競合しないように定義しましょう。</p>
+<h2>4. マルチパートフォームデータを受信する</h2>
+<hr />
+<p>FuelPHPにはアップロードされたデータを取得する手段として、UploadクラスとInputクラスが用意されています。<br />これらのクラスを同時に利用することにより、マルチパートフォームデータを受信できます。<br />FileパートのデータをUploadクラスで、StringパートのデータをInputクラスでそれぞれ受信するサンプルを以下に示します。</p>
+<p><strong>プログラムの仕様</strong><br />* StringパートのAuthorフィールドの文字列を用いてtmpディレクトリ配下にファイル保存用ディレクトリを作成<br />* アップロードするファイルはxmlファイル（mimetype:application/xml）とし、拡張子とmimetypeの検査を行う<br />* アップロード結果をクライアントに返却する</p>
+<p><strong>入力ファイル</strong><br />* content1.xml &#8212; 中身はxmlファイル<br />* content2.json &#8212; 中身はxmlファイルだが拡張子はjson<br />* content3.xml &#8212; 中身はテキストファイル<br />* content4.xml &#8212; 中身はxmlファイル</p>
+<pre><code>public function post_upload()
+{
+
+    $_result = array();
+
+    //マルチパートのStringパートを受信しディレクトリ名とする
+    $_directoryname = Security::htmlentities(Input::post('Author'));
+
+    //マルチパートのFileパートを受信するためにUploadクラスのコンフィグ設定
+    $_config = array(
+            'path' =&gt; APPPATH.'/tmp/', //ファイルの保存を許可するディレクトリを指定
+            'create_path' =&gt; true, //ディレクトリが存在しなければ作成
+            'auto_rename' =&gt; true, //ファイル名が重複した場合に自動でリネーム
+            'ext_whitelist' =&gt; array('xml'), //拡張子xmlのみアップロードを許可
+            'mime_whitelist' =&gt; array('application/xml') // mimetypeがapplication/xmlのみアップロードを許可
+    );
+    Upload::process($_config); //アップロード実行（コンフィグ指定が無ければ省略できる）
+    $_files = Upload::get_files(); //アップロードしたファイルの情報を取り出す
+    if(Upload::is_valid()){ //アップロードしたファイルの検査を行う
+        //検査合格したファイルに対して実行
+        foreach( $_files as $_key =&gt; $_value){
+            Upload::save(APPPATH.'/tmp/'.$_directoryname.'/',$_key); //指定ディレクトリにファイルを保存
+            $_result += array($_files[$_key]['name'] =&gt; 'Upload Successd');
+        }
+    }
+    $_errorfiles = Upload::get_errors();  /検査不合格のファイル情報を取得
+    foreach ($_errorfiles as $_key =&gt; $_value){ 
+        //検査不合格だったファイルに対して実行
+        foreach ($_value['errors'] as $_key =&gt; $_error){
+                $_result += array($_value['name'] =&gt; $_error['error'].':'.$_error['message']);
+        }
+    }
+
+    return $this-&gt;response($_result);
+}
+</code></pre>
+<p>実行結果（JSONで出力した場合）の例は以下の通り。</p>
+<pre><code>{
+  "content1.xml" : "Upload Successd",
+  "content4.xml" : "Upload Successd",
+  "content2.json" : "103:Upload of files with this extension is not allowed",
+  "content3.xml" : "107:Upload of files of this mime type is not allowed"
+}
+</code></pre>
+<p>補足ですが、FuelPHPのUploadクラスはmime-typeの判定について、HTTPヘッダーのContent-typeを利用するのではなく、PHPが一時領域に保存したファイルの実態をfinfo_file関数にかけてmime-typeを取得してくれているようです。<br />よって、HTTPヘッダーを偽装されてもきちんとファイルの実態にあったmime-typeを取得しファイルの検査を行ってくれます。</p>
+<h2>5. WEBAPIとtasksによる非同期バッチ処理</h2>
+<hr />
+<p>FuelPHPのtasks機能を用いてWEBAPIで処理を受付し非同期バッチ処理を行う事例を紹介します。</p>
+<p><strong>プログラムの仕様</strong><br />* WEBAPIのリクエスト時にgetメソッドでパラメーター(&#8216;runmode&#8217;)を渡すことで同期/非同期処理を切り替える<br />* WEBAPIはリクエストを受けるとtaskを実行する<br />* taskは非同期っぷりが分かるように5秒間スリープした後画面出力を行う<br />* エラー処理などは省く</p>
+<p>コントローラー部</p>
+<pre><code>public function get_runtask()
+{
+    //非同期処理は'&gt; /dev/null &amp;'で、処理をバックグラウンドに潜らせる
+    $_run = Input::get('runmode') == 'asynchronous' ? '&gt; /dev/null &amp;':null;
+    //oilコマンドを利用してタスクを実行
+    system('php '.DOCROOT.'../oil refine originaltask ');
+}
+</code></pre>
+<p>タスク部（簡単な処理なのでコメントは省略）</p>
+<pre><code>&lt;?php
+namespace Fuel\Tasks;
+
+class Originaltask
+{
+    public function run()
+    {
+        sleep(5);
+        echo 'OK';
+    }
+}
+</code></pre>
+<p><strong>このサンプルは見ての通り、セキュリティ対策やtaskの準正常系処理、異常処理などは全く考えていないため、オンラインサーバー上では実行しないでください。<br />何が起きても筆者は責任を負いません。<br />また、クライアントからの入力をWEBAPI経由でtaskに直接渡す場合は、escapeshellarg()やescapeshellcmd()を利用して必ずエスケープ処理を行ってください。</strong></p>
+<h2>6. おまけ「RESTClient」について</h2>
+<hr />
+<p>WEBAPIの開発に限ったことではありませんが、テスト環境、デバッグ環境を整えることは重要ですね。</p>
+<p>FuelPHPのテストについては、FuelPHP Advent Calendar 2012の6日目に<a href="https://mobile.twitter.com/ounziw">@ounziw</a>さんが、<a href="http://ounziw.com/2012/12/06/phpunit">「ユニットテストのすすめ」</a>という記事を書かれていますので、ぜひご一読ください！</p>
+<p>今回紹介するのはデバッグを支援するツールです。<br />Viewを持たないWEBAPIはブラウザなどでデバッグするのは非常に骨がおれますと思います。（特にHTTPヘッダーを操作したりCookieの送受信をしたり&#8230;）<br />それらを簡単に実現するツールとして、私が今回選択したのは、<a href="http://code.google.com/p/rest-client/">rest-client</a>というJAVAベースのツールです。<br />現在のバージョンではWindows、Macともに動作しますし、GUIも搭載しているので、関係者へのデモなどにも使えると思います。<br />有名なツールだと思いますが、まだ利用されたことがない方は是非！</p>
+<h2>7.終わりに</h2>
+<hr />
+<p>最後までお読みいただきありがとうございました。<br /><a href="http://atnd.org/events/33753">FuelPHP Advent Calendar 2012</a>はこれで終了となります。<br />駄文ではございますが、今年のAdvent Calendarに参加できたことを光栄に思います。</p>
+<p>私を含め25名の有志による記事は如何でしたでしょうか。<br />2012年は日本においてFuelPHPの認知度が急上昇した年だったと思います。<br />
+2013年はFuelPHPにとって、コミュニティ・ビジネス共に、今年以上に盛り上がる年になってくれる事を期待してやみません。</p>
+<p>最後に、<a href="http://atnd.org/events/33753">FuelPHP Advent Calendar 2012</a>の発起人であり、様々なところでご尽力頂いている<a href="https://twitter.com/kenji_s">@kenji_s</a>さんに感謝の意を述べさせていただきます。<br />
+ありがとうございました。</p>
+<div class='wp_social_bookmarking_light'><div class="wsbl_hatena"><a href='http://b.hatena.ne.jp/add?mode=confirm&url=http%3A%2F%2Fwww.think-sv.net%2Fblog%2F%3Fp%3D957&title=FuelPHP%E3%81%A7WEBAPI%E3%82%92%E4%BD%9C%E3%81%A3%E3%81%A6%E3%81%BF%E3%82%8B' title='このエントリーをはてなブックマークに追加' rel=nofollow class='wp_social_bookmarking_light_a' target=_blank><img src='http://www.think-sv.net/blog/wp-content/plugins/wp-social-bookmarking-light/images/hatena.gif' alt='このエントリーをはてなブックマークに追加' title='このエントリーをはてなブックマークに追加' width='16' height='12' class='wp_social_bookmarking_light_img' /></a></div><div class="wsbl_hatena_users"><a href='http://b.hatena.ne.jp/entry/http://www.think-sv.net/blog/?p=957' title='はてなブックマーク - FuelPHPでWEBAPIを作ってみる' rel=nofollow class='wp_social_bookmarking_light_a' target=_blank><img src='http://b.hatena.ne.jp/entry/image/http://www.think-sv.net/blog/?p=957' alt='はてなブックマーク - FuelPHPでWEBAPIを作ってみる' title='はてなブックマーク - FuelPHPでWEBAPIを作ってみる'   class='wp_social_bookmarking_light_img' /></a></div><div class="wsbl_google_buzz"><a href='http://www.google.com/buzz/post?url=http%3A%2F%2Fwww.think-sv.net%2Fblog%2F%3Fp%3D957&message=FuelPHP%E3%81%A7WEBAPI%E3%82%92%E4%BD%9C%E3%81%A3%E3%81%A6%E3%81%BF%E3%82%8B' title='Post to Google Buzz' rel=nofollow class='wp_social_bookmarking_light_a' target=_blank><img src='http://www.think-sv.net/blog/wp-content/plugins/wp-social-bookmarking-light/images/google-buzz.png' alt='Post to Google Buzz' title='Post to Google Buzz' width='16' height='16' class='wp_social_bookmarking_light_img' /></a></div><div class="wsbl_yahoo"><a href='http://bookmarks.yahoo.co.jp/bookmarklet/showpopup?t=FuelPHP%E3%81%A7WEBAPI%E3%82%92%E4%BD%9C%E3%81%A3%E3%81%A6%E3%81%BF%E3%82%8B&u=http%3A%2F%2Fwww.think-sv.net%2Fblog%2F%3Fp%3D957&ei=UTF-8' title='Bookmark this on Yahoo Bookmark' rel=nofollow class='wp_social_bookmarking_light_a' target=_blank><img src='http://www.think-sv.net/blog/wp-content/plugins/wp-social-bookmarking-light/images/yahoo.gif' alt='Bookmark this on Yahoo Bookmark' title='Bookmark this on Yahoo Bookmark' width='16' height='16' class='wp_social_bookmarking_light_img' /></a></div><div class="wsbl_livedoor"><a href='http://clip.livedoor.com/redirect?link=http%3A%2F%2Fwww.think-sv.net%2Fblog%2F%3Fp%3D957&title=%E3%81%84%E3%81%BE%E3%80%81%E3%81%A4%E3%81%B6%E3%82%84%E3%81%8D%E3%81%9F%E3%81%84%E3%81%93%E3%81%A8%E3%80%82%EF%BC%88%E4%BB%AE%EF%BC%89%20-%20FuelPHP%E3%81%A7WEBAPI%E3%82%92%E4%BD%9C%E3%81%A3%E3%81%A6%E3%81%BF%E3%82%8B&ie=utf-8' title='Bookmark this on Livedoor Clip' rel=nofollow class='wp_social_bookmarking_light_a' target=_blank><img src='http://www.think-sv.net/blog/wp-content/plugins/wp-social-bookmarking-light/images/livedoor.gif' alt='Bookmark this on Livedoor Clip' title='Bookmark this on Livedoor Clip' width='16' height='16' class='wp_social_bookmarking_light_img' /></a></div><div class="wsbl_friendfeed"><a href='http://friendfeed.com/?url=http%3A%2F%2Fwww.think-sv.net%2Fblog%2F%3Fp%3D957&title=FuelPHP%E3%81%A7WEBAPI%E3%82%92%E4%BD%9C%E3%81%A3%E3%81%A6%E3%81%BF%E3%82%8B' title='Share on FriendFeed' rel=nofollow class='wp_social_bookmarking_light_a' target=_blank><img src='http://www.think-sv.net/blog/wp-content/plugins/wp-social-bookmarking-light/images/friendfeed.png' alt='Share on FriendFeed' title='Share on FriendFeed' width='16' height='16' class='wp_social_bookmarking_light_img' /></a></div><div>[`grow` not found]</div><div class="wsbl_facebook"><a href='http://www.facebook.com/share.php?u=http%3A%2F%2Fwww.think-sv.net%2Fblog%2F%3Fp%3D957&t=FuelPHP%E3%81%A7WEBAPI%E3%82%92%E4%BD%9C%E3%81%A3%E3%81%A6%E3%81%BF%E3%82%8B' title='Share on Facebook' rel=nofollow class='wp_social_bookmarking_light_a' target=_blank><img src='http://www.think-sv.net/blog/wp-content/plugins/wp-social-bookmarking-light/images/facebook.png' alt='Share on Facebook' title='Share on Facebook' width='16' height='16' class='wp_social_bookmarking_light_img' /></a></div><div class="wsbl_twitter"><iframe allowtransparency="true" frameborder="0" scrolling="no" src="http://platform.twitter.com/widgets/tweet_button.html?url=http%3A%2F%2Fwww.think-sv.net%2Fblog%2F%3Fp%3D957&amp;text=FuelPHP%E3%81%A7WEBAPI%E3%82%92%E4%BD%9C%E3%81%A3%E3%81%A6%E3%81%BF%E3%82%8B&amp;via=tukimikage&amp;lang=ja&amp;count=horizontal" style="width:130px; height:20px;"></iframe></div></div><br class='wp_social_bookmarking_light_clear' />					</div><!-- .entry-content -->
+		
+		<footer class="entry-meta">
+			カテゴリー: <a href="http://www.think-sv.net/blog/?cat=17" title="FuelPHP の投稿をすべて表示" rel="category">FuelPHP</a> | 投稿日: <a href="http://www.think-sv.net/blog/?p=957" title="01:21" rel="bookmark"><time class="entry-date" datetime="2012-12-25T01:21:44+00:00">2012/12/25</time></a> | <span class="by-author">投稿者: <span class="author vcard"><a class="url fn n" href="http://www.think-sv.net/blog/?author=1" title="Yusuke の投稿をすべて表示" rel="author">Yusuke</a></span></span>								</footer><!-- .entry-meta -->
+	</article><!-- #post -->
+
+				<nav class="nav-single">
+					<h3 class="assistive-text">投稿ナビゲーション</h3>
+					<span class="nav-previous"><a href="http://www.think-sv.net/blog/?p=916" rel="prev"><span class="meta-nav">&larr;</span> とりあえず、ブログを再開</a></span>
+					<span class="nav-next"></span>
+				</nav><!-- .nav-single -->
+
+				
+<div id="comments" class="comments-area">
+
+	
+	
+									<div id="respond">
+				<h3 id="reply-title">コメントを残す <small><a rel="nofollow" id="cancel-comment-reply-link" href="/blog/?p=957#respond" style="display:none;">コメントをキャンセル</a></small></h3>
+									<form action="http://www.think-sv.net/blog/wp-comments-post.php" method="post" id="commentform">
+																			<p class="comment-notes">メールアドレスが公開されることはありません。</p>							<p class="comment-form-author"><label for="author">名前</label> <input id="author" name="author" type="text" value="" size="30" /></p>
+<p class="comment-form-email"><label for="email">メールアドレス</label> <input id="email" name="email" type="text" value="" size="30" /></p>
+<p class="comment-form-url"><label for="url">ウェブサイト</label><input id="url" name="url" type="text" value="" size="30" /></p>
+												<div class='wmd-panel'><div id='wmd-button-barcomment'></div><div id='wmd-button-bar-help'> <p>To create code blocks or other preformatted text, indent by four spaces:</p>
+        <pre class='wmd-help'><span class='wmd-help-spaces'>&nbsp;&nbsp;&nbsp;&nbsp;</span>This will be displayed in a monospaced font. The first four 
+<span class='wmd-help-spaces'>&nbsp;&nbsp;&nbsp;&nbsp;</span>spaces will be stripped off, but all other whitespace
+<span class='wmd-help-spaces'>&nbsp;&nbsp;&nbsp;&nbsp;</span>will be preserved.
+<span class='wmd-help-spaces'>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+<span class='wmd-help-spaces'>&nbsp;&nbsp;&nbsp;&nbsp;</span>Markdown is turned off in code blocks:
+<span class='wmd-help-spaces'>&nbsp;&nbsp;&nbsp;&nbsp;</span> [This is not a link](http://example.com)
+</pre>
+        <p>
+            To create not a block, but an inline code span, use backticks:
+        </p>
+        <pre class='wmd-help'>Here is some inline `code`.</pre> <p>For more help see <a href='http://daringfireball.net/projects/markdown/syntax' rel='no-follow'> http://daringfireball.net/projects/markdown/syntax</a></p></div><p class="comment-form-comment"><label for="comment">コメント</label><textarea id="comment" name="comment" cols="45" rows="8" aria-required="true"></textarea></p><div id='wmd-previewcomment' class='wmd-panel wmd-preview prettyprint'></div></div>						<p class="form-allowed-tags">次の<abbr title="HyperText Markup Language">HTML</abbr> タグと属性が使えます:  <code>&lt;a href=&quot;&quot; title=&quot;&quot;&gt; &lt;abbr title=&quot;&quot;&gt; &lt;acronym title=&quot;&quot;&gt; &lt;b&gt; &lt;blockquote cite=&quot;&quot;&gt; &lt;cite&gt; &lt;code&gt; &lt;del datetime=&quot;&quot;&gt; &lt;em&gt; &lt;i&gt; &lt;q cite=&quot;&quot;&gt; &lt;strike&gt; &lt;strong&gt; </code></p>						<p class="form-submit">
+							<input name="submit" type="submit" id="submit" value="コメントを送信" />
+							<input type='hidden' name='comment_post_ID' value='957' id='comment_post_ID' />
+<input type='hidden' name='comment_parent' id='comment_parent' value='0' />
+						</p>
+						<p style="display: none;"><input type="hidden" id="akismet_comment_nonce" name="akismet_comment_nonce" value="e0a9a5f5f4" /></p>					</form>
+							</div><!-- #respond -->
+						
+</div><!-- #comments .comments-area -->
+			
+		</div><!-- #content -->
+	</div><!-- #primary -->
+
+
+			<div id="secondary" class="widget-area" role="complementary">
+			<aside id="calendar-4" class="widget widget_calendar"><h3 class="widget-title">Calendar</h3><div id="calendar_wrap"><table id="wp-calendar">
+	<caption>2012年12月</caption>
+	<thead>
+	<tr>
+		<th scope="col" title="日曜日">日</th>
+		<th scope="col" title="月曜日">月</th>
+		<th scope="col" title="火曜日">火</th>
+		<th scope="col" title="水曜日">水</th>
+		<th scope="col" title="木曜日">木</th>
+		<th scope="col" title="金曜日">金</th>
+		<th scope="col" title="土曜日">土</th>
+	</tr>
+	</thead>
+
+	<tfoot>
+	<tr>
+		<td colspan="3" id="prev"><a href="http://www.think-sv.net/blog/?m=201104" title="2011年4月の投稿を表示">&laquo; 4月</a></td>
+		<td class="pad">&nbsp;</td>
+		<td colspan="3" id="next" class="pad">&nbsp;</td>
+	</tr>
+	</tfoot>
+
+	<tbody>
+	<tr>
+		<td colspan="6" class="pad">&nbsp;</td><td>1</td>
+	</tr>
+	<tr>
+		<td>2</td><td><a href="http://www.think-sv.net/blog/?m=20121203" title="とりあえず、ブログを再開">3</a></td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td>
+	</tr>
+	<tr>
+		<td>9</td><td>10</td><td>11</td><td>12</td><td>13</td><td>14</td><td>15</td>
+	</tr>
+	<tr>
+		<td>16</td><td>17</td><td>18</td><td>19</td><td>20</td><td>21</td><td>22</td>
+	</tr>
+	<tr>
+		<td>23</td><td>24</td><td id="today"><a href="http://www.think-sv.net/blog/?m=20121225" title="FuelPHPでWEBAPIを作ってみる">25</a></td><td>26</td><td>27</td><td>28</td><td>29</td>
+	</tr>
+	<tr>
+		<td>30</td><td>31</td>
+		<td class="pad" colspan="5">&nbsp;</td>
+	</tr>
+	</tbody>
+	</table></div></aside><aside id="search-4" class="widget widget_search"><h3 class="widget-title">Search</h3><form role="search" method="get" id="searchform" action="http://www.think-sv.net/blog/" >
+	<div><label class="screen-reader-text" for="s">検索:</label>
+	<input type="text" value="" name="s" id="s" />
+	<input type="submit" id="searchsubmit" value="検索" />
+	</div>
+	</form></aside><aside id="categories-5" class="widget widget_categories"><h3 class="widget-title">Category</h3>		<ul>
+	<li class="cat-item cat-item-17"><a href="http://www.think-sv.net/blog/?cat=17" title="FuelPHP に含まれる投稿をすべて表示">FuelPHP</a> (1)
+</li>
+	<li class="cat-item cat-item-11"><a href="http://www.think-sv.net/blog/?cat=11" title="iPhone に含まれる投稿をすべて表示">iPhone</a> (4)
+</li>
+	<li class="cat-item cat-item-12"><a href="http://www.think-sv.net/blog/?cat=12" title="PSP に含まれる投稿をすべて表示">PSP</a> (1)
+</li>
+	<li class="cat-item cat-item-8"><a href="http://www.think-sv.net/blog/?cat=8" title="S21HT に含まれる投稿をすべて表示">S21HT</a> (1)
+</li>
+	<li class="cat-item cat-item-15"><a href="http://www.think-sv.net/blog/?cat=15" title="Twitter Log">Twitter Log</a> (54)
+</li>
+	<li class="cat-item cat-item-10"><a href="http://www.think-sv.net/blog/?cat=10" title="アニメ に含まれる投稿をすべて表示">アニメ</a> (2)
+</li>
+	<li class="cat-item cat-item-7"><a href="http://www.think-sv.net/blog/?cat=7" title="パソコンソフト に含まれる投稿をすべて表示">パソコンソフト</a> (3)
+</li>
+	<li class="cat-item cat-item-4"><a href="http://www.think-sv.net/blog/?cat=4" title="一般 に含まれる投稿をすべて表示">一般</a> (11)
+</li>
+	<li class="cat-item cat-item-6"><a href="http://www.think-sv.net/blog/?cat=6" title="書籍 に含まれる投稿をすべて表示">書籍</a> (1)
+</li>
+	<li class="cat-item cat-item-3"><a href="http://www.think-sv.net/blog/?cat=3" title="自宅サーバ に含まれる投稿をすべて表示">自宅サーバ</a> (8)
+</li>
+	<li class="cat-item cat-item-9"><a href="http://www.think-sv.net/blog/?cat=9" title="色々レビュー に含まれる投稿をすべて表示">色々レビュー</a> (3)
+</li>
+	<li class="cat-item cat-item-13"><a href="http://www.think-sv.net/blog/?cat=13" title="資格試験 に含まれる投稿をすべて表示">資格試験</a> (1)
+</li>
+		</ul>
+</aside>		<aside id="recent-posts-5" class="widget widget_recent_entries">		<h3 class="widget-title">NEW Posts</h3>		<ul>
+					<li>
+				<a href="http://www.think-sv.net/blog/?p=957" title="FuelPHPでWEBAPIを作ってみる">FuelPHPでWEBAPIを作ってみる</a>
+							<span class="post-date">2012/12/25</span>
+						</li>
+					<li>
+				<a href="http://www.think-sv.net/blog/?p=916" title="とりあえず、ブログを再開">とりあえず、ブログを再開</a>
+							<span class="post-date">2012/12/03</span>
+						</li>
+					<li>
+				<a href="http://www.think-sv.net/blog/?p=891" title="Wed, Apr 06 Twitter Log">Wed, Apr 06 Twitter Log</a>
+							<span class="post-date">2011/04/07</span>
+						</li>
+					<li>
+				<a href="http://www.think-sv.net/blog/?p=890" title="Tue, Apr 05 Twitter Log">Tue, Apr 05 Twitter Log</a>
+							<span class="post-date">2011/04/06</span>
+						</li>
+					<li>
+				<a href="http://www.think-sv.net/blog/?p=889" title="Mon, Apr 04 Twitter Log">Mon, Apr 04 Twitter Log</a>
+							<span class="post-date">2011/04/05</span>
+						</li>
+				</ul>
+		</aside><aside id="recent-comments-5" class="widget widget_recent_comments"><h3 class="widget-title">New Comments</h3><ul id="recentcomments"><li class="recentcomments"><a href="http://www.think-sv.net/blog/?p=720&#038;cpage=1#comment-29">iPhone4入荷！</a> に B.P より</li><li class="recentcomments"><a href="http://www.think-sv.net/blog/?p=545&#038;cpage=1#comment-22">iPhone 4 予約する！</a> に <a href='http://www.think-sv.net/blog/' rel='external nofollow' class='url'>月御影</a> より</li><li class="recentcomments"><a href="http://www.think-sv.net/blog/?p=545&#038;cpage=1#comment-21">iPhone 4 予約する！</a> に ごっ より</li><li class="recentcomments"><a href="http://www.think-sv.net/blog/?p=235&#038;cpage=1#comment-11">マウス買い換えました。</a> に ごっ より</li><li class="recentcomments"><a href="http://www.think-sv.net/blog/?p=235&#038;cpage=1#comment-10">マウス買い換えました。</a> に B.P より</li></ul></aside><aside id="akismet_widget-4" class="widget widget_akismet_widget"><h3 class="widget-title">Spam protection</h3>
+	<div class="a-stats">
+		<a href="http://akismet.com" target="_blank" title=""><strong class="count">83件のスパム</strong>が <strong>Akismet</strong> によってブロックされました</a>
+	</div>
+
+</aside><aside id="twitter-wings" class="widget tw-widget"><h3 class="widget-title">Twitter</h3><div class='tw-body'>
+		<article class='tw-status tw-tukimikage'><div class='tw-content'><header><p class='tw-name'><a href='http://www.twitter.com/Tukimikage' title='@Tukimikage on Twitter'>Tukimikage</a></p><p class='tw-time'><time pubdate datetime='2012-12-24T17:02:05+00:00'><a href='http://twitter.com/Tukimikage/status/283256241877291008' title='Permalink'>8 hours ago</a></time></p></header><p class='tw-text'>図書館戦争が実写映画になるんだって！TRAILERだけでもすごく期待できそう！ちなみに、今やってる劇団新感線の冬興行に出ている橋本じゅんさんも出演するそうだ。配役は発表されていないけど、おそらく玄田三監だろうな＾＾
+<a href='http://t.co/Wflqur75' class='tw-url'><span>toshokan-sensou-movie.com</span></a></p></div></article>
+	
+		<article class='tw-status tw-tukimikage'><div class='tw-content'><header><p class='tw-name'><a href='http://www.twitter.com/Tukimikage' title='@Tukimikage on Twitter'>Tukimikage</a></p><p class='tw-time'><time pubdate datetime='2012-12-24T16:34:47+00:00'><a href='http://twitter.com/Tukimikage/status/283249371427008512' title='Permalink'>8 hours ago</a></time></p></header><p class='tw-text'>FuelPHP Advent Calendar 2012 最終日の記事を公開しました。「FuelPHPでWEBAPIを作ってみる」 <a href='http://t.co/DgOjbR2Y' class='tw-url'><span>bit.ly/YFwH74</span></a></p></div></article>
+	
+		<article class='tw-status tw-tukimikage'><div class='tw-content'><header><p class='tw-name'><a href='http://www.twitter.com/Tukimikage' title='@Tukimikage on Twitter'>Tukimikage</a></p><p class='tw-time'><time pubdate datetime='2012-12-22T09:55:53+00:00'><a href='http://twitter.com/Tukimikage/status/282424211954352128' title='Permalink'>6:55 PM Dec 22, 2012</a></time></p></header><p class='tw-text'>最近、Markdown記法をよく使うので、WordPressにもWP-Markdownを入れてみた。リアルタイムにプレビューが出てくれて便利。
+Githubにもリアルタイムプレビューとか出ればいいのに。
+<a href='http://t.co/zIMee2N0' class='tw-url'><span>bit.ly/XY0rqN</span></a></p></div></article>
+	
+		<article class='tw-status tw-tukimikage'><div class='tw-content'><header><p class='tw-name'><a href='http://www.twitter.com/Tukimikage' title='@Tukimikage on Twitter'>Tukimikage</a></p><p class='tw-time'><time pubdate datetime='2012-12-16T14:34:01+00:00'><a href='http://twitter.com/Tukimikage/status/280319879071006720' title='Permalink'>11:34 PM Dec 16, 2012</a></time></p></header><p class='tw-text'>nginxをapacheに戻したら、wordpressでCSSが反映されないー！！　うへ。。</p></div></article>
+	
+		<article class='tw-status tw-tukimikage'><div class='tw-content'><header><p class='tw-name'><a href='http://www.twitter.com/Tukimikage' title='@Tukimikage on Twitter'>Tukimikage</a></p><p class='tw-time'><time pubdate datetime='2012-12-16T12:42:28+00:00'><a href='http://twitter.com/Tukimikage/status/280291803234705408' title='Permalink'>9:42 PM Dec 16, 2012</a></time></p></header><p class='tw-text'>池上さんの選挙特番、橋本さんがめっちゃ老けてる！気疲れ？</p></div></article>
+	</div><footer><p class='tw-follow'><a href='https://twitter.com/tukimikage' class='twitter-follow-button' data-show-count='false' data-lang='ja'>Follow @tukimikage</a></p><script src='//platform.twitter.com/widgets.js' type='text/javascript'></script></footer></aside>		</div><!-- #secondary -->
+		</div><!-- #main .wrapper -->
+	<footer id="colophon" role="contentinfo">
+		<div class="site-info">
+						<a href="http://ja.wordpress.org/" title="セマンティックなパブリッシングツール">Proudly powered by WordPress</a>
+		</div><!-- .site-info -->
+	</footer><!-- #colophon -->
+</div><!-- #page -->
+
+<!-- BEGIN: WP Social Bookmarking Light -->
+<!-- END: WP Social Bookmarking Light -->
+<script type='text/javascript' src='http://www.think-sv.net/blog/wp-content/themes/twentytwelve/js/navigation.js?ver=1.0'></script>
+<script type='text/javascript' src='http://www.think-sv.net/blog/wp-content/plugins/wp-markdown/js/pagedown/Markdown.Converter.js?ver=1.1'></script>
+<script type='text/javascript' src='http://www.think-sv.net/blog/wp-content/plugins/wp-markdown/js/pagedown/Markdown.Sanitizer.js?ver=1.1'></script>
+<script type='text/javascript' src='http://www.think-sv.net/blog/wp-content/plugins/wp-markdown/js/pagedown/Markdown.Editor.js?ver=1.1'></script>
+<script type='text/javascript' src='http://www.think-sv.net/blog/wp-content/plugins/wp-markdown/js/markdown.js?ver=1.0'></script>
+</body>
+</html>
