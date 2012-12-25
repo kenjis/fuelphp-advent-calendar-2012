@@ -159,7 +159,7 @@ $ diff fuelphp-1.4/public/.htaccess hhblog/.htaccess
 === FuelPHP を放り込む
 
 
-準備した FuelPHP 一式を、SFTP でも SCP でも好きな方法で、レンタルサーバに放り込みましょう。fuel ディレクトリは @<tt>{/home/{account-id\}} へ、www/hhblog ディレクトリは @<tt>{/home/{account-id\}/www/hhblog} となるように配置します。
+準備した FuelPHP 一式を、SFTP でも SCP でも好きな方法で、レンタルサーバに放り込みましょう。fuel ディレクトリは @<tt>{/home/{user-id\}} へ、www/hhblog ディレクトリは @<tt>{/home/{user-id\}/www/hhblog} となるように配置します。
 
 
 手動インストール(oil を使わないで配置する)を行ったので、ディレクトリのパーミッションの変更も自分で行います(参考：@<href>{http://fuelphp.com/docs/installation/instructions.html,Instruction - Installation - FuelPHP Documentation})。
@@ -169,7 +169,7 @@ $ diff fuelphp-1.4/public/.htaccess hhblog/.htaccess
 
 //emlist{
 以下の４つのディレクトリを書込み可にする
-/home/{account-id}
+/home/{user-id}
   |-- /fuel
   |  |-- /app
   |  |  |-- /cache
@@ -367,26 +367,26 @@ View は贅沢(？)に Template を使ってみます。
 さきに書いてしまいますが、最終的なディレクトリ構成は以下のようになりました。
 
 //emlist[実装のディレクトリ構成]{
-$HOME/www/hhblog
-    |-- /fuel
-    |    |-- /app
-    |    |    |-- /classes
-    |    |    |    |-- /controller
-    |    |    |    |    `-- hhblog.php
-    |    |    |    |-- /model
-    |    |    |    |    `-- ・・・
-    |    |    |    `-- /view
-    |    |    |         `-- /hhblog
-    |    |    |              `-- /article
-    |    |    |                   |-- keyword.php    (1)'
-    |    |    |                   `-- public.php     (2)'
-    |    |    |-- /views
-    |    |    |    |-- /hhblog
-    |    |    |    |    |-- /article
-    |    |    |    |    |    |-- keyword.php    (1)
-    |    |    |    |    |    `-- public.php     (2)
-    |    |    |    |    `-- template.php
-    …
+/home/{user-id\}
+  |-- /fuel
+  |  |-- /app
+  |  |  |-- /classes
+  |  |  |  |-- /controller
+  |  |  |  |  `-- hhblog.php
+  |  |  |  |-- /model
+  |  |  |  |  `-- ・・・
+  |  |  |  `-- /view
+  |  |  |     `-- /hhblog
+  |  |  |        `-- /article
+  |  |  |           |-- keyword.php    (1)'
+  |  |  |           `-- public.php     (2)'
+  |  |  |-- /views
+  |  |  |  |-- /hhblog
+  |  |  |  |  |-- /article
+  |  |  |  |  |  |-- keyword.php    (1)
+  |  |  |  |  |  `-- public.php     (2)
+  |  |  |  |  `-- template.php
+  …
 //}
 
 
