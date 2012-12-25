@@ -2,14 +2,18 @@
 = FuelPHPのスパムフィルタパッケージ @<href>{https://twitter.com/web2citizen,@web2citizen}
 
 
-@<href>{http://atnd.org/events/33753,FuelPHP Advent Calendar 2012} 8日目です。昨日は「FuelPHP の Fieldset クラスをこんな風に拡張してまーす、という話」(@<href>{https://twitter.com/@omoon,@omooon}さん)でした。@<br>{}
+@<href>{http://atnd.org/events/33753,FuelPHP Advent Calendar 2012} 8日目です。昨日は「FuelPHPのFieldsetクラスをこんな風に拡張してまーす、という話」(@<href>{https://twitter.com/@omoon,@omooon}さん)でした。@<br>{}
 
 
 以前作成したFuelPHPで作成したWebサイト(ほぼ放置していますが…)にスパムが多々投稿されているので、FuelPHPでのパッケージ作成方法の勉強をかねて、スパム対策のためのフィルタを作成してみました。
 
 …と作成を開始してから気がついたのですが、このパッケージには、スパム情報の管理画面も含めておいた方が便利なため、Advent Calendarでも@<href>{https://twitter.com/@mikakane_info,@mikakane_info}さんや@<href>{https://twitter.com/@sa2yasu,@sa2yasu}さんが記事にしている、モジュールとして開発した方がよかったかなあと少し後悔しています。
 
-とはいえ、作成したものについては@<href>{https://github.com/web2citizen/antispam,ここ}で公開しています。 まだドキュメント等が整備されていないので、以下で解説していきます。
+とはいえ、作成したものについては以下で公開しています。
+
+ * @<href>{https://github.com/web2citizen/antispam,https://github.com/web2citizen/antispam}
+
+まだドキュメント等が整備されていないので、以下で解説していきます。
 
 == 今回作成するパッケージの機能
 
@@ -113,7 +117,7 @@ else
     // NG処理
 //}
 
-== 使用例　NGID、NGワード設定
+== 使用例　NGIP、NGワード設定
 
 
 コンフィグで指定した期間の間に指定した回数以上の投稿があったIP、投稿内容をチェックして、ブラックリストテーブルに登録します。
@@ -125,7 +129,7 @@ else
 
 
 
-@<tt>{$active = 1} の時NGID、NGワードとして登録されます。デフォルトでは0のため、自動でNGとまではならず、登録されたものを手動でチェックしてNGにしていくことを想定しています(そのため、モジュール化して管理ビューも作ればよかったと後悔)。
+@<tt>{$active = 1} の時NGIP、NGワードとして登録されます。デフォルトでは0のため、自動でNGとまではならず、登録されたものを手動でチェックしてNGにしていくことを想定しています(そのため、モジュール化して管理ビューも作ればよかったと後悔)。
 
 
 taskとして作成し、cronで実行させることで、自動的にNGIPやNG投稿内容を追加していくことができます。@<br>{}
