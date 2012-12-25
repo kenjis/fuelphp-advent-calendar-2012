@@ -23,6 +23,8 @@
 	例:
 	$ php get-blog.php http://d.hatena.ne.jp/Kenji_s/20121201/fuelphp_this_year md 01
 
+不要な部分は削除します。
+
 ### Markdownファイルの調整
 
 	$ php get-blog.php <URL> adjust <章>
@@ -36,6 +38,8 @@
 
 	例:
 	$ php get-blog.php http://d.hatena.ne.jp/Kenji_s/20121201/fuelphp_this_year image 01
+
+見出しレベルが正しくない場合は修正します。
 
 ## MarkdownファイルのReVIEW化
 
