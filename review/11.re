@@ -1,4 +1,4 @@
-= FuelPHP + NetBeans + Gitで高速開発環境を整える @<href>{https://twitter.com/LandscapeSketch,@LandscapeSketch}
+= FuelPHP+NetBeans+Gitで高速開発環境を整える @<href>{https://twitter.com/LandscapeSketch,@LandscapeSketch}
 
 
 こんにちは。
@@ -8,7 +8,7 @@ FuelPHP Advent Calendar初参加のタケです。
 昨日は@EGMCさんの「FuelPHP用ソーシャルログイン専用認証パッケージDsAuthでNinjAuthをもっと簡単に利用する」でした。@<br>{}
 
 
-今日の私の記事はFuelPHP + NetBeans + Gitで高速で便利な開発環境を作る手順です。
+今日の私の記事はFuelPHP+NetBeans+Gitで高速で便利な開発環境を作る手順です。
 画像ばかりでしかも長くなってしまいましたが、お付き合いください。
 
 == NetBeansのダウンロード
@@ -126,7 +126,7 @@ NetBeansのバージョンが違うとインストールエラーになります
 NetBeansに戻り、[ツール]→[プラグイン]を開きます。
 
 
-「ダウンロード済み」タブをクリックし、「プラグインの追加」ボタンをクリックします。
+「ダウンロード済み」タブをクリックし、[プラグインの追加]ボタンをクリックします。
 先ほどダウンロードした .nbm ファイルを選択し、[インストール]をクリックします。@<br>{}
 
 
@@ -482,7 +482,7 @@ NetBeansは動作も比較的軽く、サポート機能が充実しています
 == 明日は
 
 
-あすは@seltzerさんの「Coda + FuelPHPでお手軽開発環境を作る」です。
+あすは@seltzerさんの「Coda+FuelPHPでお手軽開発環境を作る」です。
 おたのしみに！
 
 == P.S.
