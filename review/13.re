@@ -1,9 +1,9 @@
 
-= FuelPHP + eXcale @<href>{https://twitter.com/yamamoto_manabu,@yamamoto_manabu}
+= FuelPHP+eXcale @<href>{https://twitter.com/yamamoto_manabu,@yamamoto_manabu}
 
 
 @<href>{http://atnd.org/events/33753,FuelPHP Advent Calendar 2012}の13日目担当の@<href>{https://twitter.com/yamamoto_manabu,@yamamoto_manabu}です。
- 昨日は@<href>{https://twitter.com/seltzer,@seltzer}さんの「Coda + FuelPHPでお手軽開発環境を作る」でした。
+ 昨日は@<href>{https://twitter.com/seltzer,@seltzer}さんの「Coda+FuelPHPでお手軽開発環境を作る」でした。
 
 
 私は、Eclipse→NetBeans→PhpStormをお試し中。と定番IDEを渡り歩いてきたのですが、記事を読ませて頂くとCodaもあるある機能は網羅してそうですし、iPad版もあるようなので、ちょっと浮気してみようと思います。@<br>{}
