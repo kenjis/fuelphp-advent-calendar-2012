@@ -68,7 +68,7 @@ oilコマンドでひたすらコードスケルトンを生成、設計通り�
  * @<href>{https://github.com/ya-sasaki/fuel-module-refactor,https://github.com/ya-sasaki/fuel-module-refactor}
 
 
-git cloneでもZip展開でも良いのですが、使うのはmodule_refactor.phpのみですので、これをfuel/app/tasksに置いてください。
+git cloneでもzip展開でも良いのですが、使うのはmodule_refactor.phpのみですので、これをfuel/app/tasksに置いてください。
 
 === Scaffold生成
 
