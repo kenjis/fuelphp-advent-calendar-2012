@@ -69,7 +69,6 @@ FuelPHPではControllerクラス群を継承し、対応するパスのPHPクラ
 #@# lang: .brush: .php; .title: .; .notranslate title=""
 //emlist{
     public function action_index() {
-        $view;
         if ($is_feature_phone) {
             $view = View::forge('mobile/marriage/index');
         } elseif ($is_smart_phone) {
@@ -297,7 +296,9 @@ class Input extends \Fuel\Core\Input
     {   
         parent::hydrate();
 
-        if (Agent::is_feature_phone() && !Agent::is_softbank()) {
+        $softbank_utf8 = (Agent::is_softbank() && Agent::accepts_charset('UTF-8'));
+        // UTF-8に対応したsoftbank以外のガラケー
+        if (Agent::is_feature_phone() && !$softbank_utf8) {
             $encoded = array();
             foreach (static::$input as $key => $val) {
                 $encoded[$key] = mb_convert_encoding($val, "UTF-8", "SJIS-win");
