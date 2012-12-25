@@ -2,7 +2,7 @@
 = モジュール分割の利点とスケルトンのリファクタリング @<href>{https://twitter.com/sa2yasu,@sa2yasu}
 
 
-@<href>{http://atnd.org/events/33753,FuelPHP Advent Calendar 2012} ４日目担当の@<href>{https://twitter.com/sa2yasu,@sa2yasu}です。昨日は@<href>{https://twitter.com/mkkn_info,@mkkn_info}さんの「FuelPHP を使ったモジュール開発入門」でした。@<br>{}
+@<href>{http://atnd.org/events/33753,FuelPHP Advent Calendar 2012} ４日目担当の@<href>{https://twitter.com/sa2yasu,@sa2yasu}です。昨日は@<href>{https://twitter.com/mkkn_info,@mkkn_info}さんの「FuelPHPを使ったモジュール開発入門」でした。@<br>{}
 
 
 今日はモジュール分割の話と
@@ -11,7 +11,9 @@ oilコマンドで作られるスケルトンコードに不満があったの�
 == モジュール化のメリット
 
 
-@<href>{http://press.nekoget.com/fuelphp_doc/general/modules.html,ここ}に書いてある通りなのですが、
+公式ドキュメント@<fn>{fuel-docs-modules}に書いてある通りなのですが、
+
+//footnote[fuel-docs-modules][@<href>{http://press.nekoget.com/fuelphp_doc/general/modules.html,http://press.nekoget.com/fuelphp_doc/general/modules.html}]
 
 //quote{
 モジュールとは、独立した MVC 要素のグループのことです。モジュールを使うと、コードを再利用しカプセル化することが可能になります。 
