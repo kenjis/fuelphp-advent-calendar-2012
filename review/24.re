@@ -1,16 +1,14 @@
 
-= FuelPHPで簡単なWebアプリケーションを作ってみる
-
-//hr
+= FuelPHPで簡単なWebアプリケーションを作ってみる @<href>{https://twitter.com/kurotaky,@kurotaky}
 
 
-@<href>{http://atnd.org/events/33753,FuelPHP AdventCalendar 2012}の記事です。 昨日は@<href>{https://twitter.com/mukaken,@mukaken}さんの @<href>{http://d.hatena.ne.jp/mukaken/20121223/1356256954,FuelPHP vs Codeigniter}でした。
 
 
-FuelPHPを使って簡単なアプリケーションを動かす方法をこの記事では紹介したいと思います、
+@<href>{http://atnd.org/events/33753,FuelPHP AdventCalendar 2012}の記事です。 昨日は@<href>{https://twitter.com/mukaken,@mukaken}さんの「FuelPHP vs Codeigniter」でした。@<br>{}
 
 
-PHPやFuelPHPがわからない人でも、以下の手順に沿って作成して頂ければ、 手元のPCでアプリケーションを動かすことが出来ると思います。
+FuelPHPを使って簡単なアプリケーションを動かす方法をこの記事では紹介したいと思います。
+PHPやFuelPHPがわからない人でも、以下の手順に沿って作成して頂ければ、 手元のPCでアプリケーションを動かすことが出来ると思います。@<br>{}
 
 
 まずは環境設定からです。
@@ -29,7 +27,7 @@ PHPやFuelPHPがわからない人でも、以下の手順に沿って作成し�
 普段使ってるエディタがある人はそれを使ってください。 今回はSublime Text2を使ってファイルを編集しました。
 
 
-@<href>{http://www.sublimetext.com/,Sublime Text2}
+ * Sublime Text2 @<href>{http://www.sublimetext.com/,http://www.sublimetext.com/}
 
 == MAMPインストール
 
@@ -37,12 +35,12 @@ PHPやFuelPHPがわからない人でも、以下の手順に沿って作成し�
 ここからインストールしてください！
 
 
-@<href>{http://www.mamp.info/en/index.html,MAMPダウンロード}
+ * MAMPダウンロード @<href>{http://www.mamp.info/en/index.html,http://www.mamp.info/en/index.html}
 
 
-MAMPのphpを使用するための設定
 
-//emlist{
+
+//emlist[MAMPのphpを使用するための設定]{
 # ~/.bash_profile または ~/.zshrc をエディタで開いて入力してください。
 export PATH="/Applications/MAMP/bin/php/php5.3.14/bin:$PATH"
 
@@ -55,8 +53,8 @@ export PATH="/Applications/MAMP/bin/php/php5.3.14/bin:$PATH"
 
 こちらを参考にしてインストールしました。
 
- * @<href>{http://fuelphp.com/,FuelPHP}
- * @<href>{http://press.nekoget.com/fuelphp_doc/,FuelPHP日本語ドキュメント}
+ * FuelPHP @<href>{http://fuelphp.com/,http://fuelphp.com/}
+ * FuelPHP日本語ドキュメント @<href>{http://press.nekoget.com/fuelphp_doc/,http://press.nekoget.com/fuelphp_doc/}
 
 //emlist{
 # oil インストール
@@ -79,10 +77,12 @@ export PATH="/Applications/MAMP/bin/php/php5.3.14/bin:$PATH"
 
 
 
-これで準備ができました。(MAMPは起動しておいてください！) 以下にアクセスするとFuelPHPのページが表示されるはずです。
+これで準備ができました(MAMPは起動しておいてください!)。@<br>{}
+
+以下にアクセスするとFuelPHPのページが表示されるはずです。
 
 
-http://localhost:8888/blog
+ * http://localhost:8888/blog
 
 == scaffoldを使って簡単なブログっぽいアプリを作ってみる
 
@@ -122,8 +122,12 @@ Creating view: /Users/kurotaky/lang/php/blog/fuel/app/views/post/create.php
 Creating view: /Users/kurotaky/lang/php/blog/fuel/app/views/post/edit.php
 Creating view: /Users/kurotaky/lang/php/blog/fuel/app/views/post/_form.php
 Creating view: /Users/kurotaky/lang/php/blog/fuel/app/views/template.php
+//}
 
-# マイグレーションの実行
+
+=== マイグレーションの実行
+
+//emlist{
 /Users/kurotaky/lang/php/blog% oil refine migrate
 001_create_posts
 
@@ -131,14 +135,14 @@ Creating view: /Users/kurotaky/lang/php/blog/fuel/app/views/template.php
 //}
 
 
-http://localhost:8888/MAMP/?language=Japanese の phpMyAdminからデータベースを選択して、 データベースを作成してください。(ここではfuel_devとしています)
+http://localhost:8888/MAMP/?language=Japanese の phpMyAdminからデータベースを選択して、 データベースを作成してください(ここではfuel_devとしています)。
 
 
 //image[20121224_create_db][データベースの作成]{
 //}
 
 
-データベース作成後、config/development/db.php の dsnの値を設定してください。 データベース名をfuel@<b>{devとした場合は、dbname=fuel}devとしてください。
+データベース作成後、config/development/db.php の dsnの値を設定してください。 データベース名をfuel_devとした場合は、dbname=fuel_devとしてください。
 
 
 //image[20121224_development_db][development dbの設定]{
@@ -148,27 +152,27 @@ http://localhost:8888/MAMP/?language=Japanese の phpMyAdminからデータベ�
 たったこれだけで記事を作成・読み取り・更新・削除が出来る簡単なブログっぽいアプリの完成です！ アクセスして確認してみましょう。
 
 
-http://localhost:8888/blog/post
+ * http://localhost:8888/blog/post
 
 
 記事を投稿できます。
 
 
-//image[20121224_blog1][簡単ブログの完成1]{
+//image[20121224_blog1][記事の投稿]{
 //}
 
 
 投稿した記事の一覧が確認できます。
 
 
-//image[20121224_blog2][簡単ブログの完成2]{
+//image[20121224_blog2][記事の一覧]{
 //}
 
 
 データベースにも反映されていますね。
 
 
-//image[20121224_phpmyadmin][phpmyadmin]{
+//image[20121224_phpmyadmin][phpMyAdmin]{
 //}
 
 == さらに詳しく
@@ -176,10 +180,10 @@ http://localhost:8888/blog/post
 
 現在、以下の書籍を読んでいますがFuelPHPの特徴を理解するだけでなく、 MVCモデルの基本的な説明やOSごとの環境設定、ユニットテストの方法なども書かれているので、 ぜひまだ以下の本を持っていないかたは手にとって読んでみてください！
 
- * @<href>{http://tatsu-zine.com/books/fuelphp1st,はじめてのフレームワークとしてのFuelPHP}
+ * 『@<href>{http://tatsu-zine.com/books/fuelphp1st,はじめてのフレームワークとしてのFuelPHP}』
 
 
-== 日本語ドキュメント翻訳募集をしているようです。
+== 日本語ドキュメント翻訳募集をしているようです
 
 
 有志の方たちが翻訳作業を進めているようです。
@@ -200,3 +204,11 @@ http://localhost:8888/blog/post
 
 
 明日は@<href>{https://twitter.com/Tukimikage,@tukimikage} さんです。 お楽しみに！
+
+//quote{
+@<strong>{@kurotaky}
+
+Twitter: @<href>{https://twitter.com/kurotaky,@kurotaky}
+
+Blog: @<href>{http://mo-fu.org/,http://mo-fu.org/}
+//}
