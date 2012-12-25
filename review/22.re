@@ -50,7 +50,7 @@ return array(
 //emlist[fuel/app/config/development/db.php]{
 return array(
     'default' => array(
-        'connection' => ({省略}),
+        'connection' => …省略…,
         'profiling' => true,
     ),
 );
