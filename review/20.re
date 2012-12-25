@@ -31,7 +31,7 @@ return array(
     ),
     'slave' => array(
         'connection' => array(
-            'dsn' => 'mysql:host=xxx.xxx.xxx.xxx;dbname=BLOG_DEV',
+            'dsn' => 'mysql:host=yyy.yyy.yyy.yyy;dbname=BLOG_DEV',
             'username' => 'blog',
             'password' => 'xxxxxxxx',
         ),
@@ -59,9 +59,9 @@ $query = Model_User::find()
 
 === packages/orm/classes/query.phpを拡張するためapp以下にコピー
 
-//emlist{
-mkdir -p app/classes/core/orm/
-cp ../packages/orm/classes/query.php app/classes/core/orm/
+//cmd{
+$ mkdir -p app/classes/core/orm/
+$ cp ../packages/orm/classes/query.php app/classes/core/orm/
 //}
 
 === app/classes/core/orm/query.phpに以下のメソッドを追加
@@ -115,7 +115,7 @@ fuel/app/tasks/batch.php をProductionモードでcronに設定する場合、�
 以上！@<br>{}
 
 
-あすは、@<href>{https://twitter.com/konkon1234,@konkon1234}さんの「FuelPHPで1サイトを作ってみて気が付いた点など」です。@<br>{}
+あすは、@<href>{https://twitter.com/konkon1234,@konkon1234}さんの「FuelPHPで1サイトを作ってみて気が付いた点など」です。
  お楽しみに！
 
 //quote{
