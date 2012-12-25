@@ -24,12 +24,12 @@ $ pear config-set auto_discover 1
 $ pear install pear.phpunit.de/PHPUnit
 //}
 
-詳しくは@<href>{http://www.phpunit.de/manual/3.7/ja/installation.html,第3章 PHPUnit のインストール}をごらんください。なお、Ubuntuでは、@<tt>{sudo apt-get install phpunit}でインストールできます。
+詳しくは「@<href>{http://www.phpunit.de/manual/3.7/ja/installation.html,第3章 PHPUnit のインストール}」をごらんください。なお、Ubuntuでは、@<tt>{sudo apt-get install phpunit}でインストールできます。
 
 == 簡単なユニットテストの例
 
 
-FuelPHPのコアコード@<href>{https://github.com/fuel/core/blob/1.4/master/tests/num.php,https://github.com/fuel/core/blob/1.4/master/tests/num.php}から引用です。
+FuelPHPのコアコード @<href>{https://github.com/fuel/core/blob/1.4/master/tests/num.php,https://github.com/fuel/core/blob/1.4/master/tests/num.php} から引用です。
 
 #@# lang: .brush: .php; .title: .; .notranslate title=""
 //emlist{
@@ -65,10 +65,10 @@ class Test_Num extends TestCase
 ユニットテストするには、TestCaseクラスを継承したクラスを作ります(元々のPHPUnitではPHPUnit_Framework_TestCaseクラスを継承しますが、FuelPHPではTestCaseを継承します)。
 
 
-テストのクラス名は、@<tt>{Test_テストするクラス名}とする規約になっています。上の例ではTest_Numです。テストするクラスがModel_Loginなら、Test_Model_Loginと命名します。
+テストのクラス名は、「@<tt>{Test_テストするクラス名}」とする規約になっています。上の例ではTest_Numです。テストするクラスがModel_Loginなら、Test_Model_Loginと命名します。
 
 
-このクラスで、test_で始まるメソッドを定義してください。上の例ではtest_bytesメソッドが定義されており、このメソッドは@<tt>{Num::bytes('200K');}の実行結果が@<tt>{'204800'}に等しいことを確かめています。assertEqualsは、PHPUnitのメソッドで、1つ目の引数と2つ目の引数が等しいかどうかを確かめます。
+このクラスで、「test_」で始まるメソッドを定義してください。上の例ではtest_bytesメソッドが定義されており、このメソッドは @<tt>{Num::bytes('200K');} の実行結果が @<tt>{'204800'} に等しいことを確かめています。assertEqualsは、PHPUnitのメソッドで、1つ目の引数と2つ目の引数が等しいかどうかを確かめます。
 
 == ユニットテストを書くメリット
 
