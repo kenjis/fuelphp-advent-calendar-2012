@@ -43,7 +43,7 @@ FuelPHP Documentationの日本語翻訳はGitHubを利用しています。そ�
 forkをした後については、東京での FuelPHP 勉強会の sho さんの発表資料が参考になります(22ページ目あたりからが方法についての解説です)。
 
 
-@<href>{http://www.slideshare.net/akagisho/lets-translate-fuelphp-docs,http://www.slideshare.net/akagisho/lets-translate-fuelphp-docs}
+ * @<href>{http://www.slideshare.net/akagisho/lets-translate-fuelphp-docs,http://www.slideshare.net/akagisho/lets-translate-fuelphp-docs}
 
 ==== GitHubの機能を使って、ブラウザで翻訳作業をする場合
 
@@ -61,7 +61,7 @@ MIZUNOさんの「@<href>{http://ounziw.com/2011/12/01/github-localize/,github �
 翻訳をしていると、単語の意味はわかっても訳せないものがでてきたりと躓く場面があります。
 
 
-そんなときは、@<href>{https://groups.google.com/forum/?fromgroups#!forum/fuelphp_jp,Google Groupにfuelphp.jpのML}があります。気軽に相談をしてみてくださいね。
+そんなときは、Google Groupsに「@<href>{https://groups.google.com/forum/?fromgroups#!forum/fuelphp_jp,fuelphp.jpのML}」があります。気軽に相談をしてみてくださいね。
 
 === (4)翻訳ができたら、Pull Request をお願いします。
 
