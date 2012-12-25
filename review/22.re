@@ -1,4 +1,3 @@
-
 = QueryBuilderで小難しいSELECT文を書くためのノウハウ @<href>{https://twitter.com/ts_asano,@ts_asano}
 
 
@@ -164,7 +163,7 @@ $result = \DB::select('*')
 
 //footnote[sql-injection][ただし、私が試した限りはSQLインジェクション攻撃を引き起こすことはできませんでした。]
 
-ユーザー入力をDB::expr() メソッド内またはそれに準ずる方法で処理する場合は必ずDB::escape()を使用し、以下のように対策を行うようにして下さい。
+ユーザー入力をDB::expr() メソッド内またはそれに準ずる方法で処理する場合は必ずDB::escape() メソッドを使用し、以下のように対策を行うようにして下さい。
 
 #@# lang: .syntax-highlight
 //emlist{
@@ -319,6 +318,8 @@ FuelPHPにはマニュアルでは触れられていない、思わぬ機能が�
 
 //quote{
 @<strong>{@ts_asano}
+
+（株）トゥ・ステップ勤務。趣味は電子工作。FuelPHPと自作ガジェットを繋ぐのが今の目標。
 
 Twitter: @<href>{https://twitter.com/ts_asano,@ts_asano}
 
