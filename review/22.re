@@ -319,7 +319,7 @@ FuelPHPにはマニュアルでは触れられていない、思わぬ機能が�
 //quote{
 @<strong>{@ts_asano}
 
-（株）トゥ・ステップ勤務。趣味は電子工作。FuelPHPと自作ガジェットを繋ぐのが今の目標。
+(株)トゥ・ステップ勤務。趣味は電子工作。FuelPHPと自作ガジェットを繋ぐのが今の目標。
 
 Twitter: @<href>{https://twitter.com/ts_asano,@ts_asano}
 
