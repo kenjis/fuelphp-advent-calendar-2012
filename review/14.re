@@ -149,7 +149,7 @@ CREATE TABLE IF NOT EXISTS `company` (
 
 
 認証のためのロジックはfuel/packeges/の下に置くことになります。
-このディレクトリはFuelPHPパッケージコアに含まれる部分なので、ここに手を入れるとFuelPHPコアとユーザ開発ロジックが分離できなくなるし、バージョンアップ時にも気を遣うので、僕はこのディレクトリはあまり触りたくないのですが、まぁでもここを触るしか方法が無いのでしょうがないですね。@<br>{}
+このディレクトリはFuelPHPの標準のパッケージに含まれる部分なので、ここに手を入れるとFuelPHP自体とユーザ開発ロジックが分離できなくなるし、バージョンアップ時にも気を遣うので、僕はこのディレクトリはあまり触りたくないのですが、まぁでもここを触るしか方法が無いのでしょうがないですね。@<br>{}
 
 
 fuel/packages/auth/bootstrap.phpは以下のようにします。StudentAuthとCompanyAuth関連の定義を追加しています。
@@ -256,7 +256,7 @@ public function action_login()
     }
 
     // 学生ログインページの表示
-    echo View::forge('studentlogin',$data);
+    echo View::forge('studentlogin', $data);
 }
 //}
 
@@ -264,10 +264,10 @@ public function action_login()
 
 #@# lang: .brush:xml
 //emlist[fuel/app/views/studentlogin.php]{
-<?php echo Form::open( '/studentlogin/login'); ?>
-ユーザ名<?php echo Form::input('username',  Input::post('username') ) ?>
-パスワード<?php echo Form::password('password',  Input::post('password') ) ?>
-<?php echo Form::submit('submit', 'ログイン',); ?>
+<?php echo Form::open('/studentlogin/login'); ?>
+ユーザ名<?php echo Form::input('username', Input::post('username')) ?>
+パスワード<?php echo Form::password('password', Input::post('password')) ?>
+<?php echo Form::submit('submit', 'ログイン'); ?>
 <?php echo Form::close(); ?>
 //}
 
@@ -292,10 +292,10 @@ public function action_add_user()
     if (Input::post())
     {
         $username=Input::post('username');
-              $password=Input::post('password');
-              $email=Input::post('email');
+        $password=Input::post('password');
+        $email=Input::post('email');
 
-              // Authオブジェクトを取得します。引数でStudentAuthを指定します。
+        // Authオブジェクトを取得します。引数でStudentAuthを指定します。
         $auth = Auth::instance('StudentAuth');
         // ユーザ作成
         $auth->create_user($username,$password,$email);
@@ -306,16 +306,16 @@ public function action_add_user()
 //}
 
 
- 企業ユーザ登録も同様に、companylogin.phpに同じメソッドを作ります。上記ソースコードの student の部分がcompnayになるだけです。
+ 企業ユーザ登録も同様に、companylogin.phpに同じメソッドを作ります。上記ソースコードのstudentの部分がcompnayになるだけです。
 
 ==== View
 
 #@# lang: .brush:xml
 //emlist[fuel/app/views/studentadduser.php]{
-<?php echo Form::open( '/studentlogin/add_user'); ?>
-ユーザ名<?php echo Form::input('username',  Input::post('username') ) ?>
-パスワード<?php echo Form::password('password',  Input::post('password') ) ?>
-Email<?php echo Form::input('email',  Input::post('email') ) ?>
+<?php echo Form::open('/studentlogin/add_user'); ?>
+ユーザ名<?php echo Form::input('username', Input::post('username')) ?>
+パスワード<?php echo Form::password('password', Input::post('password')) ?>
+Email<?php echo Form::input('email', Input::post('email')) ?>
 <?php echo Form::submit('submit', '登録') ?>
 <?php echo Form::close(); ?>
 //}
@@ -354,7 +354,7 @@ Viewはこちら。
 #@# lang: .brush:xml
 //emlist[fuel/app/views/studentlogout.php]{
 ログアウトしました
-ログイン
+<a href="/studentlogin">ログイン</a>
 //}
 
 
