@@ -1,11 +1,11 @@
 
-= Coda + FuelPHPでお手軽開発環境を作る @<href>{https://twitter.com/seltzer,@seltzer}
+= Coda+FuelPHPでお手軽開発環境を作る @<href>{https://twitter.com/seltzer,@seltzer}
 
 
 今年、私がもっともはまった言語系のプロダクトと言えば「FuelPHP」になります。
 
 
-そんな、FuelPHPの Advent Calendarが開催されていたので、私も参加いたしました。 昨日の @<href>{https://twitter.com/LandscapeSketch,@LandscapeSketch} さんの「FuelPHP + NetBeans + Gitで高速開発環境を整える」を受けて、私からは「Coda + FuelPHPでお手軽開発環境を作る」をお送りします。
+そんな、FuelPHPの Advent Calendarが開催されていたので、私も参加いたしました。 昨日の @<href>{https://twitter.com/LandscapeSketch,@LandscapeSketch} さんの「FuelPHP+NetBeans+Gitで高速開発環境を整える」を受けて、私からは「Coda + FuelPHPでお手軽開発環境を作る」をお送りします。
 
 
 Codaとは、Panic社から販売されている OS X向けの Web開発ソフトです。軽量・高機能で筆者ももっとも愛用しているソフトの一つです。
