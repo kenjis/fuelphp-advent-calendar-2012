@@ -157,24 +157,24 @@ $ diff fuelphp-1.4/public/.htaccess hhblog/.htaccess
 === FuelPHP を放り込む
 
 
-準備した @<tt>{hhblog} ディレクトリの FuelPHP 一式を、SFTP でも SCP でも好きな方法で、レンタルサーバのドキュメントルートに放り込みましょう。@<tt>{$HOME/www/hhblog} となるように配置します。
+準備した FuelPHP 一式を、SFTP でも SCP でも好きな方法で、レンタルサーバに放り込みましょう。fuel ディレクトリは @<tt>{/home/{account-id\}} へ、www/hhblog ディレクトリは @<tt>{/home/{account-id\}/www/hhblog} となるように配置します。
 
 
 手動インストール(oil を使わないで配置する)を行ったので、ディレクトリのパーミッションの変更も自分で行います(参考：@<href>{http://fuelphp.com/docs/installation/instructions.html,Instruction - Installation - FuelPHP Documentation})。
 
 
-以下の4つのディレクトリのパーミッションを 777(rwxrwxrwx)にします。FTP/SCP ツールで変更しても良いですし、さくらのコントロールパネルからファイルマネージャーを使用して変更することも可能です(ディレクトリを 右クリック → プロパティ で属性の変更が可能)。
+以下の４つのディレクトリのパーミッションを 755（rwxr-xr-x）にします。「所有者」に書込み（w）権限があればよいので、700（rwx------）のほうが安心です*1。FTP/SCP ツールで変更しても良いですし、さくらのコントロールパネルからファイルマネージャーを使用して変更することも可能です（ディレクトリを 右クリック → プロパティ で属性の変更が可能）。
 
 //emlist{
 以下の４つのディレクトリを書込み可にする
-$HOME/www/hhblog
-    |-- /fuel
-    |    |-- /app
-    |    |    |-- /cache
-    |    |    |-- /config
-    |    |    |-- /logs
-    |    |    |-- /tmp
-    …
+/home/{account-id}
+  |-- /fuel
+  |  |-- /app
+  |  |  |-- /cache
+  |  |  |-- /config
+  |  |  |-- /logs
+  |  |  |-- /tmp
+  ...
 //}
 
 
