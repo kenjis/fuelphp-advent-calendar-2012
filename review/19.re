@@ -21,13 +21,13 @@
  * Doctrine2 ORM(@<href>{http://www.doctrine-project.org/,doctrine project})
 
 
-なお、FuelPHPのormパッケージも色々な機能を持っています。
+なお、FuelPHPのOrmパッケージも色々な機能を持っています。
  どちらが優れているという事もないのですが、主に以下の3点の理由で採用しました。
 
 
  * スキーマ定義ファイルからのModelクラス生成
  * Modelの役割のEntity(Rowデータ管理)とRepository(クエリ関連)への分割
- * 簡易な読み出しをクエリ不要で取得する機能(magic finder ※FuelPHPのormにも付いています)
+ * 簡易な読み出しをクエリ不要で取得する機能(magic finder ※FuelPHPのOrmにも付いています)
 
 
 Symfony2に組み込まれている高機能なライブラリで、
@@ -57,7 +57,7 @@ vendor
 //}
 
 
-#SymfonyをTaskとYAMLの対応のために追加しています。
+# SymfonyをTaskとYAMLの対応のために追加しています。
 
 
 === オートローダーへの追加
@@ -358,7 +358,7 @@ return array(
     'default' => array(
         'connection'  => array(
             'driver'     => 'pdo_mysql',
-            'host'        => 'localhost',
+            'host'       => 'localhost',
             'password'   => 'dbpass',
             'user'       => 'dbuser',
             'dbname'     => 'fuel',
@@ -428,7 +428,7 @@ $ php oil refine doctrine:generate_repositories
 $ php oil refine doctrine orm:schema-tool:create -force
 //}
 
-実行するとfuel/app/classes/modelのEntitiesとRepositoriesにクラスが生成されています。@<br>{}
+実行するとfuel/app/classes/modelのEntitiesとRepositoriesにクラスが生成されています。
  ついでにちょっとした改造も加えますが、この変更は再生成しても自動的にマージされます。  
 
 #@# lang: .brush: .php; .collapse: .true; .highlight: .[133,135,156,158,200,201,209]; .light: .false; .title: .fuel/app/classes/model/Entities/News.php; .toolbar: .true; .notranslate title="fuel/app/classes/model/Entities/News.php"
