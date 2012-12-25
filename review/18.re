@@ -80,18 +80,20 @@ FuelPHP 標準のサーバキャッシュと「@<href>{http://developer.hatena.n
 //}
 
 
-ドキュメントや README、使わない oil などを削除します。また、public ディレクトリの中身をドキュメントルートに持ってきます。
+ドキュメントや README、使わない oil などを削除します。また、public ディレクトリの中身をレンサバのドキュメントルートに合わせるため、www/hhblog フォルダを作ってそこへ移動します。
 
 //emlist[変更後のディレクトリ構成]{
 /hhblog
   |-- /fuel
-  |-- /assets
-  |-- .htaccess
-  `-- index.php
+  `-- /www
+     `-- / hhblog
+        |-- /assets
+        |-- .htaccess
+        `-- index.php
 //}
 
 
-ディレクトリ構成を変更したので、index.php に記述されているパスも修正します。diff だとわかりにくいですが、@<tt>{/../fuel} から始まるパスが @<tt>{/fuel} になります。
+ディレクトリ構成を変更したので、index.php に記述されているパスも修正します。diff だとわかりにくいですが、@<tt>{/../fuel} から始まるパスが @<tt>{/../../fuel} になります。
 
 #@# lang: .code .lang-diff data-lang="diff" data-unlink=""
 //emlist{
@@ -99,15 +101,15 @@ $ diff fuelphp-1.4/public/index.php hhblog/index.php
 16c16
 < define('APPPATH', realpath(__DIR__.'/../fuel/app/').DIRECTORY_SEPARATOR);
 ---
-> define('APPPATH', realpath(__DIR__.'/fuel/app/').DIRECTORY_SEPARATOR);
+> define('APPPATH', realpath(__DIR__.'/../../fuel/app/').DIRECTORY_SEPARATOR);
 21c21
 < define('PKGPATH', realpath(__DIR__.'/../fuel/packages/').DIRECTORY_SEPARATOR);
 ---
-> define('PKGPATH', realpath(__DIR__.'/fuel/packages/').DIRECTORY_SEPARATOR);
+> define('PKGPATH', realpath(__DIR__.'/../../fuel/packages/').DIRECTORY_SEPARATOR);
 26c26
 < define('COREPATH', realpath(__DIR__.'/../fuel/core/').DIRECTORY_SEPARATOR);
 ---
-> define('COREPATH', realpath(__DIR__.'/fuel/core/').DIRECTORY_SEPARATOR);
+> define('COREPATH', realpath(__DIR__.'/../../fuel/core/').DIRECTORY_SEPARATOR);
 //}
 
 
@@ -137,7 +139,7 @@ ini_set('display_errors', 1);    // この引数を 0 にする。
 //}
 
 
- レンタルサーバへの配置ですが、今回はレンサバのドキュメントルート @<tt>{$HOME/www} 配下に、上記の @<tt>{hhblog} ディレクトリを配置することにします。アクセス時の URL は @<tt>{http://{user-id\}.sakura.ne.jp/hhblog/} になります。
+ レンタルサーバへの配置ですが、今回はレンサバのアカウントホーム @<tt>{/home/{user-id\}} 直下に fuel ディレクトリを、レンサバのドキュメントルート @<tt>{/home/{account-id\}/www} 直下に www ディレクトリの中身（hhblog ディレクトリ）を配置します。公開ディレクトリは @<tt>{/home/{user-id\}/www/hhblog} です。アクセス時の URL は @<tt>{http://{user-id\}.sakura.ne.jp/hhblog/} になります。
 
 
 この配置であれば、.htaccess ファイルを修正する必要はありません。アーカイブに在ったものをそのまま使用すれば mod_rewrite が仕事してくれます。
