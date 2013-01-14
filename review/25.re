@@ -216,7 +216,7 @@ public function get_runtask()
     //非同期処理は'> /dev/null &'で、処理をバックグラウンドに潜らせる
     $_run = Input::get('runmode') == 'asynchronous' ? '> /dev/null &' : null;
     //oilコマンドを利用してタスクを実行
-    system('php '.DOCROOT.'../oil refine originaltask ');
+    system('php '.DOCROOT.'../oil refine originaltask '.$_run);
 }
 //}
 
