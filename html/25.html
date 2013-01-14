@@ -238,7 +238,7 @@ public static $statuses = array(
     //非同期処理は'&gt; /dev/null &amp;'で、処理をバックグラウンドに潜らせる
     $_run = Input::get('runmode') == 'asynchronous' ? '&gt; /dev/null &amp;':null;
     //oilコマンドを利用してタスクを実行
-    system('php '.DOCROOT.'../oil refine originaltask ');
+    system('php '.DOCROOT.'../oil refine originaltask '.$_run);
 }
 </code></pre>
 <p>タスク部（簡単な処理なのでコメントは省略）</p>
