@@ -21,7 +21,7 @@ prt: 達人出版会
 # pht: 撮影者
 # trl: 翻訳者
 # date: 刊行日
-date: 2012-12-26
+date: 2013-01-29
 # rights: 権利表記
 # description: ブックの説明
 #
@@ -32,6 +32,7 @@ coverimage: cover.jpg
 #
 # 固有IDに使用するドメイン。指定しない場合には、時刻に基づくランダムUUIDが入る
 # urnid: urn:uid:http://example.com/some-book-title/1.0.2/
+urnid: http://tatsu-zine.com/books/fuelphpadvent2012
 # CSSファイル (yamlファイルおよびReVIEWファイルを置いたディレクトリにあること)
 stylesheet: stylesheet.css
 # LaTeX用のスタイルファイル(styディレクトリ以下に置くこと)
@@ -63,5 +64,6 @@ cover_linear: true
 params: --stylesheet=stylesheet.css --subdirmode --chapterlink
 pubhistory: |
   2012年12月26日 v0.9.0版発行
+  2013年01月29日 v1.0.0版発行
 # デバッグフラグ。nullでないときには一時ファイルをカレントディレクトリに作成し、削除もしない
 debug: null
